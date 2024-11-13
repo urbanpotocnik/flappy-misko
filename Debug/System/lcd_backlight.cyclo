@@ -1,0 +1,10 @@
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:2013:22:LL_TIM_EnableCounter	1
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:2583:22:LL_TIM_CC_EnableChannel	1
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:3196:22:LL_TIM_OC_SetCompareCH1	1
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:3297:26:LL_TIM_OC_GetCompareCH1	1
+../System/lcd_backlight.c:118:6:LCD_BKLT_init	1
+../System/lcd_backlight.c:192:9:LCD_BKLT_get_brightness	1
+../System/lcd_backlight.c:217:6:LCD_BKLT_set_brightness	1
+../System/lcd_backlight.c:244:6:LCD_BKLT_on	1
+../System/lcd_backlight.c:252:6:LCD_BKLT_off	1
+../System/lcd_backlight.c:270:6:LCD_BKLT_demo	3

@@ -1,0 +1,4 @@
+../Application/game.c:67:6:Game	16	static
+../Application/game.c:100:9:Intro	24	static
+../Application/game.c:158:9:GamePlay	24	static
+../Application/game.c:214:9:GameOver	24	static

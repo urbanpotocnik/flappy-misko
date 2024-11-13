@@ -1,0 +1,4 @@
+../Application/math_utils.c:49:6:MATH_init_random_generator	8	static
+../Application/math_utils.c:59:9:MATH_random_integer_number_from_interval	24	static
+../Application/math_utils.c:88:10:MATH_calculate_distance_between_points	40	static
+../Application/math_utils.c:115:6:MATH_demo_random_integer_number_from_interval	16	static

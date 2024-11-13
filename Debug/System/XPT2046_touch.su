@@ -1,0 +1,5 @@
+../System/XPT2046_touch.c:32:13:XPT2046_TouchSelect	4	static
+../System/XPT2046_touch.c:38:13:XPT2046_TouchUnselect	4	static
+../System/XPT2046_touch.c:44:6:XPT2046_touch_pressed	4	static
+../System/XPT2046_touch.c:52:6:XPT2046_touch_get_coordinates	56	static
+../System/XPT2046_touch.c:122:6:XPT2046_touch_get_coordinates_if_pressed	16	static

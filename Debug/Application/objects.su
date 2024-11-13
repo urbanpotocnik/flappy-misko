@@ -1,0 +1,16 @@
+../Application/objects.c:90:6:OBJ_init	8	static
+../Application/objects.c:121:6:OBJ_init_settings	4	static
+../Application/objects.c:142:6:OBJ_init_game_status	4	static
+../Application/objects.c:149:6:OBJ_init_canvas	4	static
+../Application/objects.c:192:6:OBJ_init_background	8	static
+../Application/objects.c:226:6:OBJ_init_intro_sprite	8	static
+../Application/objects.c:254:6:OBJ_init_game_over_sprite	8	static
+../Application/objects.c:339:6:OBJ_init_press_ok_sprite	8	static
+../Application/objects.c:365:6:OBJ_init_bird	8	static
+../Application/objects.c:391:6:OBJ_init_obstacleup	8	static
+../Application/objects.c:417:6:OBJ_init_obstacledown	8	static
+../Application/objects.c:448:5:randomgenerator	16	static
+../Application/objects.c:465:6:OBJ_spawn_obstacles	4	static
+../Application/objects.c:493:6:OBJ_init_score_box_title	4	static
+../Application/objects.c:510:6:OBJ_set_score_text_value	16	static
+../Application/objects.c:520:6:OBJ_init_score_text	8	static

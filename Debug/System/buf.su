@@ -1,0 +1,9 @@
+../System/buf.c:33:6:BUF_init	24	static
+../System/buf.c:45:18:BUF_flush	16	static
+../System/buf.c:59:18:BUF_store_byte	16	static
+../System/buf.c:99:18:BUF_store_bytes	32	static
+../System/buf.c:133:18:BUF_get_byte	16	static
+../System/buf.c:164:18:BUF_get_bytes	40	static
+../System/buf.c:198:10:BUF_get_data_size	16	static
+../System/buf.c:205:10:BUF_get_free_size	16	static
+../System/buf.c:220:6:BUF_demo	56	static

@@ -1,0 +1,15 @@
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:865:26:LL_GPIO_IsOutputPinSet	16	static
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:894:22:LL_GPIO_SetOutputPin	16	static
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:923:22:LL_GPIO_ResetOutputPin	16	static
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:952:22:LL_GPIO_TogglePin	24	static
+../System/LED.c:110:6:LED_init	8	static
+../System/LED.c:187:6:LED_on	16	static
+../System/LED.c:216:6:LED_off	16	static
+../System/LED.c:228:6:LED_toggle	16	static
+../System/LED.c:239:6:LED_set	16	static
+../System/LED.c:276:6:LEDs_on	24	static
+../System/LED.c:307:6:LEDs_off	24	static
+../System/LED.c:346:6:LEDs_write	24	static
+../System/LED.c:392:9:LED_is_on	16	static
+../System/LED.c:402:9:LEDs_read	16	static
+../System/LED.c:431:6:LED_demo	8	static

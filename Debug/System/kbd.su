@@ -1,0 +1,8 @@
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:813:26:LL_GPIO_IsInputPinSet	16	static
+../System/kbd.c:147:6:KBD_init	16	static
+../System/kbd.c:228:6:KBD_scan	16	static
+../System/kbd.c:276:16:KBD_get_pressed_key	16	static
+../System/kbd.c:336:20:KBD_get_button_state	16	static
+../System/kbd.c:360:6:KBD_demo_toggle_LEDs_if_buttons_pressed	16	static
+../System/kbd.c:430:6:KBD_demo	16	static
+../System/kbd.c:521:6:KBD_flush	8	static
