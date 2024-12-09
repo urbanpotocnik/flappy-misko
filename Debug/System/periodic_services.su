@@ -1,7 +1,0 @@
-../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:2013:22:LL_TIM_EnableCounter	16	static
-../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:5913:22:LL_TIM_EnableIT_UPDATE	16	static
-../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:5924:22:LL_TIM_DisableIT_UPDATE	16	static
-../System/periodic_services.c:27:6:PSERV_init	8	static
-../System/periodic_services.c:33:6:PSERV_enable	8	static
-../System/periodic_services.c:38:6:PSERV_disable	8	static
-../System/periodic_services.c:43:6:PSERV_run_services_Callback	8	static
