@@ -1,47 +1,16 @@
-/*
- * Grafični gonilnik za platformo MiŠKo3.
- * Vsebuje:
- *   - lcd.{c,h}                Inicializacija in osnovno upravljanje zaslona
- *   - lcd_ili9341.{c,h}        Strojni vmesniki za inicializacijo in nastavljanje
- *                              krmilnika Ili9341 prek STMovega pomnilniškega vmesnika FMC
- *   - lcd_ili9341_registers.h  Seznam ukazov iz podatkovnega lista krmilnika Ili9341
- *
- *
- * (C) 2022 Nejc Bertoncelj <nbertoncelj afna student.uni-lj.si>
- *
- * Deli povzeti po vmesniku platforme MiŠKo2
- * (C) 2015 Pirc, Jankovec, Matič et al, Fakulteta za elektrotehniko
- */
-
-
 #include "lcd.h"
 #include "SCI.h"
 
 
 
 // ------------------- Privatna globalna spremenljivka ----------------------
-
-// Definiramo "handle" strukturo za delo z uGUI knjižnico. Kasneje v sklopu
-// funkcije LCD_uGUI_init() to strukturo tudi inicializiramo.
 UG_GUI gui;
 
-
-
-
 // ------------------ Privatni prototipi funkcij ------------------------------
-
 void UserPixelSetFunction(UG_S16 x, UG_S16 y, UG_COLOR c);
 UG_RESULT _HW_FillFrame_(UG_S16 x, UG_S16 y, UG_S16 w, UG_S16 h, UG_COLOR c);
 
-
-
-
-
-
-
-
 // ---------------- Osnovno upravljanje LCD zaslona preko ILI9341 vmesnika ----------------
-
 
 /*!
  * @brief Nizkonivojska inicializacija zaslona
@@ -67,6 +36,7 @@ static void LCD_IO_Init()
  * Funkcija izbere želeno območje, potem pa tolikokrat pošlje izbrano barvo,
  * kolikor slikovnih točk je potrebnih.
  */
+
 void LCD_FillRect(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint16_t c)
 {
 	uint32_t max_count   = ILI9341_GetParam(LCD_AREA);     /* Št. vseh pikslov     */
@@ -84,9 +54,6 @@ void LCD_FillRect(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint16_t c)
 	//	pixel_count--;
 	//}
 }
-
-
-
 
 /*!
  * @brief Glavna inicializacija zaslona
@@ -114,10 +81,6 @@ void LCD_Init()
 	LCD_BKLT_init();
 }
 
-
-
-
-
 /*!
  * @brief Počisti zaslon (prebarvaj s črno barvo)
  */
@@ -127,10 +90,7 @@ void LCD_ClearScreen()
 }
 
 
-
-
 // ------------------ Testne demo funkcije ----------------
-
 
 /*!
  * @brief Preprosta demonstracija delovanja LCD zaslona s pomočjo funkcij
@@ -156,19 +116,9 @@ void LCD_demo_simple()
 	}
 }
 
-
-
-
-
-
-
-
-
 // --------------------- Povezava LCD funkcij z uGUI knjižnico ----------------------
 
-
 // ------ Definicija dveh temeljnih funkcij za risanje na zaslon -------
-
 
 // Implementacija funkcije za izris enega samega piksla na zaslon.
 void UserPixelSetFunction(UG_S16 x, UG_S16 y, UG_COLOR c)
@@ -176,7 +126,6 @@ void UserPixelSetFunction(UG_S16 x, UG_S16 y, UG_COLOR c)
 	ILI9341_SetDisplayWindow(x, y, 1, 1);
 	ILI9341_SendData((LCD_IO_Data_t *)&c, 1);
 }
-
 
 // Implementacija funkcije za izris pravokotnika na zaslon.
 UG_RESULT _HW_FillFrame_(UG_S16 x, UG_S16 y, UG_S16 w, UG_S16 h, UG_COLOR c)
@@ -186,16 +135,11 @@ UG_RESULT _HW_FillFrame_(UG_S16 x, UG_S16 y, UG_S16 w, UG_S16 h, UG_COLOR c)
 	return UG_RESULT_OK;
 }
 
-
-
 // ------------ Inicializacija uGUI za delo z našim zaslonom -------------------
-
 
 // Inicializacija uGUI knjižnice za delo z našim LCD zaslonom.
 void LCD_uGUI_init(void)
 {
-
-
 	// Inicializacija uGUI knjižnice: registracija funkcije za izris enega piksla na zaslon,
 	// specifikacija resolucije zaslona.
 	UG_Init(&gui, UserPixelSetFunction, ILI9341_GetParam(LCD_WIDTH), ILI9341_GetParam(LCD_HEIGHT));
@@ -210,12 +154,7 @@ void LCD_uGUI_init(void)
 	//UG_DriverEnable(DRIVER_FILL_FRAME);
 }
 
-
-
-
 // ------------------ Testne demo funkcije ----------------
-
-
 
 // Demonstracija izrisa grafike na zalon s pomočjo uGUI knjižnice.
 void LCD_uGUI_demo_Misko3(void)
@@ -250,16 +189,7 @@ void LCD_uGUI_demo_Misko3(void)
 
 }
 
-
-
-
-
-
-
-
 // ------------- Funkcionalnost povezana s senzorjem pritiska na zaslon ---------------
-
-
 
 // ------------------- Demo testna funkcija ---------------
 
