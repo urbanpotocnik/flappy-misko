@@ -1,3 +1,4 @@
+// ----------- Include other modules (for private) -------------
 #include "LED.h"
 
 // ---------------------- Private definitions ------------------
