@@ -1,10 +1,3 @@
-/*
- * periodic_services.c
- *
- *  Created on: 
- *      Author: 
- */
-
 #include "LED.h"
 #include "kbd.h"
 #include "SCI.h"
@@ -21,7 +14,6 @@ typedef struct
 }periodic_services_handle_t;
 
 periodic_services_handle_t periodic_services;
-
 
 
 void PSERV_init(void)
@@ -43,5 +35,4 @@ void PSERV_disable(void)
 void PSERV_run_services_Callback(void)
 {
 	KBD_scan();
-	
 }
