@@ -33,6 +33,7 @@ V tem modulu bom implementiral igrico s pomočjo avtomatov stanj
 // ----- Definicija možnih stanj avtomatov --------
 
 stopwatch_handle_t   stopwatch;
+location_t movement_area;
 location_t location = {
     .x_min = 0,
     .x_max = 0,
@@ -218,13 +219,32 @@ uint8_t GamePlay() {
 
                 				
 
-                if ( TIMUT_stopwatch_has_X_ms_passed( &stopwatch, 500) == 1)
+                if(TIMUT_stopwatch_has_X_ms_passed( &stopwatch, 500) == 1)
                 {
                     GFX_set_gfx_object_velocity(&bird, 0, -1);
                 }
 
+                // zaslonje 320x240
 
-                GamePlay_UpdateChanges();
+                GFX_get_object_movement_area(&bird, &movement_area);
+
+                
+                // konec igre, pade na tla
+                if(movement_area.y_max == 239)
+                {
+                    GFX_set_gfx_object_velocity(&bird, 0, 0);
+                    exit_value = 1;
+                    break;
+                }
+
+
+
+
+
+
+
+
+            GamePlay_UpdateChanges();
 
 
 
