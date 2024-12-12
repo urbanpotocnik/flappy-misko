@@ -33,6 +33,13 @@ V tem modulu bom implementiral igrico s pomočjo avtomatov stanj
 // ----- Definicija možnih stanj avtomatov --------
 
 stopwatch_handle_t   stopwatch;
+location_t location = {
+    .x_min = 0,
+    .x_max = 0,
+    .y_min = 350,
+    .y_max = 370
+};
+
 
 
 // stanja avtomata Game()
@@ -183,11 +190,10 @@ uint8_t GamePlay() {
             GFX_display_text_object(&score_box_title);
             GFX_display_text_object(&score_text);
             OBJ_init_settings();
-            MATH_init_random_generator();
-            //int x = 3;
-            //int y = 4;
+            //MATH_init_random_generator();
             GFX_draw_one_gfx_object_on_background(&bird, &background);
-            GFX_set_gfx_object_velocity(&bird, 0, 1);
+            GFX_set_gfx_object_center_location(&bird, 0, 0);
+            GFX_init_gfx_object_center_location(&bird, 0, 0);
             gameplay_state = GAMEPLAY_JUMP;
             exit_value = 0;
             break;
@@ -207,18 +213,15 @@ uint8_t GamePlay() {
 
                 if(pressed_button == BTN_OK){
                     TIMUT_stopwatch_set_time_mark(&stopwatch);	
-                    while ( !TIMUT_stopwatch_has_X_ms_passed(&stopwatch, 500) )
-                    {
-                       GFX_set_gfx_object_velocity(&bird, 0, 1);   
-                       GamePlay_UpdateChanges();  
-                    }
-                    GFX_set_gfx_object_velocity(&bird, 0, -1);
-                    
+                    GFX_set_gfx_object_velocity(&bird, 0, 1);               
 			    }
 
                 				
 
-                
+                if ( TIMUT_stopwatch_has_X_ms_passed( &stopwatch, 500) == 1)
+                {
+                    GFX_set_gfx_object_velocity(&bird, 0, -1);
+                }
 
 
                 GamePlay_UpdateChanges();
