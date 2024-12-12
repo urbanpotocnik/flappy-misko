@@ -1,0 +1,8 @@
+TO DO:
+- kalibriranje hitrosti skoka (trenutno je velocity 1 in je premalo, ce ga nastavimo na 2 je ze prevec, ujeti bo treba nekje umes)
+- kompresija slik
+- 3D case 
+- 
+
+IDEJE:
+- uporabimo tudi motorcek za vibriranje
