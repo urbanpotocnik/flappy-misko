@@ -369,8 +369,8 @@ void OBJ_init_bird(void)
 		// init image
 		bird.image.image_array = (uint16_t*) bird_img;
 
-		bird.image.size_x = 40;
-		bird.image.size_y = 40;
+		bird.image.size_x = 50;
+		bird.image.size_y = 25;
 		bird.image.size = bird.image.size_x * bird.image.size_y;
 
 		// init the graphic object location
