@@ -1,8 +1,11 @@
 TO DO:
-- kalibriranje hitrosti skoka (trenutno je velocity 1 in je premalo, ce ga nastavimo na 2 je ze prevec, ujeti bo treba nekje umes)
+- kalibriranje hitrosti skoka in cas skoka (trenutno je velocity 1 in je premalo, ce ga nastavimo na 2 je ze prevec, ujeti bo treba nekje umes)
 - kompresija slik
 - 3D case 
-- 
+- zmiganje z ledicami bo treba zrihtat
+
 
 IDEJE:
 - uporabimo tudi motorcek za vibriranje
+- ce zmanjka idej za dodatke lahko povprasamo AI hehe
+- spreminjanje hitrosti skoka in padca da nista linearna

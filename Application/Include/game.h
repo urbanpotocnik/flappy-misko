@@ -1,20 +1,12 @@
-/*
- * game.h
- *
- *  Created on: May 14, 2022
- *      Author: 
- */
-
 #ifndef INCLUDE_GAME_H_
 #define INCLUDE_GAME_H_
-
-
 
 // ----------- Include other modules (for public) -------------
 
 
 // -------------------- Public definitions --------------------
-
+#define INTRO_DELAY_BEFORE_KBD_ACTIVE 3000
+#define GAMEOVER_DELAY_BEFORE_KBD_ACTIVE 3000
 
 // ---------------- Public function prototypes ----------------
 
