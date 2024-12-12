@@ -32,6 +32,9 @@ V tem modulu bom implementiral igrico s pomočjo avtomatov stanj
 
 // ----- Definicija možnih stanj avtomatov --------
 
+stopwatch_handle_t   stopwatch;
+
+
 // stanja avtomata Game()
 typedef enum GAME_states {
     GAME_INTRO_STATE,           // izris pozdravne slike
@@ -108,6 +111,8 @@ uint8_t Intro() {
         case INTRO_INIT:
             OBJ_init();
             GFX_draw_gfx_object(&background);
+            //
+
             GFX_draw_one_gfx_object_on_background(&intro_sprite, &background);
             TIMUT_stopwatch_set_time_mark(&stopwatch);
             int a = 0x01;
@@ -179,25 +184,71 @@ uint8_t GamePlay() {
             GFX_display_text_object(&score_text);
             OBJ_init_settings();
             MATH_init_random_generator();
-            int x = 3;
-            int y = 4;
+            //int x = 3;
+            //int y = 4;
             GFX_draw_one_gfx_object_on_background(&bird, &background);
-            GFX_set_gfx_object_velocity(&bird, x, y);
+            GFX_set_gfx_object_velocity(&bird, 0, 1);
             gameplay_state = GAMEPLAY_JUMP;
             exit_value = 0;
             break;
 
         case GAMEPLAY_JUMP:
-            KBD_flush();
-            GFX_clear_gfx_object_on_background(&press_ok_sprite, &background);
-            while (1) {
+
+			KBD_flush();
+			GFX_clear_gfx_object_on_background(&press_ok_sprite, &background);
+
+            GFX_set_gfx_object_velocity(&bird, 0, 0);
+
+			while(1){
                 KBD_scan();
                 pressed_button = KBD_get_pressed_key();
-                if (pressed_button == BTN_OK) {
-                    GFX_update_moving_gfx_object_location(&bird);
-                }
-            }
-            break;
+
+               
+
+                if(pressed_button == BTN_OK){
+                    TIMUT_stopwatch_set_time_mark(&stopwatch);	
+                    while ( !TIMUT_stopwatch_has_X_ms_passed(&stopwatch, 500) )
+                    {
+                       GFX_set_gfx_object_velocity(&bird, 0, 1);   
+                       GamePlay_UpdateChanges();  
+                    }
+                    GFX_set_gfx_object_velocity(&bird, 0, -1);
+                    
+			    }
+
+                				
+
+                
+
+
+                GamePlay_UpdateChanges();
+
+
+
+
+
+
+
+
+			//OBJ_spawn_obstacles(void);  // funkcija ki spawna ovire ------------- je še za pregledati
+			//HAL_Delay(neki);
+			// tukaj bo moral priti delay med generacijami ovir
+
+			//------------- priševanje scora
+			//uint8_t GFX_are_locations_overlapping(location_t *location_A, location_t *location_B);
+			//uint8_t GFX_is_point_inside_location(location_t *location, int16_t x, int16_t y);
+			// game_status.score += target.points;
+			// to bom realiziral z enostavnim if stavkom
+
+
+			//------ če se zadadne se while loop prekine in program gre v naslednje stanje avtomata
+			//if ((GFX_are_gfx_objects_overlapping(&bird, &obstacleup) == 1) || ((GFX_are_gfx_objects_overlapping(&bird, &obstacledown) == 1)  {
+			//	break;
+			//}
+
+			}
+
+		break;
 
         default:
             printf("GamePlay(): Error - unknown state (%d)", gameplay_state);
