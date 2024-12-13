@@ -50,7 +50,8 @@ buttons_enum_t key;
 stopwatch_handle_t stopwatch_leds;
 stopwatch_handle_t stopwatch_gameover;
 buttons_enum_t pressed_button = BTN_NONE;
-static stopwatch_handle_t stopwatch_jump;
+stopwatch_handle_t stopwatch_jump;
+stopwatch_handle_t stopwatch_obstacle;
 
 // ------------- Public function implementations --------------
 void Game() {
@@ -152,6 +153,10 @@ uint8_t GamePlay() {
 			GFX_display_text_object(&score_text);
 			GFX_draw_one_gfx_object_on_background(&bird, &background);
 			GFX_update_moving_gfx_object_location(&bird);
+			GFX_draw_one_gfx_object_on_background(&obstacledown, &background);
+			GFX_update_moving_gfx_object_location(&obstacledown);
+			GFX_draw_one_gfx_object_on_background(&obstacleup, &background);
+			GFX_update_moving_gfx_object_location(&obstacleup);
 		}
 	}
 
@@ -177,6 +182,7 @@ uint8_t GamePlay() {
 
 			if (pressed_button == BTN_OK) {
 				TIMUT_stopwatch_set_time_mark(&stopwatch_jump);
+				TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle);
 				GFX_set_gfx_object_velocity(&bird, 0, 1);
 			}
 
@@ -184,18 +190,37 @@ uint8_t GamePlay() {
 				GFX_set_gfx_object_velocity(&bird, 0, -1);
 			}
 
+			if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 700) == 1) {
+				OBJ_spawn_obstacles();
+
+				//OBJ_init_obstacledown(220, 120);
+				//GFX_draw_one_gfx_object_on_background(&obstacledown, &background);
+			}
+
+
 			// zaslon je 320x240
 
-			GFX_get_object_movement_area(&bird, &movement_area);
 
 			// konec igre, pade na tla
+			GFX_get_object_movement_area(&bird, &movement_area);
 			if (movement_area.y_max == 239) {
 				GFX_set_gfx_object_velocity(&bird, 0, 0);
 				exit_value = 1;
 				break;
 			}
 
+
+
+
+			// updejti gameplay update changes da dodas se refresh za stolpe
 			GamePlay_UpdateChanges();
+
+
+
+
+
+
+
 
 
 

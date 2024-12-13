@@ -3,9 +3,32 @@ TO DO:
 - kompresija slik
 - 3D case 
 - zmiganje z ledicami bo treba zrihtat
+- dodaj touch
 
 
 IDEJE:
 - uporabimo tudi motorcek za vibriranje
 - ce zmanjka idej za dodatke lahko povprasamo AI hehe
 - spreminjanje hitrosti skoka in padca da nista linearna
+
+
+Here are some features you could add to your project:
+
+1. **Scoring System**:
+   - Keep track of the player's score based on obstacles passed.
+   - Display the score on the screen during gameplay.
+2. **Power-ups**:
+   - Introduce collectibles that grant temporary abilities, like invincibility or speed boost.
+3. **Multiple Levels**:
+   - Create different backgrounds and obstacle patterns for each level.
+   - Increase difficulty as the player progresses.
+4. **High Score Tracking**:
+   - Save high scores and display them on the game over screen.
+5. **Sound Effects and Music**:
+   - Add background music and sounds for actions like jumping or hitting an obstacle.
+6. **Character Selection**:
+   - Offer different characters or skins that the player can choose from.
+7. **Dynamic Obstacles**:
+   - Implement moving obstacles or ones that change size to increase difficulty.
+8. **Touch Controls**:
+   - Add support for touch input if your hardware allows it.

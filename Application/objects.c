@@ -104,7 +104,6 @@ void OBJ_init(void)
 
 	// compound objects
 	OBJ_init_bird();
-	//OBJ_init_obstacle();
 
 	// text boxes
 	OBJ_init_score_box_title();
@@ -115,8 +114,6 @@ void OBJ_init(void)
 
 
 // ---------------- OBJECTS for SETTINGS ----------------
-
-
 
 void OBJ_init_settings(void)
 {
@@ -131,9 +128,6 @@ void OBJ_init_settings(void)
 	//settings.upmin = 110;
 	//settings.downmax = 230;
 	//settings.downmin = 110;
-
-
-
 }
 
 
@@ -210,8 +204,6 @@ void OBJ_init_background(void)
 
 		// set edge parameters
 		background.edge_behavior = EDGE_IGNORE;
-
-
 }
 
 
@@ -245,7 +237,6 @@ void OBJ_init_intro_sprite(void)
 
 		// set edge parameters
 		intro_sprite.edge_behavior = EDGE_IGNORE;
-
 }
 
 
@@ -358,7 +349,6 @@ void OBJ_init_press_ok_sprite(void)
 
 		// set edge parameters
 		press_ok_sprite.edge_behavior = EDGE_IGNORE;
-
 }
 
 
@@ -383,21 +373,19 @@ void OBJ_init_bird(void)
 
 		// set edge parameters
 		background.edge_behavior = EDGE_IGNORE;
-
-
 }
 
 
-void OBJ_init_obstacleup(void)
+void OBJ_init_obstacleup(int x_cooridnate, int y_coordinate)
 {
 	// init graphic object
 
 		// init image
-		obstacle.image.image_array = (uint16_t*) obstacleup_img;
+		obstacleup.image.image_array = (uint16_t*) obstacleup_img;
 
-		obstacle.image.size_x = 50;
-		obstacle.image.size_y = 240;
-		obstacle.image.size = obstacleup.image.size_x * obstacleup.image.size_y;
+		obstacleup.image.size_x = 50;
+		obstacleup.image.size_y = 240;
+		obstacleup.image.size = obstacleup.image.size_x * obstacleup.image.size_y;
 
 		// init the graphic object location
 		GFX_init_location_restrictions (&obstacleup, &canvas.whole_area );
@@ -405,58 +393,43 @@ void OBJ_init_obstacleup(void)
 
 
 		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&obstacleup, 0, 0);
+		GFX_set_gfx_object_velocity(&obstacleup, -1, 0);
 
 		// set edge parameters
 		background.edge_behavior = EDGE_IGNORE;
-
-
 }
 
 
-void OBJ_init_obstacledown(void)
+void OBJ_init_obstacledown(int x_cooridnate, int y_coordinate)
 {
 	// init graphic object
 
 		// init image
-		obstacle.image.image_array = (uint16_t*) obstacledown_img;
+		obstacledown.image.image_array = (uint16_t*) obstacledown_img;
 
-		obstacle.image.size_x = 50;
-		obstacle.image.size_y = 240;
-		obstacle.image.size = obstacledown.image.size_x * obstacledown.image.size_y;
+		obstacledown.image.size_x = 50;
+		obstacledown.image.size_y = 240;
+		obstacledown.image.size = obstacledown.image.size_x * obstacledown.image.size_y;
 
 		// init the graphic object location
-		//GFX_init_location_restrictions (&obstacledown, &canvas.whole_area );
-		//GFX_init_gfx_object_location( &obstacledown, 320, ydown);
+		GFX_init_location_restrictions (&obstacledown, &canvas.whole_area );
+		GFX_init_gfx_object_location( &obstacledown, x_cooridnate, y_coordinate);
 
 
 		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&obstacledown, 0, 0);
+		GFX_set_gfx_object_velocity(&obstacledown, -1, 0);
 
 		// set edge parameters
 		background.edge_behavior = EDGE_IGNORE;
-
-
 }
 
-int yup;
-int ydown;
 
 //int32_t MATH_random_integer_number_from_interval(int32_t x_min, int32_t x_max);
 
 
-int randomgenerator(yup, ydown){
-	while(1){
-		//yup = MATH_random_integer_number_from_interval(settings.upmin, settings.upmax);
-		//ydown = MATH_random_integer_number_from_interval(settings.downmin, settings.downmaxxx);
-
-		/*
-		if(ydown - yup = 80){
-			break;
-			return yup, ydown;
-		}
-		*/
-	}
+int randomgenerator(void){
+		int yup = MATH_random_integer_number_from_interval(120, 240);
+		return yup;
 }
 
 //------------- tale random generator nevem če je prav        vmes mora biti 80 pikslov prostora za ptico
@@ -464,19 +437,16 @@ int randomgenerator(yup, ydown){
 
 void OBJ_spawn_obstacles(void){
 
+	int yup = randomgenerator();
+	int ydown = yup - 100;
 
+	// spremeni v funkcijah da se lahko nastavlja samo y ovir
+	OBJ_init_obstacledown(320, ydown);
+	OBJ_init_obstacleup(320, yup);
 
-	//--- tu nekje se bodo generirale višine ovir
-
-	void OBJ_init_obstacledown(void);		//inicialiiramo ovire
-	void OBJ_init_obstacleup(void);
-
-	//void GFX_draw_two_gfx_objects_on_background(&obstacleup, &obstacledown, &background);		//izrišemo ovire
-
-	//uint8_t GFX_move_gfx_object(graphic_object_t *gfx_object, int16_t x, int16_t y);
-	//ta funkicja bo pomikala ovire proti levi
-
-
+	GFX_draw_one_gfx_object_on_background(&obstacleup, &background);
+	GFX_draw_one_gfx_object_on_background(&obstacledown, &background);
+	//GFX_draw_two_gfx_objects_on_background(&obstacleup, &obstacledown, &background);
 
 }
 
