@@ -161,7 +161,7 @@ void OBJ_init_score_text(void);
 void OBJ_set_score_text_value(int16_t score);
 
 void OBJ_spawn_obstacles(void);
-void OBJ_init_obstacleup(int x_cooridnate, int y_coordinate);
+void OBJ_init_obstacleup(void);
 void OBJ_init_obstacledown(int x_cooridnate, int y_coordinate);
 
 

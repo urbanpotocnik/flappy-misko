@@ -376,7 +376,7 @@ void OBJ_init_bird(void)
 }
 
 
-void OBJ_init_obstacleup(int x_cooridnate, int y_coordinate)
+void OBJ_init_obstacleup(void)
 {
 	// init graphic object
 
@@ -393,7 +393,7 @@ void OBJ_init_obstacleup(int x_cooridnate, int y_coordinate)
 
 
 		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&obstacleup, -1, 0);
+		GFX_set_gfx_object_velocity(&obstacleup, 0, 0);
 
 		// set edge parameters
 		background.edge_behavior = EDGE_IGNORE;
@@ -442,7 +442,7 @@ void OBJ_spawn_obstacles(void){
 
 	// spremeni v funkcijah da se lahko nastavlja samo y ovir
 	OBJ_init_obstacledown(320, ydown);
-	OBJ_init_obstacleup(320, yup);
+	OBJ_init_obstacleup();
 
 	GFX_draw_one_gfx_object_on_background(&obstacleup, &background);
 	GFX_draw_one_gfx_object_on_background(&obstacledown, &background);

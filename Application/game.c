@@ -148,15 +148,25 @@ uint8_t GamePlay() {
 	
 	void GamePlay_UpdateChanges(void) {
 		static stopwatch_handle_t update_stopwatch;
+
+		// IMPORTANT: tweak the refresh time, best is 20ms
 		if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch, settings.game_play_update_period)) {
+			
+			
 			OBJ_set_score_text_value(game_status.score);
 			GFX_display_text_object(&score_text);
-			GFX_draw_one_gfx_object_on_background(&bird, &background);
+
+			//GFX_draw_gfx_object(&background);
+			// To prepreci da se vlece crta za objektom, vendar pa zelo upocasni renderiranje igrice
+
+			
+			GFX_clear_gfx_object_on_background(&bird, &background);
 			GFX_update_moving_gfx_object_location(&bird);
-			GFX_draw_one_gfx_object_on_background(&obstacledown, &background);
-			GFX_update_moving_gfx_object_location(&obstacledown);
-			GFX_draw_one_gfx_object_on_background(&obstacleup, &background);
+			GFX_draw_one_gfx_object_on_background(&bird, &background);
+
+			GFX_clear_gfx_object_on_background(&obstacleup, &background);
 			GFX_update_moving_gfx_object_location(&obstacleup);
+			GFX_draw_one_gfx_object_on_background(&obstacleup, &background);
 		}
 	}
 
@@ -168,6 +178,7 @@ uint8_t GamePlay() {
 		GFX_display_text_object(&score_text);
 		GFX_draw_one_gfx_object_on_background(&bird, &background);
         GFX_set_gfx_object_velocity(&bird, 0, 0);
+		//
 		gameplay_state = GAMEPLAY_JUMP;
 		exit_value = 0;
 		break;
@@ -175,31 +186,34 @@ uint8_t GamePlay() {
 	case GAMEPLAY_JUMP:
 		KBD_flush();
 		GFX_clear_gfx_object_on_background(&press_ok_sprite, &background);
+		int moving_obstacles = 0; 
+		int obstacle_spawned = 0;  
 
 		while (1) {
 			KBD_scan();
 			pressed_button = KBD_get_pressed_key();
 
 			if (pressed_button == BTN_OK) {
+				if (moving_obstacles == 0) {
+					moving_obstacles = 1;
+					TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle);
+				}
 				TIMUT_stopwatch_set_time_mark(&stopwatch_jump);
-				TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle);
-				GFX_set_gfx_object_velocity(&bird, 0, 1);
+				GFX_set_gfx_object_velocity(&bird, 0, 4);
 			}
 
-			if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_jump, 500) == 1) {
-				GFX_set_gfx_object_velocity(&bird, 0, -1);
+			if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_jump, 500)) {
+				GFX_set_gfx_object_velocity(&bird, 0, -4);
 			}
 
-			if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 700) == 1) {
-				OBJ_spawn_obstacles();
-
-				//OBJ_init_obstacledown(220, 120);
-				//GFX_draw_one_gfx_object_on_background(&obstacledown, &background);
+			if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 4000) && obstacle_spawned == 0) {
+				OBJ_init_obstacleup();
+				GFX_set_gfx_object_velocity(&obstacleup, -2, 0);
+				GFX_init_gfx_object_location( &obstacleup, 220, 220);
+				obstacle_spawned = 1;
 			}
-
 
 			// zaslon je 320x240
-
 
 			// konec igre, pade na tla
 			GFX_get_object_movement_area(&bird, &movement_area);
@@ -209,20 +223,8 @@ uint8_t GamePlay() {
 				break;
 			}
 
-
-
-
 			// updejti gameplay update changes da dodas se refresh za stolpe
 			GamePlay_UpdateChanges();
-
-
-
-
-
-
-
-
-
 
 			//OBJ_spawn_obstacles(void);  // funkcija ki spawna ovire ------------- je še za pregledati
 			//HAL_Delay(neki);
