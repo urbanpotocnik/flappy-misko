@@ -147,23 +147,29 @@ uint8_t GamePlay() {
 	uint8_t exit_value = 0;
 	
 	void GamePlay_UpdateChanges(void) {
-		static stopwatch_handle_t update_stopwatch;
+		static stopwatch_handle_t update_stopwatch_bird;
+		static stopwatch_handle_t update_stopwatch_obstacle;
+		static uint8_t timers_initialized = 0;
 
-		// IMPORTANT: tweak the refresh time, best is 20ms
-		if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch, settings.game_play_update_period)) {
+		if (!timers_initialized) {
+			// Initialize the bird's timer
+			TIMUT_stopwatch_set_time_mark(&update_stopwatch_bird);
 			
+			// Initialize the obstacle's timer
+			TIMUT_stopwatch_set_time_mark(&update_stopwatch_obstacle);
 			
-			OBJ_set_score_text_value(game_status.score);
-			GFX_display_text_object(&score_text);
+			timers_initialized = 1;
+		}
 
-			//GFX_draw_gfx_object(&background);
-			// To prepreci da se vlece crta za objektom, vendar pa zelo upocasni renderiranje igrice
-
-			
+		// Update and draw the bird every game_play_update_period milliseconds
+		if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_bird, settings.game_play_update_period)) {
 			GFX_clear_gfx_object_on_background(&bird, &background);
 			GFX_update_moving_gfx_object_location(&bird);
 			GFX_draw_one_gfx_object_on_background(&bird, &background);
+		}
 
+		// Update and draw the obstacle every game_play_update_period milliseconds, offset by 10 ms
+		if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_obstacle, settings.game_play_update_period + 10)) {
 			GFX_clear_gfx_object_on_background(&obstacleup, &background);
 			GFX_update_moving_gfx_object_location(&obstacleup);
 			GFX_draw_one_gfx_object_on_background(&obstacleup, &background);
