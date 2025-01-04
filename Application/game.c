@@ -142,124 +142,112 @@ uint8_t Intro() {
 	return exit_value;
 }
 
+void GamePlay_UpdateChanges(void) {
+    static stopwatch_handle_t update_stopwatch_bird;
+    static stopwatch_handle_t update_stopwatch_obstacle_up;
+    static stopwatch_handle_t update_stopwatch_obstacle_down;
+    static uint8_t timers_initialized = 0;
+
+    if (!timers_initialized) {
+        TIMUT_stopwatch_set_time_mark(&update_stopwatch_bird);
+        TIMUT_stopwatch_set_time_mark(&update_stopwatch_obstacle_up);
+        TIMUT_stopwatch_set_time_mark(&update_stopwatch_obstacle_down);
+        
+        timers_initialized = 1;
+    }
+
+    if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_bird, settings.game_play_update_period)) {
+        GFX_update_moving_gfx_object_location(&bird);
+        GFX_draw_one_gfx_object_on_background(&bird, &background);
+    }
+
+    if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_obstacle_up, settings.game_play_update_period + 10)) {
+        GFX_update_moving_gfx_object_location(&obstacleup);
+        GFX_draw_one_gfx_object_on_background(&obstacleup, &background);
+    }
+
+    if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_obstacle_down, settings.game_play_update_period + 20)) {
+        GFX_update_moving_gfx_object_location(&obstacledown);
+        GFX_draw_one_gfx_object_on_background(&obstacledown, &background);
+    }
+}
+
 uint8_t GamePlay() {
-	static GAMEPLAY_states_t gameplay_state = GAMEPLAY_INIT;
-	uint8_t exit_value = 0;
-	
-	void GamePlay_UpdateChanges(void) {
-		static stopwatch_handle_t update_stopwatch_bird;
-		static stopwatch_handle_t update_stopwatch_obstacle;
-		static uint8_t timers_initialized = 0;
+    static GAMEPLAY_states_t gameplay_state = GAMEPLAY_INIT;
+    uint8_t exit_value = 0;
+    int obstacle_spawned = 0;  
+    int obstacle_top_spawned = 0;  
 
-		if (!timers_initialized) {
-			// Initialize the bird's timer
-			TIMUT_stopwatch_set_time_mark(&update_stopwatch_bird);
-			
-			// Initialize the obstacle's timer
-			TIMUT_stopwatch_set_time_mark(&update_stopwatch_obstacle);
-			
-			timers_initialized = 1;
-		}
-
-		// Update and draw the bird every game_play_update_period milliseconds
-		if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_bird, settings.game_play_update_period)) {
-			GFX_clear_gfx_object_on_background(&bird, &background);
-			GFX_update_moving_gfx_object_location(&bird);
-			GFX_draw_one_gfx_object_on_background(&bird, &background);
-		}
-
-		// Update and draw the obstacle every game_play_update_period milliseconds, offset by 10 ms
-		if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_obstacle, settings.game_play_update_period + 10)) {
-			GFX_clear_gfx_object_on_background(&obstacleup, &background);
-			GFX_update_moving_gfx_object_location(&obstacleup);
-			GFX_draw_one_gfx_object_on_background(&obstacleup, &background);
-		}
-	}
-
-	switch (gameplay_state) {
-	case GAMEPLAY_INIT:
-		OBJ_init();
-		OBJ_set_score_text_value(game_status.score);
-		GFX_display_text_object(&score_box_title);
-		GFX_display_text_object(&score_text);
-		GFX_draw_one_gfx_object_on_background(&bird, &background);
+    switch (gameplay_state) {
+    case GAMEPLAY_INIT:
+        OBJ_init();
+        OBJ_set_score_text_value(game_status.score);
+        GFX_display_text_object(&score_box_title);
+        GFX_display_text_object(&score_text);
+        GFX_draw_one_gfx_object_on_background(&bird, &background);
         GFX_set_gfx_object_velocity(&bird, 0, 0);
-		//
-		gameplay_state = GAMEPLAY_JUMP;
-		exit_value = 0;
-		break;
+        gameplay_state = GAMEPLAY_JUMP;
+        exit_value = 0;
+        break;
 
-	case GAMEPLAY_JUMP:
-		KBD_flush();
-		GFX_clear_gfx_object_on_background(&press_ok_sprite, &background);
-		int moving_obstacles = 0; 
-		int obstacle_spawned = 0;  
+    case GAMEPLAY_JUMP:
+        KBD_flush();
+        GFX_clear_gfx_object_on_background(&press_ok_sprite, &background);
+        int moving_obstacles = 0; 
 
-		while (1) {
-			KBD_scan();
-			pressed_button = KBD_get_pressed_key();
+        while (1) {
+            KBD_scan();
+            pressed_button = KBD_get_pressed_key();
 
-			if (pressed_button == BTN_OK) {
-				if (moving_obstacles == 0) {
-					moving_obstacles = 1;
-					TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle);
-				}
-				TIMUT_stopwatch_set_time_mark(&stopwatch_jump);
-				GFX_set_gfx_object_velocity(&bird, 0, 4);
-			}
+            if (pressed_button == BTN_OK) {
+                if (moving_obstacles == 0) {
+                    moving_obstacles = 1;
+                    TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle);
+                }
+                TIMUT_stopwatch_set_time_mark(&stopwatch_jump);
+                GFX_set_gfx_object_velocity(&bird, 0, 5);
+            }
 
-			if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_jump, 500)) {
-				GFX_set_gfx_object_velocity(&bird, 0, -4);
-			}
+            if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_jump, 500)) {
+                GFX_set_gfx_object_velocity(&bird, 0, -5);
+            }
 
-			if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 4000) && obstacle_spawned == 0) {
-				OBJ_init_obstacleup();
-				GFX_set_gfx_object_velocity(&obstacleup, -2, 0);
-				GFX_init_gfx_object_location( &obstacleup, 220, 220);
-				obstacle_spawned = 1;
-			}
+            if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 4000)) {
+                // pozicija obstacle upa ni prava, je samo toliko da se sproba rendering 3 objektov
+				if (obstacle_spawned == 0) {
+                    OBJ_init_obstacleup();
+                    GFX_set_gfx_object_velocity(&obstacleup, -2, 0);
+                    GFX_init_gfx_object_location(&obstacleup, 220, 220);
+                    obstacle_spawned = 1;
+                }
+                if (obstacle_top_spawned == 0) {
+                    OBJ_init_obstacledown();  
+                    GFX_set_gfx_object_velocity(&obstacledown, -2, 0);
+                    GFX_init_gfx_object_location(&obstacledown, 220, 0); 
+                    obstacle_top_spawned = 1;
+                }
+            }
 
-			// zaslon je 320x240
+            GamePlay_UpdateChanges();
 
-			// konec igre, pade na tla
-			GFX_get_object_movement_area(&bird, &movement_area);
-			if (movement_area.y_max == 239) {
-				GFX_set_gfx_object_velocity(&bird, 0, 0);
-				exit_value = 1;
-				break;
-			}
+            GFX_get_object_movement_area(&bird, &movement_area);
+            if (movement_area.y_max == 239) {
+                GFX_set_gfx_object_velocity(&bird, 0, 0);
+                exit_value = 1;
+                break;
+            }
+        }
+        break;
 
-			// updejti gameplay update changes da dodas se refresh za stolpe
-			GamePlay_UpdateChanges();
+    default:
+        printf("GamePlay(): Error - unknown state (%d)", gameplay_state);
+        HAL_Delay(5000);
+        gameplay_state = GAMEPLAY_INIT;
+        exit_value = 0;
+        break;
+    }
 
-			//OBJ_spawn_obstacles(void);  // funkcija ki spawna ovire ------------- je še za pregledati
-			//HAL_Delay(neki);
-			// tukaj bo moral priti delay med generacijami ovir
-
-			//------------- priševanje scora
-			//uint8_t GFX_are_locations_overlapping(location_t *location_A, location_t *location_B);
-			//uint8_t GFX_is_point_inside_location(location_t *location, int16_t x, int16_t y);
-			// game_status.score += target.points;
-			// to bom realiziral z enostavnim if stavkom
-
-			//------ če se zadadne se while loop prekine in program gre v naslednje stanje avtomata
-			//if ((GFX_are_gfx_objects_overlapping(&bird, &obstacleup) == 1) || ((GFX_are_gfx_objects_overlapping(&bird, &obstacledown) == 1)  {
-			//	break;
-			//}
-
-		}
-
-		break;
-
-	default:
-		printf("GamePlay(): Error - unknown state (%d)", gameplay_state);
-		HAL_Delay(5000);
-		gameplay_state = GAMEPLAY_INIT;
-		exit_value = 0;
-		break;
-	}
-
-	return exit_value;
+    return exit_value;
 }
 
 uint8_t GameOver() {

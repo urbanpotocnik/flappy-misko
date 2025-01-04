@@ -400,7 +400,7 @@ void OBJ_init_obstacleup(void)
 }
 
 
-void OBJ_init_obstacledown(int x_cooridnate, int y_coordinate)
+void OBJ_init_obstacledown(void)
 {
 	// init graphic object
 
@@ -413,11 +413,11 @@ void OBJ_init_obstacledown(int x_cooridnate, int y_coordinate)
 
 		// init the graphic object location
 		GFX_init_location_restrictions (&obstacledown, &canvas.whole_area );
-		GFX_init_gfx_object_location( &obstacledown, x_cooridnate, y_coordinate);
+		//GFX_init_gfx_object_location( &obstacledown, x_cooridnate, y_coordinate);
 
 
 		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&obstacledown, -1, 0);
+		GFX_set_gfx_object_velocity(&obstacledown, 0, 0);
 
 		// set edge parameters
 		background.edge_behavior = EDGE_IGNORE;
@@ -441,7 +441,7 @@ void OBJ_spawn_obstacles(void){
 	int ydown = yup - 100;
 
 	// spremeni v funkcijah da se lahko nastavlja samo y ovir
-	OBJ_init_obstacledown(320, ydown);
+	//OBJ_init_obstacledown(320, ydown);
 	OBJ_init_obstacleup();
 
 	GFX_draw_one_gfx_object_on_background(&obstacleup, &background);
