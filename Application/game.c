@@ -155,12 +155,13 @@ void GamePlay_UpdateChanges(void) {
         
         timers_initialized = 1;
     }
-	
+
 
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_bird, settings.game_play_update_period)) {
         GFX_update_moving_gfx_object_location(&bird);
         GFX_draw_one_gfx_object_on_background(&bird, &background);
     }
+	
 
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_obstacle_up, settings.game_play_update_period + 10)) {
         GFX_update_moving_gfx_object_location(&obstacleup);
