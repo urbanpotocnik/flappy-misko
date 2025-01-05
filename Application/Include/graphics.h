@@ -296,7 +296,6 @@ void GFX_deallocate_image_buffer(uint16_t *ptr);
 // --- Graphical object related ----
 
 void GFX_draw_gfx_object(graphic_object_t *gfx_object);
-void GFX_draw_gfx_object_via_DMA(graphic_object_t *gfx_object);
 void GFX_save_gfx_object_location(graphic_object_t *gfx_object);
 void GFX_restore_gfx_object_old_location(graphic_object_t *gfx_object);
 
@@ -347,9 +346,12 @@ void GFX_update_two_gfx_objects_on_background(graphic_object_t *front_object, gr
 
 
 void GFX_display_text_object(text_object_t *text_box);
-
 void GFX_display_progress_bar(progress_bar_t *progress_bar);
 
+// Drawing via DMA functions
+void GFX_draw_gfx_object_via_DMA(graphic_object_t *gfx_object);
+void GFX_draw_one_gfx_object_on_background_via_DMA(graphic_object_t *object, graphic_object_t *bckgnd);
+void GFX_draw_two_gfx_objects_on_background_via_DMA(graphic_object_t *front_object, graphic_object_t *middle_object, graphic_object_t *bckgnd);	
 
 
 // --- Demo ---

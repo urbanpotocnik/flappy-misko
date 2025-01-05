@@ -159,18 +159,18 @@ void GamePlay_UpdateChanges(void) {
 
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_bird, settings.game_play_update_period)) {
         GFX_update_moving_gfx_object_location(&bird);
-        GFX_draw_one_gfx_object_on_background(&bird, &background);
+        GFX_draw_one_gfx_object_on_background_via_DMA(&bird, &background);
     }
 	
 
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_obstacle_up, settings.game_play_update_period + 10)) {
         GFX_update_moving_gfx_object_location(&obstacleup);
-        GFX_draw_one_gfx_object_on_background(&obstacleup, &background);
+        GFX_draw_one_gfx_object_on_background_via_DMA(&obstacleup, &background);
     }
 
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_obstacle_down, settings.game_play_update_period + 20)) {
         GFX_update_moving_gfx_object_location(&obstacledown);
-        GFX_draw_one_gfx_object_on_background(&obstacledown, &background);
+        GFX_draw_one_gfx_object_on_background_via_DMA(&obstacledown, &background);
     }
 }
 

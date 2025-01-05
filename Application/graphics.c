@@ -860,6 +860,30 @@ void GFX_draw_one_gfx_object_on_background(graphic_object_t *object, graphic_obj
 
 
 
+// Drawing one GFX object on background via DMA, which speeds up the drawing process, comments on the function are above
+void GFX_draw_one_gfx_object_on_background_via_DMA(graphic_object_t *object, graphic_object_t *bckgnd)
+{
+	location_t	area;
+
+	if( GFX_are_locations_overlapping( &object->location_old, &object->location ) )
+	{
+		GFX_get_object_movement_area(object, &area );
+		GFX_allocate_partial_frame_buffer_for_display_area(&area);
+		GFX_copy_image_part_to_partial_frame_buffer(&bckgnd->image);
+		GFX_partial_frame_buffer_overlay_object(object);
+		GFX_draw_gfx_object_via_DMA(&partial_frame_buffer);
+		GFX_deallocate_partial_frame_buffer();
+	}
+	else
+	{
+		GFX_clear_location_on_background( &object->location_old, bckgnd );
+		GFX_allocate_partial_frame_buffer_for_display_area( &object->location );
+		GFX_copy_image_part_to_partial_frame_buffer(&bckgnd->image);
+		GFX_partial_frame_buffer_overlay_object(object);
+		GFX_draw_gfx_object_via_DMA(&partial_frame_buffer);
+		GFX_deallocate_partial_frame_buffer();
+	}
+}
 
 
 
@@ -966,7 +990,37 @@ void GFX_draw_two_gfx_objects_on_background(graphic_object_t *front_object, grap
 
 
 
+void GFX_draw_two_gfx_objects_on_background_via_DMA(graphic_object_t *front_object, graphic_object_t *middle_object, graphic_object_t *bckgnd)
+{
+	location_t	area;
+	location_t	front_object_movement_area;
+	location_t	middle_object_movement_area;
+	GFX_get_object_movement_area( front_object, &front_object_movement_area);
+	GFX_get_object_movement_area( middle_object, &middle_object_movement_area);
 
+	if ( ! GFX_are_locations_overlapping( &front_object_movement_area, &middle_object_movement_area) )
+	{
+		GFX_draw_one_gfx_object_on_background(front_object, bckgnd);
+		GFX_draw_one_gfx_object_on_background(middle_object, bckgnd);
+	}
+	else
+	{
+		GFX_get_object_movement_area(middle_object, &area );
+		GFX_allocate_partial_frame_buffer_for_display_area(&area);
+		GFX_copy_image_part_to_partial_frame_buffer(&bckgnd->image);
+		GFX_partial_frame_buffer_overlay_object(middle_object);
+		GFX_partial_frame_buffer_overlay_object(front_object);
+		GFX_draw_gfx_object_via_DMA(&partial_frame_buffer);
+		GFX_deallocate_partial_frame_buffer();
+		GFX_get_object_movement_area(front_object, &area );
+		GFX_allocate_partial_frame_buffer_for_display_area(&area);
+		GFX_copy_image_part_to_partial_frame_buffer(&bckgnd->image);
+		GFX_partial_frame_buffer_overlay_object(middle_object);
+		GFX_partial_frame_buffer_overlay_object(front_object);
+		GFX_draw_gfx_object_via_DMA(&partial_frame_buffer);
+		GFX_deallocate_partial_frame_buffer();
+	}
+}
 
 
 
