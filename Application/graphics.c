@@ -193,7 +193,12 @@ void GFX_draw_gfx_object(graphic_object_t *gfx_object)
 	ILI9341_SendData((LCD_IO_Data_t *) gfx_object->image.image_array, gfx_object->image.size );
 }
 
-
+// Object drawing function that sends data via DMA, so it speeds up the drawing process
+void GFX_draw_gfx_object_via_DMA(graphic_object_t *gfx_object)
+{
+	ILI9341_SetDisplayWindow( gfx_object->location.x_min, gfx_object->location.y_min, gfx_object->image.size_x, gfx_object->image.size_y);
+	ILI9341_SendDataDMA((LCD_IO_Data_t *) gfx_object->image.image_array, gfx_object->image.size );
+}
 
 
 

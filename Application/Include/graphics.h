@@ -296,6 +296,7 @@ void GFX_deallocate_image_buffer(uint16_t *ptr);
 // --- Graphical object related ----
 
 void GFX_draw_gfx_object(graphic_object_t *gfx_object);
+void GFX_draw_gfx_object_via_DMA(graphic_object_t *gfx_object);
 void GFX_save_gfx_object_location(graphic_object_t *gfx_object);
 void GFX_restore_gfx_object_old_location(graphic_object_t *gfx_object);
 
