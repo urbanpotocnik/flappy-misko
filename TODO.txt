@@ -4,6 +4,7 @@ TO DO:
 - 3D case 
 - zmiganje z ledicami bo treba zrihtat
 - dodaj touch
+- treba je pobrisat tisti moder screen ki se prikaze vedno takoj ob zagonu
 
 
 IDEJE:
