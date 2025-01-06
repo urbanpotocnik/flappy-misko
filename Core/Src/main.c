@@ -126,22 +126,14 @@ int main(void)
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   MX_ADC4_Init();
-   SCI_init();
-   KBD_init();
-   LED_init();
-   PSERV_init();
-   PSERV_enable();
-
-   //  LCD_BKLT_init();
-   //  LCD_BKLT_demo();
-
-       LCD_Init();
-   //  LCD_demo_simple();
-
-   LCD_uGUI_init();
-    LCD_uGUI_demo_Misko3();
-
-    JOY_init(&hadc4, &htim1);
+  SCI_init();
+  KBD_init();
+  LED_init();
+  PSERV_init();
+  PSERV_enable();
+  LCD_Init();
+  LCD_uGUI_init();
+  JOY_init(&hadc4, &htim1);
 
 
 

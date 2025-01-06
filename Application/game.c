@@ -168,7 +168,7 @@ void GamePlay_UpdateChanges(void) {
 
     }
 	
-
+	// Te timerje bom zaenkrat pustil tu, ce se jih bi slucajno potrebovalo v prihodnosti
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_obstacle_up, settings.game_play_update_period + 10)) {
     }
 
