@@ -1,0 +1,7 @@
+../System/kbd.c:27:6:KBD_init	1
+../System/kbd.c:56:6:KBD_scan	4
+../System/kbd.c:71:16:KBD_get_pressed_key	2
+../System/kbd.c:85:20:KBD_get_button_state	1
+../System/kbd.c:90:6:KBD_demo_toggle_LEDs_if_buttons_pressed	11
+../System/kbd.c:131:6:KBD_demo	14
+../System/kbd.c:199:6:KBD_flush	1

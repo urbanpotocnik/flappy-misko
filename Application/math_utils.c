@@ -100,7 +100,13 @@ uint32_t MATH_calculate_distance_between_points(int16_t x1, int16_t y1, int16_t 
 }
 
 
-
+// TODO: fine tune the function, razdalja mora biti ravno pravsnja
+void MATH_get_random_distance_between_obstacles(int32_t minimal_space, int32_t maximal_space, int32_t *y_up, int32_t *y_down)
+{
+    int32_t distance = MATH_random_integer_number_from_interval(minimal_space, maximal_space);
+    *y_up = MATH_random_integer_number_from_interval(0, 240 - distance); 	// 240 je visina ekrana
+    *y_down = *y_up + distance;
+}
 
 
 

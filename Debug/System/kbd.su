@@ -1,0 +1,7 @@
+../System/kbd.c:27:6:KBD_init	4	static
+../System/kbd.c:56:6:KBD_scan	24	static
+../System/kbd.c:71:16:KBD_get_pressed_key	16	static
+../System/kbd.c:85:20:KBD_get_button_state	0	static
+../System/kbd.c:90:6:KBD_demo_toggle_LEDs_if_buttons_pressed	16	static
+../System/kbd.c:131:6:KBD_demo	40	static
+../System/kbd.c:199:6:KBD_flush	0	static

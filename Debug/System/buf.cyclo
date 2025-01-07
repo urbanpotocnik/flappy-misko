@@ -1,0 +1,9 @@
+../System/buf.c:6:6:BUF_init	1
+../System/buf.c:15:18:BUF_flush	1
+../System/buf.c:25:18:BUF_store_byte	4
+../System/buf.c:58:18:BUF_store_bytes	7
+../System/buf.c:80:18:BUF_get_byte	3
+../System/buf.c:101:18:BUF_get_bytes	7
+../System/buf.c:125:10:BUF_get_data_size	1
+../System/buf.c:130:10:BUF_get_free_size	1
+../System/buf.c:136:6:BUF_demo	1

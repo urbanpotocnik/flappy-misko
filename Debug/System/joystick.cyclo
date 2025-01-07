@@ -1,0 +1,9 @@
+../System/joystick.c:37:6:JOY_init	1
+../System/joystick.c:64:6:JOY_scan_button	2
+../System/joystick.c:75:25:JOY_get_pressed_key	2
+../System/joystick.c:93:29:JOY_get_button_state	1
+../System/joystick.c:141:9:JOY_get_axis_position	3
+../System/joystick.c:162:6:JOY_SCI_send_status	5
+../System/joystick.c:98:6:JOY_calibrate	8
+../System/joystick.c:180:6:JOY_button_demo	7
+../System/joystick.c:207:6:JOY_LED_demo	1

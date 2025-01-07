@@ -1,0 +1,6 @@
+../System/timing_utils.c:7:6:TIMUT_stopwatch_set_time_mark	8	static
+../System/timing_utils.c:12:6:TIMUT_stopwatch_update	8	static
+../System/timing_utils.c:17:9:TIMUT_stopwatch_has_X_ms_passed	16	static
+../System/timing_utils.c:31:9:TIMUT_stopwatch_has_another_X_ms_passed	16	static
+../System/timing_utils.c:53:6:TIMUT_stopwatch_demo	8	static
+../System/timing_utils.c:76:10:TIMUT_get_stopwatch_elapsed_time	8	static
