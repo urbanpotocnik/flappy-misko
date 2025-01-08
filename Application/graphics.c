@@ -302,42 +302,6 @@ uint8_t GFX_is_location_inside_object_restrictions(location_restriction_t *restr
 
 
 
-uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int16_t y)
-{
-
-	// check if the new location is within restrictions
-	if( GFX_is_location_inside_object_restrictions( &gfx_object->top_left_limits, x, y ) )
-	{
-		// within restrictions -> object can be placed
-
-		// set the new object location
-		gfx_object->location.x_min = x;
-		gfx_object->location.y_min = y;
-
-
-		gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
-		gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
-
-
-		gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
-		gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
-
-
-		return 1;	// placement successful
-	}
-	else
-	{
-		// new location is outside the restrictions -> object will not be placed
-
-		return 0;	// placement not successful
-	}
-
-
-}
-
-
-
-
 uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int16_t y)
 {
 	uint8_t return_value;
@@ -437,6 +401,43 @@ uint8_t GFX_move_gfx_object_center(graphic_object_t *gfx_object, int16_t x, int1
 
 
 
+
+
+
+
+
+uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int16_t y)
+{
+
+	// check if the new location is within restrictions
+	if( GFX_is_location_inside_object_restrictions( &gfx_object->top_left_limits, x, y ) )
+	{
+		// within restrictions -> object can be placed
+
+		// set the new object location
+		gfx_object->location.x_min = x;
+		gfx_object->location.y_min = y;
+
+
+		gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
+		gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
+
+
+		gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
+		gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
+
+
+		return 1;	// placement successful
+	}
+	else
+	{
+		// new location is outside the restrictions -> object will not be placed
+
+		return 0;	// placement not successful
+	}
+
+
+}
 
 
 

@@ -33,7 +33,6 @@ uint32_t MATH_calculate_distance_between_points(int16_t x1, int16_t y1, int16_t 
 
 
 void MATH_demo_random_integer_number_from_interval(void);
-void MATH_get_random_distance_between_obstacles(int32_t minimal_space, int32_t maximal_space, int32_t *y_up, int32_t *y_down);
 
 
 #endif /* INCLUDE_MATH_UTILS_H_ */
