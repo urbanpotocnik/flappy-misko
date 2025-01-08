@@ -10410,5 +10410,13 @@ const static uint16_t obstacleup_img[] = {// 'up', 50x240px
 
 
 
-#pragma GCC pop_options
+
+/*
+
+const static uint16_t _img[] = {
+
+};
+
+ */
+
 #endif /* IMAGES_H_ */
