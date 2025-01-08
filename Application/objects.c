@@ -389,8 +389,7 @@ void OBJ_init_obstacleup(void)
 
 		// init the graphic object location
 		GFX_init_location_restrictions (&obstacleup, &canvas.whole_area );
-		//GFX_init_gfx_object_location( &obstacleup, 320, yup);
-
+		//GFX_set_gfx_object_center_location(&obstacleup, 0, 240);
 
 		// set the initial object velocity
 		GFX_set_gfx_object_velocity(&obstacleup, 0, 0);
@@ -412,7 +411,7 @@ void OBJ_init_obstacledown(void)
 		obstacledown.image.size = obstacledown.image.size_x * obstacledown.image.size_y;
 
 		// init the graphic object location
-		GFX_init_location_restrictions (&obstacledown, &canvas.whole_area );
+		GFX_init_location_restrictions (&obstacledown, &canvas.whole_area);
 		//GFX_init_gfx_object_location( &obstacledown, x_cooridnate, y_coordinate);
 
 
