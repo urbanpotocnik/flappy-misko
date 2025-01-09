@@ -7,6 +7,7 @@ TO DO:
 - dodaj zvocnik
 - dodaj vibriranje
 - dodaj okno z pavzo, ki se odpre s pritiskom na esc button
+- RLE (run length encoding)
 
 
 IDEJE:
