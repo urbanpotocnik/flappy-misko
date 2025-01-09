@@ -4,6 +4,9 @@ TO DO:
 - 3D case 
 - zmiganje z ledicami bo treba zrihtat
 - dodaj touch
+- dodaj zvocnik
+- dodaj vibriranje
+- dodaj okno z pavzo, ki se odpre s pritiskom na esc button
 
 
 IDEJE:
