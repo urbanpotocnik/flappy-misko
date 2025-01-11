@@ -352,25 +352,6 @@ uint8_t GFX_set_gfx_object_center_location(graphic_object_t *gfx_object, int16_t
 
 
 
-uint8_t GFX_init_gfx_object_center_location(graphic_object_t *gfx_object, int16_t x, int16_t y)
-{
-	uint8_t return_value;
-
-	return_value = GFX_set_gfx_object_center_location(gfx_object, x, y);
-
-	if ( return_value )
-	{
-		// remember the initial object location
-		GFX_save_gfx_object_location(gfx_object);
-	}
-
-	return return_value;
-}
-
-
-
-
-
 uint8_t GFX_move_gfx_object(graphic_object_t *gfx_object, int16_t x, int16_t y)
 {
 
@@ -619,6 +600,25 @@ uint8_t GFX_bounce_moving_object_from_edge(graphic_object_t *gfx_object)
 
 
 
+
+
+
+
+
+uint8_t GFX_init_gfx_object_center_location(graphic_object_t *gfx_object, int16_t x, int16_t y)
+{
+	uint8_t return_value;
+
+	return_value = GFX_set_gfx_object_center_location(gfx_object, x, y);
+
+	if ( return_value )
+	{
+		// remember the initial object location
+		GFX_save_gfx_object_location(gfx_object);
+	}
+
+	return return_value;
+}
 
 
 

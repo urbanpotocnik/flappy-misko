@@ -1,7 +1,7 @@
 Application/math_utils.o: ../Application/math_utils.c \
- C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/math_utils.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/timing_utils.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/SCI.h \
+ C:/Users/Tomaz/Desktop/misko/flappy-misko/Application/Include/math_utils.h \
+ C:/Users/Tomaz/Desktop/misko/flappy-misko/System/Include/timing_utils.h \
+ C:/Users/Tomaz/Desktop/misko/flappy-misko/System/Include/SCI.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h \
@@ -37,11 +37,11 @@ Application/math_utils.o: ../Application/math_utils.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/kbd.h \
+ C:/Users/Tomaz/Desktop/misko/flappy-misko/System/Include/kbd.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h
-C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/math_utils.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/timing_utils.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/SCI.h:
+C:/Users/Tomaz/Desktop/misko/flappy-misko/Application/Include/math_utils.h:
+C:/Users/Tomaz/Desktop/misko/flappy-misko/System/Include/timing_utils.h:
+C:/Users/Tomaz/Desktop/misko/flappy-misko/System/Include/SCI.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h:
@@ -77,5 +77,5 @@ C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/SCI.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/kbd.h:
+C:/Users/Tomaz/Desktop/misko/flappy-misko/System/Include/kbd.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:
