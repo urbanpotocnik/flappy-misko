@@ -221,15 +221,18 @@ uint8_t GamePlay() {
 				if (obstacle_spawned == 0) {
                     OBJ_init_obstacleup();
                     GFX_set_gfx_object_velocity(&obstacleup, -1, 0);
-                    GFX_init_gfx_object_location(&obstacleup, 220, 220);
+                    GFX_init_gfx_object_location(&obstacleup, 220, 150);
+                    obstacleup.image.size_y = 240-150;
                     obstacle_spawned = 1;
                 }
                 if (obstacle_top_spawned == 0) {
-                    OBJ_init_obstacledown();  
+                    OBJ_init_obstacledown();
                     GFX_set_gfx_object_velocity(&obstacledown, -1, 0);
-                    GFX_init_gfx_object_location(&obstacledown, 220, 0); 
+                    GFX_init_gfx_object_location(&obstacledown, 220, 0);
+                    obstacledown.image.size_y = 30;
                     obstacle_top_spawned = 1;
                 }
+
             }
 
             GamePlay_UpdateChanges();
@@ -239,6 +242,18 @@ uint8_t GamePlay() {
                 GFX_set_gfx_object_velocity(&bird, 0, 0);
                 exit_value = 1;
                 break;
+            }
+            GFX_get_object_movement_area(&obstacledown, &movement_area);
+            if (movement_area.x_min == 1) {
+            	obstacle_top_spawned = 0;
+
+            	GFX_clear_gfx_object_on_background(&obstacledown,&background);
+            }
+            GFX_get_object_movement_area(&obstacleup, &movement_area);
+            if (movement_area.x_min == 1) {
+            	obstacle_spawned = 0;
+
+            	GFX_clear_gfx_object_on_background(&obstacleup,&background);
             }
         }
         break;

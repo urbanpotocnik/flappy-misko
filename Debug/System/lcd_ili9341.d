@@ -1,6 +1,6 @@
 System/lcd_ili9341.o: ../System/lcd_ili9341.c \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341_registers.h \
+ C:/Users/Tomaz/Desktop/misko/flappy-misko/System/Include/lcd_ili9341.h \
+ C:/Users/Tomaz/Desktop/misko/flappy-misko/System/Include/lcd_ili9341_registers.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h \
  ../Drivers/CMSIS/Include/core_cm4.h \
@@ -35,8 +35,8 @@ System/lcd_ili9341.o: ../System/lcd_ili9341.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341_registers.h:
+C:/Users/Tomaz/Desktop/misko/flappy-misko/System/Include/lcd_ili9341.h:
+C:/Users/Tomaz/Desktop/misko/flappy-misko/System/Include/lcd_ili9341_registers.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h:
 ../Drivers/CMSIS/Include/core_cm4.h:

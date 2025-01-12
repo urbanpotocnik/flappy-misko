@@ -432,13 +432,22 @@ uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int
 	else
 	{
 		// new location is outside the restrictions -> object will not be placed
+		gfx_object->location.x_min = x;
+		gfx_object->location.y_min = y;
 
-		return 0;	// placement not successful
+
+		gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
+		gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
+
+		gfx_object->location.y_min = 0;
+		gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
+		gfx_object->location.y_center = (gfx_object->location.y_min + gfx_object->location.y_max) / 2;
+
+		return 1;	// placement not successful
 	}
 
 
 }
-
 
 
 
