@@ -216,20 +216,18 @@ uint8_t GamePlay() {
                 GFX_set_gfx_object_velocity(&bird, 0, -2);
             }
 
-            if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 4000)) {
+            if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 1000)) {
                 // pozicija obstacle upa ni prava, je samo toliko da se sproba rendering 3 objektov
 				if (obstacle_spawned == 0) {
                     OBJ_init_obstacleup();
                     GFX_set_gfx_object_velocity(&obstacleup, -1, 0);
-                    GFX_init_gfx_object_location(&obstacleup, 220, 150);
-                    obstacleup.image.size_y = 240-150;
+                    GFX_init_gfx_object_location(&obstacleup, 220, 190);
                     obstacle_spawned = 1;
                 }
                 if (obstacle_top_spawned == 0) {
                     OBJ_init_obstacledown();
                     GFX_set_gfx_object_velocity(&obstacledown, -1, 0);
-                    GFX_init_gfx_object_location(&obstacledown, 220, 0);
-                    obstacledown.image.size_y = 30;
+                    GFX_init_gfx_object_location(&obstacledown, 220, -110);
                     obstacle_top_spawned = 1;
                 }
 

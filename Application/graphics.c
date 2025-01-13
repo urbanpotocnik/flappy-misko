@@ -406,31 +406,54 @@ uint8_t GFX_move_gfx_object_center(graphic_object_t *gfx_object, int16_t x, int1
 
 
 
+
 uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int16_t y)
 {
+    // check if the new location is within restrictions
+    if (GFX_is_location_inside_object_restrictions(&gfx_object->top_left_limits, x, y))
+    {
+        // within restrictions -> object can be placed
 
-	// check if the new location is within restrictions
-	if( GFX_is_location_inside_object_restrictions( &gfx_object->top_left_limits, x, y ) )
-	{
-		// within restrictions -> object can be placed
+        // set the new object location
+        gfx_object->location.x_min = x;
+        gfx_object->location.y_min = y;
 
-		// set the new object location
-		gfx_object->location.x_min = x;
-		gfx_object->location.y_min = y;
+        gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
+        gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
 
+        gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
+        gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
 
-		gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
-		gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
+        return 1; // placement successful
+    }
+    else
+    {
+        if(gfx_object == &obstacledown)
+		{
+			// new location is outside the restrictions -> object will not be placed
+			gfx_object->location.x_min = x;
+			gfx_object->location.y_min = y;
 
+			gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
+			gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
 
-		gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
-		gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
+			// Clip the part of the object that is outside the screen
+			if (gfx_object->location.y_min < 0)
+			{
+				int16_t offset = -gfx_object->location.y_min;
+				gfx_object->location.y_min = 0;
+				gfx_object->location.y_max -= offset;
+				gfx_object->location.y_center = (gfx_object->location.y_min + gfx_object->location.y_max) / 2;
 
+				// Adjust the image data to clip the top part
+				gfx_object->image.image_array += offset * gfx_object->image.size_x;
+				gfx_object->image.size_y -= offset;
+				gfx_object->image.size = gfx_object->image.size_x * gfx_object->image.size_y;
+			}
 
-		return 1;	// placement successful
-	}
-	else
-	{
+			return 1; // placement not successful
+		}
+		
 		// new location is outside the restrictions -> object will not be placed
 		gfx_object->location.x_min = x;
 		gfx_object->location.y_min = y;
@@ -444,9 +467,9 @@ uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int
 		gfx_object->location.y_center = (gfx_object->location.y_min + gfx_object->location.y_max) / 2;
 
 		return 1;	// placement not successful
-	}
-
-
+		
+		
+    }
 }
 
 
