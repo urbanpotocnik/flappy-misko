@@ -428,30 +428,24 @@ uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int
     }
     else
     {
-        if(gfx_object == &obstacledown)
+        if(gfx_object == &obstacledown && y < 0)
 		{
-			// new location is outside the restrictions -> object will not be placed
-			gfx_object->location.x_min = x;
-			gfx_object->location.y_min = y;
-
-			gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
-			gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
-
 			// Clip the part of the object that is outside the screen
-			if (gfx_object->location.y_min < 0)
-			{
-				int16_t offset = -gfx_object->location.y_min;
-				gfx_object->location.y_min = 0;
-				gfx_object->location.y_max -= offset;
-				gfx_object->location.y_center = (gfx_object->location.y_min + gfx_object->location.y_max) / 2;
+			int16_t offset = -y;
+			gfx_object->location.y_min = 0;
+			gfx_object->location.y_max = 240 - offset;
+			gfx_object->location.y_center = (gfx_object->location.y_min + gfx_object->location.y_max) / 2;
 
-				// Adjust the image data to clip the top part
-				gfx_object->image.image_array += offset * gfx_object->image.size_x;
-				gfx_object->image.size_y -= offset;
-				gfx_object->image.size = gfx_object->image.size_x * gfx_object->image.size_y;
-			}
+			gfx_object->location.x_min = x;
+			gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
 
-			return 1; // placement not successful
+			// Adjust the image data to clip the top part
+			gfx_object->image.image_array += offset * gfx_object->image.size_x;
+			gfx_object->image.size_y -= offset;
+			gfx_object->image.size = gfx_object->image.size_x * gfx_object->image.size_y;
+			
+
+			return 1; // placement of obstacle successful
 		}
 		
 		// new location is outside the restrictions -> object will not be placed
@@ -466,8 +460,7 @@ uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int
 		gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
 		gfx_object->location.y_center = (gfx_object->location.y_min + gfx_object->location.y_max) / 2;
 
-		return 1;	// placement not successful
-		
+		return 0;	// placement not successful
 		
     }
 }

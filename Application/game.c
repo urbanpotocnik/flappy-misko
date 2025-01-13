@@ -165,7 +165,9 @@ void GamePlay_UpdateChanges(void) {
         GFX_update_moving_gfx_object_location(&obstacledown);
         GFX_draw_one_gfx_object_on_background(&obstacledown, &background);
 
-
+		// Da obstacle ne zabrise scora odkomentiraj tole
+		//GFX_display_text_object(&score_box_title);
+        //GFX_display_text_object(&score_text);
     }
 	
 	// Te timerje bom zaenkrat pustil tu, ce se jih bi slucajno potrebovalo v prihodnosti
@@ -217,37 +219,49 @@ uint8_t GamePlay() {
             }
 
             if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 1000)) {
-                // pozicija obstacle upa ni prava, je samo toliko da se sproba rendering 3 objektov
+
 				if (obstacle_spawned == 0) {
                     OBJ_init_obstacleup();
                     GFX_set_gfx_object_velocity(&obstacleup, -1, 0);
                     GFX_init_gfx_object_location(&obstacleup, 220, 190);
+                    obstacleup.image.size_y = 240-190;  // TO DO: popravi tole na lepsi nacin
                     obstacle_spawned = 1;
                 }
                 if (obstacle_top_spawned == 0) {
                     OBJ_init_obstacledown();
                     GFX_set_gfx_object_velocity(&obstacledown, -1, 0);
-                    GFX_init_gfx_object_location(&obstacledown, 220, -110);
+                    GFX_init_gfx_object_location(&obstacledown, 220, -160);
                     obstacle_top_spawned = 1;
                 }
 
             }
 
+			// Zdruzi objekta v struct in jih inicializiraj skupaj
+			// Implementiraj random nastavljanje sirine med ovirama
+			// Imprementiraj preverjanje trkov
+
+
+
             GamePlay_UpdateChanges();
 
             GFX_get_object_movement_area(&bird, &movement_area);
+
             if (movement_area.y_max == 239) {
                 GFX_set_gfx_object_velocity(&bird, 0, 0);
                 exit_value = 1;
                 break;
             }
+
             GFX_get_object_movement_area(&obstacledown, &movement_area);
+
             if (movement_area.x_min == 1) {
             	obstacle_top_spawned = 0;
 
             	GFX_clear_gfx_object_on_background(&obstacledown,&background);
             }
+
             GFX_get_object_movement_area(&obstacleup, &movement_area);
+			
             if (movement_area.x_min == 1) {
             	obstacle_spawned = 0;
 
