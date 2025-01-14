@@ -428,7 +428,8 @@ uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int
 
     else
     {
-        if(gfx_object == &obstacle_pair.top && y < 0)
+        // NOTE: ta del je zaenkrat samo za obstacle_pair.top, za naprej ga naredi modularnega!!!
+		if(gfx_object == &obstacle_pair.top && y < 0)
 		{
 			// Clip the part of the object that is outside the screen
 			int16_t offset = -y;

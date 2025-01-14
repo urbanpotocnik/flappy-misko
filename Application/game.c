@@ -243,13 +243,7 @@ uint8_t GamePlay() {
 			// Imprementiraj preverjanje trkov
 			// Implementiraj pristevanje scora
 
-
-
             GamePlay_UpdateChanges();
-
-
-
-			// clean up tole tukaj
 
             GFX_get_object_movement_area(&misko, &movement_area);
 
@@ -259,22 +253,16 @@ uint8_t GamePlay() {
                 break;
             }
 
-            GFX_get_object_movement_area(&obstacle_bottom, &movement_area);
+			GFX_get_object_movement_area(&obstacle_pair.bottom, &movement_area);
 
             if (movement_area.x_min == 1) {
             	obstacle_pair_spawned = 0;
 
-            	GFX_clear_gfx_object_on_background(&obstacle_bottom,&background);
-            }
-
-            GFX_get_object_movement_area(&obstacle_top, &movement_area);
-			
-            if (movement_area.x_min == 1) {
-            	obstacle_pair_spawned = 0;
-
-            	GFX_clear_gfx_object_on_background(&obstacle_top,&background);
-            }
+            	GFX_clear_gfx_object_on_background(&obstacle_pair.bottom, &background);
+				GFX_clear_gfx_object_on_background(&obstacle_pair.top, &background);
+            }	
         }
+
         break;
 
     default:
