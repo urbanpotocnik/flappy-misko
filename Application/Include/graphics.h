@@ -258,7 +258,6 @@ typedef struct
 
 
 
-
 // text box object
 typedef struct
 {
@@ -269,12 +268,14 @@ typedef struct
 
 
 
+typedef struct 
+{
+    graphic_object_t top;
+    graphic_object_t bottom;
 
+} obstacle_pair_t;
 
-
-
-
-
+extern obstacle_pair_t obstacle_pair;
 
 
 
@@ -347,6 +348,13 @@ void GFX_update_two_gfx_objects_on_background(graphic_object_t *front_object, gr
 
 void GFX_display_text_object(text_object_t *text_box);
 void GFX_display_progress_bar(progress_bar_t *progress_bar);
+
+
+void GFX_init_obstacle_pair_location(obstacle_pair_t *pair, int16_t x, int16_t top_y, int16_t bottom_y);
+void GFX_set_obstacle_pair_x_axis_velocity(obstacle_pair_t *pair, int8_t x_velocity);
+void GFX_update_obstacle_pair_location(obstacle_pair_t *pair);
+void GFX_draw_obstacle_pair_on_background(obstacle_pair_t *pair, graphic_object_t *background);
+
 
 // Drawing via DMA functions
 void GFX_draw_gfx_object_via_DMA(graphic_object_t *gfx_object);

@@ -12,6 +12,7 @@
 #include "graphics.h"           
 
 // ----- Definicija možnih stanj avtomatov --------
+
 typedef enum GAME_states {
 	GAME_INTRO_STATE, 
     GAME_PLAY_STATE, 
@@ -39,6 +40,7 @@ typedef enum GAMEOVER_states {
 
 stopwatch_handle_t stopwatch;
 location_t movement_area;
+
 location_t location = { 
     .x_min = 0, 
     .x_max = 0, 
@@ -52,6 +54,7 @@ stopwatch_handle_t stopwatch_gameover;
 buttons_enum_t pressed_button = BTN_NONE;
 stopwatch_handle_t stopwatch_jump;
 stopwatch_handle_t stopwatch_obstacle;
+
 
 // ------------- Public function implementations --------------
 void Game() {
@@ -160,10 +163,15 @@ void GamePlay_UpdateChanges(void) {
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_misko, 10)) {
         GFX_update_moving_gfx_object_location(&misko);
         GFX_draw_one_gfx_object_on_background(&misko, &background);
-        GFX_update_moving_gfx_object_location(&obstacle_top);
-        GFX_draw_one_gfx_object_on_background(&obstacle_top, &background);
-        GFX_update_moving_gfx_object_location(&obstacle_bottom);
-        GFX_draw_one_gfx_object_on_background(&obstacle_bottom, &background);
+        //GFX_update_moving_gfx_object_location(&obstacle_top);
+        //GFX_draw_one_gfx_object_on_background(&obstacle_top, &background);
+        //GFX_update_moving_gfx_object_location(&obstacle_bottom);
+        //GFX_draw_one_gfx_object_on_background(&obstacle_bottom, &background);
+
+		GFX_update_obstacle_pair_location(&obstacle_pair);
+        GFX_draw_obstacle_pair_on_background(&obstacle_pair, &background);
+
+
 
 		// Da obstacle ne zabrise scora odkomentiraj tole
 		//GFX_display_text_object(&score_box_title);
@@ -181,8 +189,7 @@ void GamePlay_UpdateChanges(void) {
 uint8_t GamePlay() {
     static GAMEPLAY_states_t gameplay_state = GAMEPLAY_INIT;
     uint8_t exit_value = 0;
-    int obstacle_spawned = 0;  
-    int obstacle_top_spawned = 0;  
+    int obstacle_pair_spawned = 0;  
 
     switch (gameplay_state) {
     case GAMEPLAY_INIT:
@@ -220,23 +227,18 @@ uint8_t GamePlay() {
 
             if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 1000)) {
 
-				if (obstacle_spawned == 0) {
-                    OBJ_init_obstacle_top();
-                    GFX_set_gfx_object_velocity(&obstacle_top, -1, 0);
-                    GFX_init_gfx_object_location(&obstacle_top, 220, 190);
-                    obstacle_top.image.size_y = 240-190;  // TO DO: popravi tole na lepsi nacin
-                    obstacle_spawned = 1;
-                }
-                if (obstacle_top_spawned == 0) {
-                    OBJ_init_obstacle_bottom();
-                    GFX_set_gfx_object_velocity(&obstacle_bottom, -1, 0);
-                    GFX_init_gfx_object_location(&obstacle_bottom, 220, -160);
-                    obstacle_top_spawned = 1;
-                }
-
+				if (obstacle_pair_spawned == 0) 
+				{
+                    OBJ_init_obstacle_pair();
+					GFX_init_obstacle_pair_location(&obstacle_pair, 220, -100, 200);
+					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair, -1);
+					//obstacle_pair.bottom.image.size_y = 240-190; // TO DO: popravvi na boljsi nacin
+             
+                    obstacle_pair_spawned = 1;
+				}
+    
             }
 
-			// Zdruzi objekta v struct in jih inicializiraj skupaj
 			// Implementiraj random nastavljanje sirine med ovirama
 			// Imprementiraj preverjanje trkov
 			// Implementiraj pristevanje scora
@@ -244,6 +246,10 @@ uint8_t GamePlay() {
 
 
             GamePlay_UpdateChanges();
+
+
+
+			// clean up tole tukaj
 
             GFX_get_object_movement_area(&misko, &movement_area);
 
@@ -256,7 +262,7 @@ uint8_t GamePlay() {
             GFX_get_object_movement_area(&obstacle_bottom, &movement_area);
 
             if (movement_area.x_min == 1) {
-            	obstacle_top_spawned = 0;
+            	obstacle_pair_spawned = 0;
 
             	GFX_clear_gfx_object_on_background(&obstacle_bottom,&background);
             }
@@ -264,7 +270,7 @@ uint8_t GamePlay() {
             GFX_get_object_movement_area(&obstacle_top, &movement_area);
 			
             if (movement_area.x_min == 1) {
-            	obstacle_spawned = 0;
+            	obstacle_pair_spawned = 0;
 
             	GFX_clear_gfx_object_on_background(&obstacle_top,&background);
             }

@@ -38,7 +38,6 @@
 
 
 
-
 // -------------------- Public definitions --------------------
 
 
@@ -95,17 +94,6 @@ typedef struct
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // ------------- OBJECT ARE EXTERNAL GLOBAL VARIABLES  -----------
 
 // This simplifies inter-module data transfer at the risk of exposing data.
@@ -129,7 +117,6 @@ extern graphic_object_t obstacle_bottom;
 
 extern text_object_t	score_box_title;
 extern text_object_t	score_text;
-
 
 
 
@@ -167,6 +154,7 @@ void OBJ_init_obstacle_bottom(void);
 
 
 void OBJ_demo_spawn_target(void);
+void OBJ_init_obstacle_pair(void);
 
 
 #endif /* INCLUDE_OBJECTS_H_ */

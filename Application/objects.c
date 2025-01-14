@@ -81,7 +81,7 @@ text_object_t	score_box_title;		//tekstovni objekti
 text_object_t	score_text;
 
 
-
+obstacle_pair_t obstacle_pair;
 
 
 // ------------- Public function implementations --------------
@@ -422,6 +422,27 @@ void OBJ_init_obstacle_bottom(void)
 }
 
 
+void OBJ_init_obstacle_pair(void) 
+{
+    // Initialize top obstacle
+    obstacle_pair.top.image.image_array = (uint16_t*) obstacle_top_img;
+    obstacle_pair.top.image.size_x = 50;
+    obstacle_pair.top.image.size_y = 240;
+    obstacle_pair.top.image.size = obstacle_pair.top.image.size_x * obstacle_pair.top.image.size_y;
+    GFX_init_location_restrictions(&obstacle_pair.top, &canvas.whole_area);
+    obstacle_pair.top.edge_behavior = EDGE_IGNORE;
+
+    // Initialize bottom obstacle
+    obstacle_pair.bottom.image.image_array = (uint16_t*) obstacle_bottom_img;
+    obstacle_pair.bottom.image.size_x = 50;
+    obstacle_pair.bottom.image.size_y = 240;
+    obstacle_pair.bottom.image.size = obstacle_pair.bottom.image.size_x * obstacle_pair.bottom.image.size_y;
+    GFX_init_location_restrictions(&obstacle_pair.bottom, &canvas.whole_area);
+    obstacle_pair.bottom.edge_behavior = EDGE_IGNORE;
+
+}
+
+
 //int32_t MATH_random_integer_number_from_interval(int32_t x_min, int32_t x_max);
 
 
@@ -499,46 +520,4 @@ void OBJ_init_score_text(void)
 }
 
 
-// ------- Test functions ---------
-
-
-/*
-
-void OBJ_demo_spawn_target(void)
-{
-	OBJ_init();	// init all the objects
-
-	// display background
-	GFX_draw_gfx_object(&background);
-
-
-	TIMUT_start_system_clock_cycle_counter();
-
-	while( KBD_get_pressed_key() == BTN_NONE );	// wait for button pressed
-
-	MATH_init_random_generator();
-
-
-
-	OBJ_spawn_target();
-
-	while(1)
-	{
-
-		GFX_draw_one_gfx_object_on_background( &target.gfx_object, &background);
-
-		HAL_Delay(20);
-
-
-		GFX_update_moving_gfx_object_location( &target.gfx_object );
-	}
-
-}
-
-
-*/
-
-
 // -------------- Private function implementations -------------
-
-

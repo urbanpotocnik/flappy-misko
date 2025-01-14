@@ -413,7 +413,6 @@ uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int
     if (GFX_is_location_inside_object_restrictions(&gfx_object->top_left_limits, x, y))
     {
         // within restrictions -> object can be placed
-
         // set the new object location
         gfx_object->location.x_min = x;
         gfx_object->location.y_min = y;
@@ -426,9 +425,10 @@ uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int
 
         return 1; // placement successful
     }
+
     else
     {
-        if(gfx_object == &obstacle_bottom && y < 0)
+        if(gfx_object == &obstacle_pair.top && y < 0)
 		{
 			// Clip the part of the object that is outside the screen
 			int16_t offset = -y;
@@ -449,17 +449,6 @@ uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int
 		}
 		
 		// new location is outside the restrictions -> object will not be placed
-		gfx_object->location.x_min = x;
-		gfx_object->location.y_min = y;
-
-
-		gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
-		gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
-
-		gfx_object->location.y_min = 0;
-		gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
-		gfx_object->location.y_center = (gfx_object->location.y_min + gfx_object->location.y_max) / 2;
-
 		return 0;	// placement not successful
 		
     }
@@ -1184,6 +1173,33 @@ void GFX_display_progress_bar(progress_bar_t *progress_bar)
 
 
 
+
+void GFX_init_obstacle_pair_location(obstacle_pair_t *pair, int16_t x, int16_t top_y, int16_t bottom_y) 
+{
+	GFX_init_gfx_object_location(&pair->top, x, top_y);
+	GFX_init_gfx_object_location(&pair->bottom, x, bottom_y);
+
+	obstacle_pair.bottom.image.size_y = DISPLAY_SIZE_Y-bottom_y;
+}
+
+void GFX_set_obstacle_pair_x_axis_velocity(obstacle_pair_t *pair, int8_t x_velocity) 
+{
+	GFX_set_gfx_object_velocity(&pair->top, x_velocity, 0);
+	GFX_set_gfx_object_velocity(&pair->bottom, x_velocity, 0);
+}
+
+
+void GFX_update_obstacle_pair_location(obstacle_pair_t *pair) 
+{
+    GFX_update_moving_gfx_object_location(&pair->top);
+    GFX_update_moving_gfx_object_location(&pair->bottom);
+}
+
+void GFX_draw_obstacle_pair_on_background(obstacle_pair_t *pair, graphic_object_t *background)
+{
+    GFX_draw_one_gfx_object_on_background(&pair->top, background);
+    GFX_draw_one_gfx_object_on_background(&pair->bottom, background);
+}
 
 
 
