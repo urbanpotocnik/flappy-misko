@@ -239,8 +239,7 @@ uint8_t GamePlay() {
 			// Zdruzi objekta v struct in jih inicializiraj skupaj
 			// Implementiraj random nastavljanje sirine med ovirama
 			// Imprementiraj preverjanje trkov
-
-			// preimenuj misko, obstacle_top, obscatle down
+			// Implementiraj pristevanje scora
 
 
 
