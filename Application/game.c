@@ -226,7 +226,7 @@ uint8_t GamePlay() {
             GamePlay_UpdateChanges();
 
             GFX_get_object_movement_area(&misko, &movement_area);
-			GFX_obstacle_pair_movement_area(&obstacle_pair, &movement_area);
+			GFX_get_obstacle_pair_movement_area(&obstacle_pair, &movement_area);
 
             if (movement_area.y_max == 239) {
                 GFX_set_gfx_object_velocity(&misko, 0, 0);
@@ -240,7 +240,12 @@ uint8_t GamePlay() {
 				GFX_clear_obstacle_pair_on_background(&obstacle_pair, &background);
             }
 
-			
+			if (GFX_are_misko_and_obstacles_colliding(&misko, &obstacle_pair) == 1) {
+                GFX_set_gfx_object_velocity(&misko, 0, 0);
+				GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair, 0);
+                exit_value = 1;
+                break;
+            }
 
 
 
