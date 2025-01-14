@@ -8,7 +8,7 @@
 ../Application/objects.c:330:6:OBJ_init_press_ok_sprite	8	static
 ../Application/objects.c:355:6:OBJ_init_bird	8	static
 ../Application/objects.c:379:6:OBJ_init_obstacle_top	8	static
-../Application/objects.c:401:6:OBJ_init_obstacledown	8	static
+../Application/objects.c:401:6:OBJ_init_obstacle_bottom	8	static
 ../Application/objects.c:428:5:randomgenerator	0	static
 ../Application/objects.c:436:6:OBJ_spawn_obstacles	16	static
 ../Application/objects.c:461:6:OBJ_init_score_box_title	4	static

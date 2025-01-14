@@ -41,13 +41,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  18 .debug_line   0003dcec  00000000  00000000  001f0554  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    0013192f  00000000  00000000  0022e240  2**0
+ 19 .debug_str    00131935  00000000  00000000  0022e240  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  0035fb6f  2**0
+ 20 .comment      00000043  00000000  00000000  0035fb75  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00006500  00000000  00000000  0035fbb4  2**2
+ 21 .debug_frame  00006500  00000000  00000000  0035fbb8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 0000005d  00000000  00000000  003660b4  2**0
+ 22 .debug_line_str 0000005d  00000000  00000000  003660b8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -681,10 +681,10 @@ void GamePlay_UpdateChanges(void) {
  80007a2:	490c      	ldr	r1, [pc, #48]	@ (80007d4 <GamePlay_UpdateChanges+0x94>)
  80007a4:	480c      	ldr	r0, [pc, #48]	@ (80007d8 <GamePlay_UpdateChanges+0x98>)
  80007a6:	f000 fd3d 	bl	8001224 <GFX_draw_one_gfx_object_on_background>
-        GFX_update_moving_gfx_object_location(&obstacledown);
+        GFX_update_moving_gfx_object_location(&obstacle_bottom);
  80007aa:	480c      	ldr	r0, [pc, #48]	@ (80007dc <GamePlay_UpdateChanges+0x9c>)
  80007ac:	f000 fb2e 	bl	8000e0c <GFX_update_moving_gfx_object_location>
-        GFX_draw_one_gfx_object_on_background(&obstacledown, &background);
+        GFX_draw_one_gfx_object_on_background(&obstacle_bottom, &background);
  80007b0:	4908      	ldr	r1, [pc, #32]	@ (80007d4 <GamePlay_UpdateChanges+0x94>)
  80007b2:	480a      	ldr	r0, [pc, #40]	@ (80007dc <GamePlay_UpdateChanges+0x9c>)
  80007b4:	f000 fd36 	bl	8001224 <GFX_draw_one_gfx_object_on_background>
@@ -812,7 +812,7 @@ uint8_t GamePlay() {
  8000882:	f9b4 3006 	ldrsh.w	r3, [r4, #6]
  8000886:	2bef      	cmp	r3, #239	@ 0xef
  8000888:	d056      	beq.n	8000938 <GamePlay+0x158>
-            GFX_get_object_movement_area(&obstacledown, &movement_area);
+            GFX_get_object_movement_area(&obstacle_bottom, &movement_area);
  800088a:	4948      	ldr	r1, [pc, #288]	@ (80009ac <GamePlay+0x1cc>)
  800088c:	4848      	ldr	r0, [pc, #288]	@ (80009b0 <GamePlay+0x1d0>)
  800088e:	f000 fb4d 	bl	8000f2c <GFX_get_object_movement_area>
@@ -880,7 +880,7 @@ uint8_t GamePlay() {
  8000908:	4628      	mov	r0, r5
  800090a:	f000 f9cf 	bl	8000cac <GFX_set_gfx_object_velocity>
  800090e:	e7b1      	b.n	8000874 <GamePlay+0x94>
-            	GFX_clear_gfx_object_on_background(&obstacledown,&background);
+            	GFX_clear_gfx_object_on_background(&obstacle_bottom,&background);
  8000910:	4924      	ldr	r1, [pc, #144]	@ (80009a4 <GamePlay+0x1c4>)
  8000912:	4827      	ldr	r0, [pc, #156]	@ (80009b0 <GamePlay+0x1d0>)
  8000914:	f000 fd06 	bl	8001324 <GFX_clear_gfx_object_on_background>
@@ -928,14 +928,14 @@ uint8_t GamePlay() {
                 if (obstacle_top_spawned == 0) {
  8000968:	f1bb 0f00 	cmp.w	fp, #0
  800096c:	d1c5      	bne.n	80008fa <GamePlay+0x11a>
-                    OBJ_init_obstacledown();
- 800096e:	f000 fe9b 	bl	80016a8 <OBJ_init_obstacledown>
-                    GFX_set_gfx_object_velocity(&obstacledown, -1, 0);
+                    OBJ_init_obstacle_bottom();
+ 800096e:	f000 fe9b 	bl	80016a8 <OBJ_init_obstacle_bottom>
+                    GFX_set_gfx_object_velocity(&obstacle_bottom, -1, 0);
  8000972:	465a      	mov	r2, fp
  8000974:	480e      	ldr	r0, [pc, #56]	@ (80009b0 <GamePlay+0x1d0>)
  8000976:	f04f 31ff 	mov.w	r1, #4294967295
  800097a:	f000 f997 	bl	8000cac <GFX_set_gfx_object_velocity>
-                    GFX_init_gfx_object_location(&obstacledown, 220, -160);
+                    GFX_init_gfx_object_location(&obstacle_bottom, 220, -160);
  800097e:	f06f 029f 	mvn.w	r2, #159	@ 0x9f
  8000982:	21dc      	movs	r1, #220	@ 0xdc
  8000984:	480a      	ldr	r0, [pc, #40]	@ (80009b0 <GamePlay+0x1d0>)
@@ -1360,7 +1360,7 @@ uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, in
     }
     else
     {
-        if(gfx_object == &obstacledown && y < 0)
+        if(gfx_object == &obstacle_bottom && y < 0)
  8000c2a:	4c1f      	ldr	r4, [pc, #124]	@ (8000ca8 <GFX_init_gfx_object_location+0xe4>)
  8000c2c:	42a3      	cmp	r3, r4
  8000c2e:	d014      	beq.n	8000c5a <GFX_init_gfx_object_location+0x96>
@@ -1401,7 +1401,7 @@ uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, in
  8000c54:	f8a3 c014 	strh.w	ip, [r3, #20]
 }
  8000c58:	bd10      	pop	{r4, pc}
-        if(gfx_object == &obstacledown && y < 0)
+        if(gfx_object == &obstacle_bottom && y < 0)
  8000c5a:	2a00      	cmp	r2, #0
  8000c5c:	dae8      	bge.n	8000c30 <GFX_init_gfx_object_location+0x6c>
 			gfx_object->location.y_min = 0;
@@ -1597,7 +1597,7 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
 
 }
  8000d46:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
-        if(gfx_object == &obstacledown && y < 0)
+        if(gfx_object == &obstacle_bottom && y < 0)
  8000d4a:	4c2f      	ldr	r4, [pc, #188]	@ (8000e08 <GFX_bounce_moving_object_from_edge+0x150>)
  8000d4c:	42a3      	cmp	r3, r4
  8000d4e:	d1e8      	bne.n	8000d22 <GFX_bounce_moving_object_from_edge+0x6a>
@@ -1843,7 +1843,7 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
  8000eb2:	4608      	mov	r0, r1
 }
  8000eb4:	bd30      	pop	{r4, r5, pc}
-        if(gfx_object == &obstacledown && y < 0)
+        if(gfx_object == &obstacle_bottom && y < 0)
  8000eb6:	4d1c      	ldr	r5, [pc, #112]	@ (8000f28 <GFX_update_moving_gfx_object_location+0x11c>)
  8000eb8:	42a8      	cmp	r0, r5
  8000eba:	d1e4      	bne.n	8000e86 <GFX_update_moving_gfx_object_location+0x7a>
@@ -3146,32 +3146,32 @@ void OBJ_init_score_text(void)
  80016a0:	20000378 	.word	0x20000378
  80016a4:	200002e0 	.word	0x200002e0
 
-080016a8 <OBJ_init_obstacledown>:
+080016a8 <OBJ_init_obstacle_bottom>:
 {
  80016a8:	b510      	push	{r4, lr}
-		obstacledown.image.image_array = (uint16_t*) obstacledown_img;
- 80016aa:	4a0b      	ldr	r2, [pc, #44]	@ (80016d8 <OBJ_init_obstacledown+0x30>)
- 80016ac:	4c0b      	ldr	r4, [pc, #44]	@ (80016dc <OBJ_init_obstacledown+0x34>)
-		obstacledown.image.size_x = 50;
- 80016ae:	4b0c      	ldr	r3, [pc, #48]	@ (80016e0 <OBJ_init_obstacledown+0x38>)
-		GFX_init_location_restrictions (&obstacledown, &canvas.whole_area );
- 80016b0:	490c      	ldr	r1, [pc, #48]	@ (80016e4 <OBJ_init_obstacledown+0x3c>)
-		obstacledown.image.size_x = 50;
+		obstacle_bottom.image.image_array = (uint16_t*) obstacle_bottom_img;
+ 80016aa:	4a0b      	ldr	r2, [pc, #44]	@ (80016d8 <OBJ_init_obstacle_bottom+0x30>)
+ 80016ac:	4c0b      	ldr	r4, [pc, #44]	@ (80016dc <OBJ_init_obstacle_bottom+0x34>)
+		obstacle_bottom.image.size_x = 50;
+ 80016ae:	4b0c      	ldr	r3, [pc, #48]	@ (80016e0 <OBJ_init_obstacle_bottom+0x38>)
+		GFX_init_location_restrictions (&obstacle_bottom, &canvas.whole_area );
+ 80016b0:	490c      	ldr	r1, [pc, #48]	@ (80016e4 <OBJ_init_obstacle_bottom+0x3c>)
+		obstacle_bottom.image.size_x = 50;
  80016b2:	e9c4 2300 	strd	r2, r3, [r4]
-		GFX_init_location_restrictions (&obstacledown, &canvas.whole_area );
+		GFX_init_location_restrictions (&obstacle_bottom, &canvas.whole_area );
  80016b6:	4620      	mov	r0, r4
-		obstacledown.image.size = obstacledown.image.size_x * obstacledown.image.size_y;
+		obstacle_bottom.image.size = obstacle_bottom.image.size_x * obstacle_bottom.image.size_y;
  80016b8:	f642 63e0 	movw	r3, #12000	@ 0x2ee0
  80016bc:	60a3      	str	r3, [r4, #8]
-		GFX_init_location_restrictions (&obstacledown, &canvas.whole_area );
+		GFX_init_location_restrictions (&obstacle_bottom, &canvas.whole_area );
  80016be:	f7ff fa17 	bl	8000af0 <GFX_init_location_restrictions>
-		GFX_set_gfx_object_velocity(&obstacledown, 0, 0);
+		GFX_set_gfx_object_velocity(&obstacle_bottom, 0, 0);
  80016c2:	2200      	movs	r2, #0
  80016c4:	4611      	mov	r1, r2
  80016c6:	4620      	mov	r0, r4
  80016c8:	f7ff faf0 	bl	8000cac <GFX_set_gfx_object_velocity>
 		background.edge_behavior = EDGE_IGNORE;
- 80016cc:	4b06      	ldr	r3, [pc, #24]	@ (80016e8 <OBJ_init_obstacledown+0x40>)
+ 80016cc:	4b06      	ldr	r3, [pc, #24]	@ (80016e8 <OBJ_init_obstacle_bottom+0x40>)
  80016ce:	2202      	movs	r2, #2
  80016d0:	f883 204a 	strb.w	r2, [r3, #74]	@ 0x4a
 }

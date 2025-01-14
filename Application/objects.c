@@ -73,7 +73,7 @@ graphic_object_t	press_ok_sprite;
 
 graphic_object_t	bird;		// sestavljeni objekti aplikacije
 graphic_object_t 	obstacle_top;
-graphic_object_t 	obstacledown;
+graphic_object_t 	obstacle_bottom;
 
 // ----- Text objects ------
 
@@ -398,24 +398,24 @@ void OBJ_init_obstacle_top(void)
 }
 
 
-void OBJ_init_obstacledown(void)
+void OBJ_init_obstacle_bottom(void)
 {
 	// init graphic object
 
 		// init image
-		obstacledown.image.image_array = (uint16_t*) obstacledown_img;
+		obstacle_bottom.image.image_array = (uint16_t*) obstacle_bottom_img;
 
-		obstacledown.image.size_x = 50;
-		obstacledown.image.size_y = 240;
-		obstacledown.image.size = obstacledown.image.size_x * obstacledown.image.size_y;
+		obstacle_bottom.image.size_x = 50;
+		obstacle_bottom.image.size_y = 240;
+		obstacle_bottom.image.size = obstacle_bottom.image.size_x * obstacle_bottom.image.size_y;
 
 		// init the graphic object location
-		GFX_init_location_restrictions (&obstacledown, &canvas.whole_area );
-		//GFX_init_gfx_object_location( &obstacledown, x_cooridnate, y_coordinate);
+		GFX_init_location_restrictions (&obstacle_bottom, &canvas.whole_area );
+		//GFX_init_gfx_object_location( &obstacle_bottom, x_cooridnate, y_coordinate);
 
 
 		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&obstacledown, 0, 0);
+		GFX_set_gfx_object_velocity(&obstacle_bottom, 0, 0);
 
 		// set edge parameters
 		background.edge_behavior = EDGE_IGNORE;
@@ -439,12 +439,12 @@ void OBJ_spawn_obstacles(void){
 	int ydown = yup - 100;
 
 	// spremeni v funkcijah da se lahko nastavlja samo y ovir
-	//OBJ_init_obstacledown(320, ydown);
+	//OBJ_init_obstacle_bottom(320, ydown);
 	OBJ_init_obstacle_top();
 
 	GFX_draw_one_gfx_object_on_background(&obstacle_top, &background);
-	GFX_draw_one_gfx_object_on_background(&obstacledown, &background);
-	//GFX_draw_two_gfx_objects_on_background(&obstacle_top, &obstacledown, &background);
+	GFX_draw_one_gfx_object_on_background(&obstacle_bottom, &background);
+	//GFX_draw_two_gfx_objects_on_background(&obstacle_top, &obstacle_bottom, &background);
 
 }
 

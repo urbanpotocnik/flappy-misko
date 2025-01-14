@@ -7448,9 +7448,9 @@ LOAD C:/ST/STM32CubeIDE_1.16.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .text.OBJ_init_obstacle_top
                 0x08001664       0x44 ./Application/objects.o
                 0x08001664                OBJ_init_obstacle_top
- .text.OBJ_init_obstacledown
+ .text.OBJ_init_obstacle_bottom
                 0x080016a8       0x44 ./Application/objects.o
-                0x080016a8                OBJ_init_obstacledown
+                0x080016a8                OBJ_init_obstacle_bottom
  .text.OBJ_set_score_text_value
                 0x080016ec       0x20 ./Application/objects.o
                 0x080016ec                OBJ_set_score_text_value
@@ -8088,7 +8088,7 @@ LOAD C:/ST/STM32CubeIDE_1.16.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x080070ac        0x4 ./Application/objects.o
  .rodata.obstacle_top_img
                 0x080070b0     0x5dc0 ./Application/objects.o
- .rodata.obstacledown_img
+ .rodata.obstacle_bottom_img
                 0x0800ce70     0x5dc0 ./Application/objects.o
  .rodata.intro_img
                 0x08012c30     0x6590 ./Application/objects.o
@@ -8255,9 +8255,9 @@ LOAD C:/ST/STM32CubeIDE_1.16.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .bss.score_box_title
                 0x20000150       0x14 ./Application/objects.o
                 0x20000150                score_box_title
- .bss.obstacledown
+ .bss.obstacle_bottom
                 0x20000164       0x4c ./Application/objects.o
-                0x20000164                obstacledown
+                0x20000164                obstacle_bottom
  .bss.obstacle_top
                 0x200001b0       0x4c ./Application/objects.o
                 0x200001b0                obstacle_top
@@ -9080,84 +9080,84 @@ LOAD C:/ST/STM32CubeIDE_1.16.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_line    0x00035d96      0xab7 ./System/timing_utils.o
  .debug_line    0x0003684d     0x749f ./System/ugui.o
 
-.debug_str      0x00000000   0x13192f
- .debug_str     0x00000000   0x1158e7 ./Application/game.o
-                             0x117785 (size before relaxing)
- .debug_str     0x001158e7      0xec0 ./Application/graphics.o
-                             0x116763 (size before relaxing)
- .debug_str     0x001167a7      0x1f4 ./Application/objects.o
-                             0x115a13 (size before relaxing)
- .debug_str     0x0011699b     0xe279 ./Core/Src/main.o
-                             0x1253fc (size before relaxing)
- .debug_str     0x00124c14      0x16c ./Core/Src/stm32g4xx_hal_msp.o
+.debug_str      0x00000000   0x131935
+ .debug_str     0x00000000   0x1158ed ./Application/game.o
+                             0x11778e (size before relaxing)
+ .debug_str     0x001158ed      0xec0 ./Application/graphics.o
+                             0x116769 (size before relaxing)
+ .debug_str     0x001167ad      0x1f4 ./Application/objects.o
+                             0x115a1c (size before relaxing)
+ .debug_str     0x001169a1     0xe279 ./Core/Src/main.o
+                             0x1253ff (size before relaxing)
+ .debug_str     0x00124c1a      0x16c ./Core/Src/stm32g4xx_hal_msp.o
                              0x11e2f9 (size before relaxing)
- .debug_str     0x00124d80      0x1d2 ./Core/Src/stm32g4xx_it.o
+ .debug_str     0x00124d86      0x1d2 ./Core/Src/stm32g4xx_it.o
                              0x11d715 (size before relaxing)
- .debug_str     0x00124f52     0x1fb9 ./Core/Src/syscalls.o
+ .debug_str     0x00124f58     0x1fb9 ./Core/Src/syscalls.o
                                0x9943 (size before relaxing)
- .debug_str     0x00126f0b       0x6b ./Core/Src/sysmem.o
+ .debug_str     0x00126f11       0x6b ./Core/Src/sysmem.o
                                0x615b (size before relaxing)
- .debug_str     0x00126f76       0x87 ./Core/Src/system_stm32g4xx.o
+ .debug_str     0x00126f7c       0x87 ./Core/Src/system_stm32g4xx.o
                              0x106d5a (size before relaxing)
- .debug_str     0x00126ffd       0x44 ./Core/Startup/startup_stm32g474qetx.o
+ .debug_str     0x00127003       0x44 ./Core/Startup/startup_stm32g474qetx.o
                                  0x79 (size before relaxing)
- .debug_str     0x00127041      0x5ce ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
+ .debug_str     0x00127047      0x5ce ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
                              0x107a6c (size before relaxing)
- .debug_str     0x0012760f      0xb07 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.o
+ .debug_str     0x00127615      0xb07 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.o
                              0x107d87 (size before relaxing)
- .debug_str     0x00128116      0x6e6 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.o
+ .debug_str     0x0012811c      0x6e6 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.o
                              0x107d2d (size before relaxing)
- .debug_str     0x001287fc      0x2d2 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o
+ .debug_str     0x00128802      0x2d2 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o
                              0x107728 (size before relaxing)
- .debug_str     0x00128ace      0x280 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o
+ .debug_str     0x00128ad4      0x280 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o
                              0x107134 (size before relaxing)
- .debug_str     0x00128d4e      0x150 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o
+ .debug_str     0x00128d54      0x150 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o
                              0x106ee5 (size before relaxing)
- .debug_str     0x00128e9e      0x495 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o
+ .debug_str     0x00128ea4      0x495 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o
                              0x107248 (size before relaxing)
- .debug_str     0x00129333      0x506 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o
+ .debug_str     0x00129339      0x506 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o
                              0x107479 (size before relaxing)
- .debug_str     0x00129839      0x401 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o
+ .debug_str     0x0012983f      0x401 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o
                              0x1074a3 (size before relaxing)
- .debug_str     0x00129c3a      0x57c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.o
+ .debug_str     0x00129c40      0x57c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.o
                              0x10768c (size before relaxing)
- .debug_str     0x0012a1b6      0x28b ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_sram.o
+ .debug_str     0x0012a1bc      0x28b ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_sram.o
                              0x1073e8 (size before relaxing)
- .debug_str     0x0012a441      0xe9c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.o
+ .debug_str     0x0012a447      0xe9c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.o
                              0x108258 (size before relaxing)
- .debug_str     0x0012b2dd      0x8f7 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.o
+ .debug_str     0x0012b2e3      0x8f7 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.o
                              0x107ecc (size before relaxing)
- .debug_str     0x0012bbd4      0x44c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_fmc.o
+ .debug_str     0x0012bbda      0x44c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_fmc.o
                              0x1072ac (size before relaxing)
- .debug_str     0x0012c020      0x650 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_gpio.o
+ .debug_str     0x0012c026      0x650 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_gpio.o
                              0x1087d1 (size before relaxing)
- .debug_str     0x0012c670      0xbd1 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.o
+ .debug_str     0x0012c676      0xbd1 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.o
                              0x10b389 (size before relaxing)
- .debug_str     0x0012d241     0x1d54 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_tim.o
+ .debug_str     0x0012d247     0x1d54 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_tim.o
                              0x111862 (size before relaxing)
- .debug_str     0x0012ef95      0xa3b ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.o
+ .debug_str     0x0012ef9b      0xa3b ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.o
                              0x10d8da (size before relaxing)
- .debug_str     0x0012f9d0      0x10c ./System/LED.o
+ .debug_str     0x0012f9d6      0x10c ./System/LED.o
                              0x1074e1 (size before relaxing)
- .debug_str     0x0012fadc      0x600 ./System/SCI.o
+ .debug_str     0x0012fae2      0x600 ./System/SCI.o
                              0x10c3a2 (size before relaxing)
- .debug_str     0x001300dc       0xb4 ./System/buf.o
+ .debug_str     0x001300e2       0xb4 ./System/buf.o
                                0x3f6a (size before relaxing)
- .debug_str     0x00130190      0x282 ./System/joystick.o
+ .debug_str     0x00130196      0x282 ./System/joystick.o
                              0x10d1b8 (size before relaxing)
- .debug_str     0x00130412       0xa2 ./System/kbd.o
+ .debug_str     0x00130418       0xa2 ./System/kbd.o
                              0x107695 (size before relaxing)
- .debug_str     0x001304b4      0x30f ./System/lcd.o
+ .debug_str     0x001304ba      0x30f ./System/lcd.o
                              0x113222 (size before relaxing)
- .debug_str     0x001307c3      0x11b ./System/lcd_backlight.o
+ .debug_str     0x001307c9      0x11b ./System/lcd_backlight.o
                              0x110645 (size before relaxing)
- .debug_str     0x001308de      0x191 ./System/lcd_ili9341.o
+ .debug_str     0x001308e4      0x191 ./System/lcd_ili9341.o
                              0x107b4e (size before relaxing)
- .debug_str     0x00130a6f       0x88 ./System/periodic_services.o
+ .debug_str     0x00130a75       0x88 ./System/periodic_services.o
                              0x110de3 (size before relaxing)
- .debug_str     0x00130af7       0x45 ./System/timing_utils.o
+ .debug_str     0x00130afd       0x45 ./System/timing_utils.o
                              0x1074b4 (size before relaxing)
- .debug_str     0x00130b3c      0xdf3 ./System/ugui.o
+ .debug_str     0x00130b42      0xdf3 ./System/ugui.o
                                0x5bf8 (size before relaxing)
 
 .comment        0x00000000       0x43

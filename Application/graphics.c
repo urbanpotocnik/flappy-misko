@@ -428,7 +428,7 @@ uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int
     }
     else
     {
-        if(gfx_object == &obstacledown && y < 0)
+        if(gfx_object == &obstacle_bottom && y < 0)
 		{
 			// Clip the part of the object that is outside the screen
 			int16_t offset = -y;

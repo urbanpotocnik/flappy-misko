@@ -162,8 +162,8 @@ void GamePlay_UpdateChanges(void) {
         GFX_draw_one_gfx_object_on_background(&bird, &background);
         GFX_update_moving_gfx_object_location(&obstacle_top);
         GFX_draw_one_gfx_object_on_background(&obstacle_top, &background);
-        GFX_update_moving_gfx_object_location(&obstacledown);
-        GFX_draw_one_gfx_object_on_background(&obstacledown, &background);
+        GFX_update_moving_gfx_object_location(&obstacle_bottom);
+        GFX_draw_one_gfx_object_on_background(&obstacle_bottom, &background);
 
 		// Da obstacle ne zabrise scora odkomentiraj tole
 		//GFX_display_text_object(&score_box_title);
@@ -228,9 +228,9 @@ uint8_t GamePlay() {
                     obstacle_spawned = 1;
                 }
                 if (obstacle_top_spawned == 0) {
-                    OBJ_init_obstacledown();
-                    GFX_set_gfx_object_velocity(&obstacledown, -1, 0);
-                    GFX_init_gfx_object_location(&obstacledown, 220, -160);
+                    OBJ_init_obstacle_bottom();
+                    GFX_set_gfx_object_velocity(&obstacle_bottom, -1, 0);
+                    GFX_init_gfx_object_location(&obstacle_bottom, 220, -160);
                     obstacle_top_spawned = 1;
                 }
 
@@ -254,12 +254,12 @@ uint8_t GamePlay() {
                 break;
             }
 
-            GFX_get_object_movement_area(&obstacledown, &movement_area);
+            GFX_get_object_movement_area(&obstacle_bottom, &movement_area);
 
             if (movement_area.x_min == 1) {
             	obstacle_top_spawned = 0;
 
-            	GFX_clear_gfx_object_on_background(&obstacledown,&background);
+            	GFX_clear_gfx_object_on_background(&obstacle_bottom,&background);
             }
 
             GFX_get_object_movement_area(&obstacle_top, &movement_area);
