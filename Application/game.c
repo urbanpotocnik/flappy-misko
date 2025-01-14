@@ -143,13 +143,13 @@ uint8_t Intro() {
 }
 
 void GamePlay_UpdateChanges(void) {
-    static stopwatch_handle_t update_stopwatch_bird;
+    static stopwatch_handle_t update_stopwatch_misko;
     static stopwatch_handle_t update_stopwatch_obstacle_up;
     static stopwatch_handle_t update_stopwatch_obstacle_down;
     static uint8_t timers_initialized = 0;
 
     if (!timers_initialized) {
-        TIMUT_stopwatch_set_time_mark(&update_stopwatch_bird);
+        TIMUT_stopwatch_set_time_mark(&update_stopwatch_misko);
         TIMUT_stopwatch_set_time_mark(&update_stopwatch_obstacle_up);
         TIMUT_stopwatch_set_time_mark(&update_stopwatch_obstacle_down);
         
@@ -157,9 +157,9 @@ void GamePlay_UpdateChanges(void) {
     }
 
 
-    if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_bird, 10)) {
-        GFX_update_moving_gfx_object_location(&bird);
-        GFX_draw_one_gfx_object_on_background(&bird, &background);
+    if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_misko, 10)) {
+        GFX_update_moving_gfx_object_location(&misko);
+        GFX_draw_one_gfx_object_on_background(&misko, &background);
         GFX_update_moving_gfx_object_location(&obstacle_top);
         GFX_draw_one_gfx_object_on_background(&obstacle_top, &background);
         GFX_update_moving_gfx_object_location(&obstacle_bottom);
@@ -190,8 +190,8 @@ uint8_t GamePlay() {
         OBJ_set_score_text_value(game_status.score);
         GFX_display_text_object(&score_box_title);
         GFX_display_text_object(&score_text);
-        GFX_draw_one_gfx_object_on_background(&bird, &background);
-        GFX_set_gfx_object_velocity(&bird, 0, 0);
+        GFX_draw_one_gfx_object_on_background(&misko, &background);
+        GFX_set_gfx_object_velocity(&misko, 0, 0);
         gameplay_state = GAMEPLAY_JUMP;
         exit_value = 0;
         break;
@@ -211,11 +211,11 @@ uint8_t GamePlay() {
                     TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle);
                 }
                 TIMUT_stopwatch_set_time_mark(&stopwatch_jump);
-                GFX_set_gfx_object_velocity(&bird, 0, 2);
+                GFX_set_gfx_object_velocity(&misko, 0, 2);
             }
 
             if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_jump, 200)) {
-                GFX_set_gfx_object_velocity(&bird, 0, -2);
+                GFX_set_gfx_object_velocity(&misko, 0, -2);
             }
 
             if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 1000)) {
@@ -240,16 +240,16 @@ uint8_t GamePlay() {
 			// Implementiraj random nastavljanje sirine med ovirama
 			// Imprementiraj preverjanje trkov
 
-			// preimenuj bird, obstacle_top, obscatle down
+			// preimenuj misko, obstacle_top, obscatle down
 
 
 
             GamePlay_UpdateChanges();
 
-            GFX_get_object_movement_area(&bird, &movement_area);
+            GFX_get_object_movement_area(&misko, &movement_area);
 
             if (movement_area.y_max == 239) {
-                GFX_set_gfx_object_velocity(&bird, 0, 0);
+                GFX_set_gfx_object_velocity(&misko, 0, 0);
                 exit_value = 1;
                 break;
             }

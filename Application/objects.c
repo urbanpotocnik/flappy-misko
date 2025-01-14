@@ -71,7 +71,7 @@ graphic_object_t	press_ok_sprite;
 
 // ------- Compound objects -------
 
-graphic_object_t	bird;		// sestavljeni objekti aplikacije
+graphic_object_t	misko;		// sestavljeni objekti aplikacije
 graphic_object_t 	obstacle_top;
 graphic_object_t 	obstacle_bottom;
 
@@ -103,7 +103,7 @@ void OBJ_init(void)
 	OBJ_init_intro_sprite();
 
 	// compound objects
-	OBJ_init_bird();
+	OBJ_init_misko();
 
 	// text boxes
 	OBJ_init_score_box_title();
@@ -352,24 +352,24 @@ void OBJ_init_press_ok_sprite(void)
 }
 
 
-void OBJ_init_bird(void)
+void OBJ_init_misko(void)
 {
 	// init graphic object
 
 		// init image
-		bird.image.image_array = (uint16_t*) bird_img;
+		misko.image.image_array = (uint16_t*) misko_img;
 
-		bird.image.size_x = 50;
-		bird.image.size_y = 25;
-		bird.image.size = bird.image.size_x * bird.image.size_y;
+		misko.image.size_x = 50;
+		misko.image.size_y = 25;
+		misko.image.size = misko.image.size_x * misko.image.size_y;
 
 		// init the graphic object location
-		GFX_init_location_restrictions (&bird, &canvas.whole_area );
-		GFX_init_gfx_object_location( &bird, 50, 120);
+		GFX_init_location_restrictions (&misko, &canvas.whole_area );
+		GFX_init_gfx_object_location( &misko, 50, 120);
 
 
 		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&bird, 0, 0);
+		GFX_set_gfx_object_velocity(&misko, 0, 0);
 
 		// set edge parameters
 		background.edge_behavior = EDGE_IGNORE;

@@ -6,7 +6,7 @@
 ../Application/objects.c:218:6:OBJ_init_intro_sprite	1
 ../Application/objects.c:245:6:OBJ_init_game_over_sprite	1
 ../Application/objects.c:330:6:OBJ_init_press_ok_sprite	1
-../Application/objects.c:355:6:OBJ_init_bird	1
+../Application/objects.c:355:6:OBJ_init_misko	1
 ../Application/objects.c:379:6:OBJ_init_obstacle_top	1
 ../Application/objects.c:401:6:OBJ_init_obstacle_bottom	1
 ../Application/objects.c:428:5:randomgenerator	1

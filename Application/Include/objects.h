@@ -122,7 +122,7 @@ extern graphic_object_t	background;
 extern graphic_object_t	game_over_sprite;
 extern graphic_object_t press_ok_sprite;
 
-extern graphic_object_t bird;
+extern graphic_object_t misko;
 extern graphic_object_t obstacle_top;
 extern graphic_object_t obstacle_bottom;
 
@@ -153,7 +153,7 @@ void OBJ_init_game_over_sprite(void);
 void OBJ_init_press_any_key_sprite(void);
 void OBJ_init_press_ok_sprite(void);
 
-void OBJ_init_bird(void);
+void OBJ_init_misko(void);
 
 
 void OBJ_init_score_box_title(void);
