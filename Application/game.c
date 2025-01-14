@@ -152,10 +152,7 @@ void GamePlay_UpdateChanges(void) {
     static uint8_t timers_initialized = 0;
 
     if (!timers_initialized) {
-        TIMUT_stopwatch_set_time_mark(&update_stopwatch_misko);
-        TIMUT_stopwatch_set_time_mark(&update_stopwatch_obstacle_up);
-        TIMUT_stopwatch_set_time_mark(&update_stopwatch_obstacle_down);
-        
+        TIMUT_stopwatch_set_time_mark(&update_stopwatch_misko);    
         timers_initialized = 1;
     }
 
@@ -163,27 +160,10 @@ void GamePlay_UpdateChanges(void) {
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_misko, 10)) {
         GFX_update_moving_gfx_object_location(&misko);
         GFX_draw_one_gfx_object_on_background(&misko, &background);
-        //GFX_update_moving_gfx_object_location(&obstacle_top);
-        //GFX_draw_one_gfx_object_on_background(&obstacle_top, &background);
-        //GFX_update_moving_gfx_object_location(&obstacle_bottom);
-        //GFX_draw_one_gfx_object_on_background(&obstacle_bottom, &background);
-
 		GFX_update_obstacle_pair_location(&obstacle_pair);
         GFX_draw_obstacle_pair_on_background(&obstacle_pair, &background);
-
-
-
-		// Da obstacle ne zabrise scora odkomentiraj tole
-		//GFX_display_text_object(&score_box_title);
-        //GFX_display_text_object(&score_text);
-    }
-	
-	// Te timerje bom zaenkrat pustil tu, ce se jih bi slucajno potrebovalo v prihodnosti
-    if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_obstacle_up, settings.game_play_update_period + 10)) {
     }
 
-    if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_obstacle_down, settings.game_play_update_period + 20)) {
-    }
 }
 
 uint8_t GamePlay() {
