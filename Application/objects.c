@@ -72,7 +72,7 @@ graphic_object_t	press_ok_sprite;
 // ------- Compound objects -------
 
 graphic_object_t	bird;		// sestavljeni objekti aplikacije
-graphic_object_t 	obstacleup;
+graphic_object_t 	obstacle_top;
 graphic_object_t 	obstacledown;
 
 // ----- Text objects ------
@@ -376,24 +376,22 @@ void OBJ_init_bird(void)
 }
 
 
-void OBJ_init_obstacleup(void)
+void OBJ_init_obstacle_top(void)
 {
 	// init graphic object
 
 		// init image
-		obstacleup.image.image_array = (uint16_t*) obstacleup_img;
+		obstacle_top.image.image_array = (uint16_t*) obstacle_top_img;
 
-		obstacleup.image.size_x = 50;
-		obstacleup.image.size_y = 240;
-		obstacleup.image.size = obstacleup.image.size_x * obstacleup.image.size_y;
+		obstacle_top.image.size_x = 50;
+		obstacle_top.image.size_y = 240;
+		obstacle_top.image.size = obstacle_top.image.size_x * obstacle_top.image.size_y;
 
 		// init the graphic object location
-		GFX_init_location_restrictions (&obstacleup, &canvas.whole_area );
-		//GFX_init_gfx_object_location( &obstacleup, 320, yup);
-
+		GFX_init_location_restrictions (&obstacle_top, &canvas.whole_area );
 
 		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&obstacleup, 0, 0);
+		GFX_set_gfx_object_velocity(&obstacle_top, 0, 0);
 
 		// set edge parameters
 		background.edge_behavior = EDGE_IGNORE;
@@ -442,11 +440,11 @@ void OBJ_spawn_obstacles(void){
 
 	// spremeni v funkcijah da se lahko nastavlja samo y ovir
 	//OBJ_init_obstacledown(320, ydown);
-	OBJ_init_obstacleup();
+	OBJ_init_obstacle_top();
 
-	GFX_draw_one_gfx_object_on_background(&obstacleup, &background);
+	GFX_draw_one_gfx_object_on_background(&obstacle_top, &background);
 	GFX_draw_one_gfx_object_on_background(&obstacledown, &background);
-	//GFX_draw_two_gfx_objects_on_background(&obstacleup, &obstacledown, &background);
+	//GFX_draw_two_gfx_objects_on_background(&obstacle_top, &obstacledown, &background);
 
 }
 

@@ -7,10 +7,10 @@
 ../Application/objects.c:245:6:OBJ_init_game_over_sprite	1
 ../Application/objects.c:330:6:OBJ_init_press_ok_sprite	1
 ../Application/objects.c:355:6:OBJ_init_bird	1
-../Application/objects.c:379:6:OBJ_init_obstacleup	1
-../Application/objects.c:403:6:OBJ_init_obstacledown	1
-../Application/objects.c:430:5:randomgenerator	1
-../Application/objects.c:438:6:OBJ_spawn_obstacles	1
-../Application/objects.c:463:6:OBJ_init_score_box_title	1
-../Application/objects.c:480:6:OBJ_set_score_text_value	1
-../Application/objects.c:490:6:OBJ_init_score_text	1
+../Application/objects.c:379:6:OBJ_init_obstacle_top	1
+../Application/objects.c:401:6:OBJ_init_obstacledown	1
+../Application/objects.c:428:5:randomgenerator	1
+../Application/objects.c:436:6:OBJ_spawn_obstacles	1
+../Application/objects.c:461:6:OBJ_init_score_box_title	1
+../Application/objects.c:478:6:OBJ_set_score_text_value	1
+../Application/objects.c:488:6:OBJ_init_score_text	1

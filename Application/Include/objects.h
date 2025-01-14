@@ -123,7 +123,7 @@ extern graphic_object_t	game_over_sprite;
 extern graphic_object_t press_ok_sprite;
 
 extern graphic_object_t bird;
-extern graphic_object_t obstacleup;
+extern graphic_object_t obstacle_top;
 extern graphic_object_t obstacledown;
 
 
@@ -161,7 +161,7 @@ void OBJ_init_score_text(void);
 void OBJ_set_score_text_value(int16_t score);
 
 void OBJ_spawn_obstacles(void);
-void OBJ_init_obstacleup(void);
+void OBJ_init_obstacle_top(void);
 void OBJ_init_obstacledown(void);
 
 
