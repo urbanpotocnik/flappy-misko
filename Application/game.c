@@ -212,8 +212,6 @@ uint8_t GamePlay() {
                     OBJ_init_obstacle_pair();
 					GFX_init_obstacle_pair_location(&obstacle_pair, 220, -100, 200);
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair, -1);
-					//obstacle_pair.bottom.image.size_y = 240-190; // TO DO: popravvi na boljsi nacin
-             
                     obstacle_pair_spawned = 1;
 				}
     
@@ -232,15 +230,14 @@ uint8_t GamePlay() {
                 exit_value = 1;
                 break;
             }
-
-			GFX_get_object_movement_area(&obstacle_pair.bottom, &movement_area);
-
-            if (movement_area.x_min == 1) {
+			
+			
+			GFX_obstacle_pair_movement_area(&obstacle_pair, &movement_area);
+			if (movement_area.x_min == 1) {
             	obstacle_pair_spawned = 0;
+				GFX_clear_obstacle_pair_on_background(&obstacle_pair, &background);
+            }
 
-            	GFX_clear_gfx_object_on_background(&obstacle_pair.bottom, &background);
-				GFX_clear_gfx_object_on_background(&obstacle_pair.top, &background);
-            }	
         }
 
         break;

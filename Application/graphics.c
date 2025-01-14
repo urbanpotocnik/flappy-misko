@@ -1183,6 +1183,7 @@ void GFX_init_obstacle_pair_location(obstacle_pair_t *pair, int16_t x, int16_t t
 	obstacle_pair.bottom.image.size_y = DISPLAY_SIZE_Y-bottom_y;
 }
 
+
 void GFX_set_obstacle_pair_x_axis_velocity(obstacle_pair_t *pair, int8_t x_velocity) 
 {
 	GFX_set_gfx_object_velocity(&pair->top, x_velocity, 0);
@@ -1196,6 +1197,7 @@ void GFX_update_obstacle_pair_location(obstacle_pair_t *pair)
     GFX_update_moving_gfx_object_location(&pair->bottom);
 }
 
+
 void GFX_draw_obstacle_pair_on_background(obstacle_pair_t *pair, graphic_object_t *background)
 {
     GFX_draw_one_gfx_object_on_background(&pair->top, background);
@@ -1203,9 +1205,18 @@ void GFX_draw_obstacle_pair_on_background(obstacle_pair_t *pair, graphic_object_
 }
 
 
+void GFX_obstacle_pair_movement_area(obstacle_pair_t *pair, location_t *object_movement_area)
+{
+	GFX_get_object_movement_area(&pair->top, object_movement_area);
+	GFX_get_object_movement_area(&pair->bottom, object_movement_area);
+}
 
 
-
+void GFX_clear_obstacle_pair_on_background(obstacle_pair_t *pair, location_t *object_movement_area)
+{
+	GFX_clear_gfx_object_on_background(&pair->top, &background);
+	GFX_clear_gfx_object_on_background(&pair->bottom, &background);
+}
 
 
 

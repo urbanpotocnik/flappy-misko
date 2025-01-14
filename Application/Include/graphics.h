@@ -354,6 +354,10 @@ void GFX_init_obstacle_pair_location(obstacle_pair_t *pair, int16_t x, int16_t t
 void GFX_set_obstacle_pair_x_axis_velocity(obstacle_pair_t *pair, int8_t x_velocity);
 void GFX_update_obstacle_pair_location(obstacle_pair_t *pair);
 void GFX_draw_obstacle_pair_on_background(obstacle_pair_t *pair, graphic_object_t *background);
+void GFX_obstacle_pair_movement_area(obstacle_pair_t *pair, location_t *object_movement_area);
+void GFX_clear_obstacle_pair_on_background(obstacle_pair_t *pair, location_t *object_movement_area);
+
+
 
 
 // Drawing via DMA functions
