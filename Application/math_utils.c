@@ -68,22 +68,6 @@ int32_t MATH_random_integer_number_from_interval(int32_t x_min, int32_t x_max)
 
 }
 
-/*
-int8_t MATH_random_sign(void)
-{
-	if ( rand() > (RAND_MAX/2) )
-	{
-		return 1;
-	}
-	else
-	{
-		return -1;
-	}
-
-}
-*/
-
-
 
 uint32_t MATH_calculate_distance_between_points(int16_t x1, int16_t y1, int16_t x2, int16_t y2)
 {
@@ -100,11 +84,21 @@ uint32_t MATH_calculate_distance_between_points(int16_t x1, int16_t y1, int16_t 
 }
 
 
+// TO DO: fine tunaj razdaljo med ovirami
+obstacle_positions_t MATH_randomise_distance_between_obstacles(void)
+{
+	obstacle_positions_t obstacle_distances;
+	MATH_init_random_generator();
 
 
+	// Randomise the top obstacle position and then to it add a random distance between obstacles
+	obstacle_distances.obstacle_top_y = MATH_random_integer_number_from_interval(-210, -120);
+	int16_t distance_between_obstacles = MATH_random_integer_number_from_interval(60, 110);
+	int16_t obstacle_length = 240;
+	obstacle_distances.obstacle_bottom_y = obstacle_distances.obstacle_top_y + distance_between_obstacles + obstacle_length;
 
-
-
+	return obstacle_distances;
+}
 
 
 
@@ -135,3 +129,4 @@ void MATH_demo_random_integer_number_from_interval(void)
 
 
 // -------------- Private function implementations -------------
+

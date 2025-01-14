@@ -9,7 +9,8 @@
 #include "timing_utils.h"       
 #include "game.h"               
 #include "objects.h"            
-#include "graphics.h"           
+#include "graphics.h"   
+#include "math_utils.h"          
 
 // ----- Definicija možnih stanj avtomatov --------
 
@@ -54,6 +55,7 @@ stopwatch_handle_t stopwatch_gameover;
 buttons_enum_t pressed_button = BTN_NONE;
 stopwatch_handle_t stopwatch_jump;
 stopwatch_handle_t stopwatch_obstacle;
+obstacle_positions_t obstacle_positions;
 
 
 // ------------- Public function implementations --------------
@@ -208,22 +210,23 @@ uint8_t GamePlay() {
             if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 1000)) {
 
 				if (obstacle_pair_spawned == 0) 
-				{
-                    OBJ_init_obstacle_pair();
-					GFX_init_obstacle_pair_location(&obstacle_pair, 220, -100, 200);
+    			{
+					obstacle_positions = MATH_randomise_distance_between_obstacles();
+					OBJ_init_obstacle_pair();
+					GFX_init_obstacle_pair_location(&obstacle_pair, 220, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair, -1);
-                    obstacle_pair_spawned = 1;
+					obstacle_pair_spawned = 1;
 				}
     
             }
 
-			// Implementiraj random nastavljanje sirine med ovirama
 			// Imprementiraj preverjanje trkov
 			// Implementiraj pristevanje scora
 
             GamePlay_UpdateChanges();
 
             GFX_get_object_movement_area(&misko, &movement_area);
+			GFX_obstacle_pair_movement_area(&obstacle_pair, &movement_area);
 
             if (movement_area.y_max == 239) {
                 GFX_set_gfx_object_velocity(&misko, 0, 0);
@@ -231,12 +234,15 @@ uint8_t GamePlay() {
                 break;
             }
 			
-			
-			GFX_obstacle_pair_movement_area(&obstacle_pair, &movement_area);
+
 			if (movement_area.x_min == 1) {
             	obstacle_pair_spawned = 0;
 				GFX_clear_obstacle_pair_on_background(&obstacle_pair, &background);
             }
+
+			
+
+
 
         }
 

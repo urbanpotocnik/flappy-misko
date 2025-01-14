@@ -1218,7 +1218,17 @@ void GFX_clear_obstacle_pair_on_background(obstacle_pair_t *pair, location_t *ob
 	GFX_clear_gfx_object_on_background(&pair->bottom, &background);
 }
 
+/*
 
+void GFX_are_misko_and_obstacles_are_colliding(location_t *location_A, location_t *location_B, location_t *location_B)
+{
+	GFX_are_locations_overlapping(location_t *location_A, location_t *location_B);
+	GFX_are_locations_overlapping(location_t *location_A, location_t *location_B);
+}
+*/
+
+
+//uint8_t GFX_are_locations_overlapping(location_t *location_A, location_t *location_B)
 
 
 
