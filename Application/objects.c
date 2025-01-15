@@ -454,6 +454,9 @@ int randomgenerator(void){
 //------------- tale random generator nevem če je prav        vmes mora biti 80 pikslov prostora za ptico
 
 
+// TO DO: delete
+
+
 void OBJ_spawn_obstacles(void){
 
 	int yup = randomgenerator();

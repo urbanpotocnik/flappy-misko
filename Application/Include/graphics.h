@@ -356,7 +356,6 @@ void GFX_update_obstacle_pair_location(obstacle_pair_t *pair);
 void GFX_draw_obstacle_pair_on_background(obstacle_pair_t *pair, graphic_object_t *background);
 void GFX_get_obstacle_pair_movement_area(obstacle_pair_t *pair, location_t *object_movement_area);
 void GFX_clear_obstacle_pair_on_background(obstacle_pair_t *pair, location_t *object_movement_area);
-uint8_t GFX_are_misko_and_obstacles_colliding(graphic_object_t *misko, obstacle_pair_t *pair);
 
 
 

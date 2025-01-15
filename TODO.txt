@@ -12,6 +12,7 @@ TO DO:
 - RLE (run length encoding)
 - high score(v meniju okno in prikaz top 3 high scorov, ob koncu igre se prikaze trenutni score in high score)
 - za spremenit je cela graficna podoba
+- formatiraj kodo
 
 
 IDEJE:

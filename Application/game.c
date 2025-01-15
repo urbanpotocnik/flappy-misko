@@ -149,8 +149,6 @@ uint8_t Intro() {
 
 void GamePlay_UpdateChanges(void) {
     static stopwatch_handle_t update_stopwatch_misko;
-    static stopwatch_handle_t update_stopwatch_obstacle_up;
-    static stopwatch_handle_t update_stopwatch_obstacle_down;
     static uint8_t timers_initialized = 0;
 
     if (!timers_initialized) {
@@ -220,8 +218,10 @@ uint8_t GamePlay() {
     
             }
 
-			// Imprementiraj preverjanje trkov
+			// Popravi da se score tabela ne zabrisuje
 			// Implementiraj pristevanje scora
+
+			// Preveri ali bi rajsi naredili razsirjanje luken ali pa da je odprtina stalna in da se spreminja samo pozicija odprtine
 
             GamePlay_UpdateChanges();
 
@@ -240,14 +240,14 @@ uint8_t GamePlay() {
 				GFX_clear_obstacle_pair_on_background(&obstacle_pair, &background);
             }
 
-			if (GFX_are_misko_and_obstacles_colliding(&misko, &obstacle_pair) == 1) {
-                GFX_set_gfx_object_velocity(&misko, 0, 0);
+			
+			// Naredi bolj modularno?
+			if (GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair.top) || GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair.bottom)) {
+				GFX_set_gfx_object_velocity(&misko, 0, 0);
 				GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair, 0);
                 exit_value = 1;
                 break;
-            }
-
-
+			}
 
         }
 
@@ -271,6 +271,9 @@ uint8_t GameOver() {
 	switch (state) {
 	case GAMEOVER_SCREEN:
 		GFX_draw_one_gfx_object_on_background(&game_over_sprite, &background);
+
+		// tukaj je treba vse variable z game podavtomata treba dati na 0
+
 		KBD_flush();
 		int a = 0x01;
 		TIMUT_stopwatch_set_time_mark(&stopwatch_gameover);

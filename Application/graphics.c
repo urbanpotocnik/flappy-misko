@@ -1220,36 +1220,6 @@ void GFX_clear_obstacle_pair_on_background(obstacle_pair_t *pair, location_t *ob
 
 
 
-uint8_t GFX_are_misko_and_obstacles_colliding(graphic_object_t *misko, obstacle_pair_t *pair)
-{
-	location_t misko_movement_area;
-	location_t obstacle_top_movement_area;
-    location_t obstacle_bottom_movement_area;
-	GFX_get_object_movement_area( &pair->top, &obstacle_top_movement_area);
-	GFX_get_object_movement_area( &pair->bottom, &obstacle_bottom_movement_area);
-	GFX_get_object_movement_area( &misko, &misko_movement_area);
-
-	if ( ! GFX_are_locations_overlapping( &misko_movement_area, &obstacle_top_movement_area) )
-	{
-		return 1;
-	}
-	if( GFX_are_locations_overlapping( &misko_movement_area, &obstacle_bottom_movement_area) )
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
-
-}
-
-
-
-//uint8_t GFX_are_locations_overlapping(location_t *location_A, location_t *location_B)
-
-
-
 // ------- Test functions ---------
 
 

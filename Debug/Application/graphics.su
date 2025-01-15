@@ -45,4 +45,3 @@
 ../Application/graphics.c:1201:6:GFX_draw_obstacle_pair_on_background	16	static
 ../Application/graphics.c:1208:6:GFX_get_obstacle_pair_movement_area	8	static
 ../Application/graphics.c:1215:6:GFX_clear_obstacle_pair_on_background	16	static
-../Application/graphics.c:1223:9:GFX_are_misko_and_obstacles_colliding	16	static
