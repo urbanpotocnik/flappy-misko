@@ -39,7 +39,7 @@
 ../Application/graphics.c:1137:6:GFX_update_two_gfx_objects_on_background	15
 ../Application/graphics.c:1154:6:GFX_display_text_object	1
 ../Application/graphics.c:1167:6:GFX_display_progress_bar	1
-../Application/graphics.c:1178:6:GFX_init_obstacle_pair_location	15
+../Application/graphics.c:1178:6:GFX_init_obstacle_pair_location	13
 ../Application/graphics.c:1187:6:GFX_set_obstacle_pair_x_axis_velocity	1
 ../Application/graphics.c:1194:6:GFX_update_obstacle_pair_location	15
 ../Application/graphics.c:1201:6:GFX_draw_obstacle_pair_on_background	1

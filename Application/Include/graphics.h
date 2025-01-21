@@ -275,7 +275,11 @@ typedef struct
 
 } obstacle_pair_t;
 
-extern obstacle_pair_t obstacle_pair;
+#define MAX_OBSTACLES 3
+
+extern obstacle_pair_t obstacle_pair[MAX_OBSTACLES];
+
+//extern obstacle_pair_t obstacle_pair;
 
 
 

@@ -121,8 +121,9 @@ extern text_object_t	score_text;
 
 
 
+//#define MAX_OBSTACLES 3
 
-
+//obstacle_pair_t obstacle_pair[MAX_OBSTACLES];
 
 
 // ---------------- Public function prototypes ----------------

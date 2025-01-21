@@ -56,6 +56,8 @@ buttons_enum_t pressed_button = BTN_NONE;
 stopwatch_handle_t stopwatch_jump;
 stopwatch_handle_t stopwatch_obstacle;
 obstacle_positions_t obstacle_positions;
+int obstacle_count = 0;
+
 
 
 // ------------- Public function implementations --------------
@@ -160,11 +162,17 @@ void GamePlay_UpdateChanges(void) {
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_misko, 10)) {
         GFX_update_moving_gfx_object_location(&misko);
         GFX_draw_one_gfx_object_on_background(&misko, &background);
-		GFX_update_obstacle_pair_location(&obstacle_pair);
-        GFX_draw_obstacle_pair_on_background(&obstacle_pair, &background);
-		
-		
+		//GFX_update_obstacle_pair_location(&obstacle_pair);
+        //GFX_draw_obstacle_pair_on_background(&obstacle_pair, &background);
 		GFX_display_text_object(&score_text);
+		
+		
+		for (int i = 0; i < obstacle_count; i++) {
+            GFX_update_obstacle_pair_location(&obstacle_pair[i]);
+            GFX_draw_obstacle_pair_on_background(&obstacle_pair[i], &background);
+        }
+		
+		
     }
 
 }
@@ -211,6 +219,24 @@ uint8_t GamePlay() {
 
             if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 1000)) {
 
+				obstacle_count++;
+				TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle);
+				
+				for (int i = 0; i < obstacle_count; i++) {
+					OBJ_init_obstacle_pair();
+					GFX_init_obstacle_pair_location(&obstacle_pair[obstacle_count], 220, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
+					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair[obstacle_count], -1);
+            	}
+
+				if (TIMUT_stopwatch_has_another_X_ms_passed(&stopwatch_obstacle, 1000) == 1) {
+					obstacle_count++;
+					OBJ_init_obstacle_pair();
+					GFX_init_obstacle_pair_location(&obstacle_pair[obstacle_count], 220, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
+					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair[obstacle_count], -1);
+				}
+
+
+				/*
 				if (obstacle_pair_spawned == 0) 
     			{
 					obstacle_positions = MATH_randomise_distance_between_obstacles();
@@ -219,17 +245,20 @@ uint8_t GamePlay() {
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair, -1);
 					obstacle_pair_spawned = 1;
 				}
-    
+				*/
             }
+
 
 			// Popravi da se score tabela ne zabrisuje
 			// Implementiraj pristevanje scora
-
 			// Implementiraj se inicializacijo 2 para ovir (mogoce tudi 3) 
+			// Popravi da se obstacli zacnejo spawnati cisto pri robu
 
-			// Preveri ali bi rajsi naredili razsirjanje lukenj ali pa da je odprtina stalna in da se spreminja samo pozicija odprtine
+
 
             GamePlay_UpdateChanges();
+
+			/*
 
             GFX_get_object_movement_area(&misko, &movement_area);
 			GFX_get_obstacle_pair_movement_area(&obstacle_pair, &movement_area);
@@ -254,6 +283,11 @@ uint8_t GamePlay() {
                 exit_value = 1;
                 break;
 			}
+			
+			*/
+
+
+
 
 			//--------------------------- WIP: Pristevanje scora
 			// Za naredit je nekaksen protection ker se trenutno ob vsakem refresh ciklu enkrat poveca

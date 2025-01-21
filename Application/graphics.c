@@ -70,7 +70,7 @@ graphic_object_t	partial_frame_buffer;
 
 
 
-
+obstacle_pair_t obstacle_pair[MAX_OBSTACLES];
 
 
 // ------------- Public function implementations --------------
@@ -429,7 +429,7 @@ uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int
     else
     {
         // NOTE: ta del je zaenkrat samo za obstacle_pair.top, za naprej ga naredi modularnega!!!
-		if(gfx_object == &obstacle_pair.top && y < 0)
+		if(gfx_object == &obstacle_pair->top && y < 0)
 		{
 			// Clip the part of the object that is outside the screen
 			int16_t offset = -y;
@@ -1180,7 +1180,7 @@ void GFX_init_obstacle_pair_location(obstacle_pair_t *pair, int16_t x, int16_t t
 	GFX_init_gfx_object_location(&pair->top, x, top_y);
 	GFX_init_gfx_object_location(&pair->bottom, x, bottom_y);
 
-	obstacle_pair.bottom.image.size_y = DISPLAY_SIZE_Y-bottom_y;
+	obstacle_pair->bottom.image.size_y = DISPLAY_SIZE_Y-bottom_y;
 }
 
 
