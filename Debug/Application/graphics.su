@@ -11,7 +11,7 @@
 ../Application/graphics.c:237:6:GFX_init_location_restrictions	40	static
 ../Application/graphics.c:268:9:GFX_is_point_inside_location	0	static
 ../Application/graphics.c:284:9:GFX_is_location_inside_object_restrictions	0	static
-../Application/graphics.c:305:9:GFX_init_gfx_object_location	8	static
+../Application/graphics.c:305:9:GFX_init_gfx_object_location	20	static
 ../Application/graphics.c:324:9:GFX_set_gfx_object_center_location	8	static
 ../Application/graphics.c:355:9:GFX_init_gfx_object_center_location	8	static
 ../Application/graphics.c:374:9:GFX_move_gfx_object	8	static
@@ -36,10 +36,10 @@
 ../Application/graphics.c:880:6:GFX_draw_one_gfx_object_on_background_via_DMA	32	static
 ../Application/graphics.c:1085:6:GFX_clear_location_on_background	16	static
 ../Application/graphics.c:1094:6:GFX_clear_gfx_object_on_background	72	static
-../Application/graphics.c:1137:6:GFX_update_two_gfx_objects_on_background	24	static
+../Application/graphics.c:1137:6:GFX_update_two_gfx_objects_on_background	32	static
 ../Application/graphics.c:1154:6:GFX_display_text_object	8	static
 ../Application/graphics.c:1167:6:GFX_display_progress_bar	16	static
-../Application/graphics.c:1178:6:GFX_init_obstacle_pair_location	16	static
+../Application/graphics.c:1178:6:GFX_init_obstacle_pair_location	20	static
 ../Application/graphics.c:1187:6:GFX_set_obstacle_pair_x_axis_velocity	0	static
 ../Application/graphics.c:1194:6:GFX_update_obstacle_pair_location	16	static
 ../Application/graphics.c:1201:6:GFX_draw_obstacle_pair_on_background	16	static

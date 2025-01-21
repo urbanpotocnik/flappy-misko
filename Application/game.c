@@ -57,6 +57,10 @@ stopwatch_handle_t stopwatch_jump;
 stopwatch_handle_t stopwatch_obstacle;
 obstacle_positions_t obstacle_positions;
 
+obstacle_pair_t obstacle_pair1;
+obstacle_pair_t obstacle_pair2;
+obstacle_pair_t obstacle_pair3;
+
 
 // ------------- Public function implementations --------------
 void Game() {
@@ -160,8 +164,14 @@ void GamePlay_UpdateChanges(void) {
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_misko, 10)) {
         GFX_update_moving_gfx_object_location(&misko);
         GFX_draw_one_gfx_object_on_background(&misko, &background);
-		GFX_update_obstacle_pair_location(&obstacle_pair);
-        GFX_draw_obstacle_pair_on_background(&obstacle_pair, &background);
+		GFX_update_obstacle_pair_location(&obstacle_pair1);
+        GFX_draw_obstacle_pair_on_background(&obstacle_pair1, &background);
+
+		GFX_update_obstacle_pair_location(&obstacle_pair2);
+        GFX_draw_obstacle_pair_on_background(&obstacle_pair2, &background);
+
+		GFX_update_obstacle_pair_location(&obstacle_pair3);
+        GFX_draw_obstacle_pair_on_background(&obstacle_pair3, &background);
 		
 		
 		GFX_display_text_object(&score_text);
@@ -214,23 +224,52 @@ uint8_t GamePlay() {
 				if (obstacle_pair_spawned == 0) 
     			{
 					obstacle_positions = MATH_randomise_distance_between_obstacles();
-					OBJ_init_obstacle_pair();
-					GFX_init_obstacle_pair_location(&obstacle_pair, 220, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
-					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair, -1);
+					OBJ_init_obstacle_pair(&obstacle_pair1);
+					GFX_init_obstacle_pair_location(&obstacle_pair1, 220, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
+					//obstacle_pair1.bottom.image.size_y = DISPLAY_SIZE_Y-obstacle_positions.obstacle_bottom_y;
+					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair1, -1);
 					obstacle_pair_spawned = 1;
 				}
-    
+				
             }
+
+			if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 2000)) {
+
+				if (obstacle_pair_spawned == 0) 
+    			{
+					obstacle_positions = MATH_randomise_distance_between_obstacles();
+					OBJ_init_obstacle_pair(&obstacle_pair2);
+					GFX_init_obstacle_pair_location(&obstacle_pair2, 220, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
+					//obstacle_pair2.bottom.image.size_y = DISPLAY_SIZE_Y-obstacle_positions.obstacle_bottom_y;
+					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair2, -1);
+					obstacle_pair_spawned = 1;
+				}
+				
+            }
+
+			if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 3000)) {
+
+				if (obstacle_pair_spawned == 0) 
+    			{
+					obstacle_positions = MATH_randomise_distance_between_obstacles();
+					OBJ_init_obstacle_pair(&obstacle_pair3);
+					GFX_init_obstacle_pair_location(&obstacle_pair3, 220, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
+					//obstacle_pair3.bottom.image.size_y = DISPLAY_SIZE_Y-obstacle_positions.obstacle_bottom_y;
+					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair3, -1);
+					obstacle_pair_spawned = 1;
+				}
+				
+            }
+
 
 			// Popravi da se score tabela ne zabrisuje
 			// Implementiraj pristevanje scora
-
 			// Implementiraj se inicializacijo 2 para ovir (mogoce tudi 3) 
-
-			// Preveri ali bi rajsi naredili razsirjanje lukenj ali pa da je odprtina stalna in da se spreminja samo pozicija odprtine
 
             GamePlay_UpdateChanges();
 
+
+			/*
             GFX_get_object_movement_area(&misko, &movement_area);
 			GFX_get_obstacle_pair_movement_area(&obstacle_pair, &movement_area);
 
@@ -264,6 +303,9 @@ uint8_t GamePlay() {
 				moving_obstacles = 0;
 			}
 			*/
+			
+			
+
 
         }
 

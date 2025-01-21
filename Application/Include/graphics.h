@@ -275,9 +275,9 @@ typedef struct
 
 } obstacle_pair_t;
 
-extern obstacle_pair_t obstacle_pair;
-
-
+extern obstacle_pair_t obstacle_pair1;
+extern obstacle_pair_t obstacle_pair2;
+extern obstacle_pair_t obstacle_pair3;
 
 
 // ---------------- Public function prototypes ----------------

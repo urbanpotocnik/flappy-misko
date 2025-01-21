@@ -81,8 +81,9 @@ text_object_t	score_box_title;		//tekstovni objekti
 text_object_t	score_text;
 
 
-obstacle_pair_t obstacle_pair;
-
+//obstacle_pair_t obstacle_pair1;
+//obstacle_pair_t obstacle_pair2;
+//obstacle_pair_t obstacle_pair3;
 
 // ------------- Public function implementations --------------
 
@@ -422,24 +423,23 @@ void OBJ_init_obstacle_bottom(void)
 }
 
 
-void OBJ_init_obstacle_pair(void) 
+void OBJ_init_obstacle_pair(obstacle_pair_t *obstacle_pair)
 {
     // Initialize top obstacle
-    obstacle_pair.top.image.image_array = (uint16_t*) obstacle_top_img;
-    obstacle_pair.top.image.size_x = 50;
-    obstacle_pair.top.image.size_y = 240;
-    obstacle_pair.top.image.size = obstacle_pair.top.image.size_x * obstacle_pair.top.image.size_y;
-    GFX_init_location_restrictions(&obstacle_pair.top, &canvas.whole_area);
-    obstacle_pair.top.edge_behavior = EDGE_IGNORE;
+    obstacle_pair->top.image.image_array = (uint16_t*) obstacle_top_img;
+    obstacle_pair->top.image.size_x = 50;
+    obstacle_pair->top.image.size_y = 240;
+    obstacle_pair->top.image.size = obstacle_pair->top.image.size_x * obstacle_pair->top.image.size_y;
+    GFX_init_location_restrictions(&obstacle_pair->top, &canvas.whole_area);
+    obstacle_pair->top.edge_behavior = EDGE_IGNORE;
 
     // Initialize bottom obstacle
-    obstacle_pair.bottom.image.image_array = (uint16_t*) obstacle_bottom_img;
-    obstacle_pair.bottom.image.size_x = 50;
-    obstacle_pair.bottom.image.size_y = 240;
-    obstacle_pair.bottom.image.size = obstacle_pair.bottom.image.size_x * obstacle_pair.bottom.image.size_y;
-    GFX_init_location_restrictions(&obstacle_pair.bottom, &canvas.whole_area);
-    obstacle_pair.bottom.edge_behavior = EDGE_IGNORE;
-
+    obstacle_pair->bottom.image.image_array = (uint16_t*) obstacle_bottom_img;
+    obstacle_pair->bottom.image.size_x = 50;
+    obstacle_pair->bottom.image.size_y = 240;
+    obstacle_pair->bottom.image.size = obstacle_pair->bottom.image.size_x * obstacle_pair->bottom.image.size_y;
+    GFX_init_location_restrictions(&obstacle_pair->bottom, &canvas.whole_area);
+    obstacle_pair->bottom.edge_behavior = EDGE_IGNORE;
 }
 
 

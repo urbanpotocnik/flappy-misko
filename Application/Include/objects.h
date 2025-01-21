@@ -154,7 +154,7 @@ void OBJ_init_obstacle_bottom(void);
 
 
 void OBJ_demo_spawn_target(void);
-void OBJ_init_obstacle_pair(void);
+void OBJ_init_obstacle_pair(obstacle_pair_t *obstacle_pair);
 
 
 #endif /* INCLUDE_OBJECTS_H_ */
