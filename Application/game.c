@@ -162,6 +162,9 @@ void GamePlay_UpdateChanges(void) {
         GFX_draw_one_gfx_object_on_background(&misko, &background);
 		GFX_update_obstacle_pair_location(&obstacle_pair);
         GFX_draw_obstacle_pair_on_background(&obstacle_pair, &background);
+		
+		
+		GFX_display_text_object(&score_text);
     }
 
 }
@@ -181,6 +184,7 @@ uint8_t GamePlay() {
         GFX_set_gfx_object_velocity(&misko, 0, 0);
         gameplay_state = GAMEPLAY_JUMP;
         exit_value = 0;
+		game_status.score = 0;
         break;
 
     case GAMEPLAY_JUMP:
@@ -221,7 +225,9 @@ uint8_t GamePlay() {
 			// Popravi da se score tabela ne zabrisuje
 			// Implementiraj pristevanje scora
 
-			// Preveri ali bi rajsi naredili razsirjanje luken ali pa da je odprtina stalna in da se spreminja samo pozicija odprtine
+			// Implementiraj se inicializacijo 2 para ovir (mogoce tudi 3) 
+
+			// Preveri ali bi rajsi naredili razsirjanje lukenj ali pa da je odprtina stalna in da se spreminja samo pozicija odprtine
 
             GamePlay_UpdateChanges();
 
@@ -248,6 +254,16 @@ uint8_t GamePlay() {
                 exit_value = 1;
                 break;
 			}
+
+			//--------------------------- WIP: Pristevanje scora
+			// Za naredit je nekaksen protection ker se trenutno ob vsakem refresh ciklu enkrat poveca
+			/*
+			if(misko.location.x_center > obstacle_pair.top.location.x_center) {
+				game_status.score += 1;
+				OBJ_set_score_text_value(game_status.score);
+				moving_obstacles = 0;
+			}
+			*/
 
         }
 
