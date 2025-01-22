@@ -20,6 +20,9 @@ IDEJE:
 - ce zmanjka idej za dodatke lahko povprasamo AI hehe
 - spreminjanje hitrosti skoka in padca da nista linearna
 
+PREDSTAVITEV:
+najzanimivejse resitve: optimizacija compilerja, RLE, merjenje casa izvedbe funkcije, DMA?, 
+
 
 Here are some features you could add to your project:
 

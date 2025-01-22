@@ -22,4 +22,6 @@ void TIMUT_stopwatch_demo(void);
 
 uint32_t TIMUT_get_stopwatch_elapsed_time(stopwatch_handle_t *stopwatch); //vaja 13
 
+void TIMUT_stopwatch_reset(stopwatch_handle_t *stopwatch);
+
 #endif 

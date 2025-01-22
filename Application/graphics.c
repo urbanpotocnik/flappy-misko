@@ -428,30 +428,48 @@ uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int
 
     else
     {
-        // NOTE: ta del je zaenkrat samo za obstacle_pair.top, za naprej ga naredi modularnega!!!
-		if((gfx_object == &obstacle_pair1.top || gfx_object == &obstacle_pair2.top || gfx_object == &obstacle_pair3.top) && y < 0)
-		{
-			// Clip the part of the object that is outside the screen
-			int16_t offset = -y;
-			gfx_object->location.y_min = 0;
-			gfx_object->location.y_max = 240 - offset;
+		if((gfx_object == &obstacle_pair1.top || gfx_object == &obstacle_pair1.bottom || 
+			gfx_object == &obstacle_pair2.top || gfx_object == &obstacle_pair2.bottom || 
+			gfx_object == &obstacle_pair3.top || gfx_object == &obstacle_pair3.bottom) && (y < 0 || x < 400)) 
+   		{
+			int16_t offset = 0;
+			
+			if (y < 0) 
+			{
+				offset = -y;
+				gfx_object->location.y_min = 0;
+				gfx_object->location.y_max = gfx_object->image.size_y - offset;
+				gfx_object->image.image_array += offset * gfx_object->image.size_x;
+				gfx_object->image.size_y -= offset;
+			}
+
+			else if (y + gfx_object->image.size_y > 240) 	 
+			{
+				offset = (y + gfx_object->image.size_y) - 240;
+				gfx_object->location.y_min = y;
+				gfx_object->location.y_max = 240;
+				gfx_object->image.size_y -= offset;
+			} 
+			
+			else 
+			{
+				gfx_object->location.y_min = y;
+				gfx_object->location.y_max = y + gfx_object->image.size_y;
+			}
+
 			gfx_object->location.y_center = (gfx_object->location.y_min + gfx_object->location.y_max) / 2;
 
 			gfx_object->location.x_min = x;
 			gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
 
-			// Adjust the image data to clip the top part
-			gfx_object->image.image_array += offset * gfx_object->image.size_x;
-			gfx_object->image.size_y -= offset;
-			gfx_object->image.size = gfx_object->image.size_x * gfx_object->image.size_y;
-			
+			//Update the image size
+			//gfx_object->image.size = gfx_object->image.size_x * gfx_object->image.size_y;
 
 			return 1; // placement of obstacle successful
-		}
+    	}
 		
 		// new location is outside the restrictions -> object will not be placed
 		return 0;	// placement not successful
-		
     }
 }
 

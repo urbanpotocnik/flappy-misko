@@ -79,5 +79,9 @@ uint32_t TIMUT_get_stopwatch_elapsed_time(stopwatch_handle_t *stopwatch)
 	return stopwatch->elapsed_time;
 }
 
+
+void TIMUT_stopwatch_reset(stopwatch_handle_t *stopwatch) {
+    TIMUT_stopwatch_set_time_mark(stopwatch);
+}
 // -------------- Private function implementations -------------
 

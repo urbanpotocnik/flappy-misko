@@ -2,4 +2,4 @@
 ../Application/math_utils.c:59:9:MATH_random_integer_number_from_interval	16	static
 ../Application/math_utils.c:72:10:MATH_calculate_distance_between_points	8	static
 ../Application/math_utils.c:88:22:MATH_randomise_distance_between_obstacles	16	static
-../Application/math_utils.c:110:6:MATH_demo_random_integer_number_from_interval	16	static
+../Application/math_utils.c:108:6:MATH_demo_random_integer_number_from_interval	16	static

@@ -54,12 +54,20 @@ stopwatch_handle_t stopwatch_leds;
 stopwatch_handle_t stopwatch_gameover;
 buttons_enum_t pressed_button = BTN_NONE;
 stopwatch_handle_t stopwatch_jump;
-stopwatch_handle_t stopwatch_obstacle;
+stopwatch_handle_t stopwatch_obstacle1;
+stopwatch_handle_t stopwatch_obstacle2;
+stopwatch_handle_t stopwatch_obstacle3;
+
+
 obstacle_positions_t obstacle_positions;
 
 obstacle_pair_t obstacle_pair1;
 obstacle_pair_t obstacle_pair2;
 obstacle_pair_t obstacle_pair3;
+
+int obstacle_pair1_spawned = 0;
+int obstacle_pair2_spawned = 0;
+int obstacle_pair3_spawned = 0;
 
 
 // ------------- Public function implementations --------------
@@ -160,21 +168,41 @@ void GamePlay_UpdateChanges(void) {
         timers_initialized = 1;
     }
 
+	GFX_display_text_object(&score_text);
+
 
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_misko, 10)) {
         GFX_update_moving_gfx_object_location(&misko);
         GFX_draw_one_gfx_object_on_background(&misko, &background);
-		GFX_update_obstacle_pair_location(&obstacle_pair1);
-        GFX_draw_obstacle_pair_on_background(&obstacle_pair1, &background);
+		
+		if(obstacle_pair1_spawned == 1) {
+			//obstacle_pair1.bottom.image.size_x = DISPLAY_SIZE_X - obstacle_pair1.bottom.location.x_min;
+			//obstacle_pair1.bottom.image.size = obstacle_pair1.bottom.image.size_x * obstacle_pair1.bottom.image.size_y;
 
-		GFX_update_obstacle_pair_location(&obstacle_pair2);
-        GFX_draw_obstacle_pair_on_background(&obstacle_pair2, &background);
+			GFX_update_obstacle_pair_location(&obstacle_pair1);
+			GFX_draw_obstacle_pair_on_background(&obstacle_pair1, &background);
+		}
 
-		GFX_update_obstacle_pair_location(&obstacle_pair3);
-        GFX_draw_obstacle_pair_on_background(&obstacle_pair3, &background);
+		if(obstacle_pair2_spawned == 1) {
+			GFX_update_obstacle_pair_location(&obstacle_pair2);
+			GFX_draw_obstacle_pair_on_background(&obstacle_pair2, &background);
+		}
+
+		if(obstacle_pair3_spawned == 1) {
+			GFX_update_obstacle_pair_location(&obstacle_pair3);
+			GFX_draw_obstacle_pair_on_background(&obstacle_pair3, &background);
+		}
+		//GFX_update_obstacle_pair_location(&obstacle_pair1);
+        //GFX_draw_obstacle_pair_on_background(&obstacle_pair1, &background);
+
+		//GFX_update_obstacle_pair_location(&obstacle_pair2);
+        //GFX_draw_obstacle_pair_on_background(&obstacle_pair2, &background);
+
+		//GFX_update_obstacle_pair_location(&obstacle_pair3);
+        //GFX_draw_obstacle_pair_on_background(&obstacle_pair3, &background);
 		
 		
-		GFX_display_text_object(&score_text);
+		
     }
 
 }
@@ -209,7 +237,9 @@ uint8_t GamePlay() {
             if (pressed_button == BTN_OK) {
                 if (moving_obstacles == 0) {
                     moving_obstacles = 1;
-                    TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle);
+                    TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle1);
+					TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle2);
+					TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle3);
                 }
                 TIMUT_stopwatch_set_time_mark(&stopwatch_jump);
                 GFX_set_gfx_object_velocity(&misko, 0, 2);
@@ -219,59 +249,60 @@ uint8_t GamePlay() {
                 GFX_set_gfx_object_velocity(&misko, 0, -2);
             }
 
-            if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 1000)) {
+            if (moving_obstacles == 1) {
 
-				if (obstacle_pair_spawned == 0) 
-    			{
+				if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle1, 5000)) {
 					obstacle_positions = MATH_randomise_distance_between_obstacles();
 					OBJ_init_obstacle_pair(&obstacle_pair1);
-					GFX_init_obstacle_pair_location(&obstacle_pair1, 220, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
-					//obstacle_pair1.bottom.image.size_y = DISPLAY_SIZE_Y-obstacle_positions.obstacle_bottom_y;
+					GFX_init_obstacle_pair_location(&obstacle_pair1, 390, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair1, -1);
-					obstacle_pair_spawned = 1;
-				}
+					//&stopwatch_obstacle1.bottom.image.size_y = DISPLAY_SIZE_Y-obstacle_positions.obstacle_bottom_y;
+					//obstacle_pair1.bottom.image.size_x = DISPLAY_SIZE_X - obstacle_pair1.bottom.location.x_min;
+					obstacle_pair1_spawned = 1;
+					TIMUT_stopwatch_reset(&stopwatch_obstacle1);
+
+				} 
 				
-            }
-
-			if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 2000)) {
-
-				if (obstacle_pair_spawned == 0) 
-    			{
+				/*
+				else if (TIMUT_stopwatch_has_another_X_ms_passed(&stopwatch_obstacle2, 4000)) {
 					obstacle_positions = MATH_randomise_distance_between_obstacles();
 					OBJ_init_obstacle_pair(&obstacle_pair2);
 					GFX_init_obstacle_pair_location(&obstacle_pair2, 220, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
-					//obstacle_pair2.bottom.image.size_y = DISPLAY_SIZE_Y-obstacle_positions.obstacle_bottom_y;
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair2, -1);
-					obstacle_pair_spawned = 1;
-				}
+					TIMUT_stopwatch_reset(&stopwatch_obstacle2);
+					obstacle_pair2_spawned = 1;
+
+				} 
 				
-            }
-
-			if (moving_obstacles == 1 && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle, 3000)) {
-
-				if (obstacle_pair_spawned == 0) 
-    			{
+				else if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle3, 6000)) {
 					obstacle_positions = MATH_randomise_distance_between_obstacles();
 					OBJ_init_obstacle_pair(&obstacle_pair3);
 					GFX_init_obstacle_pair_location(&obstacle_pair3, 220, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
-					//obstacle_pair3.bottom.image.size_y = DISPLAY_SIZE_Y-obstacle_positions.obstacle_bottom_y;
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair3, -1);
-					obstacle_pair_spawned = 1;
+					TIMUT_stopwatch_reset(&stopwatch_obstacle3);
+					obstacle_pair3_spawned = 1;
+
 				}
-				
-            }
+				*/
 
 
+			}
+
+            
+
+			// TO DO:
 			// Popravi da se score tabela ne zabrisuje
 			// Implementiraj pristevanje scora
 			// Implementiraj se inicializacijo 2 para ovir (mogoce tudi 3) 
+			// IMPORTANT: GLEDE timinga ovir bo mogoce treba izmeriti cas od desne strani ekrana do leve in temu primerno prilagoditi timing spawnanja
+
 
             GamePlay_UpdateChanges();
 
 
-			/*
+			
             GFX_get_object_movement_area(&misko, &movement_area);
-			GFX_get_obstacle_pair_movement_area(&obstacle_pair, &movement_area);
+			GFX_get_obstacle_pair_movement_area(&obstacle_pair1, &movement_area);
 
             if (movement_area.y_max == 239) {
                 GFX_set_gfx_object_velocity(&misko, 0, 0);
@@ -281,11 +312,12 @@ uint8_t GamePlay() {
 			
 
 			if (movement_area.x_min == 1) {
-            	obstacle_pair_spawned = 0;
-				GFX_clear_obstacle_pair_on_background(&obstacle_pair, &background);
+            	obstacle_pair1_spawned = 0;
+				GFX_clear_obstacle_pair_on_background(&obstacle_pair1, &background);
             }
 
 			
+			/*
 			// Naredi bolj modularno?
 			if (GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair.top) || GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair.bottom)) {
 				GFX_set_gfx_object_velocity(&misko, 0, 0);
@@ -293,6 +325,9 @@ uint8_t GamePlay() {
                 exit_value = 1;
                 break;
 			}
+			
+			*/
+
 
 			//--------------------------- WIP: Pristevanje scora
 			// Za naredit je nekaksen protection ker se trenutno ob vsakem refresh ciklu enkrat poveca
@@ -304,7 +339,13 @@ uint8_t GamePlay() {
 			}
 			*/
 			
-			
+			/*
+			if (pressed_button == BTN_ESC) {
+				exit_value = 1;
+				break;
+			}
+			*/
+				
 
 
         }
