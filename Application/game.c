@@ -57,6 +57,8 @@ stopwatch_handle_t stopwatch_jump;
 stopwatch_handle_t stopwatch_obstacle1;
 stopwatch_handle_t stopwatch_obstacle2;
 stopwatch_handle_t stopwatch_obstacle3;
+stopwatch_handle_t stopwatch_obstacle_general;
+
 
 stopwatch_handle_t stopwatch_obstacle_movement;
 
@@ -70,6 +72,8 @@ int obstacle_pair1_spawned = 0;
 int obstacle_pair2_spawned = 0;
 int obstacle_pair3_spawned = 0;
 
+int moving_obstacles = 0; 
+int time_mark = 0;
 
 // ------------- Public function implementations --------------
 void Game() {
@@ -192,17 +196,7 @@ void GamePlay_UpdateChanges(void) {
 		if(obstacle_pair3_spawned == 1) {
 			GFX_update_obstacle_pair_location(&obstacle_pair3);
 			GFX_draw_obstacle_pair_on_background(&obstacle_pair3, &background);
-		}
-		//GFX_update_obstacle_pair_location(&obstacle_pair1);
-        //GFX_draw_obstacle_pair_on_background(&obstacle_pair1, &background);
-
-		//GFX_update_obstacle_pair_location(&obstacle_pair2);
-        //GFX_draw_obstacle_pair_on_background(&obstacle_pair2, &background);
-
-		//GFX_update_obstacle_pair_location(&obstacle_pair3);
-        //GFX_draw_obstacle_pair_on_background(&obstacle_pair3, &background);
-		
-		
+		}		
 		
     }
 
@@ -211,7 +205,7 @@ void GamePlay_UpdateChanges(void) {
 uint8_t GamePlay() {
     static GAMEPLAY_states_t gameplay_state = GAMEPLAY_INIT;
     uint8_t exit_value = 0;
-    int obstacle_pair_spawned = 0;  
+	int start_spawning = 0; 
 
     switch (gameplay_state) {
     case GAMEPLAY_INIT:
@@ -229,7 +223,6 @@ uint8_t GamePlay() {
     case GAMEPLAY_JUMP:
         KBD_flush();
         GFX_clear_gfx_object_on_background(&press_ok_sprite, &background);
-        int moving_obstacles = 0; 
 
         while (1) {
             KBD_scan();
@@ -238,9 +231,7 @@ uint8_t GamePlay() {
             if (pressed_button == BTN_OK) {
                 if (moving_obstacles == 0) {
                     moving_obstacles = 1;
-                    TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle1);
-					TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle2);
-					TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle3);
+					TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle_general);
                 }
                 TIMUT_stopwatch_set_time_mark(&stopwatch_jump);
                 GFX_set_gfx_object_velocity(&misko, 0, 2);
@@ -250,43 +241,48 @@ uint8_t GamePlay() {
                 GFX_set_gfx_object_velocity(&misko, 0, -2);
             }
 
-            if (moving_obstacles == 1) {
+			if ((TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle_general, 2000) && time_mark == 0)) {
+                start_spawning = 1; 
+				TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle1);
+				TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle2);
+				TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle3);
+				time_mark = 1;
+				//printf("Time marks set\n");
+            }
+			
 
-				if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle1, 5000)) {
+			// Pot ovire od desne strani do leve strani ekrana je cca 4250ms
+            if (moving_obstacles == 1 && start_spawning == 1) {
+
+				if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle1, 4250)) {
 					obstacle_positions = MATH_randomise_distance_between_obstacles();
 					OBJ_init_obstacle_pair(&obstacle_pair1);
 					GFX_init_obstacle_pair_location(&obstacle_pair1, 390, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair1, -1);
-					//&stopwatch_obstacle1.bottom.image.size_y = DISPLAY_SIZE_Y-obstacle_positions.obstacle_bottom_y;
-					//obstacle_pair1.bottom.image.size_x = DISPLAY_SIZE_X - obstacle_pair1.bottom.location.x_min;
-					obstacle_pair1_spawned = 1;
 					TIMUT_stopwatch_reset(&stopwatch_obstacle1);
-
+					obstacle_pair1_spawned = 1;
+					printf("Obstacle 1 spawned\n");
 				} 
 				
-				/*
-				else if (TIMUT_stopwatch_has_another_X_ms_passed(&stopwatch_obstacle2, 4000)) {
+				if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle2, 5250)) {
 					obstacle_positions = MATH_randomise_distance_between_obstacles();
 					OBJ_init_obstacle_pair(&obstacle_pair2);
-					GFX_init_obstacle_pair_location(&obstacle_pair2, 220, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
+					GFX_init_obstacle_pair_location(&obstacle_pair2, 390, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair2, -1);
 					TIMUT_stopwatch_reset(&stopwatch_obstacle2);
 					obstacle_pair2_spawned = 1;
-
+					printf("Obstacle 2 spawned\n");
 				} 
 				
-				else if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle3, 6000)) {
+				if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle3, 6250)) {
 					obstacle_positions = MATH_randomise_distance_between_obstacles();
 					OBJ_init_obstacle_pair(&obstacle_pair3);
-					GFX_init_obstacle_pair_location(&obstacle_pair3, 220, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
+					GFX_init_obstacle_pair_location(&obstacle_pair3, 390, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair3, -1);
 					TIMUT_stopwatch_reset(&stopwatch_obstacle3);
 					obstacle_pair3_spawned = 1;
-
+					printf("Obstacle 3 spawned\n");
 				}
-				*/
-
-
 			}
 
             
@@ -294,7 +290,7 @@ uint8_t GamePlay() {
 			// TO DO:
 			// Popravi da se score tabela ne zabrisuje
 			// Implementiraj pristevanje scora
-			// Implementiraj se inicializacijo 2 para ovir (mogoce tudi 3) 
+			// Implementiraj periodicno spawnanje ovir
 			// IMPORTANT: GLEDE timinga ovir bo mogoce treba izmeriti cas od desne strani ekrana do leve in temu primerno prilagoditi timing spawnanja
 
 
@@ -303,26 +299,34 @@ uint8_t GamePlay() {
 
 			
             GFX_get_object_movement_area(&misko, &movement_area);
-			GFX_get_obstacle_pair_movement_area(&obstacle_pair1, &movement_area);
-
             if (movement_area.y_max == 239) {
                 GFX_set_gfx_object_velocity(&misko, 0, 0);
                 exit_value = 1;
                 break;
             }
-			
-			if (movement_area.x_min == DISPLAY_SIZE_X) {
-            	TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle_movement);
-            }
 
 
-			if (movement_area.x_min == 1) {
+
+			GFX_get_obstacle_pair_movement_area(&obstacle_pair1, &movement_area);
+			GFX_get_obstacle_pair_movement_area(&obstacle_pair2, &movement_area);
+			GFX_get_obstacle_pair_movement_area(&obstacle_pair3, &movement_area);
+			//========================================================================================================
+			// TOLE TUKAJ JE SAMO ZAENKRAT, sprogramiraj malo lepse in preverjat tudi top obstacle ne samo bottom
+			if (obstacle_pair1.bottom.location.x_min == 1) {
             	obstacle_pair1_spawned = 0;
 				GFX_clear_obstacle_pair_on_background(&obstacle_pair1, &background);
-
-				uint32_t elapsed_time = TIMUT_get_stopwatch_elapsed_time(&stopwatch_obstacle_movement);
-				printf("TIME OF MOVEMENT: %lu ms\n", elapsed_time);
             }
+
+			if (obstacle_pair2.bottom.location.x_min == 1) {
+            	obstacle_pair2_spawned = 0;
+				GFX_clear_obstacle_pair_on_background(&obstacle_pair2, &background);
+            }
+
+			if (obstacle_pair3.bottom.location.x_min == 1) {
+            	obstacle_pair3_spawned = 0;
+				GFX_clear_obstacle_pair_on_background(&obstacle_pair3, &background);
+            }
+			//========================================================================================================	
 
 			
 			/*
