@@ -21,7 +21,7 @@ IDEJE:
 - spreminjanje hitrosti skoka in padca da nista linearna
 
 PREDSTAVITEV:
-najzanimivejse resitve: optimizacija compilerja, RLE, merjenje casa izvedbe funkcije, DMA?, 
+najzanimivejse resitve: optimizacija compilerja, RLE, merjenje casa izvedbe funkcije, DMA?, clock speed na 170mhz
 
 
 Here are some features you could add to your project:

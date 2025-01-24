@@ -58,6 +58,7 @@ stopwatch_handle_t stopwatch_obstacle1;
 stopwatch_handle_t stopwatch_obstacle2;
 stopwatch_handle_t stopwatch_obstacle3;
 
+stopwatch_handle_t stopwatch_obstacle_movement;
 
 obstacle_positions_t obstacle_positions;
 
@@ -310,10 +311,17 @@ uint8_t GamePlay() {
                 break;
             }
 			
+			if (movement_area.x_min == DISPLAY_SIZE_X) {
+            	TIMUT_stopwatch_set_time_mark(&stopwatch_obstacle_movement);
+            }
+
 
 			if (movement_area.x_min == 1) {
             	obstacle_pair1_spawned = 0;
 				GFX_clear_obstacle_pair_on_background(&obstacle_pair1, &background);
+
+				uint32_t elapsed_time = TIMUT_get_stopwatch_elapsed_time(&stopwatch_obstacle_movement);
+				printf("TIME OF MOVEMENT: %lu ms\n", elapsed_time);
             }
 
 			
