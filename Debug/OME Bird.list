@@ -1000,11 +1000,11 @@ uint8_t GamePlay() {
 					OBJ_init_obstacle_pair(&obstacle_pair3);
  80009f0:	483a      	ldr	r0, [pc, #232]	@ (8000adc <GamePlay+0x2f0>)
  80009f2:	f001 f99d 	bl	8001d30 <OBJ_init_obstacle_pair>
-					GFX_init_obstacle_pair_location(&obstacle_pair3, 390, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
+					GFX_init_obstacle_pair_location(&obstacle_pair3, 269, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
  80009f6:	f9bb 3002 	ldrsh.w	r3, [fp, #2]
  80009fa:	f9bb 2000 	ldrsh.w	r2, [fp]
  80009fe:	4837      	ldr	r0, [pc, #220]	@ (8000adc <GamePlay+0x2f0>)
- 8000a00:	f44f 71c3 	mov.w	r1, #390	@ 0x186
+ 8000a00:	f240 110d 	movw	r1, #269	@ 0x10d
  8000a04:	f000 fddc 	bl	80015c0 <GFX_init_obstacle_pair_location>
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair3, -1);
  8000a08:	f04f 31ff 	mov.w	r1, #4294967295
@@ -1030,11 +1030,11 @@ uint8_t GamePlay() {
 					OBJ_init_obstacle_pair(&obstacle_pair2);
  8000a32:	4829      	ldr	r0, [pc, #164]	@ (8000ad8 <GamePlay+0x2ec>)
  8000a34:	f001 f97c 	bl	8001d30 <OBJ_init_obstacle_pair>
-					GFX_init_obstacle_pair_location(&obstacle_pair2, 390, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
+					GFX_init_obstacle_pair_location(&obstacle_pair2, 269, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
  8000a38:	f9bb 3002 	ldrsh.w	r3, [fp, #2]
  8000a3c:	f9bb 2000 	ldrsh.w	r2, [fp]
  8000a40:	4825      	ldr	r0, [pc, #148]	@ (8000ad8 <GamePlay+0x2ec>)
- 8000a42:	f44f 71c3 	mov.w	r1, #390	@ 0x186
+ 8000a42:	f240 110d 	movw	r1, #269	@ 0x10d
  8000a46:	f000 fdbb 	bl	80015c0 <GFX_init_obstacle_pair_location>
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair2, -1);
  8000a4a:	f04f 31ff 	mov.w	r1, #4294967295
@@ -1060,11 +1060,11 @@ uint8_t GamePlay() {
 					OBJ_init_obstacle_pair(&obstacle_pair1);
  8000a74:	4822      	ldr	r0, [pc, #136]	@ (8000b00 <GamePlay+0x314>)
  8000a76:	f001 f95b 	bl	8001d30 <OBJ_init_obstacle_pair>
-					GFX_init_obstacle_pair_location(&obstacle_pair1, 390, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
+					GFX_init_obstacle_pair_location(&obstacle_pair1, 269, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
  8000a7a:	f9bb 3002 	ldrsh.w	r3, [fp, #2]
  8000a7e:	f9bb 2000 	ldrsh.w	r2, [fp]
  8000a82:	481f      	ldr	r0, [pc, #124]	@ (8000b00 <GamePlay+0x314>)
- 8000a84:	f44f 71c3 	mov.w	r1, #390	@ 0x186
+ 8000a84:	f240 110d 	movw	r1, #269	@ 0x10d
  8000a88:	f000 fd9a 	bl	80015c0 <GFX_init_obstacle_pair_location>
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair1, -1);
  8000a8c:	f04f 31ff 	mov.w	r1, #4294967295
