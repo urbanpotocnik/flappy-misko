@@ -58,6 +58,7 @@ stopwatch_handle_t stopwatch_obstacle1;
 stopwatch_handle_t stopwatch_obstacle2;
 stopwatch_handle_t stopwatch_obstacle3;
 stopwatch_handle_t stopwatch_obstacle_general;
+stopwatch_handle_t stopwatch_test;
 
 
 stopwatch_handle_t stopwatch_obstacle_movement;
@@ -254,17 +255,17 @@ uint8_t GamePlay() {
 			// Pot ovire od desne strani do leve strani ekrana je cca 4250ms
             if (moving_obstacles == 1 && start_spawning == 1) {
 
+				// CAS OD SPAWNA DO LEVEGA ROBA JE 4254ms
 				if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle1, 4250)) {
 					obstacle_positions = MATH_randomise_distance_between_obstacles();
 					OBJ_init_obstacle_pair(&obstacle_pair1);
 					GFX_init_obstacle_pair_location(&obstacle_pair1, 269, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair1, -1);
+					TIMUT_stopwatch_set_time_mark(&stopwatch_test);
 					TIMUT_stopwatch_reset(&stopwatch_obstacle1);
 					obstacle_pair1_spawned = 1;
-					printf("Obstacle 1 spawned\n");
-				} 
-				
-				
+					//printf("Obstacle 1 spawned\n");
+				} 				
 				
 				if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle2, 5250)) {
 					obstacle_positions = MATH_randomise_distance_between_obstacles();
@@ -273,7 +274,7 @@ uint8_t GamePlay() {
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair2, -1);
 					TIMUT_stopwatch_reset(&stopwatch_obstacle2);
 					obstacle_pair2_spawned = 1;
-					printf("Obstacle 2 spawned\n");
+					//printf("Obstacle 2 spawned\n");
 				} 
 				
 				if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_obstacle3, 6250)) {
@@ -283,7 +284,7 @@ uint8_t GamePlay() {
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair3, -1);
 					TIMUT_stopwatch_reset(&stopwatch_obstacle3);
 					obstacle_pair3_spawned = 1;
-					printf("Obstacle 3 spawned\n");
+					//printf("Obstacle 3 spawned\n");
 				}
 				
 			}
@@ -310,15 +311,18 @@ uint8_t GamePlay() {
             }
 
 
-
+			// Tukaj bo za pogledat ker se zgleda ovire ne odstranijo iz ozadja in malo se trese slika zaradi renderiranja
+			// Zna biti da ne bo vec problem ko se bodo ovire spawnale periodicno in bo imel cas zbrisat
 			GFX_get_obstacle_pair_movement_area(&obstacle_pair1, &movement_area);
 			GFX_get_obstacle_pair_movement_area(&obstacle_pair2, &movement_area);
 			GFX_get_obstacle_pair_movement_area(&obstacle_pair3, &movement_area);
 			//========================================================================================================
 			// TOLE TUKAJ JE SAMO ZAENKRAT, sprogramiraj malo lepse in preverjat tudi top obstacle ne samo bottom
-			if (obstacle_pair1.bottom.location.x_min == 1) {
+			if (obstacle_pair1.bottom.location.x_min == 2) {
             	obstacle_pair1_spawned = 0;
 				GFX_clear_obstacle_pair_on_background(&obstacle_pair1, &background);
+				uint32_t elapsed_time = TIMUT_get_stopwatch_elapsed_time(&stopwatch_test);
+				printf("TIME OF MOVEMENT: %lu ms\n", elapsed_time);
             }
 
 			if (obstacle_pair2.bottom.location.x_min == 1) {
