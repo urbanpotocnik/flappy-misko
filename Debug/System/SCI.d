@@ -1,5 +1,5 @@
 System/SCI.o: ../System/SCI.c \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/SCI.h \
+ C:/Users/Tomaz/Desktop/flappy-misko/System/Include/SCI.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h \
@@ -35,8 +35,8 @@ System/SCI.o: ../System/SCI.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/buf.h
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/SCI.h:
+ C:/Users/Tomaz/Desktop/flappy-misko/System/Include/buf.h
+C:/Users/Tomaz/Desktop/flappy-misko/System/Include/SCI.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h:
@@ -72,4 +72,4 @@ C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/SCI.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/buf.h:
+C:/Users/Tomaz/Desktop/flappy-misko/System/Include/buf.h:
