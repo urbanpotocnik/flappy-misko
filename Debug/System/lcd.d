@@ -1,7 +1,7 @@
 System/lcd.o: ../System/lcd.c \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341_registers.h \
+ C:/Users/Tomaz/Desktop/flappy-misko/System/Include/lcd.h \
+ C:/Users/Tomaz/Desktop/flappy-misko/System/Include/lcd_ili9341.h \
+ C:/Users/Tomaz/Desktop/flappy-misko/System/Include/lcd_ili9341_registers.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h \
  ../Drivers/CMSIS/Include/core_cm4.h \
@@ -36,16 +36,16 @@ System/lcd.o: ../System/lcd.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_backlight.h \
+ C:/Users/Tomaz/Desktop/flappy-misko/System/Include/lcd_backlight.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/ugui.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/ugui_config.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/XPT2046_touch.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/SCI.h \
+ C:/Users/Tomaz/Desktop/flappy-misko/System/Include/ugui.h \
+ C:/Users/Tomaz/Desktop/flappy-misko/System/Include/ugui_config.h \
+ C:/Users/Tomaz/Desktop/flappy-misko/System/Include/XPT2046_touch.h \
+ C:/Users/Tomaz/Desktop/flappy-misko/System/Include/SCI.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341_registers.h:
+C:/Users/Tomaz/Desktop/flappy-misko/System/Include/lcd.h:
+C:/Users/Tomaz/Desktop/flappy-misko/System/Include/lcd_ili9341.h:
+C:/Users/Tomaz/Desktop/flappy-misko/System/Include/lcd_ili9341_registers.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h:
 ../Drivers/CMSIS/Include/core_cm4.h:
@@ -80,10 +80,10 @@ C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341_regist
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_backlight.h:
+C:/Users/Tomaz/Desktop/flappy-misko/System/Include/lcd_backlight.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/ugui.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/ugui_config.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/XPT2046_touch.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/SCI.h:
+C:/Users/Tomaz/Desktop/flappy-misko/System/Include/ugui.h:
+C:/Users/Tomaz/Desktop/flappy-misko/System/Include/ugui_config.h:
+C:/Users/Tomaz/Desktop/flappy-misko/System/Include/XPT2046_touch.h:
+C:/Users/Tomaz/Desktop/flappy-misko/System/Include/SCI.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h:

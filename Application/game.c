@@ -63,6 +63,10 @@ obstacle_pair_t obstacle_pair3;
 int obstacle_pair1_spawned = 0;
 int obstacle_pair2_spawned = 0;
 int obstacle_pair3_spawned = 0;
+int obstacle_pair1_cleaned = 0;
+int obstacle_pair2_cleaned = 0;
+int obstacle_pair3_cleaned = 0;
+
 
 int moving_obstacles = 0; 
 int time_mark = 0;
@@ -242,6 +246,7 @@ uint8_t GamePlay() {
 					GFX_init_obstacle_pair_location(&obstacle_pair1, 269, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair1, -1);
 					obstacle_pair1_spawned = 1;
+					obstacle_pair1_cleaned = 0;
 					obstacle_number = 2;
 					printf("Obstacle 1 spawned\n");
 				} else if (obstacle_number == 2) {
@@ -250,6 +255,7 @@ uint8_t GamePlay() {
 					GFX_init_obstacle_pair_location(&obstacle_pair2, 269, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair2, -1);
 					obstacle_pair2_spawned = 1;
+					obstacle_pair2_cleaned = 0;
 					obstacle_number = 3;
 					printf("Obstacle 2 spawned\n");
 				} else if (obstacle_number == 3) {
@@ -258,6 +264,7 @@ uint8_t GamePlay() {
 					GFX_init_obstacle_pair_location(&obstacle_pair3, 269, obstacle_positions.obstacle_top_y, obstacle_positions.obstacle_bottom_y);
 					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair3, -1);
 					obstacle_pair3_spawned = 1;
+					obstacle_pair3_cleaned = 0;
 					obstacle_number = 1;
 					printf("Obstacle 3 spawned\n");
 				}
@@ -292,18 +299,21 @@ uint8_t GamePlay() {
 			GFX_get_obstacle_pair_movement_area(&obstacle_pair3, &movement_area);
 			//========================================================================================================
 			// TOLE TUKAJ JE SAMO ZAENKRAT, sprogramiraj malo lepse in preverjat tudi top obstacle ne samo bottom
-			if (obstacle_pair1.bottom.location.x_min == 1) {
+			if (obstacle_pair1.bottom.location.x_min == 1 && obstacle_pair1_cleaned == 0) {
 				obstacle_pair1_spawned = 0;
+				obstacle_pair1_cleaned = 1;
 				GFX_clear_obstacle_pair_on_background(&obstacle_pair1, &background);
             }
 
-			if (obstacle_pair2.bottom.location.x_min == 1) {
+			if (obstacle_pair2.bottom.location.x_min == 1 && obstacle_pair2_cleaned == 0) {
             	obstacle_pair2_spawned = 0;
+            	obstacle_pair2_cleaned = 1;
 				GFX_clear_obstacle_pair_on_background(&obstacle_pair2, &background);
             }
 
-			if (obstacle_pair3.bottom.location.x_min == 1) {
+			if (obstacle_pair3.bottom.location.x_min == 1 && obstacle_pair3_cleaned == 0) {
             	obstacle_pair3_spawned = 0;
+            	obstacle_pair3_cleaned = 1;
 				GFX_clear_obstacle_pair_on_background(&obstacle_pair3, &background);
             }
 
