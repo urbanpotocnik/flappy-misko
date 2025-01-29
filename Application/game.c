@@ -67,10 +67,14 @@ int obstacle_pair1_cleaned = 0;
 int obstacle_pair2_cleaned = 0;
 int obstacle_pair3_cleaned = 0;
 
+int obstacle_pair1_scored = 0;
+int obstacle_pair2_scored = 0;
+int obstacle_pair3_scored = 0;
 
 int moving_obstacles = 0; 
 int time_mark = 0;
 int obstacle_number = 0;
+
 
 
 // ------------- Public function implementations --------------
@@ -173,7 +177,6 @@ void GamePlay_UpdateChanges(void) {
 
 	GFX_display_text_object(&score_text);
 
-
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_misko, 10)) {
         GFX_update_moving_gfx_object_location(&misko);
         GFX_draw_one_gfx_object_on_background(&misko, &background);
@@ -248,7 +251,7 @@ uint8_t GamePlay() {
 					obstacle_pair1_spawned = 1;
 					obstacle_pair1_cleaned = 0;
 					obstacle_number = 2;
-					printf("Obstacle 1 spawned\n");
+					//printf("Obstacle 1 spawned\n");
 				} else if (obstacle_number == 2) {
 					obstacle_positions = MATH_randomise_distance_between_obstacles();
 					OBJ_init_obstacle_pair(&obstacle_pair2);
@@ -257,7 +260,7 @@ uint8_t GamePlay() {
 					obstacle_pair2_spawned = 1;
 					obstacle_pair2_cleaned = 0;
 					obstacle_number = 3;
-					printf("Obstacle 2 spawned\n");
+					//printf("Obstacle 2 spawned\n");
 				} else if (obstacle_number == 3) {
 					obstacle_positions = MATH_randomise_distance_between_obstacles();
 					OBJ_init_obstacle_pair(&obstacle_pair3);
@@ -266,7 +269,7 @@ uint8_t GamePlay() {
 					obstacle_pair3_spawned = 1;
 					obstacle_pair3_cleaned = 0;
 					obstacle_number = 1;
-					printf("Obstacle 3 spawned\n");
+					//printf("Obstacle 3 spawned\n");
 				}
 			}	
 
@@ -275,9 +278,6 @@ uint8_t GamePlay() {
 
 			// TO DO:
 			// Popravi da se score tabela ne zabrisuje
-			// Implementiraj pristevanje scora
-			// Implementiraj periodicno spawnanje ovir
-			// IMPORTANT: GLEDE timinga ovir bo mogoce treba izmeriti cas od desne strani ekrana do leve in temu primerno prilagoditi timing spawnanja
 			// Dodaj razne koordinate in tako v define
 
 
@@ -293,27 +293,28 @@ uint8_t GamePlay() {
             }
 
 
-			// Tukaj bo za pogledat ker se zgleda ovire ne odstranijo iz ozadja in malo se trese slika zaradi renderiranja
 			GFX_get_obstacle_pair_movement_area(&obstacle_pair1, &movement_area);
 			GFX_get_obstacle_pair_movement_area(&obstacle_pair2, &movement_area);
 			GFX_get_obstacle_pair_movement_area(&obstacle_pair3, &movement_area);
-			//========================================================================================================
-			// TOLE TUKAJ JE SAMO ZAENKRAT, sprogramiraj malo lepse in preverjat tudi top obstacle ne samo bottom
+			
 			if (obstacle_pair1.bottom.location.x_min == 1 && obstacle_pair1_cleaned == 0) {
 				obstacle_pair1_spawned = 0;
 				obstacle_pair1_cleaned = 1;
+				obstacle_pair1_scored = 0;
 				GFX_clear_obstacle_pair_on_background(&obstacle_pair1, &background);
             }
 
 			if (obstacle_pair2.bottom.location.x_min == 1 && obstacle_pair2_cleaned == 0) {
             	obstacle_pair2_spawned = 0;
             	obstacle_pair2_cleaned = 1;
+				obstacle_pair2_scored = 0;
 				GFX_clear_obstacle_pair_on_background(&obstacle_pair2, &background);
             }
 
 			if (obstacle_pair3.bottom.location.x_min == 1 && obstacle_pair3_cleaned == 0) {
             	obstacle_pair3_spawned = 0;
             	obstacle_pair3_cleaned = 1;
+				obstacle_pair3_scored = 0;
 				GFX_clear_obstacle_pair_on_background(&obstacle_pair3, &background);
             }
 
@@ -330,16 +331,29 @@ uint8_t GamePlay() {
 			
 			*/
 
-
-			//--------------------------- WIP: Pristevanje scora
-			// Za naredit je nekaksen protection ker se trenutno ob vsakem refresh ciklu enkrat poveca
-			/*
-			if(misko.location.x_center > obstacle_pair.top.location.x_center) {
-				game_status.score += 1;
-				OBJ_set_score_text_value(game_status.score);
-				moving_obstacles = 0;
+			if (misko.location.x_center > obstacle_pair1.top.location.x_min && obstacle_pair1_spawned == 1 && !obstacle_pair1_scored) {
+				if (misko.location.x_center > obstacle_pair1.top.location.x_center) {
+					game_status.score += 1;
+					OBJ_set_score_text_value(game_status.score);
+					obstacle_pair1_scored = 1; 
+				}	
 			}
-			*/
+
+			if (misko.location.x_center > obstacle_pair2.top.location.x_min && obstacle_pair2_spawned == 1 && !obstacle_pair2_scored) {
+				if (misko.location.x_center > obstacle_pair2.top.location.x_center) {
+					game_status.score += 1;
+					OBJ_set_score_text_value(game_status.score);
+					obstacle_pair2_scored = 1; 
+				}
+			}
+
+			if (misko.location.x_center > obstacle_pair3.top.location.x_min && obstacle_pair3_spawned == 1 && !obstacle_pair3_scored) {
+				if (misko.location.x_center > obstacle_pair3.top.location.x_center) {
+					game_status.score += 1;
+					OBJ_set_score_text_value(game_status.score);
+					obstacle_pair3_scored = 1; 
+				}
+			}			
 			
 			/*
 			if (pressed_button == BTN_ESC) {

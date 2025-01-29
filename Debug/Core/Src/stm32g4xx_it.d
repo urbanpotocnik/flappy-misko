@@ -46,9 +46,9 @@ Core/Src/stm32g4xx_it.o: ../Core/Src/stm32g4xx_it.c ../Core/Inc/main.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dmamux.h \
  ../Core/Inc/stm32g4xx_it.h \
- C:/Users/Tomaz/Desktop/flappy-misko/System/Include/SCI.h \
- C:/Users/Tomaz/Desktop/flappy-misko/System/Include/periodic_services.h \
- C:/Users/Tomaz/Desktop/flappy-misko/System/Include/timing_utils.h
+ C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/SCI.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/periodic_services.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/timing_utils.h
 ../Core/Inc/main.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
@@ -97,6 +97,6 @@ Core/Src/stm32g4xx_it.o: ../Core/Src/stm32g4xx_it.c ../Core/Inc/main.h \
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dmamux.h:
 ../Core/Inc/stm32g4xx_it.h:
-C:/Users/Tomaz/Desktop/flappy-misko/System/Include/SCI.h:
-C:/Users/Tomaz/Desktop/flappy-misko/System/Include/periodic_services.h:
-C:/Users/Tomaz/Desktop/flappy-misko/System/Include/timing_utils.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/SCI.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/periodic_services.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/timing_utils.h:
