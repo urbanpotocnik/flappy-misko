@@ -92,7 +92,7 @@ obstacle_positions_t MATH_randomise_distance_between_obstacles(void)
 
 	// Randomise the top obstacle position, the distance between obstacles is constant
 	obstacle_distances.obstacle_top_y = MATH_random_integer_number_from_interval(-210, -120);
-	int16_t distance_between_obstacles = 85;
+	int16_t distance_between_obstacles = 100;
 	int16_t obstacle_length = 240;
 	obstacle_distances.obstacle_bottom_y = obstacle_distances.obstacle_top_y + distance_between_obstacles + obstacle_length;
 

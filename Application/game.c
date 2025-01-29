@@ -279,6 +279,7 @@ uint8_t GamePlay() {
 			// TO DO:
 			// Popravi da se score tabela ne zabrisuje
 			// Dodaj razne koordinate in tako v define
+			// Naredi vse skup mogoce bolj modularno
 
 
             GamePlay_UpdateChanges();
@@ -319,17 +320,25 @@ uint8_t GamePlay() {
             }
 
 
-			//========================================================================================================	
-			/*
 			// Naredi bolj modularno?
-			if (GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair.top) || GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair.bottom)) {
+			//GFX_get_obstacle_pair_movement_area(&obstacle_pair1, &movement_area);
+			//GFX_get_obstacle_pair_movement_area(&obstacle_pair2, &movement_area);
+			//GFX_get_obstacle_pair_movement_area(&obstacle_pair3, &movement_area);
+			if (GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair1.top) || 
+				GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair1.bottom) || 
+				GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair2.top) || 
+				GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair2.bottom) || 
+				GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair3.top) || 
+				GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair3.bottom)) {
+		
 				GFX_set_gfx_object_velocity(&misko, 0, 0);
-				GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair, 0);
-                exit_value = 1;
-                break;
+				GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair1, 0);
+				GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair2, 0);
+				GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair3, 0);
+				exit_value = 1;
 			}
 			
-			*/
+			
 
 			if (misko.location.x_center > obstacle_pair1.top.location.x_min && obstacle_pair1_spawned == 1 && !obstacle_pair1_scored) {
 				if (misko.location.x_center > obstacle_pair1.top.location.x_center) {
