@@ -1,5 +1,5 @@
 System/joystick.o: ../System/joystick.c \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/joystick.h \
+ C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/joystick.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
  ../Core/Inc/stm32g4xx_hal_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h \
@@ -35,11 +35,11 @@ System/joystick.o: ../System/joystick.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/LED.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/SCI.h \
+ C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/LED.h \
+ C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/SCI.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/buf.h
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/joystick.h:
+ C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/buf.h
+C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/joystick.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h:
@@ -75,7 +75,7 @@ C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/joystick.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/LED.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/SCI.h:
+C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/LED.h:
+C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/SCI.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/buf.h:
+C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/buf.h:
