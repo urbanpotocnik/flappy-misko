@@ -397,6 +397,34 @@ uint8_t GameOver() {
 		// tukaj je treba vse variable z game podavtomata treba dati na 0
 
 		KBD_flush();
+		HAL_Delay(2000);
+		game_status.score = 0;
+		exit_value = 1;
+		//state = GAMEPLAY_JUMP;
+
+		obstacle_pair1_spawned = 0;
+		obstacle_pair2_spawned = 0;
+		obstacle_pair3_spawned = 0;
+		obstacle_pair1_cleaned = 0;
+		obstacle_pair2_cleaned = 0;
+		obstacle_pair3_cleaned = 0;
+
+		obstacle_pair1_scored = 0;
+		obstacle_pair2_scored = 0;
+		obstacle_pair3_scored = 0;
+
+		moving_obstacles = 0; 
+		time_mark = 0;
+		obstacle_number = 0;
+
+		GFX_clear_obstacle_pair_on_background(&obstacle_pair1, &background);
+		GFX_clear_obstacle_pair_on_background(&obstacle_pair2, &background);
+		GFX_clear_obstacle_pair_on_background(&obstacle_pair3, &background);
+		GFX_clear_gfx_object_on_background(&misko, &background);
+		GFX_clear_gfx_object_on_background(&game_over_sprite, &background);
+
+
+		/*
 		int a = 0x01;
 		TIMUT_stopwatch_set_time_mark(&stopwatch_gameover);
 		while (1) {
@@ -411,8 +439,11 @@ uint8_t GameOver() {
 				break;
 			}
 		}
-		state = GAMEOVER_WAIT_FOR_ANY_KEY;
-		exit_value = 0;
+		*/
+
+
+		//state = GAMEOVER_WAIT_FOR_ANY_KEY;
+		//exit_value = 0;
 		break;
 
 	case GAMEOVER_WAIT_FOR_ANY_KEY:

@@ -11,7 +11,7 @@ Za narest:
 - clean up kode 
 - dodaj okno s pavzo ce se pritisne tipka esc
 - kalibracija hitrost in casa skoka? da se nastavi ravno pravsnja tezavnost
-
+- 3d printed case
 
 
 

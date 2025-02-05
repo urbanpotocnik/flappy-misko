@@ -1,5 +1,5 @@
 System/kbd.o: ../System/kbd.c \
- C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/LED.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/LED.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h \
@@ -35,9 +35,9 @@ System/kbd.o: ../System/kbd.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
- C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/kbd.h \
- C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/buf.h
-C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/LED.h:
+ C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/kbd.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/buf.h
+C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/LED.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h:
@@ -73,5 +73,5 @@ C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/LED.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h:
-C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/kbd.h:
-C:/Users/Tomaz/Desktop/New\ folder/flappy-misko/System/Include/buf.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/kbd.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/buf.h:
