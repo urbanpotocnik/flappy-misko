@@ -176,6 +176,8 @@ void GamePlay_UpdateChanges(void) {
     }
 
 	GFX_display_text_object(&score_text);
+	GFX_display_text_object(&score_box_title);
+
 
     if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_misko, 10)) {
         GFX_update_moving_gfx_object_location(&misko);
@@ -324,18 +326,16 @@ uint8_t GamePlay() {
 			//GFX_get_obstacle_pair_movement_area(&obstacle_pair1, &movement_area);
 			//GFX_get_obstacle_pair_movement_area(&obstacle_pair2, &movement_area);
 			//GFX_get_obstacle_pair_movement_area(&obstacle_pair3, &movement_area);
-			if (GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair1.top) || 
-				GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair1.bottom) || 
-				GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair2.top) || 
-				GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair2.bottom) || 
-				GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair3.top) || 
-				GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair3.bottom)) {
-		
+			if ((GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair1.top) && obstacle_pair1_spawned == 1) ||
+			(GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair1.bottom)&& obstacle_pair1_spawned == 1) ||
+			(GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair2.top) && obstacle_pair2_spawned == 1) ||
+			(GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair2.bottom)&& obstacle_pair2_spawned == 1)  ||
+			(GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair3.top) && obstacle_pair3_spawned == 1) ||
+			(GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair3.bottom)&& obstacle_pair3_spawned == 1)) {
+
 				GFX_set_gfx_object_velocity(&misko, 0, 0);
-				GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair1, 0);
-				GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair2, 0);
-				GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair3, 0);
-				exit_value = 1;
+                exit_value = 1;
+                break;
 			}
 			
 			
