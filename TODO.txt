@@ -1,18 +1,17 @@
-TO DO:
-- kalibriranje hitrosti skoka in cas skoka (trenutno je velocity 1 in je premalo, ce ga nastavimo na 2 je ze prevec, ujeti bo treba nekje umes)
-- kompresija slik
-- 3D case 
-- zmiganje z ledicami bo treba zrihtat
-- dodaj touch
-- dodaj zvocnik
-- dodaj vibriranje
-- dodaj okno z pavzo, ki se odpre s pritiskom na esc button
-- clean up kode
-- leveli tezavnosti
-- RLE (run length encoding)
-- high score(v meniju okno in prikaz top 3 high scorov, ob koncu igre se prikaze trenutni score in high score)
-- za spremenit je cela graficna podoba
-- formatiraj kodo
+Za narest:
+- za dodat vibriranje
+- za dodat zvocnik
+- za postimat so lucke da svetijo vse
+- za spremenit so grafike (Lija)
+- za dodat je start menu (game start okno, high scores okno)
+- v oknu high scores naj kaze najvisje 3 high score
+- ko je konec igre da ti displaya high score, your score
+- za popravit je da se lepo displaya score text 
+- RLE do konca
+- clean up kode 
+- dodaj okno s pavzo ce se pritisne tipka esc
+- kalibracija hitrost in casa skoka? da se nastavi ravno pravsnja tezavnost
+
 
 
 IDEJE:
