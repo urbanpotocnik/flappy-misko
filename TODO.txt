@@ -2,6 +2,7 @@ Za narest:
 - za dodat vibriranje
 - za dodat zvocnik
 - za postimat so lucke da svetijo vse
+- dodaj da poblenda ko umres
 - za spremenit so grafike (Lija)
 - za dodat je start menu (game start okno, high scores okno)
 - v oknu high scores naj kaze najvisje 3 high score
