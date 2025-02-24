@@ -10,7 +10,8 @@
 #include "game.h"               
 #include "objects.h"            
 #include "graphics.h"   
-#include "math_utils.h"          
+#include "math_utils.h" 
+#include "flash.h"         
 
 // ----- Definicija možnih stanj avtomatov --------
 

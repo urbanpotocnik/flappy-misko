@@ -5,18 +5,21 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Application/flash.c \
 ../Application/game.c \
 ../Application/graphics.c \
 ../Application/math_utils.c \
 ../Application/objects.c 
 
 OBJS += \
+./Application/flash.o \
 ./Application/game.o \
 ./Application/graphics.o \
 ./Application/math_utils.o \
 ./Application/objects.o 
 
 C_DEPS += \
+./Application/flash.d \
 ./Application/game.d \
 ./Application/graphics.d \
 ./Application/math_utils.d \
@@ -30,7 +33,7 @@ Application/%.o Application/%.su Application/%.cyclo: ../Application/%.c Applica
 clean: clean-Application
 
 clean-Application:
-	-$(RM) ./Application/game.cyclo ./Application/game.d ./Application/game.o ./Application/game.su ./Application/graphics.cyclo ./Application/graphics.d ./Application/graphics.o ./Application/graphics.su ./Application/math_utils.cyclo ./Application/math_utils.d ./Application/math_utils.o ./Application/math_utils.su ./Application/objects.cyclo ./Application/objects.d ./Application/objects.o ./Application/objects.su
+	-$(RM) ./Application/flash.cyclo ./Application/flash.d ./Application/flash.o ./Application/flash.su ./Application/game.cyclo ./Application/game.d ./Application/game.o ./Application/game.su ./Application/graphics.cyclo ./Application/graphics.d ./Application/graphics.o ./Application/graphics.su ./Application/math_utils.cyclo ./Application/math_utils.d ./Application/math_utils.o ./Application/math_utils.su ./Application/objects.cyclo ./Application/objects.d ./Application/objects.o ./Application/objects.su
 
 .PHONY: clean-Application
 

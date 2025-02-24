@@ -55,7 +55,8 @@ Application/game.o: ../Application/game.c \
  C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/LCD.h \
  C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/math_utils.h \
  C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/graphics.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/math_utils.h
+ C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/math_utils.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/flash.h
 C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/LED.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
@@ -113,3 +114,4 @@ C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/LCD.h:
 C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/math_utils.h:
 C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/graphics.h:
 C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/math_utils.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/flash.h:

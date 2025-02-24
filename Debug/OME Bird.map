@@ -123,6 +123,110 @@ Discarded input sections
  .ARM.exidx     0x00000000       0x10 C:/ST/STM32CubeIDE_1.16.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
  .ARM.attributes
                 0x00000000       0x20 C:/ST/STM32CubeIDE_1.16.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .group         0x00000000        0xc ./Application/flash.o
+ .text          0x00000000        0x0 ./Application/flash.o
+ .data          0x00000000        0x0 ./Application/flash.o
+ .bss           0x00000000        0x0 ./Application/flash.o
+ .text.Flash_Write_UInt16
+                0x00000000       0x58 ./Application/flash.o
+ .text.Flash_Read_UInt16
+                0x00000000        0x4 ./Application/flash.o
+ .debug_info    0x00000000      0x3af ./Application/flash.o
+ .debug_abbrev  0x00000000      0x1bc ./Application/flash.o
+ .debug_loclists
+                0x00000000       0x9e ./Application/flash.o
+ .debug_aranges
+                0x00000000       0x28 ./Application/flash.o
+ .debug_rnglists
+                0x00000000       0x19 ./Application/flash.o
+ .debug_macro   0x00000000      0x216 ./Application/flash.o
+ .debug_macro   0x00000000      0xade ./Application/flash.o
+ .debug_macro   0x00000000       0x22 ./Application/flash.o
+ .debug_macro   0x00000000       0x8e ./Application/flash.o
+ .debug_macro   0x00000000       0x51 ./Application/flash.o
+ .debug_macro   0x00000000      0x103 ./Application/flash.o
+ .debug_macro   0x00000000       0x6a ./Application/flash.o
+ .debug_macro   0x00000000      0x1df ./Application/flash.o
+ .debug_macro   0x00000000      0x167 ./Application/flash.o
+ .debug_macro   0x00000000       0x2e ./Application/flash.o
+ .debug_macro   0x00000000       0x28 ./Application/flash.o
+ .debug_macro   0x00000000       0x1c ./Application/flash.o
+ .debug_macro   0x00000000       0x22 ./Application/flash.o
+ .debug_macro   0x00000000       0xfb ./Application/flash.o
+ .debug_macro   0x00000000     0x1011 ./Application/flash.o
+ .debug_macro   0x00000000      0x11f ./Application/flash.o
+ .debug_macro   0x00000000    0x18b8c ./Application/flash.o
+ .debug_macro   0x00000000       0x6d ./Application/flash.o
+ .debug_macro   0x00000000     0x3558 ./Application/flash.o
+ .debug_macro   0x00000000      0x189 ./Application/flash.o
+ .debug_macro   0x00000000       0x5c ./Application/flash.o
+ .debug_macro   0x00000000     0x171f ./Application/flash.o
+ .debug_macro   0x00000000      0x600 ./Application/flash.o
+ .debug_macro   0x00000000      0x1b6 ./Application/flash.o
+ .debug_macro   0x00000000      0x34a ./Application/flash.o
+ .debug_macro   0x00000000      0x53c ./Application/flash.o
+ .debug_macro   0x00000000      0x18b ./Application/flash.o
+ .debug_macro   0x00000000       0x43 ./Application/flash.o
+ .debug_macro   0x00000000      0x23d ./Application/flash.o
+ .debug_macro   0x00000000     0x1112 ./Application/flash.o
+ .debug_macro   0x00000000      0x72e ./Application/flash.o
+ .debug_macro   0x00000000      0x391 ./Application/flash.o
+ .debug_macro   0x00000000      0x211 ./Application/flash.o
+ .debug_macro   0x00000000      0x45c ./Application/flash.o
+ .debug_macro   0x00000000      0x11c ./Application/flash.o
+ .debug_macro   0x00000000      0x122 ./Application/flash.o
+ .debug_macro   0x00000000      0x3d1 ./Application/flash.o
+ .debug_macro   0x00000000      0x2fe ./Application/flash.o
+ .debug_macro   0x00000000      0x332 ./Application/flash.o
+ .debug_macro   0x00000000      0xc0b ./Application/flash.o
+ .debug_macro   0x00000000      0x718 ./Application/flash.o
+ .debug_macro   0x00000000      0x358 ./Application/flash.o
+ .debug_line    0x00000000      0x875 ./Application/flash.o
+ .debug_str     0x00000000   0x106d03 ./Application/flash.o
+ .comment       0x00000000       0x44 ./Application/flash.o
+ .debug_frame   0x00000000       0x40 ./Application/flash.o
+ .ARM.attributes
+                0x00000000       0x30 ./Application/flash.o
  .group         0x00000000        0xc ./Application/game.o
  .group         0x00000000        0xc ./Application/game.o
  .group         0x00000000        0xc ./Application/game.o
@@ -207,6 +311,43 @@ Discarded input sections
                 0x00000000        0xc ./Application/game.o
  .bss.stopwatch
                 0x00000000        0x8 ./Application/game.o
+ .debug_macro   0x00000000      0xade ./Application/game.o
+ .debug_macro   0x00000000       0x22 ./Application/game.o
+ .debug_macro   0x00000000       0x2e ./Application/game.o
+ .debug_macro   0x00000000       0x28 ./Application/game.o
+ .debug_macro   0x00000000      0x103 ./Application/game.o
+ .debug_macro   0x00000000       0x6a ./Application/game.o
+ .debug_macro   0x00000000      0x1df ./Application/game.o
+ .debug_macro   0x00000000       0x1c ./Application/game.o
+ .debug_macro   0x00000000       0x22 ./Application/game.o
+ .debug_macro   0x00000000       0xfb ./Application/game.o
+ .debug_macro   0x00000000     0x1011 ./Application/game.o
+ .debug_macro   0x00000000      0x11f ./Application/game.o
+ .debug_macro   0x00000000    0x18b8c ./Application/game.o
+ .debug_macro   0x00000000       0x6d ./Application/game.o
+ .debug_macro   0x00000000      0x167 ./Application/game.o
+ .debug_macro   0x00000000     0x3558 ./Application/game.o
+ .debug_macro   0x00000000     0x171f ./Application/game.o
+ .debug_macro   0x00000000      0x600 ./Application/game.o
+ .debug_macro   0x00000000      0x1b6 ./Application/game.o
+ .debug_macro   0x00000000      0x34a ./Application/game.o
+ .debug_macro   0x00000000      0x53c ./Application/game.o
+ .debug_macro   0x00000000      0x18b ./Application/game.o
+ .debug_macro   0x00000000       0x43 ./Application/game.o
+ .debug_macro   0x00000000      0x23d ./Application/game.o
+ .debug_macro   0x00000000     0x1112 ./Application/game.o
+ .debug_macro   0x00000000      0x72e ./Application/game.o
+ .debug_macro   0x00000000      0x391 ./Application/game.o
+ .debug_macro   0x00000000      0x211 ./Application/game.o
+ .debug_macro   0x00000000      0x45c ./Application/game.o
+ .debug_macro   0x00000000      0x11c ./Application/game.o
+ .debug_macro   0x00000000      0x122 ./Application/game.o
+ .debug_macro   0x00000000      0x3d1 ./Application/game.o
+ .debug_macro   0x00000000      0x2fe ./Application/game.o
+ .debug_macro   0x00000000      0x332 ./Application/game.o
+ .debug_macro   0x00000000      0xc0b ./Application/game.o
+ .debug_macro   0x00000000      0x718 ./Application/game.o
+ .debug_macro   0x00000000      0x358 ./Application/game.o
  .group         0x00000000        0xc ./Application/graphics.o
  .group         0x00000000        0xc ./Application/graphics.o
  .group         0x00000000        0xc ./Application/graphics.o
@@ -670,6 +811,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x94 ./Application/objects.o
  .debug_macro   0x00000000       0x43 ./Application/objects.o
  .debug_macro   0x00000000       0x34 ./Application/objects.o
+ .debug_macro   0x00000000      0x189 ./Application/objects.o
  .debug_macro   0x00000000       0x16 ./Application/objects.o
  .debug_macro   0x00000000       0x43 ./Application/objects.o
  .debug_macro   0x00000000       0x57 ./Application/objects.o
@@ -823,6 +965,8 @@ Discarded input sections
  .debug_macro   0x00000000       0x2e ./Core/Src/main.o
  .debug_macro   0x00000000       0x28 ./Core/Src/main.o
  .debug_macro   0x00000000       0x22 ./Core/Src/main.o
+ .debug_macro   0x00000000       0x8e ./Core/Src/main.o
+ .debug_macro   0x00000000       0x51 ./Core/Src/main.o
  .debug_macro   0x00000000      0x103 ./Core/Src/main.o
  .debug_macro   0x00000000       0x6a ./Core/Src/main.o
  .debug_macro   0x00000000      0x1df ./Core/Src/main.o
@@ -835,6 +979,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x6d ./Core/Src/main.o
  .debug_macro   0x00000000     0x3558 ./Core/Src/main.o
  .debug_macro   0x00000000      0x189 ./Core/Src/main.o
+ .debug_macro   0x00000000       0x5c ./Core/Src/main.o
  .debug_macro   0x00000000     0x171f ./Core/Src/main.o
  .debug_macro   0x00000000      0x600 ./Core/Src/main.o
  .debug_macro   0x00000000      0x1b6 ./Core/Src/main.o
@@ -7232,6 +7377,7 @@ Linker script and memory map
 LOAD C:/ST/STM32CubeIDE_1.16.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crti.o
 LOAD C:/ST/STM32CubeIDE_1.16.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 LOAD C:/ST/STM32CubeIDE_1.16.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+LOAD ./Application/flash.o
 LOAD ./Application/game.o
 LOAD ./Application/graphics.o
 LOAD ./Application/math_utils.o
@@ -8943,294 +9089,253 @@ LOAD C:/ST/STM32CubeIDE_1.16.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_rnglists
                 0x00004c77      0xdfe ./System/ugui.o
 
-.debug_macro    0x00000000    0x33035
- .debug_macro   0x00000000      0x407 ./Application/game.o
- .debug_macro   0x00000407      0xade ./Application/game.o
- .debug_macro   0x00000ee5       0x22 ./Application/game.o
- .debug_macro   0x00000f07       0x5b ./Application/game.o
- .debug_macro   0x00000f62       0x2a ./Application/game.o
- .debug_macro   0x00000f8c       0x94 ./Application/game.o
- .debug_macro   0x00001020       0x43 ./Application/game.o
- .debug_macro   0x00001063       0x34 ./Application/game.o
- .debug_macro   0x00001097       0x16 ./Application/game.o
- .debug_macro   0x000010ad       0x57 ./Application/game.o
- .debug_macro   0x00001104       0x9e ./Application/game.o
- .debug_macro   0x000011a2      0x369 ./Application/game.o
- .debug_macro   0x0000150b      0x10b ./Application/game.o
- .debug_macro   0x00001616       0x10 ./Application/game.o
- .debug_macro   0x00001626       0x16 ./Application/game.o
- .debug_macro   0x0000163c       0x43 ./Application/game.o
- .debug_macro   0x0000167f       0x34 ./Application/game.o
- .debug_macro   0x000016b3       0x10 ./Application/game.o
- .debug_macro   0x000016c3       0x58 ./Application/game.o
- .debug_macro   0x0000171b       0x8e ./Application/game.o
- .debug_macro   0x000017a9       0x1c ./Application/game.o
- .debug_macro   0x000017c5      0x177 ./Application/game.o
- .debug_macro   0x0000193c       0x16 ./Application/game.o
- .debug_macro   0x00001952       0x16 ./Application/game.o
- .debug_macro   0x00001968      0x146 ./Application/game.o
- .debug_macro   0x00001aae       0x16 ./Application/game.o
- .debug_macro   0x00001ac4       0x35 ./Application/game.o
- .debug_macro   0x00001af9       0x16 ./Application/game.o
- .debug_macro   0x00001b0f       0x29 ./Application/game.o
- .debug_macro   0x00001b38       0x2e ./Application/game.o
- .debug_macro   0x00001b66       0x28 ./Application/game.o
- .debug_macro   0x00001b8e      0x103 ./Application/game.o
- .debug_macro   0x00001c91       0x6a ./Application/game.o
- .debug_macro   0x00001cfb      0x1df ./Application/game.o
- .debug_macro   0x00001eda       0x1c ./Application/game.o
- .debug_macro   0x00001ef6       0x22 ./Application/game.o
- .debug_macro   0x00001f18       0xfb ./Application/game.o
- .debug_macro   0x00002013     0x1011 ./Application/game.o
- .debug_macro   0x00003024      0x11f ./Application/game.o
- .debug_macro   0x00003143    0x18b8c ./Application/game.o
- .debug_macro   0x0001bccf       0x6d ./Application/game.o
- .debug_macro   0x0001bd3c      0x167 ./Application/game.o
- .debug_macro   0x0001bea3     0x3558 ./Application/game.o
- .debug_macro   0x0001f3fb       0x56 ./Application/game.o
- .debug_macro   0x0001f451     0x171f ./Application/game.o
- .debug_macro   0x00020b70      0x600 ./Application/game.o
- .debug_macro   0x00021170      0x1b6 ./Application/game.o
- .debug_macro   0x00021326      0x34a ./Application/game.o
- .debug_macro   0x00021670      0x53c ./Application/game.o
- .debug_macro   0x00021bac      0x18b ./Application/game.o
- .debug_macro   0x00021d37       0x43 ./Application/game.o
- .debug_macro   0x00021d7a      0x23d ./Application/game.o
- .debug_macro   0x00021fb7     0x1112 ./Application/game.o
- .debug_macro   0x000230c9      0x72e ./Application/game.o
- .debug_macro   0x000237f7      0x391 ./Application/game.o
- .debug_macro   0x00023b88      0x211 ./Application/game.o
- .debug_macro   0x00023d99      0x45c ./Application/game.o
- .debug_macro   0x000241f5      0x11c ./Application/game.o
- .debug_macro   0x00024311      0x122 ./Application/game.o
- .debug_macro   0x00024433      0x3d1 ./Application/game.o
- .debug_macro   0x00024804      0x2fe ./Application/game.o
- .debug_macro   0x00024b02      0x332 ./Application/game.o
- .debug_macro   0x00024e34      0xc0b ./Application/game.o
- .debug_macro   0x00025a3f      0x718 ./Application/game.o
- .debug_macro   0x00026157      0x358 ./Application/game.o
- .debug_macro   0x000264af      0x163 ./Application/game.o
- .debug_macro   0x00026612      0x40f ./Application/game.o
- .debug_macro   0x00026a21      0x1f6 ./Application/game.o
- .debug_macro   0x00026c17       0x8e ./Application/game.o
- .debug_macro   0x00026ca5      0xfc9 ./Application/game.o
- .debug_macro   0x00027c6e       0x34 ./Application/game.o
- .debug_macro   0x00027ca2      0x936 ./Application/game.o
- .debug_macro   0x000285d8       0x22 ./Application/game.o
- .debug_macro   0x000285fa       0x52 ./Application/game.o
- .debug_macro   0x0002864c       0x1c ./Application/game.o
- .debug_macro   0x00028668       0x16 ./Application/game.o
- .debug_macro   0x0002867e       0x10 ./Application/game.o
- .debug_macro   0x0002868e       0x1c ./Application/game.o
- .debug_macro   0x000286aa      0x3d5 ./Application/graphics.o
- .debug_macro   0x00028a7f      0x11c ./Application/graphics.o
- .debug_macro   0x00028b9b       0x94 ./Application/graphics.o
- .debug_macro   0x00028c2f      0x19b ./Application/graphics.o
- .debug_macro   0x00028dca       0x1c ./Application/graphics.o
- .debug_macro   0x00028de6       0x1c ./Application/graphics.o
- .debug_macro   0x00028e02       0x1c ./Application/graphics.o
- .debug_macro   0x00028e1e      0x36a ./Application/math_utils.o
- .debug_macro   0x00029188      0x409 ./Application/math_utils.o
- .debug_macro   0x00029591      0x169 ./Application/math_utils.o
- .debug_macro   0x000296fa      0x3c5 ./Application/objects.o
- .debug_macro   0x00029abf      0x189 ./Application/objects.o
- .debug_macro   0x00029c48       0x10 ./Application/objects.o
- .debug_macro   0x00029c58       0x20 ./Application/objects.o
- .debug_macro   0x00029c78      0x43e ./Core/Src/main.o
- .debug_macro   0x0002a0b6       0x8e ./Core/Src/main.o
- .debug_macro   0x0002a144       0x51 ./Core/Src/main.o
- .debug_macro   0x0002a195       0x5c ./Core/Src/main.o
- .debug_macro   0x0002a1f1      0x652 ./Core/Src/main.o
- .debug_macro   0x0002a843      0x34f ./Core/Src/main.o
- .debug_macro   0x0002ab92      0x178 ./Core/Src/main.o
- .debug_macro   0x0002ad0a      0x1d0 ./Core/Src/main.o
- .debug_macro   0x0002aeda      0x1a6 ./Core/Src/main.o
- .debug_macro   0x0002b080       0xa0 ./Core/Src/main.o
- .debug_macro   0x0002b120      0x231 ./Core/Src/main.o
- .debug_macro   0x0002b351      0x63e ./Core/Src/main.o
- .debug_macro   0x0002b98f      0x2cc ./Core/Src/main.o
- .debug_macro   0x0002bc5b       0x61 ./Core/Src/main.o
- .debug_macro   0x0002bcbc      0x288 ./Core/Src/stm32g4xx_hal_msp.o
- .debug_macro   0x0002bf44      0x2b0 ./Core/Src/stm32g4xx_it.o
- .debug_macro   0x0002c1f4      0x274 ./Core/Src/syscalls.o
- .debug_macro   0x0002c468       0x10 ./Core/Src/syscalls.o
- .debug_macro   0x0002c478       0x10 ./Core/Src/syscalls.o
- .debug_macro   0x0002c488       0x10 ./Core/Src/syscalls.o
- .debug_macro   0x0002c498       0x10 ./Core/Src/syscalls.o
- .debug_macro   0x0002c4a8       0x1c ./Core/Src/syscalls.o
- .debug_macro   0x0002c4c4       0x52 ./Core/Src/syscalls.o
- .debug_macro   0x0002c516       0x22 ./Core/Src/syscalls.o
- .debug_macro   0x0002c538       0x10 ./Core/Src/syscalls.o
- .debug_macro   0x0002c548       0x52 ./Core/Src/syscalls.o
- .debug_macro   0x0002c59a       0xcf ./Core/Src/syscalls.o
- .debug_macro   0x0002c669       0x1c ./Core/Src/syscalls.o
- .debug_macro   0x0002c685       0x3d ./Core/Src/syscalls.o
- .debug_macro   0x0002c6c2       0x35 ./Core/Src/syscalls.o
- .debug_macro   0x0002c6f7      0x12c ./Core/Src/syscalls.o
- .debug_macro   0x0002c823       0x10 ./Core/Src/syscalls.o
- .debug_macro   0x0002c833      0x242 ./Core/Src/syscalls.o
- .debug_macro   0x0002ca75       0x10 ./Core/Src/syscalls.o
- .debug_macro   0x0002ca85      0x18a ./Core/Src/syscalls.o
- .debug_macro   0x0002cc0f       0x16 ./Core/Src/syscalls.o
- .debug_macro   0x0002cc25       0xce ./Core/Src/syscalls.o
- .debug_macro   0x0002ccf3       0xff ./Core/Src/sysmem.o
- .debug_macro   0x0002cdf2      0x23c ./Core/Src/sysmem.o
- .debug_macro   0x0002d02e      0x20c ./Core/Src/system_stm32g4xx.o
- .debug_macro   0x0002d23a      0x25a ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
- .debug_macro   0x0002d494      0x229 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.o
- .debug_macro   0x0002d6bd      0x218 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.o
- .debug_macro   0x0002d8d5      0x20c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o
- .debug_macro   0x0002dae1      0x20c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o
- .debug_macro   0x0002dced      0x213 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o
- .debug_macro   0x0002df00      0x236 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o
- .debug_macro   0x0002e136      0x24e ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o
- .debug_macro   0x0002e384      0x236 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o
- .debug_macro   0x0002e5ba      0x214 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.o
- .debug_macro   0x0002e7ce      0x20c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_sram.o
- .debug_macro   0x0002e9da      0x214 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.o
- .debug_macro   0x0002ebee      0x212 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.o
- .debug_macro   0x0002ee00      0x22a ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_fmc.o
- .debug_macro   0x0002f02a      0x24e ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_gpio.o
- .debug_macro   0x0002f278      0x269 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.o
- .debug_macro   0x0002f4e1      0x64c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.o
- .debug_macro   0x0002fb2d      0x2c5 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_tim.o
- .debug_macro   0x0002fdf2      0xfc3 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_tim.o
- .debug_macro   0x00030db5      0x287 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.o
- .debug_macro   0x0003103c      0x225 ./System/LED.o
- .debug_macro   0x00031261      0x321 ./System/SCI.o
- .debug_macro   0x00031582       0x74 ./System/buf.o
- .debug_macro   0x000315f6      0x324 ./System/joystick.o
- .debug_macro   0x0003191a      0x23f ./System/kbd.o
- .debug_macro   0x00031b59      0x289 ./System/lcd.o
- .debug_macro   0x00031de2      0x238 ./System/lcd_backlight.o
- .debug_macro   0x0003201a      0x224 ./System/lcd_ili9341.o
- .debug_macro   0x0003223e      0x269 ./System/periodic_services.o
- .debug_macro   0x000324a7      0x229 ./System/timing_utils.o
- .debug_macro   0x000326d0       0x29 ./System/ugui.o
- .debug_macro   0x000326f9      0x93c ./System/ugui.o
+.debug_macro    0x00000000     0xd95a
+ .debug_macro   0x00000000      0x411 ./Application/game.o
+ .debug_macro   0x00000411       0x5b ./Application/game.o
+ .debug_macro   0x0000046c       0x2a ./Application/game.o
+ .debug_macro   0x00000496       0x94 ./Application/game.o
+ .debug_macro   0x0000052a       0x43 ./Application/game.o
+ .debug_macro   0x0000056d       0x34 ./Application/game.o
+ .debug_macro   0x000005a1       0x16 ./Application/game.o
+ .debug_macro   0x000005b7       0x57 ./Application/game.o
+ .debug_macro   0x0000060e       0x9e ./Application/game.o
+ .debug_macro   0x000006ac      0x369 ./Application/game.o
+ .debug_macro   0x00000a15      0x10b ./Application/game.o
+ .debug_macro   0x00000b20       0x10 ./Application/game.o
+ .debug_macro   0x00000b30       0x16 ./Application/game.o
+ .debug_macro   0x00000b46       0x43 ./Application/game.o
+ .debug_macro   0x00000b89       0x34 ./Application/game.o
+ .debug_macro   0x00000bbd       0x10 ./Application/game.o
+ .debug_macro   0x00000bcd       0x58 ./Application/game.o
+ .debug_macro   0x00000c25       0x8e ./Application/game.o
+ .debug_macro   0x00000cb3       0x1c ./Application/game.o
+ .debug_macro   0x00000ccf      0x177 ./Application/game.o
+ .debug_macro   0x00000e46       0x16 ./Application/game.o
+ .debug_macro   0x00000e5c       0x16 ./Application/game.o
+ .debug_macro   0x00000e72      0x146 ./Application/game.o
+ .debug_macro   0x00000fb8       0x16 ./Application/game.o
+ .debug_macro   0x00000fce       0x35 ./Application/game.o
+ .debug_macro   0x00001003       0x16 ./Application/game.o
+ .debug_macro   0x00001019       0x29 ./Application/game.o
+ .debug_macro   0x00001042       0x56 ./Application/game.o
+ .debug_macro   0x00001098      0x163 ./Application/game.o
+ .debug_macro   0x000011fb      0x40f ./Application/game.o
+ .debug_macro   0x0000160a      0x1f6 ./Application/game.o
+ .debug_macro   0x00001800       0x8e ./Application/game.o
+ .debug_macro   0x0000188e      0xfc9 ./Application/game.o
+ .debug_macro   0x00002857       0x34 ./Application/game.o
+ .debug_macro   0x0000288b      0x936 ./Application/game.o
+ .debug_macro   0x000031c1       0x22 ./Application/game.o
+ .debug_macro   0x000031e3       0x52 ./Application/game.o
+ .debug_macro   0x00003235       0x1c ./Application/game.o
+ .debug_macro   0x00003251       0x16 ./Application/game.o
+ .debug_macro   0x00003267       0x10 ./Application/game.o
+ .debug_macro   0x00003277       0x1c ./Application/game.o
+ .debug_macro   0x00003293      0x3d5 ./Application/graphics.o
+ .debug_macro   0x00003668      0x11c ./Application/graphics.o
+ .debug_macro   0x00003784       0x94 ./Application/graphics.o
+ .debug_macro   0x00003818      0x19b ./Application/graphics.o
+ .debug_macro   0x000039b3       0x1c ./Application/graphics.o
+ .debug_macro   0x000039cf       0x1c ./Application/graphics.o
+ .debug_macro   0x000039eb       0x1c ./Application/graphics.o
+ .debug_macro   0x00003a07      0x36a ./Application/math_utils.o
+ .debug_macro   0x00003d71      0x409 ./Application/math_utils.o
+ .debug_macro   0x0000417a      0x169 ./Application/math_utils.o
+ .debug_macro   0x000042e3      0x3c5 ./Application/objects.o
+ .debug_macro   0x000046a8       0x10 ./Application/objects.o
+ .debug_macro   0x000046b8       0x20 ./Application/objects.o
+ .debug_macro   0x000046d8      0x43e ./Core/Src/main.o
+ .debug_macro   0x00004b16      0x652 ./Core/Src/main.o
+ .debug_macro   0x00005168      0x34f ./Core/Src/main.o
+ .debug_macro   0x000054b7      0x178 ./Core/Src/main.o
+ .debug_macro   0x0000562f      0x1d0 ./Core/Src/main.o
+ .debug_macro   0x000057ff      0x1a6 ./Core/Src/main.o
+ .debug_macro   0x000059a5       0xa0 ./Core/Src/main.o
+ .debug_macro   0x00005a45      0x231 ./Core/Src/main.o
+ .debug_macro   0x00005c76      0x63e ./Core/Src/main.o
+ .debug_macro   0x000062b4      0x2cc ./Core/Src/main.o
+ .debug_macro   0x00006580       0x61 ./Core/Src/main.o
+ .debug_macro   0x000065e1      0x288 ./Core/Src/stm32g4xx_hal_msp.o
+ .debug_macro   0x00006869      0x2b0 ./Core/Src/stm32g4xx_it.o
+ .debug_macro   0x00006b19      0x274 ./Core/Src/syscalls.o
+ .debug_macro   0x00006d8d       0x10 ./Core/Src/syscalls.o
+ .debug_macro   0x00006d9d       0x10 ./Core/Src/syscalls.o
+ .debug_macro   0x00006dad       0x10 ./Core/Src/syscalls.o
+ .debug_macro   0x00006dbd       0x10 ./Core/Src/syscalls.o
+ .debug_macro   0x00006dcd       0x1c ./Core/Src/syscalls.o
+ .debug_macro   0x00006de9       0x52 ./Core/Src/syscalls.o
+ .debug_macro   0x00006e3b       0x22 ./Core/Src/syscalls.o
+ .debug_macro   0x00006e5d       0x10 ./Core/Src/syscalls.o
+ .debug_macro   0x00006e6d       0x52 ./Core/Src/syscalls.o
+ .debug_macro   0x00006ebf       0xcf ./Core/Src/syscalls.o
+ .debug_macro   0x00006f8e       0x1c ./Core/Src/syscalls.o
+ .debug_macro   0x00006faa       0x3d ./Core/Src/syscalls.o
+ .debug_macro   0x00006fe7       0x35 ./Core/Src/syscalls.o
+ .debug_macro   0x0000701c      0x12c ./Core/Src/syscalls.o
+ .debug_macro   0x00007148       0x10 ./Core/Src/syscalls.o
+ .debug_macro   0x00007158      0x242 ./Core/Src/syscalls.o
+ .debug_macro   0x0000739a       0x10 ./Core/Src/syscalls.o
+ .debug_macro   0x000073aa      0x18a ./Core/Src/syscalls.o
+ .debug_macro   0x00007534       0x16 ./Core/Src/syscalls.o
+ .debug_macro   0x0000754a       0xce ./Core/Src/syscalls.o
+ .debug_macro   0x00007618       0xff ./Core/Src/sysmem.o
+ .debug_macro   0x00007717      0x23c ./Core/Src/sysmem.o
+ .debug_macro   0x00007953      0x20c ./Core/Src/system_stm32g4xx.o
+ .debug_macro   0x00007b5f      0x25a ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
+ .debug_macro   0x00007db9      0x229 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.o
+ .debug_macro   0x00007fe2      0x218 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.o
+ .debug_macro   0x000081fa      0x20c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o
+ .debug_macro   0x00008406      0x20c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o
+ .debug_macro   0x00008612      0x213 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o
+ .debug_macro   0x00008825      0x236 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o
+ .debug_macro   0x00008a5b      0x24e ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o
+ .debug_macro   0x00008ca9      0x236 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o
+ .debug_macro   0x00008edf      0x214 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.o
+ .debug_macro   0x000090f3      0x20c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_sram.o
+ .debug_macro   0x000092ff      0x214 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.o
+ .debug_macro   0x00009513      0x212 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.o
+ .debug_macro   0x00009725      0x22a ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_fmc.o
+ .debug_macro   0x0000994f      0x24e ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_gpio.o
+ .debug_macro   0x00009b9d      0x269 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.o
+ .debug_macro   0x00009e06      0x64c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.o
+ .debug_macro   0x0000a452      0x2c5 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_tim.o
+ .debug_macro   0x0000a717      0xfc3 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_tim.o
+ .debug_macro   0x0000b6da      0x287 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.o
+ .debug_macro   0x0000b961      0x225 ./System/LED.o
+ .debug_macro   0x0000bb86      0x321 ./System/SCI.o
+ .debug_macro   0x0000bea7       0x74 ./System/buf.o
+ .debug_macro   0x0000bf1b      0x324 ./System/joystick.o
+ .debug_macro   0x0000c23f      0x23f ./System/kbd.o
+ .debug_macro   0x0000c47e      0x289 ./System/lcd.o
+ .debug_macro   0x0000c707      0x238 ./System/lcd_backlight.o
+ .debug_macro   0x0000c93f      0x224 ./System/lcd_ili9341.o
+ .debug_macro   0x0000cb63      0x269 ./System/periodic_services.o
+ .debug_macro   0x0000cdcc      0x229 ./System/timing_utils.o
+ .debug_macro   0x0000cff5       0x29 ./System/ugui.o
+ .debug_macro   0x0000d01e      0x93c ./System/ugui.o
 
-.debug_line     0x00000000    0x3f230
- .debug_line    0x00000000     0x1142 ./Application/game.o
- .debug_line    0x00001142     0x3748 ./Application/graphics.o
- .debug_line    0x0000488a      0xbb7 ./Application/math_utils.o
- .debug_line    0x00005441     0x110a ./Application/objects.o
- .debug_line    0x0000654b     0x1a92 ./Core/Src/main.o
- .debug_line    0x00007fdd      0xc4b ./Core/Src/stm32g4xx_hal_msp.o
- .debug_line    0x00008c28      0xba1 ./Core/Src/stm32g4xx_it.o
- .debug_line    0x000097c9      0x94c ./Core/Src/syscalls.o
- .debug_line    0x0000a115      0x5bb ./Core/Src/sysmem.o
- .debug_line    0x0000a6d0      0x889 ./Core/Src/system_stm32g4xx.o
- .debug_line    0x0000af59       0x7b ./Core/Startup/startup_stm32g474qetx.o
- .debug_line    0x0000afd4      0xd00 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
- .debug_line    0x0000bcd4     0x31f0 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.o
- .debug_line    0x0000eec4     0x2b5b ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.o
- .debug_line    0x00011a1f      0xe2d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o
- .debug_line    0x0001284c     0x1403 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o
- .debug_line    0x00013c4f      0xdad ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o
- .debug_line    0x000149fc      0xf41 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o
- .debug_line    0x0001593d     0x1475 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o
- .debug_line    0x00016db2     0x1706 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o
- .debug_line    0x000184b8     0x4247 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.o
- .debug_line    0x0001c6ff     0x1176 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_sram.o
- .debug_line    0x0001d875     0x6a91 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.o
- .debug_line    0x00024306     0x294c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.o
- .debug_line    0x00026c52      0xc0b ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_fmc.o
- .debug_line    0x0002785d      0xd65 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_gpio.o
- .debug_line    0x000285c2     0x28fa ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.o
- .debug_line    0x0002aebc     0x13f1 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_tim.o
- .debug_line    0x0002c2ad      0xbd4 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.o
- .debug_line    0x0002ce81     0x3a54 ./System/LED.o
- .debug_line    0x000308d5     0x131c ./System/SCI.o
- .debug_line    0x00031bf1      0x76e ./System/buf.o
- .debug_line    0x0003235f      0xe02 ./System/joystick.o
- .debug_line    0x00033161      0xc7b ./System/kbd.o
- .debug_line    0x00033ddc      0xb34 ./System/lcd.o
- .debug_line    0x00034910      0xb6b ./System/lcd_backlight.o
- .debug_line    0x0003547b     0x152e ./System/lcd_ili9341.o
- .debug_line    0x000369a9      0x91f ./System/periodic_services.o
- .debug_line    0x000372c8      0xac9 ./System/timing_utils.o
- .debug_line    0x00037d91     0x749f ./System/ugui.o
+.debug_line     0x00000000    0x3f23b
+ .debug_line    0x00000000     0x114d ./Application/game.o
+ .debug_line    0x0000114d     0x3748 ./Application/graphics.o
+ .debug_line    0x00004895      0xbb7 ./Application/math_utils.o
+ .debug_line    0x0000544c     0x110a ./Application/objects.o
+ .debug_line    0x00006556     0x1a92 ./Core/Src/main.o
+ .debug_line    0x00007fe8      0xc4b ./Core/Src/stm32g4xx_hal_msp.o
+ .debug_line    0x00008c33      0xba1 ./Core/Src/stm32g4xx_it.o
+ .debug_line    0x000097d4      0x94c ./Core/Src/syscalls.o
+ .debug_line    0x0000a120      0x5bb ./Core/Src/sysmem.o
+ .debug_line    0x0000a6db      0x889 ./Core/Src/system_stm32g4xx.o
+ .debug_line    0x0000af64       0x7b ./Core/Startup/startup_stm32g474qetx.o
+ .debug_line    0x0000afdf      0xd00 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
+ .debug_line    0x0000bcdf     0x31f0 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.o
+ .debug_line    0x0000eecf     0x2b5b ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.o
+ .debug_line    0x00011a2a      0xe2d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o
+ .debug_line    0x00012857     0x1403 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o
+ .debug_line    0x00013c5a      0xdad ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o
+ .debug_line    0x00014a07      0xf41 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o
+ .debug_line    0x00015948     0x1475 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o
+ .debug_line    0x00016dbd     0x1706 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o
+ .debug_line    0x000184c3     0x4247 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.o
+ .debug_line    0x0001c70a     0x1176 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_sram.o
+ .debug_line    0x0001d880     0x6a91 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.o
+ .debug_line    0x00024311     0x294c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.o
+ .debug_line    0x00026c5d      0xc0b ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_fmc.o
+ .debug_line    0x00027868      0xd65 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_gpio.o
+ .debug_line    0x000285cd     0x28fa ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.o
+ .debug_line    0x0002aec7     0x13f1 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_tim.o
+ .debug_line    0x0002c2b8      0xbd4 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.o
+ .debug_line    0x0002ce8c     0x3a54 ./System/LED.o
+ .debug_line    0x000308e0     0x131c ./System/SCI.o
+ .debug_line    0x00031bfc      0x76e ./System/buf.o
+ .debug_line    0x0003236a      0xe02 ./System/joystick.o
+ .debug_line    0x0003316c      0xc7b ./System/kbd.o
+ .debug_line    0x00033de7      0xb34 ./System/lcd.o
+ .debug_line    0x0003491b      0xb6b ./System/lcd_backlight.o
+ .debug_line    0x00035486     0x152e ./System/lcd_ili9341.o
+ .debug_line    0x000369b4      0x91f ./System/periodic_services.o
+ .debug_line    0x000372d3      0xac9 ./System/timing_utils.o
+ .debug_line    0x00037d9c     0x749f ./System/ugui.o
 
-.debug_str      0x00000000   0x131c52
- .debug_str     0x00000000   0x115a97 ./Application/game.o
-                             0x11791a (size before relaxing)
- .debug_str     0x00115a97      0xec8 ./Application/graphics.o
+.debug_str      0x00000000   0x131c63
+ .debug_str     0x00000000   0x115aa8 ./Application/game.o
+                             0x11792b (size before relaxing)
+ .debug_str     0x00115aa8      0xec8 ./Application/graphics.o
                              0x11689f (size before relaxing)
- .debug_str     0x0011695f      0x115 ./Application/math_utils.o
+ .debug_str     0x00116970      0x115 ./Application/math_utils.o
                              0x10cf31 (size before relaxing)
- .debug_str     0x00116a74      0x240 ./Application/objects.o
+ .debug_str     0x00116a85      0x240 ./Application/objects.o
                              0x115a5b (size before relaxing)
- .debug_str     0x00116cb4     0xe279 ./Core/Src/main.o
+ .debug_str     0x00116cc5     0xe279 ./Core/Src/main.o
                              0x125400 (size before relaxing)
- .debug_str     0x00124f2d      0x16c ./Core/Src/stm32g4xx_hal_msp.o
+ .debug_str     0x00124f3e      0x16c ./Core/Src/stm32g4xx_hal_msp.o
                              0x11e2f9 (size before relaxing)
- .debug_str     0x00125099      0x1d2 ./Core/Src/stm32g4xx_it.o
+ .debug_str     0x001250aa      0x1d2 ./Core/Src/stm32g4xx_it.o
                              0x11d715 (size before relaxing)
- .debug_str     0x0012526b     0x1fb9 ./Core/Src/syscalls.o
+ .debug_str     0x0012527c     0x1fb9 ./Core/Src/syscalls.o
                                0x9943 (size before relaxing)
- .debug_str     0x00127224       0x6b ./Core/Src/sysmem.o
+ .debug_str     0x00127235       0x6b ./Core/Src/sysmem.o
                                0x615b (size before relaxing)
- .debug_str     0x0012728f       0x87 ./Core/Src/system_stm32g4xx.o
+ .debug_str     0x001272a0       0x87 ./Core/Src/system_stm32g4xx.o
                              0x106d5a (size before relaxing)
- .debug_str     0x00127316       0x44 ./Core/Startup/startup_stm32g474qetx.o
+ .debug_str     0x00127327       0x44 ./Core/Startup/startup_stm32g474qetx.o
                                  0x79 (size before relaxing)
- .debug_str     0x0012735a      0x5c2 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
+ .debug_str     0x0012736b      0x5c2 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o
                              0x107a6c (size before relaxing)
- .debug_str     0x0012791c      0xb07 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.o
+ .debug_str     0x0012792d      0xb07 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.o
                              0x107d87 (size before relaxing)
- .debug_str     0x00128423      0x6e6 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.o
+ .debug_str     0x00128434      0x6e6 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.o
                              0x107d2d (size before relaxing)
- .debug_str     0x00128b09      0x2d2 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o
+ .debug_str     0x00128b1a      0x2d2 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o
                              0x107728 (size before relaxing)
- .debug_str     0x00128ddb      0x280 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o
+ .debug_str     0x00128dec      0x280 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o
                              0x107134 (size before relaxing)
- .debug_str     0x0012905b      0x150 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o
+ .debug_str     0x0012906c      0x150 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o
                              0x106ee5 (size before relaxing)
- .debug_str     0x001291ab      0x495 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o
+ .debug_str     0x001291bc      0x495 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o
                              0x107248 (size before relaxing)
- .debug_str     0x00129640      0x506 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o
+ .debug_str     0x00129651      0x506 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o
                              0x107479 (size before relaxing)
- .debug_str     0x00129b46      0x401 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o
+ .debug_str     0x00129b57      0x401 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o
                              0x1074a3 (size before relaxing)
- .debug_str     0x00129f47      0x57c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.o
+ .debug_str     0x00129f58      0x57c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.o
                              0x10768c (size before relaxing)
- .debug_str     0x0012a4c3      0x28b ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_sram.o
+ .debug_str     0x0012a4d4      0x28b ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_sram.o
                              0x1073e8 (size before relaxing)
- .debug_str     0x0012a74e      0xe9c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.o
+ .debug_str     0x0012a75f      0xe9c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.o
                              0x108258 (size before relaxing)
- .debug_str     0x0012b5ea      0x8f7 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.o
+ .debug_str     0x0012b5fb      0x8f7 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.o
                              0x107ecc (size before relaxing)
- .debug_str     0x0012bee1      0x44c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_fmc.o
+ .debug_str     0x0012bef2      0x44c ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_fmc.o
                              0x1072ac (size before relaxing)
- .debug_str     0x0012c32d      0x650 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_gpio.o
+ .debug_str     0x0012c33e      0x650 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_gpio.o
                              0x1087d1 (size before relaxing)
- .debug_str     0x0012c97d      0xbd1 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.o
+ .debug_str     0x0012c98e      0xbd1 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.o
                              0x10b389 (size before relaxing)
- .debug_str     0x0012d54e     0x1d54 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_tim.o
+ .debug_str     0x0012d55f     0x1d54 ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_tim.o
                              0x111862 (size before relaxing)
- .debug_str     0x0012f2a2      0xa3b ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.o
+ .debug_str     0x0012f2b3      0xa3b ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.o
                              0x10d8da (size before relaxing)
- .debug_str     0x0012fcdd      0x10c ./System/LED.o
+ .debug_str     0x0012fcee      0x10c ./System/LED.o
                              0x1074e1 (size before relaxing)
- .debug_str     0x0012fde9      0x600 ./System/SCI.o
+ .debug_str     0x0012fdfa      0x600 ./System/SCI.o
                              0x10c3a2 (size before relaxing)
- .debug_str     0x001303e9       0xb4 ./System/buf.o
+ .debug_str     0x001303fa       0xb4 ./System/buf.o
                                0x3f6a (size before relaxing)
- .debug_str     0x0013049d      0x282 ./System/joystick.o
+ .debug_str     0x001304ae      0x282 ./System/joystick.o
                              0x10d1b8 (size before relaxing)
- .debug_str     0x0013071f       0xa2 ./System/kbd.o
+ .debug_str     0x00130730       0xa2 ./System/kbd.o
                              0x107695 (size before relaxing)
- .debug_str     0x001307c1      0x30f ./System/lcd.o
+ .debug_str     0x001307d2      0x30f ./System/lcd.o
                              0x113222 (size before relaxing)
- .debug_str     0x00130ad0      0x11b ./System/lcd_backlight.o
+ .debug_str     0x00130ae1      0x11b ./System/lcd_backlight.o
                              0x110645 (size before relaxing)
- .debug_str     0x00130beb      0x191 ./System/lcd_ili9341.o
+ .debug_str     0x00130bfc      0x191 ./System/lcd_ili9341.o
                              0x107b4e (size before relaxing)
- .debug_str     0x00130d7c       0x88 ./System/periodic_services.o
+ .debug_str     0x00130d8d       0x88 ./System/periodic_services.o
                              0x110de3 (size before relaxing)
- .debug_str     0x00130e04       0x5b ./System/timing_utils.o
+ .debug_str     0x00130e15       0x5b ./System/timing_utils.o
                              0x1074ca (size before relaxing)
- .debug_str     0x00130e5f      0xdf3 ./System/ugui.o
+ .debug_str     0x00130e70      0xdf3 ./System/ugui.o
                                0x5bf8 (size before relaxing)
 
 .comment        0x00000000       0x43

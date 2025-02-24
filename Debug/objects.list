@@ -1,3 +1,4 @@
+"./Application/flash.o"
 "./Application/game.o"
 "./Application/graphics.o"
 "./Application/math_utils.o"

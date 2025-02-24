@@ -13,6 +13,7 @@ Za narest:
 - kalibracija hitrost in casa skoka? da se nastavi ravno pravsnja tezavnost
 - 3d printed case
 - dodaj izbiro med touch in knofom
+- dodaj izbiro teme 
 
 
 IDEJE:
