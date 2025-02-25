@@ -1,0 +1,3 @@
+../Application/flash.c:7:10:Flash_Read_UInt16	1
+../Application/flash.c:13:6:Update_High_Scores	6
+../Application/flash.c:55:11:Get_High_Scores	1

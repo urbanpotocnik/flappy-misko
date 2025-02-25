@@ -7,7 +7,6 @@ Za narest:
 - za dodat je start menu (game start okno, high scores okno)
 - v oknu high scores naj kaze najvisje 3 high score
 - ko je konec igre da ti displaya high score, your score
-- za popravit je da se lepo displaya score text 
 - RLE do konca
 - clean up kode 
 - dodaj okno s pavzo ce se pritisne tipka esc
@@ -15,6 +14,7 @@ Za narest:
 - 3d printed case
 - dodaj izbiro med touch in knofom
 - dodaj izbiro teme 
+- zrihtaj da se prvi obstacle pojavi hitreje
 
 
 IDEJE:
