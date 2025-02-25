@@ -118,6 +118,7 @@ uint8_t Intro() {
 	switch (state) {
 	case INTRO_INIT:
 		OBJ_init();
+		Init_High_Scores();
 		GFX_draw_gfx_object(&background);
 		GFX_draw_one_gfx_object_on_background(&intro_sprite, &background);
 		TIMUT_stopwatch_set_time_mark(&stopwatch_leds);
@@ -334,6 +335,15 @@ uint8_t GamePlay() {
 			(GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair3.top) && obstacle_pair3_spawned == 1) ||
 			(GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair3.bottom)&& obstacle_pair3_spawned == 1)) {
 
+				
+				Update_High_Scores(game_status.score);
+    
+				uint16_t* high_scores = Get_High_Scores();
+				// Add your graphics code here to display the high scores on screen
+				printf("High Scores:\n1. %d\n2. %d\n3. %d\n", 
+					high_scores[0], high_scores[1], high_scores[2]);
+							
+
 				GFX_set_gfx_object_velocity(&misko, 0, 0);
                 exit_value = 1;
                 break;
@@ -464,4 +474,108 @@ uint8_t GameOver() {
 	}
 
 	return exit_value;
+}
+
+
+void Flash_Write_UInt16(uint32_t address, uint16_t data) {
+    HAL_FLASH_Unlock();
+    
+    // Don't erase, just program
+    uint64_t value = 0xFFFFFFFFFFFFFFFFULL;
+    value = (value & ~0xFFFFULL) | data;
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, address, value);
+    
+    HAL_FLASH_Lock();
+}
+
+// Funkcija za branje iz flash pomnilnika
+// Prebere prvi del double worda
+uint16_t Flash_Read_UInt16(uint32_t address) {
+    uint64_t value = *(uint64_t*)address;
+    return (uint16_t)(value & 0xFFFF);
+}
+
+void Update_High_Scores(uint16_t new_score) {
+    uint16_t scores[NUM_HIGH_SCORES];
+    
+    // Read existing scores
+    for(int i = 0; i < NUM_HIGH_SCORES; i++) {
+        scores[i] = Flash_Read_UInt16(HIGH_SCORES_BASE_ADDRESS + (i * 8));
+        if(scores[i] == 0xFFFF) scores[i] = 0;  // Handle uninitialized values
+    }
+    
+    // Insert new score if it's higher than any existing score
+    int inserted = 0;
+    for(int i = 0; i < NUM_HIGH_SCORES; i++) {
+        if(new_score > scores[i] && !inserted) {
+            // Shift lower scores down
+            for(int j = NUM_HIGH_SCORES - 1; j > i; j--) {
+                scores[j] = scores[j-1];
+            }
+            scores[i] = new_score;
+            inserted = 1;
+            break;
+        }
+    }
+    
+    if(inserted) {
+        // Erase page first
+        HAL_FLASH_Unlock();
+        FLASH_EraseInitTypeDef eraseInitStruct;
+        uint32_t pageError;
+        eraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
+        eraseInitStruct.Page = (HIGH_SCORES_BASE_ADDRESS - FLASH_BASE) / FLASH_PAGE_SIZE;
+        eraseInitStruct.NbPages = 1;
+        eraseInitStruct.Banks = FLASH_BANK_2;
+        
+        if (HAL_FLASHEx_Erase(&eraseInitStruct, &pageError) == HAL_OK) {
+            // Write all scores
+            for(int i = 0; i < NUM_HIGH_SCORES; i++) {
+                uint64_t value = 0xFFFFFFFFFFFFFFFFULL;
+                value = (value & ~0xFFFFULL) | scores[i];
+                HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, 
+                                HIGH_SCORES_BASE_ADDRESS + (i * 8), 
+                                value);
+            }
+        }
+        HAL_FLASH_Lock();
+    }
+}
+
+uint16_t* Get_High_Scores(void) {
+    static uint16_t scores[NUM_HIGH_SCORES];
+    
+    for(int i = 0; i < NUM_HIGH_SCORES; i++) {
+        scores[i] = Flash_Read_UInt16(HIGH_SCORES_BASE_ADDRESS + (i * 8));
+    }
+    
+    return scores;
+}
+
+void Init_High_Scores(void) {
+    // Check if scores are already initialized
+    uint16_t first_score = Flash_Read_UInt16(HIGH_SCORES_BASE_ADDRESS);
+    
+    if (first_score == 0xFFFF) {
+        // Erase the page first
+        HAL_FLASH_Unlock();
+        FLASH_EraseInitTypeDef eraseInitStruct;
+        uint32_t pageError;
+        eraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
+        eraseInitStruct.Page = (HIGH_SCORES_BASE_ADDRESS - FLASH_BASE) / FLASH_PAGE_SIZE;
+        eraseInitStruct.NbPages = 1;
+        eraseInitStruct.Banks = FLASH_BANK_2;
+        
+        if (HAL_FLASHEx_Erase(&eraseInitStruct, &pageError) == HAL_OK) {
+            // Initialize all scores to 0
+            for(int i = 0; i < NUM_HIGH_SCORES; i++) {
+                uint64_t value = 0xFFFFFFFFFFFFFFFFULL;
+                value = (value & ~0xFFFFULL) | 0;
+                HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, 
+                                HIGH_SCORES_BASE_ADDRESS + (i * 8), 
+                                value);
+            }
+        }
+        HAL_FLASH_Lock();
+    }
 }

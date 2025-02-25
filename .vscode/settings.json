@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "sci.h": "c",
+        "lcd.h": "c",
+        "flash.h": "c"
+    }
+}

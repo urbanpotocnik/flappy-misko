@@ -1,2 +1,0 @@
-../Application/flash.c:6:6:Flash_Write_UInt16	40	static
-../Application/flash.c:33:10:Flash_Read_UInt16	0	static
