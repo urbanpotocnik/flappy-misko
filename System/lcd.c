@@ -164,7 +164,7 @@ void LCD_uGUI_demo_Misko3(void)
 
 	uint16_t pozicija_y=135, pozicija_x=150;
 
-	UG_FontSelect(&FONT_32X53);
+	UG_FontSelect(&FONT_12X16);
 	UG_SetForecolor(C_VIOLET);
 	UG_PutString(pozicija_x-90,pozicija_y,"M");
 

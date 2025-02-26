@@ -55,6 +55,8 @@ stopwatch_handle_t stopwatch_leds;
 stopwatch_handle_t stopwatch_gameover;
 buttons_enum_t pressed_button = BTN_NONE;
 stopwatch_handle_t stopwatch_jump;
+stopwatch_handle_t update_stopwatch_intro;
+stopwatch_handle_t update_stopwatch_intro_exit;
 stopwatch_handle_t stopwatch_obstacles;
 obstacle_positions_t obstacle_positions;
 obstacle_pair_t obstacle_pair1;
@@ -116,33 +118,56 @@ uint8_t Intro() {
 	uint8_t exit_value = 0;
 
 	switch (state) {
-	case INTRO_INIT:
+		case INTRO_INIT:
 		OBJ_init();
+		OBJ_init_big_sprite(20, 50);
 		GFX_draw_gfx_object(&background);
-		GFX_draw_one_gfx_object_on_background(&intro_sprite, &background);
+		GFX_draw_one_gfx_object_on_background(&big_sprite, &background);
+		OBJ_init_flappy_misko_text(59, 62);
+		GFX_display_text_object(&flappy_misko_text);
+		
+		GFX_set_gfx_object_location(&misko, 0, 160);
+		GFX_draw_one_gfx_object_on_background(&misko, &background);
+		GFX_set_gfx_object_velocity(&misko, 2, 0);
+	
 		TIMUT_stopwatch_set_time_mark(&stopwatch_leds);
+		TIMUT_stopwatch_set_time_mark(&update_stopwatch_intro);  
+		TIMUT_stopwatch_set_time_mark(&update_stopwatch_intro_exit);  
 		int a = 0x01;
-
-		while (1) {
-			LEDs_write(a);
-			HAL_Delay(100);
-			a = a << 1;
-			if (a == 0x80) {
-				a = 0x01;
-			}
-			if (TIMUT_get_stopwatch_elapsed_time(&stopwatch_leds) > INTRO_DELAY_BEFORE_KBD_ACTIVE) {
-				LEDs_off(0xFF);
+	
+		while(1) {
+			if (TIMUT_stopwatch_has_X_ms_passed(&update_stopwatch_intro_exit, 4000)) {
 				break;
 			}
+
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_intro, 7)) {
+				GFX_update_moving_gfx_object_location(&misko);
+				GFX_draw_one_gfx_object_on_background(&misko, &background);
+			}
+		
+			LEDs_write(a);
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&stopwatch_leds, 100)) {
+				a = a << 1;
+
+				if (a > 0x80) {  
+					a = 0x01;
+				}
+			}
 		}
+
+		LEDs_off(0xFF);
 
 		KBD_flush();
 		state = INTRO_PRESS_ANY_KEY;
 		exit_value = 0;
+		printf("HEHEHE DO TUKI PRIDE\n");
 		break;
 
 	case INTRO_PRESS_ANY_KEY:
-		GFX_clear_gfx_object_on_background(&intro_sprite, &background);
+		GFX_clear_gfx_object_on_background(&misko, &background);
+		GFX_clear_gfx_object_on_background(&big_sprite, &background);
+		//GFX_clear_text_object(&flappy_misko_text);
+
 		GFX_draw_one_gfx_object_on_background(&press_ok_sprite, &background);
 		state = INTRO_WAIT_FOR_ANY_KEY;
 		exit_value = 0;
@@ -166,6 +191,7 @@ uint8_t Intro() {
 
 	return exit_value;
 }
+
 
 void GamePlay_UpdateChanges(void) {
     static stopwatch_handle_t update_stopwatch_misko;

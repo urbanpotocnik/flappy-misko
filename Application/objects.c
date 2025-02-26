@@ -69,6 +69,7 @@ graphic_object_t	background;
 graphic_object_t	game_over_sprite;
 graphic_object_t	press_ok_sprite;
 graphic_object_t	small_sprite;
+graphic_object_t	big_sprite;
 
 // ------- Compound objects -------
 
@@ -80,11 +81,8 @@ graphic_object_t 	obstacle_bottom;
 
 text_object_t	score_box_title;		//tekstovni objekti
 text_object_t	score_text;
+text_object_t 	flappy_misko_text;
 
-
-//obstacle_pair_t obstacle_pair1;
-//obstacle_pair_t obstacle_pair2;
-//obstacle_pair_t obstacle_pair3;
 
 // ------------- Public function implementations --------------
 
@@ -275,7 +273,7 @@ void OBJ_init_small_sprite(int x, int y)
 {
 	// uporabi font 12x16, size sprita naj bo 24x220
 
-		small_sprite.image.image_array = (uint16_t*) small_sprite;
+		small_sprite.image.image_array = (uint16_t*) small_sprite_img;
 
 		small_sprite.image.size_x = 220;
 		small_sprite.image.size_y = 24;
@@ -288,6 +286,25 @@ void OBJ_init_small_sprite(int x, int y)
 
 		small_sprite.edge_behavior = EDGE_IGNORE;
 }
+
+void OBJ_init_big_sprite(int x, int y)
+{
+	// uporabi font 24x40, size sprita naj bo 50x220
+
+		big_sprite.image.image_array = (uint16_t*) big_sprite_img;
+
+		big_sprite.image.size_x = 280;
+		big_sprite.image.size_y = 50;
+		big_sprite.image.size = big_sprite.image.size_x * big_sprite.image.size_y;
+
+		GFX_init_location_restrictions (&big_sprite, &canvas.whole_area );
+		GFX_init_gfx_object_location( &big_sprite, x, y);
+
+		GFX_set_gfx_object_velocity(&big_sprite, 0, 0);
+
+		big_sprite.edge_behavior = EDGE_IGNORE;
+}
+
 
 void OBJ_init_press_ok_sprite(void)
 {
@@ -453,7 +470,7 @@ void OBJ_init_score_box_title(void)
 	score_box_title.fore_color = C_WHITE;
 	score_box_title.back_color = C_BLACK;
 
-	score_box_title.font = (UG_FONT*) &FONT_8X12;     // pred errorjem je bil FONT_8X12 nimam pojma zakaj
+	score_box_title.font = (UG_FONT*) &FONT_8X12;     
 }
 
 
@@ -478,8 +495,114 @@ void OBJ_init_score_text(void)
 	score_text.fore_color = C_WHITE;
 	score_text.back_color = C_BLACK;
 
-	score_text.font = (UG_FONT*) &FONT_8X12;    // pred errorjem je bil FONT_8X8 nimam pojma zakaj
+	score_text.font = (UG_FONT*) &FONT_8X12;   
 }
 
+void OBJ_init_start_game_text(int x_min, int y_min)
+{
+	static char str[]= "START GAME";
+
+	score_box_title.text = str;
+
+	score_box_title.x_min = x_min;
+	score_box_title.y_min = y_min;
+
+	score_box_title.fore_color = C_WHITE;
+	score_box_title.back_color = C_BLACK;
+
+	score_box_title.font = (UG_FONT*) &FONT_12X16;     
+}
+
+void OBJ_init_choose_theme_text(int x_min, int y_min)
+{
+	static char str[]= "CHOOSE THEME";
+
+	score_box_title.text = str;
+
+	score_box_title.x_min = x_min;
+	score_box_title.y_min = y_min;
+
+	score_box_title.fore_color = C_WHITE;
+	score_box_title.back_color = C_BLACK;
+
+	score_box_title.font = (UG_FONT*) &FONT_12X16;     
+}
+
+void OBJ_init_high_scores_text(int x_min, int y_min)
+{
+	static char str[]= "HIGH SCORES";
+
+	score_box_title.text = str;
+
+	score_box_title.x_min = x_min;
+	score_box_title.y_min = y_min;
+
+	score_box_title.fore_color = C_WHITE;
+	score_box_title.back_color = C_BLACK;
+
+	score_box_title.font = (UG_FONT*) &FONT_12X16;     
+}
+
+// choose input, play with, touch or button?, how to play?
+void OBJ_init_finger_or_click_text(int x_min, int y_min)
+{
+	static char str[]= "FINGER OR CLICK?";
+
+	score_box_title.text = str;
+
+	score_box_title.x_min = x_min;
+	score_box_title.y_min = y_min;
+
+	score_box_title.fore_color = C_WHITE;
+	score_box_title.back_color = C_BLACK;
+
+	score_box_title.font = (UG_FONT*) &FONT_12X16;     
+}
+
+void OBJ_init_null_text(int x_min, int y_min)
+{
+	static char str[]= "[]";
+
+	score_box_title.text = str;
+
+	score_box_title.x_min = x_min;
+	score_box_title.y_min = y_min;
+
+	score_box_title.fore_color = C_WHITE;
+	score_box_title.back_color = C_BLACK;
+
+	score_box_title.font = (UG_FONT*) &FONT_12X16;     
+}
+
+void OBJ_init_x_text(int x_min, int y_min)
+{
+	// probaj z → ▶
+	static char str[]= "[X]";
+
+	score_box_title.text = str;
+
+	score_box_title.x_min = x_min;
+	score_box_title.y_min = y_min;
+
+	score_box_title.fore_color = C_WHITE;
+	score_box_title.back_color = C_BLACK;
+
+	score_box_title.font = (UG_FONT*) &FONT_12X16;     
+}
+
+void OBJ_init_flappy_misko_text(int x_min, int y_min)
+{
+    static char str[]= "FLAPPY MISKO";
+
+    flappy_misko_text.text = str;
+
+    flappy_misko_text.x_min = x_min;
+    flappy_misko_text.y_min = y_min;
+
+    flappy_misko_text.fore_color = C_BLACK;
+    flappy_misko_text.back_color = C_YELLOW;  // Changed from C_BLACK to transparent
+
+    flappy_misko_text.font = (UG_FONT*) &FONT_16X26;     
+}
 
 // -------------- Private function implementations -------------

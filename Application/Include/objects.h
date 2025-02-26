@@ -109,6 +109,8 @@ extern graphic_object_t	background;
 
 extern graphic_object_t	game_over_sprite;
 extern graphic_object_t press_ok_sprite;
+extern graphic_object_t small_sprite;
+extern graphic_object_t big_sprite;
 
 extern graphic_object_t misko;
 extern graphic_object_t obstacle_top;
@@ -117,6 +119,12 @@ extern graphic_object_t obstacle_bottom;
 
 extern text_object_t	score_box_title;
 extern text_object_t	score_text;
+extern text_object_t	start_game_text;
+extern text_object_t	choose_theme_text;
+extern text_object_t	high_scores_text;
+extern text_object_t	finger_or_click_text;
+extern text_object_t 	flappy_misko_text;
+
 
 
 
@@ -155,6 +163,18 @@ void OBJ_init_obstacle_bottom(void);
 
 void OBJ_demo_spawn_target(void);
 void OBJ_init_obstacle_pair(obstacle_pair_t *obstacle_pair);
+
+void OBJ_init_small_sprite(int x, int y);
+void OBJ_init_start_game_text(int x_min, int y_min);
+void OBJ_init_choose_theme_text(int x_min, int y_min);
+void OBJ_init_high_scores_text(int x_min, int y_min);
+void OBJ_init_finger_or_click_text(int x_min, int y_min);
+void OBJ_init_null_text(int x_min, int y_min);
+void OBJ_init_x_text(int x_min, int y_min);
+void OBJ_init_flappy_misko_text(int x_min, int y_min);
+void OBJ_init_big_sprite(int x, int y);
+
+
 
 
 #endif /* INCLUDE_OBJECTS_H_ */

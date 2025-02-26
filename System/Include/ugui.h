@@ -732,6 +732,7 @@ typedef struct
 #define C_GAINSBORO                    0xDEDB
 #define C_WHITE_SMOKE                  0xF7BE
 #define C_WHITE                        0xFFFF
+#define C_YELLOW                       0xEEA2
 #endif
 
 #ifdef USE_COLOR_RGB888
