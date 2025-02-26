@@ -226,6 +226,16 @@ uint8_t Intro() {
 		OBJ_init_small_sprite_object(&finger_or_button_sprite, 50, 190);	
 		GFX_draw_one_gfx_object_on_background(&finger_or_button_sprite, &background);
 
+		OBJ_init_text_small(60, 80, "START GAME", &start_game_text);
+		GFX_display_text_object(&start_game_text);
+		OBJ_init_text_small(60, 120, "CHOOSE THEME", &choose_theme_text);
+		GFX_display_text_object(&choose_theme_text);
+		OBJ_init_text_small(60, 160, "HIGH SCORES", &high_scores_text);
+		GFX_display_text_object(&high_scores_text);
+		OBJ_init_text_small(60, 200, "PLAY WITH", &touch_or_button_text);
+		GFX_display_text_object(&touch_or_button_text);
+
+		
 
 		state = INTRO_WAIT_FOR_ANY_KEY;
 		exit_value = 0;

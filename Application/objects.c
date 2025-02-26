@@ -89,6 +89,10 @@ text_object_t	score_text;
 text_object_t 	flappy_misko_text;
 text_object_t 	loading_text;
 
+text_object_t 	start_game_text;
+text_object_t	choose_theme_text;
+text_object_t	high_scores_text;
+text_object_t	touch_or_button_text;
 
 // ------------- Public function implementations --------------
 
@@ -501,50 +505,6 @@ void OBJ_init_score_text(void)
 	score_text.font = (UG_FONT*) &FONT_8X12;   
 }
 
-void OBJ_init_start_game_text(int x_min, int y_min)
-{
-	static char str[]= "START GAME";
-
-	score_box_title.text = str;
-
-	score_box_title.x_min = x_min;
-	score_box_title.y_min = y_min;
-
-	score_box_title.fore_color = C_WHITE;
-	score_box_title.back_color = C_BLACK;
-
-	score_box_title.font = (UG_FONT*) &FONT_12X16;     
-}
-
-void OBJ_init_choose_theme_text(int x_min, int y_min)
-{
-	static char str[]= "CHOOSE THEME";
-
-	score_box_title.text = str;
-
-	score_box_title.x_min = x_min;
-	score_box_title.y_min = y_min;
-
-	score_box_title.fore_color = C_WHITE;
-	score_box_title.back_color = C_BLACK;
-
-	score_box_title.font = (UG_FONT*) &FONT_12X16;     
-}
-
-void OBJ_init_high_scores_text(int x_min, int y_min)
-{
-	static char str[]= "HIGH SCORES";
-
-	score_box_title.text = str;
-
-	score_box_title.x_min = x_min;
-	score_box_title.y_min = y_min;
-
-	score_box_title.fore_color = C_WHITE;
-	score_box_title.back_color = C_BLACK;
-
-	score_box_title.font = (UG_FONT*) &FONT_12X16;     
-}
 
 // choose input, play with, touch or button?, how to play?
 void OBJ_init_finger_or_click_text(int x_min, int y_min)
@@ -561,6 +521,7 @@ void OBJ_init_finger_or_click_text(int x_min, int y_min)
 
 	score_box_title.font = (UG_FONT*) &FONT_12X16;     
 }
+
 
 void OBJ_init_null_text(int x_min, int y_min)
 {
@@ -622,4 +583,16 @@ void OBJ_init_loading_text(int x_min, int y_min, const char* str)
 }
 
 
+void OBJ_init_text_small(int x_min, int y_min, const char* input_str, text_object_t *txt_object)
+{
+    txt_object->text = input_str;
+
+    txt_object->x_min = x_min;
+    txt_object->y_min = y_min;
+
+    txt_object->fore_color = C_BLACK;
+    txt_object->back_color = C_YELLOW;
+
+    txt_object->font = (UG_FONT*) &FONT_12X16;     
+}
 // -------------- Private function implementations -------------
