@@ -25,6 +25,7 @@ typedef enum GAME_states {
 typedef enum INTRO_states {
 	INTRO_INIT, 
     INTRO_PRESS_ANY_KEY, 
+	INTRO_MAIN_MENU,
     INTRO_WAIT_FOR_ANY_KEY, 
     INTRO_NUM_OF_STATES
 } INTRO_states_t;
@@ -116,39 +117,84 @@ void Game() {
 uint8_t Intro() {
 	static INTRO_states_t state = INTRO_INIT;
 	uint8_t exit_value = 0;
+	int a = 0x01;
 
 	switch (state) {
 		case INTRO_INIT:
 		OBJ_init();
-		OBJ_init_big_sprite(20, 50);
+		OBJ_init_big_sprite(20, 20);
 		GFX_draw_gfx_object(&background);
 		GFX_draw_one_gfx_object_on_background(&big_sprite, &background);
-		OBJ_init_flappy_misko_text(59, 62);
+		OBJ_init_flappy_misko_text(59, 32);
 		GFX_display_text_object(&flappy_misko_text);
 		
-		GFX_set_gfx_object_location(&misko, 0, 160);
+		GFX_set_gfx_object_location(&misko, 0, 120);
 		GFX_draw_one_gfx_object_on_background(&misko, &background);
 		GFX_set_gfx_object_velocity(&misko, 2, 0);
 	
 		TIMUT_stopwatch_set_time_mark(&stopwatch_leds);
 		TIMUT_stopwatch_set_time_mark(&update_stopwatch_intro);  
 		TIMUT_stopwatch_set_time_mark(&update_stopwatch_intro_exit);  
-		int a = 0x01;
+		
+		OBJ_init_small_sprite_object(&loading_sprite, 50, 190);	
+		GFX_draw_one_gfx_object_on_background(&loading_sprite, &background);
+		
+		int loading_state = 0;
+		int loading_direction = 1; 
+		stopwatch_handle_t loading_text_stopwatch;
+		TIMUT_stopwatch_set_time_mark(&loading_text_stopwatch);
+		OBJ_init_loading_text(96, 196, "LOADING");
+		GFX_display_text_object(&flappy_misko_text);
 	
 		while(1) {
 			if (TIMUT_stopwatch_has_X_ms_passed(&update_stopwatch_intro_exit, 4000)) {
 				break;
 			}
-
+		
 			if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_intro, 7)) {
 				GFX_update_moving_gfx_object_location(&misko);
 				GFX_draw_one_gfx_object_on_background(&misko, &background);
+			}
+			
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&loading_text_stopwatch, 100)) {
+				switch(loading_state) {
+					case 0:
+						GFX_draw_one_gfx_object_on_background(&loading_sprite, &background);
+						OBJ_init_loading_text(96, 196, "LOADING");
+						GFX_display_text_object(&loading_text);
+						break;
+					case 1:
+						OBJ_init_loading_text(96, 196, "LOADING.");
+						GFX_display_text_object(&loading_text);
+						break;
+					case 2:
+						OBJ_init_loading_text(96, 196, "LOADING..");
+						GFX_display_text_object(&loading_text);
+						break;
+					case 3:
+						OBJ_init_loading_text(96, 196, "LOADING...");
+						GFX_display_text_object(&loading_text);
+						break;
+				}
+				GFX_display_text_object(&flappy_misko_text);
+				
+				if (loading_direction == 1) {
+					loading_state++;
+					if (loading_state == 3) {
+						loading_direction = -1;
+					}
+				} else if (loading_direction == -1) {
+					loading_state--;
+					if (loading_state == 0) {
+						loading_direction = 1;
+					}
+				}
 			}
 		
 			LEDs_write(a);
 			if (TIMUT_stopwatch_has_another_X_ms_passed(&stopwatch_leds, 100)) {
 				a = a << 1;
-
+		
 				if (a > 0x80) {  
 					a = 0x01;
 				}
@@ -156,17 +202,38 @@ uint8_t Intro() {
 		}
 
 		LEDs_off(0xFF);
-
+		GFX_clear_gfx_object_on_background(&misko, &background);
+		GFX_clear_gfx_object_on_background(&big_sprite, &background);
 		KBD_flush();
-		state = INTRO_PRESS_ANY_KEY;
+		state = INTRO_MAIN_MENU;
 		exit_value = 0;
-		printf("HEHEHE DO TUKI PRIDE\n");
+		break;
+
+	case INTRO_MAIN_MENU:
+		OBJ_init_big_sprite(20, 10);
+		//GFX_draw_gfx_object(&background);
+		GFX_draw_one_gfx_object_on_background(&big_sprite, &background);
+		OBJ_init_flappy_misko_text(59, 22);
+		GFX_display_text_object(&flappy_misko_text);
+
+
+		OBJ_init_small_sprite_object(&start_game_sprite, 50, 70);	
+		GFX_draw_one_gfx_object_on_background(&start_game_sprite, &background);
+		OBJ_init_small_sprite_object(&choose_theme_sprite, 50, 110);	
+		GFX_draw_one_gfx_object_on_background(&choose_theme_sprite, &background);
+		OBJ_init_small_sprite_object(&high_scores_sprite, 50, 150);	
+		GFX_draw_one_gfx_object_on_background(&high_scores_sprite, &background);
+		OBJ_init_small_sprite_object(&finger_or_button_sprite, 50, 190);	
+		GFX_draw_one_gfx_object_on_background(&finger_or_button_sprite, &background);
+
+
+		state = INTRO_WAIT_FOR_ANY_KEY;
+		exit_value = 0;
 		break;
 
 	case INTRO_PRESS_ANY_KEY:
 		GFX_clear_gfx_object_on_background(&misko, &background);
 		GFX_clear_gfx_object_on_background(&big_sprite, &background);
-		//GFX_clear_text_object(&flappy_misko_text);
 
 		GFX_draw_one_gfx_object_on_background(&press_ok_sprite, &background);
 		state = INTRO_WAIT_FOR_ANY_KEY;

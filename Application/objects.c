@@ -68,7 +68,12 @@ graphic_object_t	intro_sprite;			// grafični objekti aplikacije
 graphic_object_t	background;
 graphic_object_t	game_over_sprite;
 graphic_object_t	press_ok_sprite;
-graphic_object_t	small_sprite;
+graphic_object_t	start_game_sprite;
+graphic_object_t	choose_theme_sprite;
+graphic_object_t	high_scores_sprite;
+graphic_object_t	finger_or_button_sprite;
+graphic_object_t	loading_sprite;
+
 graphic_object_t	big_sprite;
 
 // ------- Compound objects -------
@@ -82,6 +87,7 @@ graphic_object_t 	obstacle_bottom;
 text_object_t	score_box_title;		//tekstovni objekti
 text_object_t	score_text;
 text_object_t 	flappy_misko_text;
+text_object_t 	loading_text;
 
 
 // ------------- Public function implementations --------------
@@ -268,24 +274,21 @@ void OBJ_init_game_over_sprite(void)
 }
 
 
-
-void OBJ_init_small_sprite(int x, int y)
+void OBJ_init_small_sprite_object(graphic_object_t *sprite, int x, int y)
 {
-	// uporabi font 12x16, size sprita naj bo 24x220
+    // uporabi font 12x16, size sprita naj bo 24x220
+    sprite->image.image_array = (uint16_t*) small_sprite_img;
+    sprite->image.size_x = 220;
+    sprite->image.size_y = 32;
+    sprite->image.size = sprite->image.size_x * sprite->image.size_y;
 
-		small_sprite.image.image_array = (uint16_t*) small_sprite_img;
+    GFX_init_location_restrictions(sprite, &canvas.whole_area);
+    GFX_init_gfx_object_location(sprite, x, y);
 
-		small_sprite.image.size_x = 220;
-		small_sprite.image.size_y = 24;
-		small_sprite.image.size = small_sprite.image.size_x * small_sprite.image.size_y;
-
-		GFX_init_location_restrictions (&small_sprite, &canvas.whole_area );
-		GFX_init_gfx_object_location( &small_sprite, x, y);
-
-		GFX_set_gfx_object_velocity(&small_sprite, 0, 0);
-
-		small_sprite.edge_behavior = EDGE_IGNORE;
+    GFX_set_gfx_object_velocity(sprite, 0, 0);
+    sprite->edge_behavior = EDGE_IGNORE;
 }
+
 
 void OBJ_init_big_sprite(int x, int y)
 {
@@ -600,9 +603,23 @@ void OBJ_init_flappy_misko_text(int x_min, int y_min)
     flappy_misko_text.y_min = y_min;
 
     flappy_misko_text.fore_color = C_BLACK;
-    flappy_misko_text.back_color = C_YELLOW;  // Changed from C_BLACK to transparent
+    flappy_misko_text.back_color = C_YELLOW;  
 
     flappy_misko_text.font = (UG_FONT*) &FONT_16X26;     
 }
+
+void OBJ_init_loading_text(int x_min, int y_min, const char* str)
+{
+    loading_text.text = str;
+
+    loading_text.x_min = x_min;
+    loading_text.y_min = y_min;
+
+    loading_text.fore_color = C_BLACK;
+    loading_text.back_color = C_YELLOW;
+
+    loading_text.font = (UG_FONT*) &FONT_12X20;     
+}
+
 
 // -------------- Private function implementations -------------
