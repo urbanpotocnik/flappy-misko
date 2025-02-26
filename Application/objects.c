@@ -93,6 +93,9 @@ text_object_t 	start_game_text;
 text_object_t	choose_theme_text;
 text_object_t	high_scores_text;
 text_object_t	touch_or_button_text;
+text_object_t	text_selector;
+
+
 
 // ------------- Public function implementations --------------
 

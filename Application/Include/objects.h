@@ -128,7 +128,7 @@ extern text_object_t	high_scores_text;
 extern text_object_t	touch_or_button_text;
 extern text_object_t 	flappy_misko_text;
 extern text_object_t 	loading_text;
-
+extern text_object_t	text_selector;
 
 extern text_object_t 	start_game_text;
 
