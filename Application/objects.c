@@ -68,6 +68,7 @@ graphic_object_t	intro_sprite;			// grafični objekti aplikacije
 graphic_object_t	background;
 graphic_object_t	game_over_sprite;
 graphic_object_t	press_ok_sprite;
+graphic_object_t	small_sprite;
 
 // ------- Compound objects -------
 
@@ -269,70 +270,29 @@ void OBJ_init_game_over_sprite(void)
 }
 
 
-/*
-// object "constructor"
-void OBJ_init_press_any_key_sprite(void)
+
+void OBJ_init_small_sprite(int x, int y)
 {
-	// init graphic object
+	// uporabi font 12x16, size sprita naj bo 24x220
 
-		// init image
-		press_any_key_sprite.image.image_array = (uint16_t*) press_any_key_img;
+		small_sprite.image.image_array = (uint16_t*) small_sprite;
 
-		press_any_key_sprite.image.size_x = 260;
-		press_any_key_sprite.image.size_y = 60;
-		press_any_key_sprite.image.size = press_any_key_sprite.image.size_x * press_any_key_sprite.image.size_y;
+		small_sprite.image.size_x = 220;
+		small_sprite.image.size_y = 24;
+		small_sprite.image.size = small_sprite.image.size_x * small_sprite.image.size_y;
 
-		// init the graphic object location
-		GFX_init_location_restrictions (&press_any_key_sprite, &canvas.whole_area );
-		GFX_init_gfx_object_location( &press_any_key_sprite, 40, 150);
+		GFX_init_location_restrictions (&small_sprite, &canvas.whole_area );
+		GFX_init_gfx_object_location( &small_sprite, x, y);
 
+		GFX_set_gfx_object_velocity(&small_sprite, 0, 0);
 
-		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&press_any_key_sprite, 0, 0);
-
-
-		// set edge parameters
-		press_any_key_sprite.edge_behavior = EDGE_IGNORE;
-
+		small_sprite.edge_behavior = EDGE_IGNORE;
 }
-
-
-
-void OBJ_spawn_target(void)
-{
-	arduino_types_enum_t arduino_type;
-	int16_t x, y;
-
-	// generate a target from a random arduino
-	arduino_type = MATH_random_integer_number_from_interval(0, NUM_OF_ARDUINO_TYPES - 1);
-
-	OBJ_init_target(arduino_type);
-
-
-	// randomize the target position
-	x = MATH_random_integer_number_from_interval(target.gfx_object.center_limits.X_MIN, target.gfx_object.center_limits.X_MAX);
-	y = MATH_random_integer_number_from_interval(target.gfx_object.center_limits.Y_MIN, target.gfx_object.center_limits.Y_MAX);
-
-	GFX_init_gfx_object_center_location( &target.gfx_object, x, y );
-
-
-	// randomize the target velocity
-	x = MATH_random_sign() * MATH_random_integer_number_from_interval(settings.abs_velocity_min.x, settings.abs_velocity_max.x);
-	y = MATH_random_sign() * MATH_random_integer_number_from_interval(settings.abs_velocity_min.y, settings.abs_velocity_max.y);
-
-	GFX_set_gfx_object_velocity( &target.gfx_object, x, y );
-
-}
-
-
-*/
-
 
 void OBJ_init_press_ok_sprite(void)
 {
 	// init graphic object
 
-		// init image
 		press_ok_sprite.image.image_array = (uint16_t*) press_ok_img;
 
 		press_ok_sprite.image.size_x = 260;
@@ -352,7 +312,6 @@ void OBJ_init_press_ok_sprite(void)
 		press_ok_sprite.edge_behavior = EDGE_IGNORE;
 }
 
-
 void OBJ_init_misko(void)
 {
 	// init graphic object
@@ -366,7 +325,7 @@ void OBJ_init_misko(void)
 
 		// init the graphic object location
 		GFX_init_location_restrictions (&misko, &canvas.whole_area );
-		GFX_init_gfx_object_location( &misko, 50, 120);
+		GFX_init_gfx_object_location(&misko, 50, 120);
 
 
 		// set the initial object velocity
