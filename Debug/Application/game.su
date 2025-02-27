@@ -1,5 +1,5 @@
-../Application/game.c:134:9:Intro	56	static
-../Application/game.c:587:6:GamePlay_UpdateChanges	8	static
-../Application/game.c:623:9:GamePlay	48	static
-../Application/game.c:804:9:GameOver	16	static
-../Application/game.c:102:6:Game	8	static
+../Application/game.c:123:9:Intro	56	static
+../Application/game.c:580:6:GamePlay_UpdateChanges	8	static
+../Application/game.c:615:9:GamePlay	48	static
+../Application/game.c:822:9:GameOver	16	static
+../Application/game.c:91:6:Game	8	static

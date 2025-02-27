@@ -124,8 +124,6 @@ void OBJ_init(void)
 	OBJ_init_background();
 
 	// sprites
-	OBJ_init_press_ok_sprite();
-	OBJ_init_intro_sprite();
 
 	// compound objects
 	OBJ_init_misko();
@@ -240,29 +238,6 @@ void OBJ_init_background(void)
 // In computer graphics, a sprite is a two-dimensional bitmap that is
 // integrated into a larger scene, most often in a 2D video game.
 
-void OBJ_init_intro_sprite(void)
-{
-	// init graphic object
-
-		// init image
-		intro_sprite.image.image_array = (uint16_t*) intro_img;
-
-		intro_sprite.image.size_x = 130;
-		intro_sprite.image.size_y = 100;
-		intro_sprite.image.size = intro_sprite.image.size_x * intro_sprite.image.size_y;
-
-		// init the graphic object location
-		GFX_init_location_restrictions (&intro_sprite, &canvas.whole_area );
-		GFX_init_gfx_object_location( &intro_sprite, 95, 20);
-
-
-		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&intro_sprite, 0, 0);
-
-
-		// set edge parameters
-		intro_sprite.edge_behavior = EDGE_IGNORE;
-}
 
 
 
@@ -298,30 +273,6 @@ void OBJ_init_big_sprite(int x, int y)
 		GFX_set_gfx_object_velocity(&big_sprite, 0, 0);
 
 		big_sprite.edge_behavior = EDGE_IGNORE;
-}
-
-
-void OBJ_init_press_ok_sprite(void)
-{
-	// init graphic object
-
-		press_ok_sprite.image.image_array = (uint16_t*) press_ok_img;
-
-		press_ok_sprite.image.size_x = 260;
-		press_ok_sprite.image.size_y = 30;
-		press_ok_sprite.image.size = press_ok_sprite.image.size_x * press_ok_sprite.image.size_y;
-
-		// init the graphic object location
-		GFX_init_location_restrictions (&press_ok_sprite, &canvas.whole_area );
-		GFX_init_gfx_object_location( &press_ok_sprite, 40, 170);
-
-
-		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&press_ok_sprite, 0, 0);
-
-
-		// set edge parameters
-		press_ok_sprite.edge_behavior = EDGE_IGNORE;
 }
 
 void OBJ_init_high_score_sprite_large(int x, int y)
