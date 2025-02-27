@@ -94,7 +94,9 @@ int time_mark = 0;
 int obstacle_number = 0;
 uint8_t menu_initialized = 0;
 int previous_selected_item = -1;
-
+uint8_t play_style_menu_initialized = 0;
+int selected_play_style = 0;
+int previous_selected_play_style = -1;
 
 // ------------- Public function implementations --------------
 void Game() {
@@ -316,46 +318,13 @@ uint8_t Intro() {
                     break;
 
                 case 2: // High Scores
-					// WIP: fix the high scores logic
-					// TO DO: naredi da se high scori ne ponavljajo
-					GFX_draw_gfx_object(&background);
-					OBJ_init_high_score_sprite_large(30, 30);
-					GFX_draw_one_gfx_object_on_background(&high_score_sprite_large, &background);
-					
-					uint16_t* high_scores = Get_High_Scores();
-					char score_text[20];
-
-					OBJ_init_text_big(67, 40, "HIGH SCORES:", &high_scores_menu_text);
-					
-					OBJ_init_text_big(50, 75, "1.", &high_score1_text);
-					sprintf(score_text, "%d", high_scores[0]);  
-					OBJ_init_text_big(95, 75, score_text, &high_score1_text_value);
-					
-					OBJ_init_text_big(50, 110, "2.", &high_score2_text);
-					sprintf(score_text, "%d", high_scores[1]);  
-					OBJ_init_text_big(95, 110, score_text, &high_score2_text_value);
-					
-					OBJ_init_text_big(50, 145, "3.", &high_score3_text);
-					sprintf(score_text, "%d", high_scores[2]); 
-					OBJ_init_text_big(95, 145, score_text, &high_score3_text_value);
-					
-					OBJ_init_text_tiny(50, 185, "PRESS ANY KEY TO GO BACK", &press_to_go_back_text);
-
-					GFX_display_text_object(&high_scores_menu_text);
-					GFX_display_text_object(&high_score1_text);
-					GFX_display_text_object(&high_score1_text_value);
-					GFX_display_text_object(&high_score2_text);
-					GFX_display_text_object(&high_score2_text_value);
-					GFX_display_text_object(&high_score3_text);
-					GFX_display_text_object(&high_score3_text_value);
-					GFX_display_text_object(&press_to_go_back_text);
-
-					state = INTRO_HIGH_SCORES;
-					menu_initialized = 0;
-					break;
+                    state = INTRO_HIGH_SCORES;
+                    menu_initialized = 0;
+                    break;
 
                 case 3: // Play With
-                    
+					state = INTRO_PLAY_WITH;
+					menu_initialized = 0;
                     break;
             }
         }
@@ -368,39 +337,46 @@ uint8_t Intro() {
 		break;
 
 	case INTRO_CHOOSE_THEME:
-    {
-        static uint8_t theme_menu_initialized = 0;
-        static int selected_theme = 0;
-        static int previous_selected_theme = -1;
+{
+    static uint8_t theme_menu_initialized = 0;
+    static int selected_theme = 0;
+    static int previous_selected_theme = -1;
 
-        if (!theme_menu_initialized) {
-            GFX_draw_gfx_object(&background);
-            OBJ_init_big_sprite(20, 10);
-            GFX_draw_one_gfx_object_on_background(&big_sprite, &background);
-            OBJ_init_flappy_misko_text(30, 22);
-            GFX_display_text_object(&flappy_misko_text);
+    if (!theme_menu_initialized) {
+        GFX_draw_gfx_object(&background);
+        OBJ_init_big_sprite(20, 10);
+        GFX_draw_one_gfx_object_on_background(&big_sprite, &background);
+        OBJ_init_flappy_misko_text(30, 22);
+        GFX_display_text_object(&flappy_misko_text);
 
-            GFX_set_gfx_object_location(&misko, 240, 22);
-            GFX_draw_one_gfx_object_on_background(&misko, &background);
-            
-            OBJ_init_small_sprite_object(&choose_theme_sprite, 50, 70);    
-            OBJ_init_small_sprite_object(&dark_theme_sprite, 50, 110);    
-            OBJ_init_small_sprite_object(&light_theme_sprite, 50, 150);    
+        GFX_set_gfx_object_location(&misko, 240, 22);
+        GFX_draw_one_gfx_object_on_background(&misko, &background);
+        
+        OBJ_init_small_sprite_object(&choose_theme_sprite, 50, 70);    
+        OBJ_init_small_sprite_object(&dark_theme_sprite, 50, 110);    
+        OBJ_init_small_sprite_object(&light_theme_sprite, 50, 150);    
 
-            GFX_draw_one_gfx_object_on_background(&choose_theme_sprite, &background);
-            GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
-            GFX_draw_one_gfx_object_on_background(&light_theme_sprite, &background);
+        GFX_draw_one_gfx_object_on_background(&choose_theme_sprite, &background);
+        GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
+        GFX_draw_one_gfx_object_on_background(&light_theme_sprite, &background);
 
-            OBJ_init_text_small(60, 80, "CHOOSE THEME:", &choose_theme_text);
-            OBJ_init_text_small(60, 120, "DARK", &dark_theme_text);
-            OBJ_init_text_small(60, 160, "LIGHT", &light_theme_text);
+        OBJ_init_text_small(60, 80, "CHOOSE THEME:", &choose_theme_text);
+        OBJ_init_text_small(60, 120, "DARK", &dark_theme_text);
+        OBJ_init_text_small(60, 160, "LIGHT", &light_theme_text);
 
-            GFX_display_text_object(&choose_theme_text);
-            GFX_display_text_object(&dark_theme_text);
-            GFX_display_text_object(&light_theme_text);
+        GFX_display_text_object(&choose_theme_text);
+        GFX_display_text_object(&dark_theme_text);
+        GFX_display_text_object(&light_theme_text);
 
-            theme_menu_initialized = 1;
-        }
+        // Initialize cursor at the default position (DARK theme)
+        OBJ_init_text_small(230, 120, "->", &text_selector);
+        GFX_display_text_object(&text_selector);
+        previous_selected_theme = selected_theme;
+
+        theme_menu_initialized = 1;
+    }
+
+    // Rest of the theme menu code remains the same...
 
         if (previous_selected_theme != selected_theme) {
             GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
@@ -423,42 +399,161 @@ uint8_t Intro() {
 
         key = KBD_get_pressed_key();
         if (key == BTN_UP || key == BTN_DOWN) {
-            selected_theme = !selected_theme; // Toggle between 0 and 1
+            selected_theme = !selected_theme; 
         }
-        else if (key == BTN_OK) {
-            // Apply the selected theme
-            if (selected_theme == 0) {
-                // Apply dark theme
-            } else {
-                // Apply light theme
+        else if (key == BTN_OK || key == BTN_ESC) {
+            
+            if (key == BTN_OK) {
+                if (selected_theme == 0) {
+                    // Apply dark theme
+                } else {
+                    // Apply light theme
+                }
             }
             theme_menu_initialized = 0; // Reset for next time
             state = INTRO_MAIN_MENU;
             menu_initialized = 0; // Force main menu redraw
-        }
-        else if (key == BTN_ESC) {
-            theme_menu_initialized = 0; // Reset for next time
-            state = INTRO_MAIN_MENU;
-            menu_initialized = 0; // Force main menu redraw
+            previous_selected_item = -1; // Force cursor redraw in main menu
         }
         break;
     }
 
 	case INTRO_HIGH_SCORES:
+{
+    static uint8_t high_scores_initialized = 0;
+
+    if (!high_scores_initialized) {
+        // Clear the background first
+        GFX_draw_gfx_object(&background);
+        
+        // Initialize the high score sprite and draw it
+        OBJ_init_high_score_sprite_large(30, 30);
+        GFX_draw_one_gfx_object_on_background(&high_score_sprite_large, &background);
+        
+        // Get fresh high scores using the working logic
+        uint16_t* high_scores = Get_High_Scores();
+        char score_text[20];
+
+        // Title
+        OBJ_init_text_big(67, 40, "HIGH SCORES:", &high_scores_menu_text);
+        GFX_display_text_object(&high_scores_menu_text);
+        
+        // Display each score with proper value from the array
+        sprintf(score_text, "%d", high_scores[0]);  // First place
+        OBJ_init_text_big(50, 75, "1.", &high_score1_text);
+        OBJ_init_text_big(95, 75, score_text, &high_score1_text_value);
+        GFX_display_text_object(&high_score1_text);
+        GFX_display_text_object(&high_score1_text_value);
+        
+        sprintf(score_text, "%d", high_scores[1]);  // Second place
+        OBJ_init_text_big(50, 110, "2.", &high_score2_text);
+        OBJ_init_text_big(95, 110, score_text, &high_score2_text_value);
+        GFX_display_text_object(&high_score2_text);
+        GFX_display_text_object(&high_score2_text_value);
+        
+        sprintf(score_text, "%d", high_scores[2]);  // Third place
+        OBJ_init_text_big(50, 145, "3.", &high_score3_text);
+        OBJ_init_text_big(95, 145, score_text, &high_score3_text_value);
+        GFX_display_text_object(&high_score3_text);
+        GFX_display_text_object(&high_score3_text_value);
+        
+        // Back button text
+        OBJ_init_text_tiny(50, 185, "PRESS ANY KEY TO GO BACK", &press_to_go_back_text);
+        GFX_display_text_object(&press_to_go_back_text);
+
+        high_scores_initialized = 1;
+    }
+
     key = KBD_get_pressed_key();
     if (key != BTN_NONE) {
         state = INTRO_MAIN_MENU;
+        high_scores_initialized = 0;  // Reset for next time
+        menu_initialized = 0;  // Force main menu redraw
+        previous_selected_item = -1;  // Force cursor redraw in main menu
         GFX_draw_gfx_object(&background);  // Clear screen for main menu
     }
     break;
+}
 
 	case INTRO_PLAY_WITH:
-		//state = INTRO_WAIT_FOR_ANY_KEY;
-		//exit_value = 0;
-		break;	
+{
+    if (!play_style_menu_initialized) {
+        GFX_draw_gfx_object(&background);
+        OBJ_init_big_sprite(20, 10);
+        GFX_draw_one_gfx_object_on_background(&big_sprite, &background);
+        OBJ_init_flappy_misko_text(30, 22);
+        GFX_display_text_object(&flappy_misko_text);
 
+        GFX_set_gfx_object_location(&misko, 240, 22);
+        GFX_draw_one_gfx_object_on_background(&misko, &background);
+        
+        OBJ_init_small_sprite_object(&choose_theme_sprite, 50, 70);    
+        OBJ_init_small_sprite_object(&dark_theme_sprite, 50, 110);    
+        OBJ_init_small_sprite_object(&light_theme_sprite, 50, 150);    
+
+        GFX_draw_one_gfx_object_on_background(&choose_theme_sprite, &background);
+        GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
+        GFX_draw_one_gfx_object_on_background(&light_theme_sprite, &background);
+
+        OBJ_init_text_small(60, 80, "CHOOSE INPUT:", &choose_theme_text);
+        OBJ_init_text_small(60, 120, "BUTTON", &dark_theme_text);
+        OBJ_init_text_small(60, 160, "SCREEN", &light_theme_text);
+
+        GFX_display_text_object(&choose_theme_text);
+        GFX_display_text_object(&dark_theme_text);
+        GFX_display_text_object(&light_theme_text);
+
+        // Initialize cursor at the default position (Button input)
+        OBJ_init_text_small(230, 120, "->", &text_selector);
+        GFX_display_text_object(&text_selector);
+        previous_selected_play_style = selected_play_style;
+
+        play_style_menu_initialized = 1;
+    }
+
+    if (previous_selected_play_style != selected_play_style) {
+        GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
+        GFX_draw_one_gfx_object_on_background(&light_theme_sprite, &background);
+
+        GFX_display_text_object(&dark_theme_text);
+        GFX_display_text_object(&light_theme_text);
+
+        switch(selected_play_style) {
+            case 0:
+                OBJ_init_text_small(230, 120, "->", &text_selector);
+                break;
+            case 1:
+                OBJ_init_text_small(230, 160, "->", &text_selector);
+                break;
+        }
+        GFX_display_text_object(&text_selector);
+        previous_selected_play_style = selected_play_style;
+    }
+
+    key = KBD_get_pressed_key();
+    if (key == BTN_UP || key == BTN_DOWN) {
+        selected_play_style = !selected_play_style; 
+    }
+    else if (key == BTN_OK || key == BTN_ESC) {
+        if (key == BTN_OK) {
+            if (selected_play_style == 0) {
+                // Apply button input
+                //game_status.input_mode = INPUT_BUTTON;
+            } else {
+                // Apply screen input
+                //game_status.input_mode = INPUT_SCREEN;
+            }
+        }
+        play_style_menu_initialized = 0; // Reset for next time
+        state = INTRO_MAIN_MENU;
+        menu_initialized = 0; // Force main menu redraw
+        previous_selected_item = -1; // Force cursor redraw in main menu
+    }
+    break;
+}
 
 	// POCLEARAJ IN POBRISI VSE PREDEN GRES V IGRALNI DEL
+	// pobrisi neuporabljene slike
 
 	case INTRO_PRESS_ANY_KEY:
 		GFX_clear_gfx_object_on_background(&misko, &background);
