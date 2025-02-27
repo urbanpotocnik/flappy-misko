@@ -120,6 +120,7 @@ extern graphic_object_t	choose_theme_sprite;
 extern graphic_object_t	high_scores_sprite;
 extern graphic_object_t	finger_or_button_sprite;
 extern graphic_object_t	loading_sprite;
+extern graphic_object_t high_score_sprite_large;
 
 extern text_object_t	score_box_title;
 extern text_object_t	score_text;
@@ -132,7 +133,14 @@ extern text_object_t	text_selector;
 
 extern text_object_t 	start_game_text;
 
-
+extern text_object_t	high_scores_menu_text;
+extern text_object_t	high_score1_text;
+extern text_object_t	high_score2_text;
+extern text_object_t	high_score3_text;
+extern text_object_t	press_to_go_back_text;
+extern text_object_t	high_score1_text_value;
+extern text_object_t	high_score2_text_value;
+extern text_object_t	high_score3_text_value;
 
 
 
@@ -180,6 +188,9 @@ void OBJ_init_big_sprite(int x, int y);
 void OBJ_init_small_sprite_object(graphic_object_t *sprite, int x, int y);
 void OBJ_init_loading_text(int x_min, int y_min, const char* str);
 void OBJ_init_text_small(int x_min, int y_min, const char* input_str, text_object_t *txt_object);
+void OBJ_init_high_score_sprite_large(int x, int y);
+void OBJ_init_text_big(int x_min, int y_min, const char* input_str, text_object_t *txt_object);
+void OBJ_init_text_tiny(int x_min, int y_min, const char* input_str, text_object_t *txt_object);
 
 
 #endif /* INCLUDE_OBJECTS_H_ */

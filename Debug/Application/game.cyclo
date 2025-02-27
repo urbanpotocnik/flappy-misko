@@ -1,5 +1,5 @@
-../Application/game.c:128:9:Intro	35
-../Application/game.c:344:6:GamePlay_UpdateChanges	6
-../Application/game.c:380:9:GamePlay	41
-../Application/game.c:561:9:GameOver	5
-../Application/game.c:96:6:Game	7
+../Application/game.c:132:9:Intro	40
+../Application/game.c:419:6:GamePlay_UpdateChanges	6
+../Application/game.c:455:9:GamePlay	41
+../Application/game.c:636:9:GameOver	5
+../Application/game.c:100:6:Game	7

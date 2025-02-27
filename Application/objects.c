@@ -73,7 +73,7 @@ graphic_object_t	choose_theme_sprite;
 graphic_object_t	high_scores_sprite;
 graphic_object_t	finger_or_button_sprite;
 graphic_object_t	loading_sprite;
-
+graphic_object_t 	high_score_sprite_large;
 graphic_object_t	big_sprite;
 
 // ------- Compound objects -------
@@ -95,6 +95,15 @@ text_object_t	high_scores_text;
 text_object_t	touch_or_button_text;
 text_object_t	text_selector;
 
+text_object_t	high_scores_menu_text;
+text_object_t	high_score1_text;
+text_object_t	high_score2_text;
+text_object_t	high_score3_text;
+text_object_t	press_to_go_back_text;
+text_object_t	high_score1_text_value;
+text_object_t	high_score2_text_value;
+text_object_t	high_score3_text_value;
+
 
 
 // ------------- Public function implementations --------------
@@ -111,7 +120,6 @@ void OBJ_init(void)
 	OBJ_init_background();
 
 	// sprites
-	OBJ_init_game_over_sprite();
 	OBJ_init_press_ok_sprite();
 	OBJ_init_intro_sprite();
 
@@ -254,33 +262,6 @@ void OBJ_init_intro_sprite(void)
 
 
 
-// object "constructor"
-void OBJ_init_game_over_sprite(void)
-{
-	// init graphic object
-
-		// init image
-		game_over_sprite.image.image_array = (uint16_t*) game_over_img;
-
-		game_over_sprite.image.size_x = 250;
-		game_over_sprite.image.size_y = 170;
-		game_over_sprite.image.size = game_over_sprite.image.size_x * game_over_sprite.image.size_y;
-
-		// init the graphic object location
-		GFX_init_location_restrictions ( &game_over_sprite, &canvas.whole_area );
-		GFX_init_gfx_object_location( &game_over_sprite, 35, 35 );
-
-
-
-		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&game_over_sprite, 0, 0);
-
-
-		// set edge parameters
-		game_over_sprite.edge_behavior = EDGE_IGNORE;
-}
-
-
 void OBJ_init_small_sprite_object(graphic_object_t *sprite, int x, int y)
 {
     // uporabi font 12x16, size sprita naj bo 24x220
@@ -337,6 +318,28 @@ void OBJ_init_press_ok_sprite(void)
 
 		// set edge parameters
 		press_ok_sprite.edge_behavior = EDGE_IGNORE;
+}
+
+void OBJ_init_high_score_sprite_large(int x, int y)
+{
+		// init image
+		high_score_sprite_large.image.image_array = (uint16_t*) high_score_sprite_large_img;
+
+		high_score_sprite_large.image.size_x = 260;
+		high_score_sprite_large.image.size_y = 180;
+		high_score_sprite_large.image.size = intro_sprite.image.size_x * intro_sprite.image.size_y;
+
+		// init the graphic object location
+		GFX_init_location_restrictions (&high_score_sprite_large, &canvas.whole_area );
+		GFX_init_gfx_object_location(&high_score_sprite_large, x, y);
+
+
+		// set the initial object velocity
+		GFX_set_gfx_object_velocity(&high_score_sprite_large, 0, 0);
+
+
+		// set edge parameters
+		high_score_sprite_large.edge_behavior = EDGE_IGNORE;
 }
 
 void OBJ_init_misko(void)
@@ -598,4 +601,31 @@ void OBJ_init_text_small(int x_min, int y_min, const char* input_str, text_objec
 
     txt_object->font = (UG_FONT*) &FONT_12X16;     
 }
+
+void OBJ_init_text_big(int x_min, int y_min, const char* input_str, text_object_t *txt_object)
+{
+    txt_object->text = input_str;
+
+    txt_object->x_min = x_min;
+    txt_object->y_min = y_min;
+
+    txt_object->fore_color = C_BLACK;
+    txt_object->back_color = C_YELLOW;
+
+    txt_object->font = (UG_FONT*) &FONT_16X26;     
+}
+
+void OBJ_init_text_tiny(int x_min, int y_min, const char* input_str, text_object_t *txt_object)
+{
+    txt_object->text = input_str;
+
+    txt_object->x_min = x_min;
+    txt_object->y_min = y_min;
+
+    txt_object->fore_color = C_BLACK;
+    txt_object->back_color = C_YELLOW;
+
+    txt_object->font = (UG_FONT*) &FONT_8X12;     
+}
+
 // -------------- Private function implementations -------------

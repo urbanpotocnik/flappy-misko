@@ -26,6 +26,10 @@ typedef enum INTRO_states {
 	INTRO_INIT, 
     INTRO_PRESS_ANY_KEY, 
 	INTRO_MAIN_MENU,
+	INTRO_START_GAME,
+	INTRO_CHOOSE_THEME,
+	INTRO_HIGH_SCORES,
+	INTRO_PLAY_WITH,
     INTRO_WAIT_FOR_ANY_KEY, 
     INTRO_NUM_OF_STATES
 } INTRO_states_t;
@@ -285,11 +289,19 @@ uint8_t Intro() {
         }
 
         key = KBD_get_pressed_key();
-        if (key == BTN_UP && selected_menu_item > 0) {
-            selected_menu_item--;
+        if (key == BTN_UP) {
+            if (selected_menu_item == 0) {
+                selected_menu_item = MENU_ITEMS_COUNT - 1;
+            } else {
+                selected_menu_item--;
+            }
         }
-        else if (key == BTN_DOWN && selected_menu_item < 3) {
-            selected_menu_item++;
+        else if (key == BTN_DOWN) {
+            if (selected_menu_item == MENU_ITEMS_COUNT - 1) {
+                selected_menu_item = 0;
+            } else {
+                selected_menu_item++;
+            }
         }
         else if (key == BTN_OK) {
             switch(selected_menu_item) {
@@ -299,11 +311,49 @@ uint8_t Intro() {
                     exit_value = 1;
                     break;
                 case 1: // Choose Theme
-                    
+	
+
                     break;
+
                 case 2: // High Scores
-                    
-                    break;
+				// WIP: fix the high scores logic
+				// TO DO: naredi da se high scori ne ponavljajo
+				GFX_draw_gfx_object(&background);
+				OBJ_init_high_score_sprite_large(30, 30);
+				GFX_draw_one_gfx_object_on_background(&high_score_sprite_large, &background);
+				
+				uint16_t* high_scores = Get_High_Scores();
+				char score_text[20];
+
+				OBJ_init_text_big(67, 40, "HIGH SCORES:", &high_scores_menu_text);
+				
+				OBJ_init_text_big(50, 75, "1.", &high_score1_text);
+				sprintf(score_text, "%d", high_scores[0]);  
+				OBJ_init_text_big(95, 75, score_text, &high_score1_text_value);
+				
+				OBJ_init_text_big(50, 110, "2.", &high_score2_text);
+				sprintf(score_text, "%d", high_scores[1]);  
+				OBJ_init_text_big(95, 110, score_text, &high_score2_text_value);
+				
+				OBJ_init_text_big(50, 145, "3.", &high_score3_text);
+				sprintf(score_text, "%d", high_scores[2]); 
+				OBJ_init_text_big(95, 145, score_text, &high_score3_text_value);
+				
+				OBJ_init_text_tiny(50, 185, "PRESS ANY KEY TO GO BACK", &press_to_go_back_text);
+
+				GFX_display_text_object(&high_scores_menu_text);
+				GFX_display_text_object(&high_score1_text);
+				GFX_display_text_object(&high_score1_text_value);
+				GFX_display_text_object(&high_score2_text);
+				GFX_display_text_object(&high_score2_text_value);
+				GFX_display_text_object(&high_score3_text);
+				GFX_display_text_object(&high_score3_text_value);
+				GFX_display_text_object(&press_to_go_back_text);
+
+				state = INTRO_HIGH_SCORES;
+				menu_initialized = 0;
+				break;
+
                 case 3: // Play With
                     
                     break;
@@ -311,6 +361,32 @@ uint8_t Intro() {
         }
         break;
     }
+
+	case INTRO_START_GAME:
+		//state = INTRO_WAIT_FOR_ANY_KEY;
+		//exit_value = 0;
+		break;
+
+	case INTRO_CHOOSE_THEME:
+		//state = INTRO_WAIT_FOR_ANY_KEY;
+		//exit_value = 0;
+		break;
+
+	case INTRO_HIGH_SCORES:
+    key = KBD_get_pressed_key();
+    if (key != BTN_NONE) {
+        state = INTRO_MAIN_MENU;
+        GFX_draw_gfx_object(&background);  // Clear screen for main menu
+    }
+    break;
+
+	case INTRO_PLAY_WITH:
+		//state = INTRO_WAIT_FOR_ANY_KEY;
+		//exit_value = 0;
+		break;	
+
+
+	// POCLEARAJ IN POBRISI VSE PREDEN GRES V IGRALNI DEL
 
 	case INTRO_PRESS_ANY_KEY:
 		GFX_clear_gfx_object_on_background(&misko, &background);
@@ -590,8 +666,6 @@ uint8_t GameOver() {
 		GFX_clear_obstacle_pair_on_background(&obstacle_pair2, &background);
 		GFX_clear_obstacle_pair_on_background(&obstacle_pair3, &background);
 		GFX_clear_gfx_object_on_background(&misko, &background);
-		GFX_clear_gfx_object_on_background(&game_over_sprite, &background);
-
 
 		/*
 		int a = 0x01;
