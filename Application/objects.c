@@ -77,6 +77,11 @@ graphic_object_t 	high_score_sprite_large;
 graphic_object_t	big_sprite;
 graphic_object_t 	dark_theme_sprite;
 graphic_object_t 	light_theme_sprite;
+graphic_object_t    press_any_key_sprite;
+graphic_object_t 	play_with_sprite;
+graphic_object_t 	buttons_sprite;
+graphic_object_t 	touchscreen_sprite;
+
 
 // ------- Compound objects -------
 
@@ -107,8 +112,10 @@ text_object_t	high_score2_text_value;
 text_object_t	high_score3_text_value;
 text_object_t	dark_theme_text;
 text_object_t	light_theme_text;
-
-
+text_object_t	press_any_key_text;
+text_object_t	play_with_text;
+text_object_t	buttons_text;
+text_object_t	touchscreen_text;
 
 // ------------- Public function implementations --------------
 

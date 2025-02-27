@@ -121,9 +121,17 @@ extern graphic_object_t	high_scores_sprite;
 extern graphic_object_t	finger_or_button_sprite;
 extern graphic_object_t	loading_sprite;
 extern graphic_object_t high_score_sprite_large;
-extern graphic_object_t 	dark_theme_sprite;
-extern graphic_object_t 	light_theme_sprite;
+extern graphic_object_t dark_theme_sprite;
+extern graphic_object_t light_theme_sprite;
+extern graphic_object_t press_any_key_sprite;
+extern graphic_object_t play_with_sprite;
+extern graphic_object_t buttons_sprite;
+extern graphic_object_t touchscreen_sprite;
 
+extern text_object_t	press_any_key_text;
+extern text_object_t	play_with_text;
+extern text_object_t	buttons_text;
+extern text_object_t	touchscreen_text;
 extern text_object_t	score_box_title;
 extern text_object_t	score_text;
 extern text_object_t	choose_theme_text;
@@ -132,7 +140,6 @@ extern text_object_t	touch_or_button_text;
 extern text_object_t 	flappy_misko_text;
 extern text_object_t 	loading_text;
 extern text_object_t	text_selector;
-
 extern text_object_t 	start_game_text;
 
 extern text_object_t	high_scores_menu_text;

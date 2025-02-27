@@ -153,23 +153,19 @@ uint8_t Intro() {
 		GFX_display_text_object(&flappy_misko_text);
 
 		while (1) {
-			if (TIMUT_stopwatch_has_X_ms_passed(&update_stopwatch_intro_exit,
-					4000)) {
+			if (TIMUT_stopwatch_has_X_ms_passed(&update_stopwatch_intro_exit, 4000)) {
 				break;
 			}
 
-			if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_intro,
-					7)) {
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_intro, 7)) {
 				GFX_update_moving_gfx_object_location(&misko);
 				GFX_draw_one_gfx_object_on_background(&misko, &background);
 			}
 
-			if (TIMUT_stopwatch_has_another_X_ms_passed(&loading_text_stopwatch,
-					100)) {
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&loading_text_stopwatch, 100)) {
 				switch (loading_state) {
 				case 0:
-					GFX_draw_one_gfx_object_on_background(&loading_sprite,
-							&background);
+					GFX_draw_one_gfx_object_on_background(&loading_sprite, &background);
 					OBJ_init_loading_text(96, 196, "LOADING");
 					GFX_display_text_object(&loading_text);
 					break;
@@ -235,14 +231,10 @@ uint8_t Intro() {
 			OBJ_init_small_sprite_object(&high_scores_sprite, 50, 150);
 			OBJ_init_small_sprite_object(&finger_or_button_sprite, 50, 190);
 
-			GFX_draw_one_gfx_object_on_background(&start_game_sprite,
-					&background);
-			GFX_draw_one_gfx_object_on_background(&choose_theme_sprite,
-					&background);
-			GFX_draw_one_gfx_object_on_background(&high_scores_sprite,
-					&background);
-			GFX_draw_one_gfx_object_on_background(&finger_or_button_sprite,
-					&background);
+			GFX_draw_one_gfx_object_on_background(&start_game_sprite, &background);
+			GFX_draw_one_gfx_object_on_background(&choose_theme_sprite,&background);
+			GFX_draw_one_gfx_object_on_background(&high_scores_sprite, &background);
+			GFX_draw_one_gfx_object_on_background(&finger_or_button_sprite, &background);
 
 			OBJ_init_text_small(60, 80, "START GAME", &start_game_text);
 			OBJ_init_text_small(60, 120, "CHOOSE THEME", &choose_theme_text);
@@ -258,14 +250,10 @@ uint8_t Intro() {
 		}
 
 		if (previous_selected_item != selected_menu_item) {
-			GFX_draw_one_gfx_object_on_background(&start_game_sprite,
-					&background);
-			GFX_draw_one_gfx_object_on_background(&choose_theme_sprite,
-					&background);
-			GFX_draw_one_gfx_object_on_background(&high_scores_sprite,
-					&background);
-			GFX_draw_one_gfx_object_on_background(&finger_or_button_sprite,
-					&background);
+			GFX_draw_one_gfx_object_on_background(&start_game_sprite, &background);
+			GFX_draw_one_gfx_object_on_background(&choose_theme_sprite, &background);
+			GFX_draw_one_gfx_object_on_background(&high_scores_sprite, &background);
+			GFX_draw_one_gfx_object_on_background(&finger_or_button_sprite, &background);
 
 			GFX_display_text_object(&start_game_text);
 			GFX_display_text_object(&choose_theme_text);
@@ -307,8 +295,8 @@ uint8_t Intro() {
 			switch (selected_menu_item) {
 			case 0: // Start Game
 				menu_initialized = 0;
-				state = INTRO_INIT;
-				exit_value = 1;
+				state = INTRO_PRESS_ANY_KEY;
+				exit_value = 0;  
 				break;
 			case 1: // Choose Theme
 				state = INTRO_CHOOSE_THEME;
@@ -353,12 +341,9 @@ uint8_t Intro() {
 			OBJ_init_small_sprite_object(&dark_theme_sprite, 50, 110);
 			OBJ_init_small_sprite_object(&light_theme_sprite, 50, 150);
 
-			GFX_draw_one_gfx_object_on_background(&choose_theme_sprite,
-					&background);
-			GFX_draw_one_gfx_object_on_background(&dark_theme_sprite,
-					&background);
-			GFX_draw_one_gfx_object_on_background(&light_theme_sprite,
-					&background);
+			GFX_draw_one_gfx_object_on_background(&choose_theme_sprite, &background);
+			GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
+			GFX_draw_one_gfx_object_on_background(&light_theme_sprite, &background);
 
 			OBJ_init_text_small(60, 80, "CHOOSE THEME:", &choose_theme_text);
 			OBJ_init_text_small(60, 120, "DARK", &dark_theme_text);
@@ -376,10 +361,8 @@ uint8_t Intro() {
 		}
 
 		if (previous_selected_theme != selected_theme) {
-			GFX_draw_one_gfx_object_on_background(&dark_theme_sprite,
-					&background);
-			GFX_draw_one_gfx_object_on_background(&light_theme_sprite,
-					&background);
+			GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
+			GFX_draw_one_gfx_object_on_background(&light_theme_sprite, &background);
 
 			GFX_display_text_object(&dark_theme_text);
 			GFX_display_text_object(&light_theme_text);
@@ -403,9 +386,9 @@ uint8_t Intro() {
 
 			if (key == BTN_OK) {
 				if (selected_theme == 0) {
-
+                    // Apply dark theme                                 
 				} else {
-
+                    // Apply light theme
 				}
 			}
 			theme_menu_initialized = 0;
@@ -448,8 +431,7 @@ uint8_t Intro() {
 			GFX_display_text_object(&high_score3_text);
 			GFX_display_text_object(&high_score3_text_value);
 
-			OBJ_init_text_tiny(50, 185, "PRESS ANY KEY TO GO BACK",
-					&press_to_go_back_text);
+			OBJ_init_text_tiny(50, 185, "PRESS ANY KEY TO GO BACK", &press_to_go_back_text);
 			GFX_display_text_object(&press_to_go_back_text);
 
 			high_scores_initialized = 1;
@@ -477,16 +459,13 @@ uint8_t Intro() {
 			GFX_set_gfx_object_location(&misko, 240, 22);
 			GFX_draw_one_gfx_object_on_background(&misko, &background);
 
-			OBJ_init_small_sprite_object(&choose_theme_sprite, 50, 70);
-			OBJ_init_small_sprite_object(&dark_theme_sprite, 50, 110);
-			OBJ_init_small_sprite_object(&light_theme_sprite, 50, 150);
+			OBJ_init_small_sprite_object(&play_with_sprite, 50, 70);
+			OBJ_init_small_sprite_object(&buttons_sprite, 50, 110);
+			OBJ_init_small_sprite_object(&touchscreen_sprite, 50, 150);
 
-			GFX_draw_one_gfx_object_on_background(&choose_theme_sprite,
-					&background);
-			GFX_draw_one_gfx_object_on_background(&dark_theme_sprite,
-					&background);
-			GFX_draw_one_gfx_object_on_background(&light_theme_sprite,
-					&background);
+			GFX_draw_one_gfx_object_on_background(&play_with_sprite, &background);
+			GFX_draw_one_gfx_object_on_background(&buttons_sprite, &background);
+			GFX_draw_one_gfx_object_on_background(&touchscreen_sprite, &background);
 
 			OBJ_init_text_small(60, 80, "PLAY WITH:", &choose_theme_text);
 			OBJ_init_text_small(60, 120, "BUTTONS", &dark_theme_text);
@@ -504,10 +483,8 @@ uint8_t Intro() {
 		}
 
 		if (previous_selected_play_style != selected_play_style) {
-			GFX_draw_one_gfx_object_on_background(&dark_theme_sprite,
-					&background);
-			GFX_draw_one_gfx_object_on_background(&light_theme_sprite,
-					&background);
+			GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
+			GFX_draw_one_gfx_object_on_background(&light_theme_sprite, &background);
 
 			GFX_display_text_object(&dark_theme_text);
 			GFX_display_text_object(&light_theme_text);
@@ -545,14 +522,16 @@ uint8_t Intro() {
 		break;
 	}
 
-		// POCLEARAJ IN POBRISI VSE PREDEN GRES V IGRALNI DEL
-		// pobrisi neuporabljene slike
-
 	case INTRO_PRESS_ANY_KEY:
-		GFX_clear_gfx_object_on_background(&misko, &background);
+        GFX_draw_gfx_object(&background);
+        GFX_clear_gfx_object_on_background(&misko, &background);
 		GFX_clear_gfx_object_on_background(&big_sprite, &background);
 
-		GFX_draw_one_gfx_object_on_background(&press_ok_sprite, &background);
+        OBJ_init_small_sprite_object(&press_any_key_sprite, 50, 180);
+		GFX_draw_one_gfx_object_on_background(&press_any_key_sprite, &background);
+		
+		OBJ_init_text_tiny(61, 190, "PRESS ANY KEY TO START", &press_any_key_text);
+        GFX_display_text_object(&press_any_key_text);
 		state = INTRO_WAIT_FOR_ANY_KEY;
 		exit_value = 0;
 		break;
@@ -561,6 +540,7 @@ uint8_t Intro() {
 		key = KBD_get_pressed_key();
 		if (key != BTN_NONE) {
 			state = INTRO_INIT;
+            GFX_draw_gfx_object(&background);
 			exit_value = 1;
 		}
 		break;
