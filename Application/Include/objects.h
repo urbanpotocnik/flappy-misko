@@ -121,6 +121,8 @@ extern graphic_object_t	high_scores_sprite;
 extern graphic_object_t	finger_or_button_sprite;
 extern graphic_object_t	loading_sprite;
 extern graphic_object_t high_score_sprite_large;
+extern graphic_object_t 	dark_theme_sprite;
+extern graphic_object_t 	light_theme_sprite;
 
 extern text_object_t	score_box_title;
 extern text_object_t	score_text;
@@ -141,7 +143,8 @@ extern text_object_t	press_to_go_back_text;
 extern text_object_t	high_score1_text_value;
 extern text_object_t	high_score2_text_value;
 extern text_object_t	high_score3_text_value;
-
+extern text_object_t	dark_theme_text;
+extern text_object_t	light_theme_text;
 
 
 
