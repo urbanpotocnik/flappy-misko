@@ -116,6 +116,11 @@ text_object_t	press_any_key_text;
 text_object_t	play_with_text;
 text_object_t	buttons_text;
 text_object_t	touchscreen_text;
+text_object_t	high_score_menu_text;
+text_object_t	your_hs_text;
+text_object_t	biggest_hs_text;
+text_object_t	your_hs_value_text;
+
 
 // ------------- Public function implementations --------------
 

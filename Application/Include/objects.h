@@ -152,7 +152,11 @@ extern text_object_t	high_score2_text_value;
 extern text_object_t	high_score3_text_value;
 extern text_object_t	dark_theme_text;
 extern text_object_t	light_theme_text;
-
+extern text_object_t	high_score_menu_text;
+extern text_object_t	your_hs_text;
+extern text_object_t	biggest_hs_text;
+extern text_object_t	your_hs_value_text;
+extern text_object_t	biggest_hs_value_text;
 
 
 // ---------------- Public function prototypes ----------------

@@ -87,6 +87,7 @@ uint8_t play_style_menu_initialized = 0;
 int selected_play_style = 0;
 int previous_selected_play_style = -1;
 
+
 // ------------- Public function implementations --------------
 void Game() {
 	static GAME_states_t state = GAME_INTRO_STATE;
@@ -804,10 +805,9 @@ uint8_t GameOver() {
 
 	switch (state) {
 	case GAMEOVER_SCREEN:
-		GFX_draw_one_gfx_object_on_background(&game_over_sprite, &background);
+		//GFX_draw_one_gfx_object_on_background(&game_over_sprite, &background);
 		KBD_flush();
-		HAL_Delay(2000);
-		game_status.score = 0;
+		HAL_Delay(300);
 		exit_value = 1;
 		//state = GAMEPLAY_JUMP;
 
@@ -830,6 +830,43 @@ uint8_t GameOver() {
 		GFX_clear_obstacle_pair_on_background(&obstacle_pair2, &background);
 		GFX_clear_obstacle_pair_on_background(&obstacle_pair3, &background);
 		GFX_clear_gfx_object_on_background(&misko, &background);
+
+		// resetiraj pozicijo miska
+		// dodaj logiko za knofe
+		// dodaj blicanje luck
+		// porini text bolj dol
+		// spodaj dodaj text in logiko za iti v menu ali pa restart
+
+
+
+		GFX_draw_gfx_object(&background);
+		OBJ_init_high_score_sprite_large(30, 30);
+		GFX_draw_one_gfx_object_on_background(&high_score_sprite_large,&background);
+
+		uint16_t *high_scores_2 = Get_High_Scores();
+		char score_text_2[20];
+
+		OBJ_init_text_big(67, 40, "GAME OVER!", &high_score_menu_text);
+		GFX_display_text_object(&high_score_menu_text);
+
+		OBJ_init_text_small(50, 75, "YOUR SCORE:", &your_hs_text);
+		GFX_display_text_object(&your_hs_text);
+		sprintf(score_text_2, "%d", game_status.score);
+		OBJ_init_text_small(195, 75, score_text_2, &your_hs_value_text);
+		GFX_display_text_object(&your_hs_value_text);
+
+		OBJ_init_text_small(50, 110, "HIGHEST SCORE:", &biggest_hs_text); 
+		GFX_display_text_object(&biggest_hs_text);
+		sprintf(score_text_2, "%d", high_scores_2[0]);
+		OBJ_init_text_small(233, 110, score_text_2, &high_score1_text_value);
+		GFX_display_text_object(&high_score1_text_value);
+
+		OBJ_init_text_tiny(50, 185, "PRESS ANY KEY TO GO BACK", &press_to_go_back_text);
+		GFX_display_text_object(&press_to_go_back_text);
+
+		game_status.score = 0;
+
+		HAL_Delay(20000);
 
 		/*
 		 int a = 0x01;
