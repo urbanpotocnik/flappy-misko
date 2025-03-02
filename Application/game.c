@@ -87,46 +87,55 @@ uint8_t play_style_menu_initialized = 0;
 int selected_play_style = 0;
 int previous_selected_play_style = -1;
 
+static INTRO_states_t intro_state = INTRO_INIT;
 
 // ------------- Public function implementations --------------
 void Game() {
-	static GAME_states_t state = GAME_INTRO_STATE;
-	uint8_t exit_value = 0;
+    static GAME_states_t state = GAME_INTRO_STATE;
+    uint8_t exit_value = 0;
 
-	switch (state) {
-	case GAME_INTRO_STATE:
-		exit_value = Intro();
-		if (exit_value != 0)
-			state = GAME_PLAY_STATE;
-		break;
+    switch (state) {
+    case GAME_INTRO_STATE:
+        exit_value = Intro();
+        if (exit_value != 0) {
+            state = GAME_PLAY_STATE;
+        }
+        break;
 
-	case GAME_PLAY_STATE:
-		exit_value = GamePlay();
-		if (exit_value != 0)
-			state = GAME_OVER_STATE;
-		break;
+    case GAME_PLAY_STATE:
+        exit_value = GamePlay();
+        if (exit_value != 0) {
+            state = GAME_OVER_STATE;
+        }
+        break;
 
-	case GAME_OVER_STATE:
-		exit_value = GameOver();
-		if (exit_value != 0)
-			state = GAME_INTRO_STATE;
-		break;
+    case GAME_OVER_STATE:
+        exit_value = GameOver();
+        if (exit_value == 1) {  
+            state = GAME_INTRO_STATE;
+            intro_state = INTRO_MAIN_MENU;  
+            menu_initialized = 0;  
+            previous_selected_item = -1;
+        }
+        else if (exit_value == 2) {  
+            state = GAME_INTRO_STATE;
+            intro_state = INTRO_PRESS_ANY_KEY;  
+        }
+        break;
 
-	default:
-		printf("Game(): Error - undefined state (%d)", state);
-		HAL_Delay(5000);
-		state = GAME_INTRO_STATE;
-		exit_value = 0;
-		break;
-	}
+    default:
+        printf("Game(): Error - undefined state (%d)", state);
+        HAL_Delay(5000);
+        state = GAME_INTRO_STATE;
+        break;
+    }
 }
 
 uint8_t Intro() {
-	static INTRO_states_t state = INTRO_INIT;
 	uint8_t exit_value = 0;
 	int a = 0x01;
 
-	switch (state) {
+	switch (intro_state) {
 	case INTRO_INIT:
 		OBJ_init();
 		OBJ_init_big_sprite(20, 20);
@@ -212,20 +221,21 @@ uint8_t Intro() {
 		GFX_clear_gfx_object_on_background(&misko, &background);
 		GFX_clear_gfx_object_on_background(&big_sprite, &background);
 		KBD_flush();
-		state = INTRO_MAIN_MENU;
+		intro_state = INTRO_MAIN_MENU;
 		exit_value = 0;
 		break;
 
 	case INTRO_MAIN_MENU: {
 
 		if (!menu_initialized) {
+			GFX_draw_gfx_object(&background);
 			OBJ_init_big_sprite(20, 10);
 			GFX_draw_one_gfx_object_on_background(&big_sprite, &background);
 			OBJ_init_flappy_misko_text(30, 22);
 			GFX_display_text_object(&flappy_misko_text);
 
-			GFX_set_gfx_object_location(&misko, 240, 22);
-			GFX_draw_one_gfx_object_on_background(&misko, &background);
+			GFX_set_gfx_object_location(&misko2, 240, 22);
+			GFX_draw_one_gfx_object_on_background(&misko2, &background);
 
 			OBJ_init_small_sprite_object(&start_game_sprite, 50, 70);
 			OBJ_init_small_sprite_object(&choose_theme_sprite, 50, 110);
@@ -296,21 +306,21 @@ uint8_t Intro() {
 			switch (selected_menu_item) {
 			case 0: // Start Game
 				menu_initialized = 0;
-				state = INTRO_PRESS_ANY_KEY;
+				intro_state = INTRO_PRESS_ANY_KEY;
 				exit_value = 0;  
 				break;
 			case 1: // Choose Theme
-				state = INTRO_CHOOSE_THEME;
+				intro_state = INTRO_CHOOSE_THEME;
 				menu_initialized = 0;
 				break;
 
 			case 2: // High Scores
-				state = INTRO_HIGH_SCORES;
+				intro_state = INTRO_HIGH_SCORES;
 				menu_initialized = 0;
 				break;
 
 			case 3: // Play With
-				state = INTRO_PLAY_WITH;
+				intro_state = INTRO_PLAY_WITH;
 				menu_initialized = 0;
 				break;
 			}
@@ -393,7 +403,7 @@ uint8_t Intro() {
 				}
 			}
 			theme_menu_initialized = 0;
-			state = INTRO_MAIN_MENU;
+			intro_state = INTRO_MAIN_MENU;
 			menu_initialized = 0;
 			previous_selected_item = -1;
 		}
@@ -440,7 +450,7 @@ uint8_t Intro() {
 
 		key = KBD_get_pressed_key();
 		if (key != BTN_NONE) {
-			state = INTRO_MAIN_MENU;
+			intro_state = INTRO_MAIN_MENU;
 			high_scores_initialized = 0;
 			menu_initialized = 0;
 			previous_selected_item = -1;
@@ -516,7 +526,7 @@ uint8_t Intro() {
 				}
 			}
 			play_style_menu_initialized = 0;
-			state = INTRO_MAIN_MENU;
+			intro_state = INTRO_MAIN_MENU;
 			menu_initialized = 0;
 			previous_selected_item = -1;
 		}
@@ -533,23 +543,23 @@ uint8_t Intro() {
 		
 		OBJ_init_text_tiny(61, 190, "PRESS ANY KEY TO START", &press_any_key_text);
         GFX_display_text_object(&press_any_key_text);
-		state = INTRO_WAIT_FOR_ANY_KEY;
+		intro_state = INTRO_WAIT_FOR_ANY_KEY;
 		exit_value = 0;
 		break;
 
 	case INTRO_WAIT_FOR_ANY_KEY:
 		key = KBD_get_pressed_key();
 		if (key != BTN_NONE) {
-			state = INTRO_INIT;
+			intro_state = INTRO_INIT;
             GFX_draw_gfx_object(&background);
 			exit_value = 1;
 		}
 		break;
 
 	default:
-		printf("Intro(): Error - unknown state (%d)", state);
+		printf("Intro(): Error - unknown state (%d)", intro_state);
 		HAL_Delay(5000);
-		state = INTRO_INIT;
+		intro_state = INTRO_INIT;
 		exit_value = 0;
 		break;
 	}
@@ -598,16 +608,33 @@ uint8_t GamePlay() {
 
 	switch (gameplay_state) {
 	case GAMEPLAY_INIT:
-		OBJ_init();
-		OBJ_set_score_text_value(game_status.score);
-		GFX_display_text_object(&score_box_title);
-		GFX_display_text_object(&score_text);
-		GFX_draw_one_gfx_object_on_background(&misko, &background);
-		GFX_set_gfx_object_velocity(&misko, 0, 0);
-		gameplay_state = GAMEPLAY_JUMP;
-		exit_value = 0;
-		game_status.score = 0;
-		break;
+    OBJ_init();
+    game_status.score = 0;
+    OBJ_set_score_text_value(game_status.score);
+    GFX_display_text_object(&score_box_title);
+    GFX_display_text_object(&score_text);
+    
+    moving_obstacles = 0;
+    time_mark = 0;
+    obstacle_number = 0;
+    obstacle_pair1_spawned = 0;
+    obstacle_pair2_spawned = 0;
+    obstacle_pair3_spawned = 0;
+    obstacle_pair1_cleaned = 0;
+    obstacle_pair2_cleaned = 0;
+    obstacle_pair3_cleaned = 0;
+    obstacle_pair1_scored = 0;
+    obstacle_pair2_scored = 0;
+    obstacle_pair3_scored = 0;
+    
+    GFX_clear_gfx_object_on_background(&misko, &background);
+    GFX_set_gfx_object_location(&misko, 80, 120);  
+    GFX_set_gfx_object_velocity(&misko, 0, 0);
+    GFX_draw_one_gfx_object_on_background(&misko, &background);
+    
+    gameplay_state = GAMEPLAY_JUMP;
+    exit_value = 0;
+    break;
 
 	case GAMEPLAY_JUMP:
 		KBD_flush();
@@ -673,10 +700,6 @@ uint8_t GamePlay() {
 					//printf("Obstacle 3 spawned\n");
 				}
 			}
-
-			// TO DO:
-			// Dodaj razne koordinate in tako v define
-			// Naredi vse skup mogoce bolj modularno
 
 			GamePlay_UpdateChanges();
 
@@ -800,111 +823,85 @@ uint8_t GamePlay() {
 }
 
 uint8_t GameOver() {
-	static GAMEOVER_states_t state = GAMEOVER_SCREEN;
-	uint8_t exit_value = 0;
+    static GAMEOVER_states_t state = GAMEOVER_SCREEN;
+    uint8_t exit_value = 0;
 
-	switch (state) {
-	case GAMEOVER_SCREEN:
-		//GFX_draw_one_gfx_object_on_background(&game_over_sprite, &background);
-		KBD_flush();
-		HAL_Delay(300);
-		exit_value = 1;
-		//state = GAMEPLAY_JUMP;
+    switch (state) {
+    case GAMEOVER_SCREEN:
+        KBD_flush();
+        HAL_Delay(300);
 
-		obstacle_pair1_spawned = 0;
-		obstacle_pair2_spawned = 0;
-		obstacle_pair3_spawned = 0;
-		obstacle_pair1_cleaned = 0;
-		obstacle_pair2_cleaned = 0;
-		obstacle_pair3_cleaned = 0;
+        obstacle_pair1_spawned = 0;
+        obstacle_pair2_spawned = 0;
+        obstacle_pair3_spawned = 0;
+        obstacle_pair1_cleaned = 0;
+        obstacle_pair2_cleaned = 0;
+        obstacle_pair3_cleaned = 0;
 
-		obstacle_pair1_scored = 0;
-		obstacle_pair2_scored = 0;
-		obstacle_pair3_scored = 0;
+        obstacle_pair1_scored = 0;
+        obstacle_pair2_scored = 0;
+        obstacle_pair3_scored = 0;
 
-		moving_obstacles = 0;
-		time_mark = 0;
-		obstacle_number = 0;
+        moving_obstacles = 0;
+        time_mark = 0;
+        obstacle_number = 0;
 
-		GFX_clear_obstacle_pair_on_background(&obstacle_pair1, &background);
-		GFX_clear_obstacle_pair_on_background(&obstacle_pair2, &background);
-		GFX_clear_obstacle_pair_on_background(&obstacle_pair3, &background);
-		GFX_clear_gfx_object_on_background(&misko, &background);
+        GFX_clear_obstacle_pair_on_background(&obstacle_pair1, &background);
+        GFX_clear_obstacle_pair_on_background(&obstacle_pair2, &background);
+        GFX_clear_obstacle_pair_on_background(&obstacle_pair3, &background);
+        GFX_clear_gfx_object_on_background(&misko, &background);
 
-		// resetiraj pozicijo miska
-		// dodaj logiko za knofe
-		// dodaj blicanje luck
-		// porini text bolj dol
-		// spodaj dodaj text in logiko za iti v menu ali pa restart
+        GFX_draw_gfx_object(&background);
+        OBJ_init_high_score_sprite_large(30, 30);
+        GFX_draw_one_gfx_object_on_background(&high_score_sprite_large,&background);
 
+        uint16_t *high_scores_2 = Get_High_Scores();
+        char score_text_2[20];
 
+        OBJ_init_text_big(75, 40, "GAME OVER!", &high_score_menu_text);
+        GFX_display_text_object(&high_score_menu_text);
 
-		GFX_draw_gfx_object(&background);
-		OBJ_init_high_score_sprite_large(30, 30);
-		GFX_draw_one_gfx_object_on_background(&high_score_sprite_large,&background);
+        OBJ_init_text_small(50, 85, "YOUR SCORE:", &your_hs_text);
+        GFX_display_text_object(&your_hs_text);
+        sprintf(score_text_2, "%d", game_status.score);
+        OBJ_init_text_small(195, 85, score_text_2, &your_hs_value_text);
+        GFX_display_text_object(&your_hs_value_text);
 
-		uint16_t *high_scores_2 = Get_High_Scores();
-		char score_text_2[20];
+        OBJ_init_text_small(50, 115, "HIGHEST SCORE:", &biggest_hs_text); 
+        GFX_display_text_object(&biggest_hs_text);
+        sprintf(score_text_2, "%d", high_scores_2[0]);
+        OBJ_init_text_small(233, 115, score_text_2, &high_score1_text_value);
+        GFX_display_text_object(&high_score1_text_value);
 
-		OBJ_init_text_big(67, 40, "GAME OVER!", &high_score_menu_text);
-		GFX_display_text_object(&high_score_menu_text);
+        OBJ_init_text_tiny(43, 170, "PRESS OK TO RESTART OR ESC", &press_to_go_back_text);
+        GFX_display_text_object(&press_to_go_back_text);
+        OBJ_init_text_tiny(43, 185, "TO GO BACK TO THE MAIN MENU", &press_to_go_back_text2);
+        GFX_display_text_object(&press_to_go_back_text2);
 
-		OBJ_init_text_small(50, 75, "YOUR SCORE:", &your_hs_text);
-		GFX_display_text_object(&your_hs_text);
-		sprintf(score_text_2, "%d", game_status.score);
-		OBJ_init_text_small(195, 75, score_text_2, &your_hs_value_text);
-		GFX_display_text_object(&your_hs_value_text);
+        game_status.score = 0;
 
-		OBJ_init_text_small(50, 110, "HIGHEST SCORE:", &biggest_hs_text); 
-		GFX_display_text_object(&biggest_hs_text);
-		sprintf(score_text_2, "%d", high_scores_2[0]);
-		OBJ_init_text_small(233, 110, score_text_2, &high_score1_text_value);
-		GFX_display_text_object(&high_score1_text_value);
+        state = GAMEOVER_WAIT_FOR_ANY_KEY;
+        exit_value = 0;
+        break;
 
-		OBJ_init_text_tiny(50, 185, "PRESS ANY KEY TO GO BACK", &press_to_go_back_text);
-		GFX_display_text_object(&press_to_go_back_text);
+    case GAMEOVER_WAIT_FOR_ANY_KEY:
+        key = KBD_get_pressed_key();
+        if (key == BTN_OK || key == BTN_ESC) {
+            GFX_clear_gfx_object_on_background(&misko, &background);
+            GFX_set_gfx_object_location(&misko, 80, 120);  
+            GFX_set_gfx_object_velocity(&misko, 0, 0);
+			game_status.score = 0;
+            OBJ_set_score_text_value(game_status.score); 
+            GFX_display_text_object(&score_text);        
+            state = GAMEOVER_SCREEN;  
+            exit_value = (key == BTN_ESC) ? 1 : 2;  
+        }
+        break;
 
-		game_status.score = 0;
+    default:
+        state = GAMEOVER_SCREEN;
+        break;
+    }
 
-		HAL_Delay(20000);
-
-		/*
-		 int a = 0x01;
-		 TIMUT_stopwatch_set_time_mark(&stopwatch_gameover);
-		 while (1) {
-		 LEDs_write(a);
-		 HAL_Delay(100);
-		 a = a << 1;
-		 if (a == 0x80) {
-		 a = 0x01;
-		 }
-		 if (TIMUT_get_stopwatch_elapsed_time(&stopwatch_gameover) > GAMEOVER_DELAY_BEFORE_KBD_ACTIVE) {
-		 LEDs_off(0xFF);
-		 break;
-		 }
-		 }
-		 */
-
-		//state = GAMEOVER_WAIT_FOR_ANY_KEY;
-		//exit_value = 0;
-		break;
-
-	case GAMEOVER_WAIT_FOR_ANY_KEY:
-		key = KBD_get_pressed_key();
-		if ((TIMUT_get_stopwatch_elapsed_time(&stopwatch_gameover) > 10000)
-				|| (key != BTN_NONE)) {
-			state = GAMEOVER_SCREEN;
-			exit_value = 1;
-		}
-		break;
-
-	default:
-		printf("GameOver(): Error - unknown state (%d)", state);
-		HAL_Delay(5000);
-		state = GAMEOVER_SCREEN;
-		exit_value = 0;
-		break;
-	}
-
-	return exit_value;
+    return exit_value;
 }

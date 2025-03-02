@@ -88,6 +88,7 @@ graphic_object_t 	touchscreen_sprite;
 graphic_object_t	misko;		// sestavljeni objekti aplikacije
 graphic_object_t 	obstacle_top;
 graphic_object_t 	obstacle_bottom;
+graphic_object_t	misko2;
 
 // ----- Text objects ------
 
@@ -107,6 +108,7 @@ text_object_t	high_score1_text;
 text_object_t	high_score2_text;
 text_object_t	high_score3_text;
 text_object_t	press_to_go_back_text;
+text_object_t	press_to_go_back_text2;
 text_object_t	high_score1_text_value;
 text_object_t	high_score2_text_value;
 text_object_t	high_score3_text_value;

@@ -1,10 +1,8 @@
 Za narest:
 - za dodat vibriranje
 - za dodat zvocnik
-- dodaj da poblenda ko umres
-- ko je konec igre da ti displaya high score, your score
 - RLE do konca
-- clean up kode 
+- clean up kode in formatiranje
 - 3d printed case
 - dodaj izbiro med touch in knofom
 - dodaj izbiro teme 

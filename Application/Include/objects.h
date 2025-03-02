@@ -106,6 +106,8 @@ extern canvas_t			canvas;
 
 extern graphic_object_t	intro_sprite;
 extern graphic_object_t	background;
+extern graphic_object_t	misko2;
+
 
 extern graphic_object_t	game_over_sprite;
 extern graphic_object_t press_ok_sprite;
@@ -157,6 +159,7 @@ extern text_object_t	your_hs_text;
 extern text_object_t	biggest_hs_text;
 extern text_object_t	your_hs_value_text;
 extern text_object_t	biggest_hs_value_text;
+extern text_object_t	press_to_go_back_text2;
 
 
 // ---------------- Public function prototypes ----------------
