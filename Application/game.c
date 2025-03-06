@@ -100,6 +100,7 @@ static bool press_enable = 1;
 static INTRO_states_t intro_state = INTRO_INIT;
 
 static stopwatch_handle_t touch_polling_stopwatch;
+static stopwatch_handle_t touch_debounce_stopwatch;
 static int touch_initialized = 0;
 
 // ------------- Public function implementations --------------
@@ -302,6 +303,54 @@ uint8_t Intro() {
 			previous_selected_item = selected_menu_item;
 		}
 
+		if (current_input_mode == INPUT_TOUCHSCREEN) {
+			if (!touch_init) {
+				TIMUT_stopwatch_set_time_mark(&touch_polling_stopwatch);
+				TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+				touch_init = 1;
+			}
+		
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 100)) {
+				XPT2046_touch_get_coordinates(&x1, &y1);
+				
+				if (press_enable == 1 && x1 >= 50 && x1 <= 230) {
+					if (y1 >= 70 && y1 <= 100) { 
+						selected_menu_item = MENU_START_GAME;
+						menu_initialized = 0;
+						intro_state = INTRO_PRESS_ANY_KEY;
+						exit_value = 0;
+						press_enable = 0;
+						TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+					}
+					else if (y1 >= 110 && y1 <= 140) { 
+						selected_menu_item = MENU_CHOOSE_THEME;
+						intro_state = INTRO_CHOOSE_THEME;
+						menu_initialized = 0;
+						press_enable = 0;
+						TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+					}
+					else if (y1 >= 150 && y1 <= 180) { 
+						selected_menu_item = MENU_HIGH_SCORES;
+						intro_state = INTRO_HIGH_SCORES;
+						menu_initialized = 0;
+						press_enable = 0;
+						TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+					}
+					else if (y1 >= 190 && y1 <= 220) { 
+						selected_menu_item = MENU_PLAY_WITH;
+						intro_state = INTRO_PLAY_WITH;
+						menu_initialized = 0;
+						press_enable = 0;
+						TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+					}
+				}
+			}
+		
+			if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 100)) {
+				press_enable = 1;
+			}
+		}
+
 		key = KBD_get_pressed_key();
 		if (key == BTN_UP) {
 			if (selected_menu_item == 0) {
@@ -403,6 +452,45 @@ uint8_t Intro() {
 			previous_selected_theme = selected_theme;
 		}
 
+		if (current_input_mode == INPUT_TOUCHSCREEN) {
+			if (!touch_init) {
+				TIMUT_stopwatch_set_time_mark(&touch_polling_stopwatch);
+				TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+				touch_init = 1;
+			}
+
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 100)) {
+				XPT2046_touch_get_coordinates(&x1, &y1);
+				
+				if (press_enable == 1 && x1 >= 50 && x1 <= 230) {
+					if (y1 >= 110 && y1 <= 140) { // DARK theme
+						selected_theme = 0;
+						//dark theme implementation
+						theme_menu_initialized = 0;
+						intro_state = INTRO_MAIN_MENU;
+						menu_initialized = 0;
+						previous_selected_item = -1;
+						press_enable = 0;
+						TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+					}
+					else if (y1 >= 150 && y1 <= 180) { // LIGHT theme
+						selected_theme = 1;
+						//light theme implementation
+						theme_menu_initialized = 0;
+						intro_state = INTRO_MAIN_MENU;
+						menu_initialized = 0;
+						previous_selected_item = -1;
+						press_enable = 0;
+						TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+					}
+				}
+			}
+
+			if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 100)) {
+				press_enable = 1;
+			}
+		}
+
 		key = KBD_get_pressed_key();
 		if (key == BTN_UP || key == BTN_DOWN) {
 			selected_theme = !selected_theme;
@@ -459,6 +547,32 @@ uint8_t Intro() {
 			GFX_display_text_object(&press_to_go_back_text);
 
 			high_scores_initialized = 1;
+		}
+
+		if (current_input_mode == INPUT_TOUCHSCREEN) {
+			if (!touch_init) {
+				TIMUT_stopwatch_set_time_mark(&touch_polling_stopwatch);
+				TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+				touch_init = 1;
+			}
+
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 100)) {
+				XPT2046_touch_get_coordinates(&x1, &y1);
+				
+				if (press_enable == 1 && y1 < 240) { 
+					intro_state = INTRO_MAIN_MENU;
+					high_scores_initialized = 0;
+					menu_initialized = 0;
+					previous_selected_item = -1;
+					GFX_draw_gfx_object(&background);
+					press_enable = 0;
+					TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+				}
+			}
+
+			if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 100)) {
+				press_enable = 1;
+			}
 		}
 
 		key = KBD_get_pressed_key();
@@ -520,6 +634,45 @@ uint8_t Intro() {
 			}
 			GFX_display_text_object(&text_selector);
 			previous_selected_play_style = selected_play_style;
+		}
+
+		if (current_input_mode == INPUT_TOUCHSCREEN) {
+			if (!touch_init) {
+				TIMUT_stopwatch_set_time_mark(&touch_polling_stopwatch);
+				TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+				touch_init = 1;
+			}
+
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 100)) {
+				XPT2046_touch_get_coordinates(&x1, &y1);
+				
+				if (press_enable == 1 && x1 >= 50 && x1 <= 230) {
+					if (y1 >= 110 && y1 <= 140) { 
+						selected_play_style = 0;
+						current_input_mode = INPUT_BUTTONS;
+						play_style_menu_initialized = 0;
+						intro_state = INTRO_MAIN_MENU;
+						menu_initialized = 0;
+						previous_selected_item = -1;
+						press_enable = 0;
+						TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+					}
+					else if (y1 >= 150 && y1 <= 180) { 
+						selected_play_style = 1;
+						current_input_mode = INPUT_TOUCHSCREEN;
+						play_style_menu_initialized = 0;
+						intro_state = INTRO_MAIN_MENU;
+						menu_initialized = 0;
+						previous_selected_item = -1;
+						press_enable = 0;
+						TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+					}
+				}
+			}
+
+			if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 100)) {
+				press_enable = 1;
+			}
 		}
 
 		key = KBD_get_pressed_key();
