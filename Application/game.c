@@ -62,6 +62,7 @@ stopwatch_handle_t stopwatch_jump;
 stopwatch_handle_t update_stopwatch_intro;
 stopwatch_handle_t update_stopwatch_intro_exit;
 stopwatch_handle_t stopwatch_obstacles;
+stopwatch_handle_t stopwatch_touchscreen;
 obstacle_positions_t obstacle_positions;
 obstacle_pair_t obstacle_pair1;
 obstacle_pair_t obstacle_pair2;
@@ -88,6 +89,9 @@ int selected_play_style = 0;
 int previous_selected_play_style = -1;
 
 static INTRO_states_t intro_state = INTRO_INIT;
+
+static stopwatch_handle_t touch_polling_stopwatch;
+static int touch_initialized = 0;
 
 // ------------- Public function implementations --------------
 void Game() {
@@ -626,6 +630,8 @@ uint8_t GamePlay() {
     obstacle_pair1_scored = 0;
     obstacle_pair2_scored = 0;
     obstacle_pair3_scored = 0;
+
+	bool press_enable = 1;
     
     GFX_clear_gfx_object_on_background(&misko, &background);
     GFX_set_gfx_object_location(&misko, 80, 120);  
@@ -640,9 +646,30 @@ uint8_t GamePlay() {
 		KBD_flush();
 		GFX_clear_gfx_object_on_background(&press_ok_sprite, &background);
 
+		if (!touch_initialized) {
+			TIMUT_stopwatch_set_time_mark(&touch_polling_stopwatch);
+			touch_initialized = 1;
+		}
+
 		while (1) {
 			KBD_scan();
 			pressed_button = KBD_get_pressed_key();
+
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 75)) {
+				int x, y; 
+				XPT2046_touch_get_coordinates(&x, &y);
+				
+				if (y < 240 && press_enable == 1) {
+					pressed_button = BTN_OK;
+					press_enable = 0;
+					TIMUT_stopwatch_set_time_mark(&stopwatch_touchscreen);
+					// printf("Touchscreen pressed\n");
+				}
+			}
+
+			if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_touchscreen, 200)) {
+				press_enable = 1;
+			}
 
 			if (pressed_button == BTN_OK) {
 				if (moving_obstacles == 0) {
