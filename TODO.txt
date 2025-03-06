@@ -7,6 +7,8 @@ Za narest:
 - dodaj izbiro med touch in knofom
 - dodaj izbiro teme 
 - zrihtaj da se prvi obstacle pojavi hitreje
+- popuci warninge
+- stestiraj vse
 
 
 IDEJE:

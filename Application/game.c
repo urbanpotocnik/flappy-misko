@@ -47,6 +47,12 @@ typedef enum MENU_ITEMS {
 	MENU_ITEMS_COUNT
 } MENU_ITEMS_t;
 
+typedef enum INPUT_MODE {
+    INPUT_BUTTONS,
+    INPUT_TOUCHSCREEN
+} INPUT_MODE_t;
+
+static INPUT_MODE_t current_input_mode = INPUT_BUTTONS;
 static MENU_ITEMS_t selected_menu_item = MENU_START_GAME;
 
 stopwatch_handle_t stopwatch;
@@ -87,6 +93,8 @@ int previous_selected_item = -1;
 uint8_t play_style_menu_initialized = 0;
 int selected_play_style = 0;
 int previous_selected_play_style = -1;
+static bool touch_init = 0;
+static bool press_enable = 1;
 
 static INTRO_states_t intro_state = INTRO_INIT;
 
@@ -522,11 +530,9 @@ uint8_t Intro() {
 		} else if (key == BTN_OK || key == BTN_ESC) {
 			if (key == BTN_OK) {
 				if (selected_play_style == 0) {
-					// Apply button input
-					//game_status.input_mode = INPUT_BUTTON;
+					current_input_mode = INPUT_BUTTONS;
 				} else {
-					// Apply screen input
-					//game_status.input_mode = INPUT_SCREEN;
+					current_input_mode = INPUT_TOUCHSCREEN;
 				}
 			}
 			play_style_menu_initialized = 0;
@@ -538,27 +544,61 @@ uint8_t Intro() {
 	}
 
 	case INTRO_PRESS_ANY_KEY:
-        GFX_draw_gfx_object(&background);
-        GFX_clear_gfx_object_on_background(&misko, &background);
+		GFX_draw_gfx_object(&background);
+		GFX_clear_gfx_object_on_background(&misko, &background);
 		GFX_clear_gfx_object_on_background(&big_sprite, &background);
 
-        OBJ_init_small_sprite_object(&press_any_key_sprite, 50, 180);
+		OBJ_init_small_sprite_object(&press_any_key_sprite, 50, 180);
 		GFX_draw_one_gfx_object_on_background(&press_any_key_sprite, &background);
 		
 		OBJ_init_text_tiny(61, 190, "PRESS ANY KEY TO START", &press_any_key_text);
-        GFX_display_text_object(&press_any_key_text);
+		GFX_display_text_object(&press_any_key_text);
+		
+		touch_init = 0;
+		press_enable = 1;
+		
 		intro_state = INTRO_WAIT_FOR_ANY_KEY;
 		exit_value = 0;
 		break;
 
 	case INTRO_WAIT_FOR_ANY_KEY:
 		key = KBD_get_pressed_key();
+		static bool touch_init = 0;  
+		static bool press_enable = 1;
+		static stopwatch_handle_t touch_polling_stopwatch;
+		static stopwatch_handle_t touch_debounce_stopwatch;
+		
+		if (current_input_mode == INPUT_TOUCHSCREEN) {
+			if (!touch_init) {
+				TIMUT_stopwatch_set_time_mark(&touch_polling_stopwatch);
+				TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+				touch_init = 1;
+			}
+
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 60)) {
+				int x, y; 
+				XPT2046_touch_get_coordinates(&x, &y);
+				
+				if (y < 240 && press_enable == 1) {
+					key = BTN_OK;
+					press_enable = 0;
+					TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+				}
+			}
+
+			if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 60)) {
+				press_enable = 1;
+			}
+		}
+		
 		if (key != BTN_NONE) {
 			intro_state = INTRO_INIT;
-            GFX_draw_gfx_object(&background);
+			GFX_draw_gfx_object(&background);
 			exit_value = 1;
+			touch_init = 0;  
+			press_enable = 1;  // Reset for next time
 		}
-		break;
+    	break;
 
 	default:
 		printf("Intro(): Error - unknown state (%d)", intro_state);
@@ -655,19 +695,20 @@ uint8_t GamePlay() {
 			KBD_scan();
 			pressed_button = KBD_get_pressed_key();
 
-			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 75)) {
-				int x, y; 
-				XPT2046_touch_get_coordinates(&x, &y);
-				
-				if (y < 240 && press_enable == 1) {
-					pressed_button = BTN_OK;
-					press_enable = 0;
-					TIMUT_stopwatch_set_time_mark(&stopwatch_touchscreen);
-					// printf("Touchscreen pressed\n");
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 60)) {
+				if (current_input_mode == INPUT_TOUCHSCREEN) {  
+					int x, y; 
+					XPT2046_touch_get_coordinates(&x, &y);
+					
+					if (y < 240 && press_enable == 1) {
+						pressed_button = BTN_OK;
+						press_enable = 0;
+						TIMUT_stopwatch_set_time_mark(&stopwatch_touchscreen);
+					}
 				}
 			}
 
-			if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_touchscreen, 200)) {
+			if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_touchscreen, 60)) {
 				press_enable = 1;
 			}
 
@@ -913,17 +954,46 @@ uint8_t GameOver() {
 
     case GAMEOVER_WAIT_FOR_ANY_KEY:
         key = KBD_get_pressed_key();
-        if (key == BTN_OK || key == BTN_ESC) {
-            GFX_clear_gfx_object_on_background(&misko, &background);
-            GFX_set_gfx_object_location(&misko, 80, 120);  
-            GFX_set_gfx_object_velocity(&misko, 0, 0);
+		static stopwatch_handle_t touch_polling_stopwatch;
+		static stopwatch_handle_t touch_debounce_stopwatch;
+		
+		if (current_input_mode == INPUT_TOUCHSCREEN) {
+			if (!touch_init) {
+				TIMUT_stopwatch_set_time_mark(&touch_polling_stopwatch);
+				TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+				touch_init = 1;
+			}
+
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 60)) {
+				int x, y; 
+				XPT2046_touch_get_coordinates(&x, &y);
+				
+				if (y < 240 && press_enable == 1) {
+					key = BTN_OK;  
+					press_enable = 0;
+					TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+				}
+			}
+
+			if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 60)) {
+				press_enable = 1;
+			}
+		}
+
+		if (key == BTN_OK || key == BTN_ESC) {
+			GFX_clear_gfx_object_on_background(&misko, &background);
+			GFX_set_gfx_object_location(&misko, 80, 120);  
+			GFX_set_gfx_object_velocity(&misko, 0, 0);
 			game_status.score = 0;
-            OBJ_set_score_text_value(game_status.score); 
-            GFX_display_text_object(&score_text);        
-            state = GAMEOVER_SCREEN;  
-            exit_value = (key == BTN_ESC) ? 1 : 2;  
-        }
-        break;
+			OBJ_set_score_text_value(game_status.score); 
+			GFX_display_text_object(&score_text);        
+			state = GAMEOVER_SCREEN;  
+			exit_value = (key == BTN_ESC) ? 1 : 2;
+			touch_init = 0;  
+			press_enable = 1;  
+			touch_initialized = 0;  
+		}
+		break;
 
     default:
         state = GAMEOVER_SCREEN;
