@@ -84,7 +84,7 @@ int obstacle_pair3_cleaned = 0;
 int obstacle_pair1_scored = 0;
 int obstacle_pair2_scored = 0;
 int obstacle_pair3_scored = 0;
-int a, b; 
+int x1, y1; 
 int moving_obstacles = 0;
 int time_mark = 0;
 int obstacle_number = 0;
@@ -247,8 +247,8 @@ uint8_t Intro() {
 			OBJ_init_flappy_misko_text(30, 22);
 			GFX_display_text_object(&flappy_misko_text);
 
-			GFX_set_gfx_object_location(&misko2, 240, 22);
-			GFX_draw_one_gfx_object_on_background(&misko2, &background);
+			GFX_set_gfx_object_location(&misko, 240, 22);
+			GFX_draw_one_gfx_object_on_background(&misko, &background);
 
 			OBJ_init_small_sprite_object(&start_game_sprite, 50, 70);
 			OBJ_init_small_sprite_object(&choose_theme_sprite, 50, 110);
@@ -546,6 +546,10 @@ uint8_t Intro() {
 		GFX_clear_gfx_object_on_background(&misko, &background);
 		GFX_clear_gfx_object_on_background(&big_sprite, &background);
 
+		GFX_set_gfx_object_location(&misko, 80, 120);
+		GFX_set_gfx_object_velocity(&misko, 0, 0);
+		GFX_draw_one_gfx_object_on_background(&misko, &background);
+
 		OBJ_init_small_sprite_object(&press_any_key_sprite, 50, 180);
 		GFX_draw_one_gfx_object_on_background(&press_any_key_sprite, &background);
 		
@@ -570,18 +574,18 @@ uint8_t Intro() {
 				TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
 				touch_init = 1;
 			}
-			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 60)) {
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 100)) {
 				
-				XPT2046_touch_get_coordinates(&a, &b);
+				XPT2046_touch_get_coordinates(&x1, &y1);
 				
-				if (b < 240 && press_enable == 1) {
+				if (y1 < 240 && press_enable == 1) {
 					key = BTN_OK;  
 					press_enable = 0;
 					TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
 				}
 			}
 
-			if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 60)) {
+			if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 100)) {
 				press_enable = 1;
 			}
 		}
@@ -693,9 +697,8 @@ uint8_t GamePlay() {
 
 			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 60)) {
 				if (current_input_mode == INPUT_TOUCHSCREEN) {  
-					int x, y; 
+					int x, y;
 					XPT2046_touch_get_coordinates(&x, &y);
-					printf("y:%d", y);
 					if (y < 240 && press_enable == 1) {
 						pressed_button = BTN_OK;
 						press_enable = 0;
@@ -960,7 +963,7 @@ uint8_t GameOver() {
 				touch_init = 1;
 			}
 
-			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 60)) {
+			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 100)) {
 				int x, y; 
 				XPT2046_touch_get_coordinates(&x, &y);
 				printf("y:%d", y);
@@ -971,7 +974,7 @@ uint8_t GameOver() {
 				}
 			}
 
-			if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 60)) {
+			if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 100)) {
 				press_enable = 1;
 			}
 		}
