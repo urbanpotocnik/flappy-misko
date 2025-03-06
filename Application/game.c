@@ -475,44 +475,41 @@ uint8_t Intro() {
 	case INTRO_PLAY_WITH: {
 		if (!play_style_menu_initialized) {
 			GFX_draw_gfx_object(&background);
+				
 			OBJ_init_big_sprite(20, 10);
 			GFX_draw_one_gfx_object_on_background(&big_sprite, &background);
 			OBJ_init_flappy_misko_text(30, 22);
 			GFX_display_text_object(&flappy_misko_text);
-
+	
 			GFX_set_gfx_object_location(&misko, 240, 22);
 			GFX_draw_one_gfx_object_on_background(&misko, &background);
-
+	
 			OBJ_init_small_sprite_object(&play_with_sprite, 50, 70);
 			OBJ_init_small_sprite_object(&buttons_sprite, 50, 110);
 			OBJ_init_small_sprite_object(&touchscreen_sprite, 50, 150);
-
+	
 			GFX_draw_one_gfx_object_on_background(&play_with_sprite, &background);
 			GFX_draw_one_gfx_object_on_background(&buttons_sprite, &background);
 			GFX_draw_one_gfx_object_on_background(&touchscreen_sprite, &background);
-
+	
 			OBJ_init_text_small(60, 80, "PLAY WITH:", &choose_theme_text);
 			OBJ_init_text_small(60, 120, "BUTTONS", &dark_theme_text);
 			OBJ_init_text_small(60, 160, "TOUCHSCREEN", &light_theme_text);
-
+	
 			GFX_display_text_object(&choose_theme_text);
 			GFX_display_text_object(&dark_theme_text);
 			GFX_display_text_object(&light_theme_text);
-
-			OBJ_init_text_small(230, 120, "->", &text_selector);
-			GFX_display_text_object(&text_selector);
-			previous_selected_play_style = selected_play_style;
-
+	
 			play_style_menu_initialized = 1;
+			previous_selected_play_style = -1;
 		}
-
+	
 		if (previous_selected_play_style != selected_play_style) {
-			GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
-			GFX_draw_one_gfx_object_on_background(&light_theme_sprite, &background);
-
+			GFX_draw_one_gfx_object_on_background(&buttons_sprite, &background);
+			GFX_draw_one_gfx_object_on_background(&touchscreen_sprite, &background);
 			GFX_display_text_object(&dark_theme_text);
 			GFX_display_text_object(&light_theme_text);
-
+	
 			switch (selected_play_style) {
 			case 0:
 				OBJ_init_text_small(230, 120, "->", &text_selector);
