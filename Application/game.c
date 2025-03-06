@@ -84,7 +84,7 @@ int obstacle_pair3_cleaned = 0;
 int obstacle_pair1_scored = 0;
 int obstacle_pair2_scored = 0;
 int obstacle_pair3_scored = 0;
-
+int a, b; 
 int moving_obstacles = 0;
 int time_mark = 0;
 int obstacle_number = 0;
@@ -93,7 +93,8 @@ int previous_selected_item = -1;
 uint8_t play_style_menu_initialized = 0;
 int selected_play_style = 0;
 int previous_selected_play_style = -1;
-static bool touch_init = 0;
+
+static bool touch_init = 0;  
 static bool press_enable = 1;
 
 static INTRO_states_t intro_state = INTRO_INIT;
@@ -563,8 +564,6 @@ uint8_t Intro() {
 
 	case INTRO_WAIT_FOR_ANY_KEY:
 		key = KBD_get_pressed_key();
-		static bool touch_init = 0;  
-		static bool press_enable = 1;
 		static stopwatch_handle_t touch_polling_stopwatch;
 		static stopwatch_handle_t touch_debounce_stopwatch;
 		
@@ -574,13 +573,12 @@ uint8_t Intro() {
 				TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
 				touch_init = 1;
 			}
-
 			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 60)) {
-				int x, y; 
-				XPT2046_touch_get_coordinates(&x, &y);
 				
-				if (y < 240 && press_enable == 1) {
-					key = BTN_OK;
+				XPT2046_touch_get_coordinates(&a, &b);
+				
+				if (b < 240 && press_enable == 1) {
+					key = BTN_OK;  
 					press_enable = 0;
 					TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
 				}
@@ -596,7 +594,8 @@ uint8_t Intro() {
 			GFX_draw_gfx_object(&background);
 			exit_value = 1;
 			touch_init = 0;  
-			press_enable = 1;  // Reset for next time
+			press_enable = 1;  
+			touch_initialized = 0; 
 		}
     	break;
 
@@ -699,7 +698,7 @@ uint8_t GamePlay() {
 				if (current_input_mode == INPUT_TOUCHSCREEN) {  
 					int x, y; 
 					XPT2046_touch_get_coordinates(&x, &y);
-					
+					printf("y:%d", y);
 					if (y < 240 && press_enable == 1) {
 						pressed_button = BTN_OK;
 						press_enable = 0;
@@ -967,7 +966,7 @@ uint8_t GameOver() {
 			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 60)) {
 				int x, y; 
 				XPT2046_touch_get_coordinates(&x, &y);
-				
+				printf("y:%d", y);
 				if (y < 240 && press_enable == 1) {
 					key = BTN_OK;  
 					press_enable = 0;
