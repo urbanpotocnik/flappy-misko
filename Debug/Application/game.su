@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 ../Application/game.c:146:9:Intro	56	static
 ../Application/game.c:617:6:GamePlay_UpdateChanges	8	static
 ../Application/game.c:652:9:GamePlay	56	static
 ../Application/game.c:896:9:GameOver	48	static
 ../Application/game.c:105:6:Game	16	static
+=======
+../Application/game.c:148:9:Intro	56	static
+../Application/game.c:772:6:GamePlay_UpdateChanges	8	static
+../Application/game.c:807:9:GamePlay	56	static
+../Application/game.c:1050:9:GameOver	48	static
+../Application/game.c:107:6:Game	16	static
+>>>>>>> 765b1739670b731dca74105c26c25a9f3a503acc
