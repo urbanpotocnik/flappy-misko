@@ -151,7 +151,10 @@ uint8_t Intro() {
 	case INTRO_INIT:
 		OBJ_init();
 		OBJ_init_big_sprite(20, 20);
-		GFX_draw_gfx_object(&background);
+
+
+
+	    GFX_draw_gfx_object(&background);
 		GFX_draw_one_gfx_object_on_background(&big_sprite, &background);
 		OBJ_init_flappy_misko_text(59, 32);
 		GFX_display_text_object(&flappy_misko_text);
