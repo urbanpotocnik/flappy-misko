@@ -1209,6 +1209,79 @@ void GFX_clear_obstacle_pair_on_background(obstacle_pair_t *pair, location_t *ob
 	GFX_clear_gfx_object_on_background(&pair->bottom, &background);
 }
 
+bool RLE_Encode_RGB565(const uint16_t* input, uint32_t input_len,
+                      uint16_t* output, uint32_t output_max_size,
+                      uint32_t* encoded_len) {
+    uint32_t out_idx = 0;
+    uint32_t in_idx = 0;
+
+    while (in_idx < input_len) {
+        // Check if output buffer has space for at least two more elements
+        if (out_idx + 2 > output_max_size) return false;
+
+        uint16_t current_color = input[in_idx];
+        uint32_t run_start = in_idx;
+
+        // Calculate run length (up to maximum of 65535)
+        while (in_idx < input_len &&
+               input[in_idx] == current_color &&
+               (in_idx - run_start) < 65535) {
+            in_idx++;
+        }
+
+        uint16_t run_length = (uint16_t)(in_idx - run_start);
+
+        // Store run length and color in output buffer
+        output[out_idx++] = run_length;
+        output[out_idx++] = current_color;
+    }
+
+    *encoded_len = out_idx;
+    return true;
+}
+
+// RLE Decoder for RGB565 format
+// Parameters:
+//   encoded: Pointer to encoded RLE data
+//   encoded_len: Number of elements in encoded array
+//   output: Pointer to output buffer for decoded RGB565 data
+//   output_max_size: Maximum number of elements in output buffer
+//   decoded_len: Output parameter for number of elements written to output buffer
+// Returns: true if decoding succeeded, false otherwise
+bool RLE_Decode_RGB565(const uint16_t* encoded, uint32_t encoded_len,
+                      uint16_t* output, uint32_t output_max_size,
+                      uint32_t* decoded_len) {
+    // Encoded data must contain pairs of values
+    if (encoded_len % 2 != 0) return false;
+
+    uint32_t required_len = 0;
+
+    // Calculate required output buffer size
+    for (uint32_t i = 0; i < encoded_len; i += 2) {
+        required_len += encoded[i];
+
+        if (required_len > output_max_size) return false;
+    }
+
+    // Check if output buffer is large enough
+    if (required_len > output_max_size) return false;
+
+    *decoded_len = required_len;
+
+    // Decode the RLE data
+    uint32_t out_idx = 0;
+    for (uint32_t i = 0; i < encoded_len; i += 2) {
+        uint16_t count = encoded[i];
+        uint16_t color = encoded[i + 1];
+
+        // Fill output with 'count' copies of 'color'
+        for (uint16_t j = 0; j < count; j++) {
+            output[out_idx++] = color;
+        }
+    }
+
+    return true;
+}
 
 
 // ------- Test functions ---------

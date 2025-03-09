@@ -225,6 +225,8 @@ void OBJ_init_background(void)
 	// init graphic object
 
 		// init image
+
+
 		background.image.image_array = (uint16_t*) background_img;
 
 		background.image.size_x = 320;
@@ -340,7 +342,17 @@ void OBJ_init_obstacle_top(void)
 	// init graphic object
 
 		// init image
-		obstacle_top.image.image_array = (uint16_t*) obstacle_top_img;
+		// Decoding
+		uint16_t decoded_buffer[46930];  // Must be large enough for original data
+		uint32_t decoded_length;
+
+		if (RLE_Decode_RGB565(rle_data, rle_length,
+							 decoded_buffer, sizeof(decoded_buffer)/sizeof(decoded_buffer[0]),
+							 &decoded_length)) {
+			// Send decoded data to display
+
+		}
+		obstacle_top.image.image_array = (uint16_t*) decoded_buffer;
 
 		obstacle_top.image.size_x = 50;
 		obstacle_top.image.size_y = 240;
@@ -383,8 +395,17 @@ void OBJ_init_obstacle_bottom(void)
 
 void OBJ_init_obstacle_pair(obstacle_pair_t *obstacle_pair)
 {
-    // Initialize top obstacle
-    obstacle_pair->top.image.image_array = (uint16_t*) obstacle_top_img;
+	// Decoding
+	uint16_t decoded_buffer[46930];  // Must be large enough for original data
+	uint32_t decoded_length;
+
+	if (RLE_Decode_RGB565(rle_data, rle_length,
+						 decoded_buffer, sizeof(decoded_buffer)/sizeof(decoded_buffer[0]),
+						 &decoded_length)) {
+		// Send decoded data to display
+
+	}
+    obstacle_pair->top.image.image_array = (uint16_t*) decoded_buffer;
     obstacle_pair->top.image.size_x = 50;
     obstacle_pair->top.image.size_y = 240;
     obstacle_pair->top.image.size = obstacle_pair->top.image.size_x * obstacle_pair->top.image.size_y;

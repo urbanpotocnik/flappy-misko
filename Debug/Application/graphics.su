@@ -45,3 +45,5 @@
 ../Application/graphics.c:1192:6:GFX_draw_obstacle_pair_on_background	16	static
 ../Application/graphics.c:1199:6:GFX_get_obstacle_pair_movement_area	8	static
 ../Application/graphics.c:1206:6:GFX_clear_obstacle_pair_on_background	16	static
+../Application/graphics.c:1212:6:RLE_Encode_RGB565	36	static
+../Application/graphics.c:1251:6:RLE_Decode_RGB565	24	static

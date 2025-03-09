@@ -1,5 +1,5 @@
 Application/flash.o: ../Application/flash.c \
- C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/flash.h \
+ D:/Projekti/flappy-misko/Application/Include/flash.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
  ../Core/Inc/stm32g4xx_hal_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h \
@@ -34,8 +34,8 @@ Application/flash.o: ../Application/flash.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/game.h
-C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/flash.h:
+ D:/Projekti/flappy-misko/Application/Include/game.h
+D:/Projekti/flappy-misko/Application/Include/flash.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h:
@@ -70,4 +70,4 @@ C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/flash.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/game.h:
+D:/Projekti/flappy-misko/Application/Include/game.h:

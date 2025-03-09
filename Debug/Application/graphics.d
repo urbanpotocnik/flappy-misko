@@ -1,5 +1,5 @@
 Application/graphics.o: ../Application/graphics.c \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/kbd.h \
+ D:/Projekti/flappy-misko/System/Include/kbd.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h \
@@ -35,21 +35,21 @@ Application/graphics.o: ../Application/graphics.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/graphics.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/LCD.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341_registers.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_backlight.h \
+ D:/Projekti/flappy-misko/Application/Include/graphics.h \
+ D:/Projekti/flappy-misko/System/Include/LCD.h \
+ D:/Projekti/flappy-misko/System/Include/lcd_ili9341.h \
+ D:/Projekti/flappy-misko/System/Include/lcd_ili9341_registers.h \
+ D:/Projekti/flappy-misko/System/Include/lcd_backlight.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/ugui.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/ugui_config.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/XPT2046_touch.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/objects.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/images.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/graphics.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/math_utils.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/images.h
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/kbd.h:
+ D:/Projekti/flappy-misko/System/Include/ugui.h \
+ D:/Projekti/flappy-misko/System/Include/ugui_config.h \
+ D:/Projekti/flappy-misko/System/Include/XPT2046_touch.h \
+ D:/Projekti/flappy-misko/Application/Include/objects.h \
+ D:/Projekti/flappy-misko/Application/Include/images.h \
+ D:/Projekti/flappy-misko/Application/Include/graphics.h \
+ D:/Projekti/flappy-misko/Application/Include/math_utils.h \
+ D:/Projekti/flappy-misko/Application/Include/images.h
+D:/Projekti/flappy-misko/System/Include/kbd.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h:
@@ -85,17 +85,17 @@ C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/kbd.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/graphics.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/LCD.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_ili9341_registers.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/lcd_backlight.h:
+D:/Projekti/flappy-misko/Application/Include/graphics.h:
+D:/Projekti/flappy-misko/System/Include/LCD.h:
+D:/Projekti/flappy-misko/System/Include/lcd_ili9341.h:
+D:/Projekti/flappy-misko/System/Include/lcd_ili9341_registers.h:
+D:/Projekti/flappy-misko/System/Include/lcd_backlight.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/ugui.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/ugui_config.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/System/Include/XPT2046_touch.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/objects.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/images.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/graphics.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/math_utils.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/Application/Include/images.h:
+D:/Projekti/flappy-misko/System/Include/ugui.h:
+D:/Projekti/flappy-misko/System/Include/ugui_config.h:
+D:/Projekti/flappy-misko/System/Include/XPT2046_touch.h:
+D:/Projekti/flappy-misko/Application/Include/objects.h:
+D:/Projekti/flappy-misko/Application/Include/images.h:
+D:/Projekti/flappy-misko/Application/Include/graphics.h:
+D:/Projekti/flappy-misko/Application/Include/math_utils.h:
+D:/Projekti/flappy-misko/Application/Include/images.h:

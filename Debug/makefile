@@ -62,8 +62,8 @@ all: main-build
 main-build: OME\ Bird.elf secondary-outputs
 
 # Tool invocations
-OME\ Bird.elf OME\ Bird.map: $(OBJS) $(USER_OBJS) C:\Users\Urban\Documents\Projects\flappy-misko\STM32G474QETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "OME Bird.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Urban\Documents\Projects\flappy-misko\STM32G474QETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="OME Bird.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+OME\ Bird.elf OME\ Bird.map: $(OBJS) $(USER_OBJS) D:\Projekti\flappy-misko\STM32G474QETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "OME Bird.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\Projekti\flappy-misko\STM32G474QETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="OME Bird.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
