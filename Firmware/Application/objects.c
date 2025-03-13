@@ -43,6 +43,13 @@ the object parameters.
 
 #include "objects.h"
 
+#include "images_rle/big_sprite.h"
+#include "images_rle/small_sprite.h"
+#include "images_rle/misko.h"
+#include "images_rle/top.h"
+#include "images_rle/bottom.h"
+#include "images_rle/mega_sprite.h"
+
 
 
 
@@ -294,7 +301,19 @@ void OBJ_init_big_sprite(int x, int y)
 void OBJ_init_high_score_sprite_large(int x, int y)
 {
 		// init image
-		high_score_sprite_large.image.image_array = (uint16_t*) high_score_sprite_large_img;
+			
+		uint16_t high_score_sprite_large_buffer[55000];  // Must be large enough for original data
+		uint32_t high_score_sprite_large_decoded_length;
+
+		if (RLE_Decode_RGB565(mega_sprite_data, mega_sprite_length,
+			high_score_sprite_large_buffer, sizeof(high_score_sprite_large_buffer)/sizeof(high_score_sprite_large_buffer[0]),
+								&high_score_sprite_large_decoded_length)) {
+			// Send decoded data to display
+
+		}
+
+
+		high_score_sprite_large.image.image_array = (uint16_t*) high_score_sprite_large_buffer;
 
 		high_score_sprite_large.image.size_x = 260;
 		high_score_sprite_large.image.size_y = 180;
@@ -337,83 +356,104 @@ void OBJ_init_misko(void)
 }
 
 
-void OBJ_init_obstacle_top(void)
-{
-	// init graphic object
+// void OBJ_init_obstacle_top(void)
+// {
+// 	// init graphic object
 
-		// init image
-		// Decoding
-		uint16_t decoded_buffer[46930];  // Must be large enough for original data
-		uint32_t decoded_length;
+// 		// init image
+// 		// Decoding
+// 		uint16_t top_buffer[46930];  // Must be large enough for original data
+// 		uint32_t top_decoded_length;
 
-		if (RLE_Decode_RGB565(rle_data, rle_length,
-							 decoded_buffer, sizeof(decoded_buffer)/sizeof(decoded_buffer[0]),
-							 &decoded_length)) {
-			// Send decoded data to display
+// 		if (RLE_Decode_RGB565(top_data, top_length,
+// 							 top_buffer, sizeof(top_buffer)/sizeof(top_buffer[0]),
+// 							 &top_decoded_length)) {
+// 			// Send decoded data to display
 
-		}
-		obstacle_top.image.image_array = (uint16_t*) decoded_buffer;
+// 		}
+// 		obstacle_top.image.image_array = (uint16_t*) top_buffer;
 
-		obstacle_top.image.size_x = 50;
-		obstacle_top.image.size_y = 240;
-		obstacle_top.image.size = obstacle_top.image.size_x * obstacle_top.image.size_y;
+// 		obstacle_top.image.size_x = 50;
+// 		obstacle_top.image.size_y = 240;
+// 		obstacle_top.image.size = obstacle_top.image.size_x * obstacle_top.image.size_y;
 
-		// init the graphic object location
-		GFX_init_location_restrictions (&obstacle_top, &canvas.whole_area );
+// 		// init the graphic object location
+// 		GFX_init_location_restrictions (&obstacle_top, &canvas.whole_area );
 
-		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&obstacle_top, 0, 0);
+// 		// set the initial object velocity
+// 		GFX_set_gfx_object_velocity(&obstacle_top, 0, 0);
 
-		// set edge parameters
-		background.edge_behavior = EDGE_IGNORE;
-}
-
-
-void OBJ_init_obstacle_bottom(void)
-{
-	// init graphic object
-
-		// init image
-		obstacle_bottom.image.image_array = (uint16_t*) obstacle_bottom_img;
-
-		obstacle_bottom.image.size_x = 50;
-		obstacle_bottom.image.size_y = 240;
-		obstacle_bottom.image.size = obstacle_bottom.image.size_x * obstacle_bottom.image.size_y;
-
-		// init the graphic object location
-		GFX_init_location_restrictions (&obstacle_bottom, &canvas.whole_area );
-		//GFX_init_gfx_object_location( &obstacle_bottom, x_cooridnate, y_coordinate);
+// 		// set edge parameters
+// 		background.edge_behavior = EDGE_IGNORE;
+// }
 
 
-		// set the initial object velocity
-		GFX_set_gfx_object_velocity(&obstacle_bottom, 0, 0);
+// void OBJ_init_obstacle_bottom(void)
+// {
+// 	// init graphic object
+		
+// 		uint16_t bottom_buffer[46930];  // Must be large enough for original data
+// 		uint32_t bottom_decoded_length;
 
-		// set edge parameters
-		background.edge_behavior = EDGE_IGNORE;
-}
+// 		if (RLE_Decode_RGB565(bottom_data, bottom_length,
+// 							bottom_buffer, sizeof(bottom_buffer)/sizeof(bottom_buffer[0]),
+// 							&bottom_decoded_length)) {
+// 			// Send decoded data to display
+
+// 		}
+
+
+// 		// init image
+// 		obstacle_bottom.image.image_array = (uint16_t*) bottom_buffer;
+
+// 		obstacle_bottom.image.size_x = 50;
+// 		obstacle_bottom.image.size_y = 240;
+// 		obstacle_bottom.image.size = obstacle_bottom.image.size_x * obstacle_bottom.image.size_y;
+
+// 		// init the graphic object location
+// 		GFX_init_location_restrictions (&obstacle_bottom, &canvas.whole_area );
+// 		//GFX_init_gfx_object_location( &obstacle_bottom, x_cooridnate, y_coordinate);
+
+
+// 		// set the initial object velocity
+// 		GFX_set_gfx_object_velocity(&obstacle_bottom, 0, 0);
+
+// 		// set edge parameters
+// 		background.edge_behavior = EDGE_IGNORE;
+// }
 
 
 void OBJ_init_obstacle_pair(obstacle_pair_t *obstacle_pair)
 {
-	// Decoding
-	uint16_t decoded_buffer[46930];  // Must be large enough for original data
-	uint32_t decoded_length;
+	
+	// 	uint16_t top_buffer[48000];  // Must be large enough for original data
+	// 	uint32_t top_decoded_length;
 
-	if (RLE_Decode_RGB565(rle_data, rle_length,
-						 decoded_buffer, sizeof(decoded_buffer)/sizeof(decoded_buffer[0]),
-						 &decoded_length)) {
-		// Send decoded data to display
+	// 	if (RLE_Decode_RGB565(top_data, top_length,
+	// 							top_buffer, sizeof(top_buffer)/sizeof(top_buffer[0]),
+	// 							&top_decoded_length)) {
+	// 		// Send decoded data to display
 
-	}
-    obstacle_pair->top.image.image_array = (uint16_t*) decoded_buffer;
-    obstacle_pair->top.image.size_x = 50;
-    obstacle_pair->top.image.size_y = 240;
-    obstacle_pair->top.image.size = obstacle_pair->top.image.size_x * obstacle_pair->top.image.size_y;
-    GFX_init_location_restrictions(&obstacle_pair->top, &canvas.whole_area);
-    obstacle_pair->top.edge_behavior = EDGE_IGNORE;
+	// 	}
 
-    // Initialize bottom obstacle
-    obstacle_pair->bottom.image.image_array = (uint16_t*) obstacle_bottom_img;
+    // obstacle_pair->top.image.image_array = (uint16_t*) top_buffer;
+    // obstacle_pair->top.image.size_x = 50;
+    // obstacle_pair->top.image.size_y = 240;
+    // obstacle_pair->top.image.size = obstacle_pair->top.image.size_x * obstacle_pair->top.image.size_y;
+    // GFX_init_location_restrictions(&obstacle_pair->top, &canvas.whole_area);
+    // obstacle_pair->top.edge_behavior = EDGE_IGNORE;
+
+		uint16_t bottom_buffer[48000];  // Must be large enough for original data
+		uint32_t bottom_decoded_length;
+
+		if (RLE_Decode_RGB565(bottom_data, bottom_length,
+							bottom_buffer, sizeof(bottom_buffer)/sizeof(bottom_buffer[0]),
+							&bottom_decoded_length)) {
+			// Send decoded data to display
+							}
+
+
+    obstacle_pair->bottom.image.image_array = (uint16_t*) bottom_buffer;
     obstacle_pair->bottom.image.size_x = 50;
     obstacle_pair->bottom.image.size_y = 240;
     obstacle_pair->bottom.image.size = obstacle_pair->bottom.image.size_x * obstacle_pair->bottom.image.size_y;
