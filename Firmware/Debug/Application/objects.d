@@ -48,7 +48,13 @@ Application/objects.o: ../Application/objects.c \
  C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/ugui.h \
  C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/ugui_config.h \
  C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/XPT2046_touch.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/math_utils.h
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/math_utils.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images_rle/big_sprite.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images_rle/small_sprite.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images_rle/misko.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images_rle/top.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images_rle/bottom.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images_rle/mega_sprite.h
 C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/joystick.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
@@ -99,3 +105,9 @@ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/ugui.h:
 C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/ugui_config.h:
 C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/XPT2046_touch.h:
 C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/math_utils.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images_rle/big_sprite.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images_rle/small_sprite.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images_rle/misko.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images_rle/top.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images_rle/bottom.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images_rle/mega_sprite.h:

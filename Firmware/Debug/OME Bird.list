@@ -7,47 +7,47 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   1 .text         00009828  080001e0  080001e0  000011e0  2**4
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       0005730c  08009a08  08009a08  0000aa08  2**2
+  2 .rodata       0003bae4  08009a08  08009a08  0000aa08  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08060d14  08060d14  000620b4  2**0
+  3 .ARM.extab    00000000  080454ec  080454ec  000470b4  2**0
                   CONTENTS
-  4 .ARM          00000008  08060d14  08060d14  00061d14  2**2
+  4 .ARM          00000008  080454ec  080454ec  000464ec  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  08060d1c  08060d1c  000620b4  2**0
+  5 .preinit_array 00000000  080454f4  080454f4  000470b4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08060d1c  08060d1c  00061d1c  2**2
+  6 .init_array   00000004  080454f4  080454f4  000464f4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  7 .fini_array   00000004  08060d20  08060d20  00061d20  2**2
+  7 .fini_array   00000004  080454f8  080454f8  000464f8  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         000000b4  20000000  08060d24  00062000  2**2
+  8 .data         000000b4  20000000  080454fc  00047000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          000013d0  200000b8  08060dd8  000620b8  2**3
+  9 .bss          000013d0  200000b8  080455b0  000470b8  2**3
                   ALLOC
- 10 ._user_heap_stack 00000600  20001488  08060dd8  00062488  2**0
+ 10 ._user_heap_stack 00000600  20001488  080455b0  00047488  2**0
                   ALLOC
- 11 .ARM.attributes 00000030  00000000  00000000  000620b4  2**0
+ 11 .ARM.attributes 00000030  00000000  00000000  000470b4  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00146e20  00000000  00000000  000620e4  2**0
+ 12 .debug_info   00130905  00000000  00000000  000470e4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000086ca  00000000  00000000  001a8f04  2**0
+ 13 .debug_abbrev 000086a7  00000000  00000000  001779e9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_loclists 000266bc  00000000  00000000  001b15ce  2**0
+ 14 .debug_loclists 000266bc  00000000  00000000  00180090  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00002158  00000000  00000000  001d7c90  2**3
+ 15 .debug_aranges 00002148  00000000  00000000  001a6750  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00005e45  00000000  00000000  001d9de8  2**0
+ 16 .debug_rnglists 00005e39  00000000  00000000  001a8898  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00033ae6  00000000  00000000  001dfc2d  2**0
+ 17 .debug_macro  00033afe  00000000  00000000  001ae6d1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00043f18  00000000  00000000  00213713  2**0
+ 18 .debug_line   00043f1c  00000000  00000000  001e21cf  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    00132c84  00000000  00000000  0025762b  2**0
+ 19 .debug_str    00132d40  00000000  00000000  002260eb  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  0038a2af  2**0
+ 20 .comment      00000043  00000000  00000000  00358e2b  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00006ce0  00000000  00000000  0038a2f4  2**2
+ 21 .debug_frame  00006cac  00000000  00000000  00358e70  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000066  00000000  00000000  00390fd4  2**0
+ 22 .debug_line_str 00000066  00000000  00000000  0035fb1c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -3070,7 +3070,7 @@ uint8_t GamePlay() {
  80019f0:	6038      	str	r0, [r7, #0]
 					OBJ_init_obstacle_pair(&obstacle_pair1);
  80019f2:	484e      	ldr	r0, [pc, #312]	@ (8001b2c <GamePlay+0x55c>)
- 80019f4:	f001 fb96 	bl	8003124 <OBJ_init_obstacle_pair>
+ 80019f4:	f001 fba8 	bl	8003148 <OBJ_init_obstacle_pair>
 					GFX_init_obstacle_pair_location(&obstacle_pair1, 269,
  80019f8:	f9b7 3002 	ldrsh.w	r3, [r7, #2]
  80019fc:	f9b7 2000 	ldrsh.w	r2, [r7]
@@ -3098,7 +3098,7 @@ uint8_t GamePlay() {
  8001a2a:	6028      	str	r0, [r5, #0]
 					OBJ_init_obstacle_pair(&obstacle_pair2);
  8001a2c:	4831      	ldr	r0, [pc, #196]	@ (8001af4 <GamePlay+0x524>)
- 8001a2e:	f001 fb79 	bl	8003124 <OBJ_init_obstacle_pair>
+ 8001a2e:	f001 fb8b 	bl	8003148 <OBJ_init_obstacle_pair>
 					GFX_init_obstacle_pair_location(&obstacle_pair2, 269,
  8001a32:	f9b5 3002 	ldrsh.w	r3, [r5, #2]
  8001a36:	f9b5 2000 	ldrsh.w	r2, [r5]
@@ -3151,7 +3151,7 @@ uint8_t GamePlay() {
  8001a92:	6028      	str	r0, [r5, #0]
 					OBJ_init_obstacle_pair(&obstacle_pair3);
  8001a94:	481c      	ldr	r0, [pc, #112]	@ (8001b08 <GamePlay+0x538>)
- 8001a96:	f001 fb45 	bl	8003124 <OBJ_init_obstacle_pair>
+ 8001a96:	f001 fb57 	bl	8003148 <OBJ_init_obstacle_pair>
 					GFX_init_obstacle_pair_location(&obstacle_pair3, 269,
  8001a9a:	f9b5 3002 	ldrsh.w	r3, [r5, #2]
  8001a9e:	f9b5 2000 	ldrsh.w	r2, [r5]
@@ -6654,17 +6654,17 @@ void OBJ_init_score_text(void)
  8002ff4:	20000a40 	.word	0x20000a40
  8002ff8:	ffff009f 	.word	0xffff009f
  8002ffc:	00f00140 	.word	0x00f00140
- 8003000:	08031588 	.word	0x08031588
+ 8003000:	08017338 	.word	0x08017338
  8003004:	0077009f 	.word	0x0077009f
  8003008:	00f0013f 	.word	0x00f0013f
  800300c:	0078009f 	.word	0x0078009f
  8003010:	200005cc 	.word	0x200005cc
- 8003014:	08030bc4 	.word	0x08030bc4
+ 8003014:	08016974 	.word	0x08016974
  8003018:	200005b8 	.word	0x200005b8
  800301c:	20000024 	.word	0x20000024
  8003020:	200003cc 	.word	0x200003cc
  8003024:	00cd00f3 	.word	0x00cd00f3
- 8003028:	08058418 	.word	0x08058418
+ 8003028:	0803cbf0 	.word	0x0803cbf0
  800302c:	08009c00 	.word	0x08009c00
  8003030:	200005a4 	.word	0x200005a4
  8003034:	00db00f2 	.word	0x00db00f2
@@ -6704,7 +6704,7 @@ void OBJ_init_score_text(void)
  8003072:	f884 304a 	strb.w	r3, [r4, #74]	@ 0x4a
 }
  8003076:	bd70      	pop	{r4, r5, r6, pc}
- 8003078:	08027704 	.word	0x08027704
+ 8003078:	08013274 	.word	0x08013274
  800307c:	002000dc 	.word	0x002000dc
  8003080:	20000ad8 	.word	0x20000ad8
 
@@ -6750,119 +6750,116 @@ void OBJ_init_score_text(void)
  80030be:	bf00      	nop
  80030c0:	200007e0 	.word	0x200007e0
  80030c4:	00320118 	.word	0x00320118
- 80030c8:	080209a4 	.word	0x080209a4
+ 80030c8:	0800c514 	.word	0x0800c514
  80030cc:	20000ad8 	.word	0x20000ad8
 
 080030d0 <OBJ_init_high_score_sprite_large>:
 {
- 80030d0:	b570      	push	{r4, r5, r6, lr}
-		high_score_sprite_large.image.image_array = (uint16_t*) high_score_sprite_large_img;
- 80030d2:	4c0f      	ldr	r4, [pc, #60]	@ (8003110 <OBJ_init_high_score_sprite_large+0x40>)
+ 80030d0:	b5f0      	push	{r4, r5, r6, r7, lr}
+ 80030d2:	f5ad 3dd6 	sub.w	sp, sp, #109568	@ 0x1ac00
+ 80030d6:	b0f1      	sub	sp, #452	@ 0x1c4
+		if (RLE_Decode_RGB565(mega_sprite_data, mega_sprite_length,
+ 80030d8:	ab70      	add	r3, sp, #448	@ 0x1c0
+ 80030da:	af04      	add	r7, sp, #16
+ 80030dc:	f5a3 73da 	sub.w	r3, r3, #436	@ 0x1b4
+ 80030e0:	9300      	str	r3, [sp, #0]
+ 80030e2:	463a      	mov	r2, r7
+{
+ 80030e4:	4605      	mov	r5, r0
+ 80030e6:	460e      	mov	r6, r1
+		if (RLE_Decode_RGB565(mega_sprite_data, mega_sprite_length,
+ 80030e8:	f24d 63d8 	movw	r3, #55000	@ 0xd6d8
+ 80030ec:	f640 119c 	movw	r1, #2460	@ 0x99c
+ 80030f0:	4810      	ldr	r0, [pc, #64]	@ (8003134 <OBJ_init_high_score_sprite_large+0x64>)
+		high_score_sprite_large.image.image_array = (uint16_t*) high_score_sprite_large_buffer;
+ 80030f2:	4c11      	ldr	r4, [pc, #68]	@ (8003138 <OBJ_init_high_score_sprite_large+0x68>)
+		if (RLE_Decode_RGB565(mega_sprite_data, mega_sprite_length,
+ 80030f4:	f7ff fea0 	bl	8002e38 <RLE_Decode_RGB565>
 		high_score_sprite_large.image.size = intro_sprite.image.size_x * intro_sprite.image.size_y;
- 80030d4:	4a0f      	ldr	r2, [pc, #60]	@ (8003114 <OBJ_init_high_score_sprite_large+0x44>)
-		high_score_sprite_large.image.image_array = (uint16_t*) high_score_sprite_large_img;
- 80030d6:	4b10      	ldr	r3, [pc, #64]	@ (8003118 <OBJ_init_high_score_sprite_large+0x48>)
- 80030d8:	6023      	str	r3, [r4, #0]
+ 80030f8:	4910      	ldr	r1, [pc, #64]	@ (800313c <OBJ_init_high_score_sprite_large+0x6c>)
 		high_score_sprite_large.image.size_x = 260;
- 80030da:	4b10      	ldr	r3, [pc, #64]	@ (800311c <OBJ_init_high_score_sprite_large+0x4c>)
- 80030dc:	6063      	str	r3, [r4, #4]
+ 80030fa:	4b11      	ldr	r3, [pc, #68]	@ (8003140 <OBJ_init_high_score_sprite_large+0x70>)
 		high_score_sprite_large.image.size = intro_sprite.image.size_x * intro_sprite.image.size_y;
- 80030de:	8893      	ldrh	r3, [r2, #4]
- 80030e0:	88d2      	ldrh	r2, [r2, #6]
-{
- 80030e2:	4605      	mov	r5, r0
+ 80030fc:	88ca      	ldrh	r2, [r1, #6]
+		high_score_sprite_large.image.size_x = 260;
+ 80030fe:	6063      	str	r3, [r4, #4]
 		high_score_sprite_large.image.size = intro_sprite.image.size_x * intro_sprite.image.size_y;
- 80030e4:	fb02 f303 	mul.w	r3, r2, r3
-{
- 80030e8:	460e      	mov	r6, r1
+ 8003100:	888b      	ldrh	r3, [r1, #4]
 		GFX_init_location_restrictions (&high_score_sprite_large, &canvas.whole_area );
- 80030ea:	4620      	mov	r0, r4
- 80030ec:	490c      	ldr	r1, [pc, #48]	@ (8003120 <OBJ_init_high_score_sprite_large+0x50>)
+ 8003102:	4910      	ldr	r1, [pc, #64]	@ (8003144 <OBJ_init_high_score_sprite_large+0x74>)
+		high_score_sprite_large.image.image_array = (uint16_t*) high_score_sprite_large_buffer;
+ 8003104:	6027      	str	r7, [r4, #0]
 		high_score_sprite_large.image.size = intro_sprite.image.size_x * intro_sprite.image.size_y;
- 80030ee:	60a3      	str	r3, [r4, #8]
+ 8003106:	fb02 f303 	mul.w	r3, r2, r3
 		GFX_init_location_restrictions (&high_score_sprite_large, &canvas.whole_area );
- 80030f0:	f7fe fec8 	bl	8001e84 <GFX_init_location_restrictions>
+ 800310a:	4620      	mov	r0, r4
+		high_score_sprite_large.image.size = intro_sprite.image.size_x * intro_sprite.image.size_y;
+ 800310c:	60a3      	str	r3, [r4, #8]
+		GFX_init_location_restrictions (&high_score_sprite_large, &canvas.whole_area );
+ 800310e:	f7fe feb9 	bl	8001e84 <GFX_init_location_restrictions>
 		GFX_init_gfx_object_location(&high_score_sprite_large, x, y);
- 80030f4:	b232      	sxth	r2, r6
- 80030f6:	b229      	sxth	r1, r5
- 80030f8:	4620      	mov	r0, r4
- 80030fa:	f7fe ff2d 	bl	8001f58 <GFX_init_gfx_object_location>
+ 8003112:	b232      	sxth	r2, r6
+ 8003114:	b229      	sxth	r1, r5
+ 8003116:	4620      	mov	r0, r4
+ 8003118:	f7fe ff1e 	bl	8001f58 <GFX_init_gfx_object_location>
 		GFX_set_gfx_object_velocity(&high_score_sprite_large, 0, 0);
- 80030fe:	2200      	movs	r2, #0
- 8003100:	4611      	mov	r1, r2
- 8003102:	4620      	mov	r0, r4
- 8003104:	f7ff f800 	bl	8002108 <GFX_set_gfx_object_velocity>
+ 800311c:	2200      	movs	r2, #0
+ 800311e:	4611      	mov	r1, r2
+ 8003120:	4620      	mov	r0, r4
+ 8003122:	f7fe fff1 	bl	8002108 <GFX_set_gfx_object_velocity>
 		high_score_sprite_large.edge_behavior = EDGE_IGNORE;
- 8003108:	2302      	movs	r3, #2
- 800310a:	f884 304a 	strb.w	r3, [r4, #74]	@ 0x4a
+ 8003126:	2302      	movs	r3, #2
+ 8003128:	f884 304a 	strb.w	r3, [r4, #74]	@ 0x4a
 }
- 800310e:	bd70      	pop	{r4, r5, r6, pc}
- 8003110:	2000082c 	.word	0x2000082c
- 8003114:	20000a8c 	.word	0x20000a8c
- 8003118:	08009c04 	.word	0x08009c04
- 800311c:	00b40104 	.word	0x00b40104
- 8003120:	20000ad8 	.word	0x20000ad8
+ 800312c:	f50d 3dd6 	add.w	sp, sp, #109568	@ 0x1ac00
+ 8003130:	b071      	add	sp, #452	@ 0x1c4
+ 8003132:	bdf0      	pop	{r4, r5, r6, r7, pc}
+ 8003134:	08009c04 	.word	0x08009c04
+ 8003138:	2000082c 	.word	0x2000082c
+ 800313c:	20000a8c 	.word	0x20000a8c
+ 8003140:	00b40104 	.word	0x00b40104
+ 8003144:	20000ad8 	.word	0x20000ad8
 
-08003124 <OBJ_init_obstacle_pair>:
+08003148 <OBJ_init_obstacle_pair>:
 {
- 8003124:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
- 8003128:	f5ad 3db7 	sub.w	sp, sp, #93696	@ 0x16e00
- 800312c:	b0ac      	sub	sp, #176	@ 0xb0
-	if (RLE_Decode_RGB565(rle_data, rle_length,
- 800312e:	ab2c      	add	r3, sp, #176	@ 0xb0
+ 8003148:	b530      	push	{r4, r5, lr}
+ 800314a:	f5ad 3dbb 	sub.w	sp, sp, #95744	@ 0x17600
+ 800314e:	b0c5      	sub	sp, #276	@ 0x114
+		if (RLE_Decode_RGB565(bottom_data, bottom_length,
+ 8003150:	ab44      	add	r3, sp, #272	@ 0x110
+ 8003152:	ad04      	add	r5, sp, #16
+ 8003154:	f5a3 7182 	sub.w	r1, r3, #260	@ 0x104
 {
- 8003130:	4604      	mov	r4, r0
-    GFX_init_location_restrictions(&obstacle_pair->top, &canvas.whole_area);
- 8003132:	4e16      	ldr	r6, [pc, #88]	@ (800318c <OBJ_init_obstacle_pair+0x68>)
-    obstacle_pair->top.image.size_x = 50;
- 8003134:	4d16      	ldr	r5, [pc, #88]	@ (8003190 <OBJ_init_obstacle_pair+0x6c>)
-	if (RLE_Decode_RGB565(rle_data, rle_length,
- 8003136:	4817      	ldr	r0, [pc, #92]	@ (8003194 <OBJ_init_obstacle_pair+0x70>)
- 8003138:	f10d 080c 	add.w	r8, sp, #12
- 800313c:	f1a3 01a8 	sub.w	r1, r3, #168	@ 0xa8
- 8003140:	4642      	mov	r2, r8
- 8003142:	f24b 7352 	movw	r3, #46930	@ 0xb752
- 8003146:	9100      	str	r1, [sp, #0]
-    obstacle_pair->top.image.size = obstacle_pair->top.image.size_x * obstacle_pair->top.image.size_y;
- 8003148:	f642 67e0 	movw	r7, #12000	@ 0x2ee0
-	if (RLE_Decode_RGB565(rle_data, rle_length,
- 800314c:	f640 21ec 	movw	r1, #2796	@ 0xaec
- 8003150:	f7ff fe72 	bl	8002e38 <RLE_Decode_RGB565>
-    obstacle_pair->top.image.size = obstacle_pair->top.image.size_x * obstacle_pair->top.image.size_y;
- 8003154:	e9c4 5701 	strd	r5, r7, [r4, #4]
-    GFX_init_location_restrictions(&obstacle_pair->top, &canvas.whole_area);
- 8003158:	4631      	mov	r1, r6
- 800315a:	4620      	mov	r0, r4
-    obstacle_pair->top.image.image_array = (uint16_t*) decoded_buffer;
- 800315c:	f8c4 8000 	str.w	r8, [r4]
-    GFX_init_location_restrictions(&obstacle_pair->top, &canvas.whole_area);
- 8003160:	f7fe fe90 	bl	8001e84 <GFX_init_location_restrictions>
-    obstacle_pair->bottom.image.image_array = (uint16_t*) obstacle_bottom_img;
- 8003164:	4b0c      	ldr	r3, [pc, #48]	@ (8003198 <OBJ_init_obstacle_pair+0x74>)
+ 8003158:	4604      	mov	r4, r0
+		if (RLE_Decode_RGB565(bottom_data, bottom_length,
+ 800315a:	462a      	mov	r2, r5
+ 800315c:	9100      	str	r1, [sp, #0]
+ 800315e:	f64b 3380 	movw	r3, #48000	@ 0xbb80
+ 8003162:	f640 21ec 	movw	r1, #2796	@ 0xaec
+ 8003166:	480a      	ldr	r0, [pc, #40]	@ (8003190 <OBJ_init_obstacle_pair+0x48>)
+ 8003168:	f7ff fe66 	bl	8002e38 <RLE_Decode_RGB565>
     obstacle_pair->bottom.image.size_x = 50;
- 8003166:	6525      	str	r5, [r4, #80]	@ 0x50
-    obstacle_pair->top.edge_behavior = EDGE_IGNORE;
- 8003168:	2502      	movs	r5, #2
- 800316a:	f884 504a 	strb.w	r5, [r4, #74]	@ 0x4a
-    obstacle_pair->bottom.image.image_array = (uint16_t*) obstacle_bottom_img;
- 800316e:	64e3      	str	r3, [r4, #76]	@ 0x4c
-    obstacle_pair->bottom.image.size = obstacle_pair->bottom.image.size_x * obstacle_pair->bottom.image.size_y;
- 8003170:	6567      	str	r7, [r4, #84]	@ 0x54
+ 800316c:	4a09      	ldr	r2, [pc, #36]	@ (8003194 <OBJ_init_obstacle_pair+0x4c>)
     GFX_init_location_restrictions(&obstacle_pair->bottom, &canvas.whole_area);
- 8003172:	4631      	mov	r1, r6
- 8003174:	f104 004c 	add.w	r0, r4, #76	@ 0x4c
- 8003178:	f7fe fe84 	bl	8001e84 <GFX_init_location_restrictions>
+ 800316e:	490a      	ldr	r1, [pc, #40]	@ (8003198 <OBJ_init_obstacle_pair+0x50>)
+    obstacle_pair->bottom.image.size = obstacle_pair->bottom.image.size_x * obstacle_pair->bottom.image.size_y;
+ 8003170:	f642 63e0 	movw	r3, #12000	@ 0x2ee0
+ 8003174:	6563      	str	r3, [r4, #84]	@ 0x54
+    obstacle_pair->bottom.image.size_x = 50;
+ 8003176:	e9c4 5213 	strd	r5, r2, [r4, #76]	@ 0x4c
+    GFX_init_location_restrictions(&obstacle_pair->bottom, &canvas.whole_area);
+ 800317a:	f104 004c 	add.w	r0, r4, #76	@ 0x4c
+ 800317e:	f7fe fe81 	bl	8001e84 <GFX_init_location_restrictions>
     obstacle_pair->bottom.edge_behavior = EDGE_IGNORE;
- 800317c:	f884 5096 	strb.w	r5, [r4, #150]	@ 0x96
+ 8003182:	2302      	movs	r3, #2
+ 8003184:	f884 3096 	strb.w	r3, [r4, #150]	@ 0x96
 }
- 8003180:	f50d 3db7 	add.w	sp, sp, #93696	@ 0x16e00
- 8003184:	b02c      	add	sp, #176	@ 0xb0
- 8003186:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
- 800318a:	bf00      	nop
- 800318c:	20000ad8 	.word	0x20000ad8
- 8003190:	00f00032 	.word	0x00f00032
- 8003194:	08056d88 	.word	0x08056d88
- 8003198:	0802ae04 	.word	0x0802ae04
+ 8003188:	f50d 3dbb 	add.w	sp, sp, #95744	@ 0x17600
+ 800318c:	b045      	add	sp, #276	@ 0x114
+ 800318e:	bd30      	pop	{r4, r5, pc}
+ 8003190:	0800af3c 	.word	0x0800af3c
+ 8003194:	00f00032 	.word	0x00f00032
+ 8003198:	20000ad8 	.word	0x20000ad8
 
 0800319c <OBJ_set_score_text_value>:
 {
@@ -6924,7 +6921,7 @@ void OBJ_init_flappy_misko_text(int x_min, int y_min)
  80031da:	bf00      	nop
  80031dc:	20000590 	.word	0x20000590
  80031e0:	20000014 	.word	0x20000014
- 80031e4:	080583c4 	.word	0x080583c4
+ 80031e4:	0803cb9c 	.word	0x0803cb9c
 
 080031e8 <OBJ_init_loading_text>:
 
@@ -6958,7 +6955,7 @@ void OBJ_init_loading_text(int x_min, int y_min, const char* str)
 }
  8003202:	4770      	bx	lr
  8003204:	20000578 	.word	0x20000578
- 8003208:	080583e0 	.word	0x080583e0
+ 8003208:	0803cbb8 	.word	0x0803cbb8
 
 0800320c <OBJ_init_text_small>:
 
@@ -6991,7 +6988,7 @@ void OBJ_init_text_small(int x_min, int y_min, const char* input_str, text_objec
 }
  8003224:	4770      	bx	lr
  8003226:	bf00      	nop
- 8003228:	080583fc 	.word	0x080583fc
+ 8003228:	0803cbd4 	.word	0x0803cbd4
 
 0800322c <OBJ_init_text_big>:
 
@@ -7023,7 +7020,7 @@ void OBJ_init_text_big(int x_min, int y_min, const char* input_str, text_object_
 }
  8003244:	4770      	bx	lr
  8003246:	bf00      	nop
- 8003248:	080583c4 	.word	0x080583c4
+ 8003248:	0803cb9c 	.word	0x0803cb9c
 
 0800324c <OBJ_init_text_tiny>:
 
@@ -7055,7 +7052,7 @@ void OBJ_init_text_tiny(int x_min, int y_min, const char* input_str, text_object
 }
  8003264:	4770      	bx	lr
  8003266:	bf00      	nop
- 8003268:	08058418 	.word	0x08058418
+ 8003268:	0803cbf0 	.word	0x0803cbf0
 
 0800326c <SystemClock_Config>:
 /**
@@ -9118,7 +9115,7 @@ LoopForever:
   ldr r1, =_edata
  8003da0:	200000b4 	.word	0x200000b4
   ldr r2, =_sidata
- 8003da4:	08060d24 	.word	0x08060d24
+ 8003da4:	080454fc 	.word	0x080454fc
   ldr r2, =_sbss
  8003da8:	200000b8 	.word	0x200000b8
   ldr r4, =_ebss
@@ -13838,7 +13835,7 @@ uint32_t HAL_RCC_GetSysClockFreq(void)
  8005a90:	40022000 	.word	0x40022000
  8005a94:	40021000 	.word	0x40021000
  8005a98:	04c4b400 	.word	0x04c4b400
- 8005a9c:	08058368 	.word	0x08058368
+ 8005a9c:	0803cb40 	.word	0x0803cb40
  8005aa0:	2000002c 	.word	0x2000002c
  8005aa4:	20000034 	.word	0x20000034
  8005aa8:	007a1200 	.word	0x007a1200
@@ -17445,8 +17442,8 @@ __STATIC_INLINE uint32_t LL_RCC_PLL_GetDivider(void)
  8006f8c:	40021000 	.word	0x40021000
  8006f90:	000c0008 	.word	0x000c0008
  8006f94:	00f42400 	.word	0x00f42400
- 8006f98:	08058368 	.word	0x08058368
- 8006f9c:	08058360 	.word	0x08058360
+ 8006f98:	0803cb40 	.word	0x0803cb40
+ 8006f9c:	0803cb38 	.word	0x0803cb38
  8006fa0:	00030002 	.word	0x00030002
  8006fa4:	00300020 	.word	0x00300020
  8006fa8:	007a1200 	.word	0x007a1200
@@ -17668,8 +17665,8 @@ __STATIC_INLINE uint32_t LL_RCC_PLL_GetDivider(void)
  800711c:	40021000 	.word	0x40021000
  8007120:	03000200 	.word	0x03000200
  8007124:	00f42400 	.word	0x00f42400
- 8007128:	08058368 	.word	0x08058368
- 800712c:	08058360 	.word	0x08058360
+ 8007128:	0803cb40 	.word	0x0803cb40
+ 800712c:	0803cb38 	.word	0x0803cb38
  8007130:	00c00080 	.word	0x00c00080
  8007134:	007a1200 	.word	0x007a1200
 
@@ -18514,7 +18511,7 @@ ErrorStatus LL_USART_Init(USART_TypeDef *USARTx, const LL_USART_InitTypeDef *USA
  800766c:	40004800 	.word	0x40004800
  8007670:	40004c00 	.word	0x40004c00
  8007674:	40005000 	.word	0x40005000
- 8007678:	08058378 	.word	0x08058378
+ 8007678:	0803cb50 	.word	0x0803cb50
 
 0800767c <LED_init>:
 
@@ -19093,14 +19090,14 @@ void XPT2046_touch_get_coordinates(uint16_t* x, uint16_t* y)
  800798e:	e7d0      	b.n	8007932 <XPT2046_touch_get_coordinates+0x9a>
  8007990:	48001000 	.word	0x48001000
  8007994:	20000c0c 	.word	0x20000c0c
- 8007998:	080583b0 	.word	0x080583b0
- 800799c:	080583a8 	.word	0x080583a8
+ 8007998:	0803cb88 	.word	0x0803cb88
+ 800799c:	0803cb80 	.word	0x0803cb80
  80079a0:	80808081 	.word	0x80808081
  80079a4:	0006d523 	.word	0x0006d523
  80079a8:	0070731b 	.word	0x0070731b
  80079ac:	4e0b90d7 	.word	0x4e0b90d7
  80079b0:	350d66f7 	.word	0x350d66f7
- 80079b4:	080583ac 	.word	0x080583ac
+ 80079b4:	0803cb84 	.word	0x0803cb84
 
 080079b8 <BUF_init>:
 }
@@ -19648,7 +19645,7 @@ void LCD_uGUI_init(void)
  8007c6c:	f000 b9da 	b.w	8008024 <UG_SetBackcolor>
  8007c70:	08007bb5 	.word	0x08007bb5
  8007c74:	20001288 	.word	0x20001288
- 8007c78:	08058418 	.word	0x08058418
+ 8007c78:	0803cbf0 	.word	0x0803cbf0
 
 08007c7c <LL_TIM_OC_SetCompareCH1>:
   WRITE_REG(TIMx->CCR1, CompareValue);
@@ -20059,7 +20056,7 @@ void ILI9341_Init(uint32_t color_space, uint32_t orientation)
  8007eac:	23f0      	movs	r3, #240	@ 0xf0
  8007eae:	f44f 72a0 	mov.w	r2, #320	@ 0x140
  8007eb2:	e7ab      	b.n	8007e0c <ILI9341_Init+0x34>
- 8007eb4:	080583b4 	.word	0x080583b4
+ 8007eb4:	0803cb8c 	.word	0x0803cb8c
  8007eb8:	20001328 	.word	0x20001328
  8007ebc:	60010000 	.word	0x60010000
 
@@ -21204,8 +21201,8 @@ void _UG_PutChar( char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc, const 
  8008648:	615a      	str	r2, [r3, #20]
  800864a:	bd38      	pop	{r3, r4, r5, pc}
  800864c:	20000064 	.word	0x20000064
- 8008650:	08060c34 	.word	0x08060c34
- 8008654:	08060c4b 	.word	0x08060c4b
+ 8008650:	0804540c 	.word	0x0804540c
+ 8008654:	08045423 	.word	0x08045423
  8008658:	abcd330e 	.word	0xabcd330e
  800865c:	e66d1234 	.word	0xe66d1234
  8008660:	0005deec 	.word	0x0005deec
@@ -21249,8 +21246,8 @@ void _UG_PutChar( char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc, const 
  80086ba:	f020 4000 	bic.w	r0, r0, #2147483648	@ 0x80000000
  80086be:	bd10      	pop	{r4, pc}
  80086c0:	20000064 	.word	0x20000064
- 80086c4:	08060c34 	.word	0x08060c34
- 80086c8:	08060c4b 	.word	0x08060c4b
+ 80086c4:	0804540c 	.word	0x0804540c
+ 80086c8:	08045423 	.word	0x08045423
  80086cc:	abcd330e 	.word	0xabcd330e
  80086d0:	e66d1234 	.word	0xe66d1234
  80086d4:	0005deec 	.word	0x0005deec
@@ -21932,10 +21929,10 @@ void _UG_PutChar( char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc, const 
  8008cda:	4798      	blx	r3
  8008cdc:	3601      	adds	r6, #1
  8008cde:	e7f2      	b.n	8008cc6 <__libc_init_array+0x1e>
- 8008ce0:	08060d1c 	.word	0x08060d1c
- 8008ce4:	08060d1c 	.word	0x08060d1c
- 8008ce8:	08060d1c 	.word	0x08060d1c
- 8008cec:	08060d20 	.word	0x08060d20
+ 8008ce0:	080454f4 	.word	0x080454f4
+ 8008ce4:	080454f4 	.word	0x080454f4
+ 8008ce8:	080454f4 	.word	0x080454f4
+ 8008cec:	080454f8 	.word	0x080454f8
 
 08008cf0 <__retarget_lock_init_recursive>:
  8008cf0:	4770      	bx	lr
@@ -21968,9 +21965,9 @@ void _UG_PutChar( char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc, const 
  8008d20:	e7f4      	b.n	8008d0c <__assert_func+0x14>
  8008d22:	bf00      	nop
  8008d24:	20000064 	.word	0x20000064
- 8008d28:	08060cde 	.word	0x08060cde
- 8008d2c:	08060cb0 	.word	0x08060cb0
- 8008d30:	08060ca3 	.word	0x08060ca3
+ 8008d28:	080454b6 	.word	0x080454b6
+ 8008d2c:	08045488 	.word	0x08045488
+ 8008d30:	0804547b 	.word	0x0804547b
 
 08008d34 <_free_r>:
  8008d34:	b538      	push	{r3, r4, r5, lr}
@@ -22318,11 +22315,11 @@ void _UG_PutChar( char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc, const 
  800905c:	4638      	mov	r0, r7
  800905e:	f000 f9bb 	bl	80093d8 <_printf_i>
  8009062:	e7ed      	b.n	8009040 <_svfiprintf_r+0x1c0>
- 8009064:	08060cdf 	.word	0x08060cdf
- 8009068:	08060ce9 	.word	0x08060ce9
+ 8009064:	080454b7 	.word	0x080454b7
+ 8009068:	080454c1 	.word	0x080454c1
  800906c:	00000000 	.word	0x00000000
  8009070:	08008dc9 	.word	0x08008dc9
- 8009074:	08060ce5 	.word	0x08060ce5
+ 8009074:	080454bd 	.word	0x080454bd
 
 08009078 <__sfputc_r>:
  8009078:	6893      	ldr	r3, [r2, #8]
@@ -22588,11 +22585,11 @@ void _UG_PutChar( char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc, const 
  80092e0:	4630      	mov	r0, r6
  80092e2:	f000 f879 	bl	80093d8 <_printf_i>
  80092e6:	e7e4      	b.n	80092b2 <_vfiprintf_r+0x1e6>
- 80092e8:	08060cdf 	.word	0x08060cdf
- 80092ec:	08060ce9 	.word	0x08060ce9
+ 80092e8:	080454b7 	.word	0x080454b7
+ 80092ec:	080454c1 	.word	0x080454c1
  80092f0:	00000000 	.word	0x00000000
  80092f4:	080090a7 	.word	0x080090a7
- 80092f8:	08060ce5 	.word	0x08060ce5
+ 80092f8:	080454bd 	.word	0x080454bd
 
 080092fc <_printf_common>:
  80092fc:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
@@ -22923,8 +22920,8 @@ void _UG_PutChar( char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc, const 
  8009608:	f104 0619 	add.w	r6, r4, #25
  800960c:	e7f5      	b.n	80095fa <_printf_i+0x222>
  800960e:	bf00      	nop
- 8009610:	08060cf0 	.word	0x08060cf0
- 8009614:	08060d01 	.word	0x08060d01
+ 8009610:	080454c8 	.word	0x080454c8
+ 8009614:	080454d9 	.word	0x080454d9
 
 08009618 <__sflush_r>:
  8009618:	f9b1 200c 	ldrsh.w	r2, [r1, #12]
