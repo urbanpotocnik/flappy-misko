@@ -6,6 +6,7 @@ Za narest:
 - popuci warninge
 - stestiraj vse
 - dodaj locene high score
+- dodaj readme
 
 
 
