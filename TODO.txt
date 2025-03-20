@@ -8,6 +8,7 @@ Za narest:
 - dodaj locene high score
 - dodaj readme
 - dodaj pause menu
+- uredi direktorij
 
 
 
