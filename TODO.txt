@@ -7,6 +7,7 @@ Za narest:
 - stestiraj vse
 - dodaj locene high score
 - dodaj readme
+- dodaj pause menu
 
 
 
