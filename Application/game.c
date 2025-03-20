@@ -55,6 +55,14 @@ typedef enum INPUT_MODE {
 static INPUT_MODE_t current_input_mode = INPUT_BUTTONS;
 static MENU_ITEMS_t selected_menu_item = MENU_START_GAME;
 
+typedef enum DIFFICULTY_MODE {
+    DIFFICULTY_EASY,
+    DIFFICULTY_HARD
+} DIFFICULTY_MODE_t;
+
+static DIFFICULTY_MODE_t current_difficulty = DIFFICULTY_EASY;
+
+
 stopwatch_handle_t stopwatch;
 location_t movement_area;
 
@@ -262,7 +270,7 @@ uint8_t Intro() {
 			GFX_draw_one_gfx_object_on_background(&finger_or_button_sprite, &background);
 
 			OBJ_init_text_small(60, 80, "START GAME", &start_game_text);
-			OBJ_init_text_small(60, 120, "CHOOSE THEME", &choose_theme_text);
+			OBJ_init_text_small(60, 120, "CHANGE LEVEL", &choose_theme_text);
 			OBJ_init_text_small(60, 160, "HIGH SCORES", &high_scores_text);
 			OBJ_init_text_small(60, 200, "PLAY WITH", &touch_or_button_text);
 
@@ -396,120 +404,116 @@ uint8_t Intro() {
 		break;
 
 	case INTRO_CHOOSE_THEME: {
-		static uint8_t theme_menu_initialized = 0;
-		static int selected_theme = 0;
-		static int previous_selected_theme = -1;
+    static uint8_t difficulty_menu_initialized = 0;
+    static int selected_difficulty = 0;
+    static int previous_selected_difficulty = -1;
 
-		if (!theme_menu_initialized) {
-			GFX_draw_gfx_object(&background);
-			OBJ_init_big_sprite(20, 10);
-			GFX_draw_one_gfx_object_on_background(&big_sprite, &background);
-			OBJ_init_flappy_misko_text(30, 22);
-			GFX_display_text_object(&flappy_misko_text);
+    if (!difficulty_menu_initialized) {
+        GFX_draw_gfx_object(&background);
+        OBJ_init_big_sprite(20, 10);
+        GFX_draw_one_gfx_object_on_background(&big_sprite, &background);
+        OBJ_init_flappy_misko_text(30, 22);
+        GFX_display_text_object(&flappy_misko_text);
 
-			GFX_set_gfx_object_location(&misko, 240, 22);
-			GFX_draw_one_gfx_object_on_background(&misko, &background);
+        GFX_set_gfx_object_location(&misko, 240, 22);
+        GFX_draw_one_gfx_object_on_background(&misko, &background);
 
-			OBJ_init_small_sprite_object(&choose_theme_sprite, 50, 70);
-			OBJ_init_small_sprite_object(&dark_theme_sprite, 50, 110);
-			OBJ_init_small_sprite_object(&light_theme_sprite, 50, 150);
+        OBJ_init_small_sprite_object(&choose_theme_sprite, 50, 70);
+        OBJ_init_small_sprite_object(&dark_theme_sprite, 50, 110);
+        OBJ_init_small_sprite_object(&light_theme_sprite, 50, 150);
 
-			GFX_draw_one_gfx_object_on_background(&choose_theme_sprite, &background);
-			GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
-			GFX_draw_one_gfx_object_on_background(&light_theme_sprite, &background);
+        GFX_draw_one_gfx_object_on_background(&choose_theme_sprite, &background);
+        GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
+        GFX_draw_one_gfx_object_on_background(&light_theme_sprite, &background);
 
-			OBJ_init_text_small(60, 80, "CHOOSE THEME:", &choose_theme_text);
-			OBJ_init_text_small(60, 120, "DARK", &dark_theme_text);
-			OBJ_init_text_small(60, 160, "LIGHT", &light_theme_text);
+        OBJ_init_text_small(60, 80, "CHANGE LEVEL:", &choose_theme_text);
+        OBJ_init_text_small(60, 120, "EASY", &dark_theme_text);
+        OBJ_init_text_small(60, 160, "HARD", &light_theme_text);
 
-			GFX_display_text_object(&choose_theme_text);
-			GFX_display_text_object(&dark_theme_text);
-			GFX_display_text_object(&light_theme_text);
+        GFX_display_text_object(&choose_theme_text);
+        GFX_display_text_object(&dark_theme_text);
+        GFX_display_text_object(&light_theme_text);
 
-			OBJ_init_text_small(230, 120, "->", &text_selector);
-			GFX_display_text_object(&text_selector);
-			previous_selected_theme = selected_theme;
+        selected_difficulty = (current_difficulty == DIFFICULTY_EASY) ? 0 : 1;
+        previous_selected_difficulty = -1;  // Force initial draw
+        
+        difficulty_menu_initialized = 1;
+    }
 
-			theme_menu_initialized = 1;
-		}
+    // Only redraw if selection changed
+    if (previous_selected_difficulty != selected_difficulty) {
+        // Clear previous cursor position
+        GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
+        GFX_draw_one_gfx_object_on_background(&light_theme_sprite, &background);
 
-		if (previous_selected_theme != selected_theme) {
-			GFX_draw_one_gfx_object_on_background(&dark_theme_sprite, &background);
-			GFX_draw_one_gfx_object_on_background(&light_theme_sprite, &background);
+        GFX_display_text_object(&dark_theme_text);
+        GFX_display_text_object(&light_theme_text);
 
-			GFX_display_text_object(&dark_theme_text);
-			GFX_display_text_object(&light_theme_text);
+        // Draw new cursor position
+        if (selected_difficulty == 0) {
+            OBJ_init_text_small(230, 120, "->", &text_selector);
+        } else {
+            OBJ_init_text_small(230, 160, "->", &text_selector);
+        }
+        GFX_display_text_object(&text_selector);
+        previous_selected_difficulty = selected_difficulty;
+    }
 
-			switch (selected_theme) {
-			case 0:
-				OBJ_init_text_small(230, 120, "->", &text_selector);
-				break;
-			case 1:
-				OBJ_init_text_small(230, 160, "->", &text_selector);
-				break;
-			}
-			GFX_display_text_object(&text_selector);
-			previous_selected_theme = selected_theme;
-		}
+    // Handle touchscreen input
+    if (current_input_mode == INPUT_TOUCHSCREEN) {
+        if (!touch_init) {
+            TIMUT_stopwatch_set_time_mark(&touch_polling_stopwatch);
+            TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+            touch_init = 1;
+        }
 
-		if (current_input_mode == INPUT_TOUCHSCREEN) {
-			if (!touch_init) {
-				TIMUT_stopwatch_set_time_mark(&touch_polling_stopwatch);
-				TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
-				touch_init = 1;
-			}
+        if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 100)) {
+            XPT2046_touch_get_coordinates(&x1, &y1);
+            
+            if (press_enable == 1 && x1 >= 50 && x1 <= 230) {
+                if (y1 >= 110 && y1 <= 140) { // EASY mode
+                    selected_difficulty = 0;
+                    current_difficulty = DIFFICULTY_EASY;
+                    difficulty_menu_initialized = 0;
+                    intro_state = INTRO_MAIN_MENU;
+                    menu_initialized = 0;
+                    previous_selected_item = -1;
+                    press_enable = 0;
+                    TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+                }
+                else if (y1 >= 150 && y1 <= 180) { // HARD mode
+                    selected_difficulty = 1;
+                    current_difficulty = DIFFICULTY_HARD;
+                    difficulty_menu_initialized = 0;
+                    intro_state = INTRO_MAIN_MENU;
+                    menu_initialized = 0;
+                    previous_selected_item = -1;
+                    press_enable = 0;
+                    TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+                }
+            }
+        }
 
-			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 100)) {
-				XPT2046_touch_get_coordinates(&x1, &y1);
-				
-				if (press_enable == 1 && x1 >= 50 && x1 <= 230) {
-					if (y1 >= 110 && y1 <= 140) { // DARK theme
-						selected_theme = 0;
-						//dark theme implementation
-						theme_menu_initialized = 0;
-						intro_state = INTRO_MAIN_MENU;
-						menu_initialized = 0;
-						previous_selected_item = -1;
-						press_enable = 0;
-						TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
-					}
-					else if (y1 >= 150 && y1 <= 180) { // LIGHT theme
-						selected_theme = 1;
-						//light theme implementation
-						theme_menu_initialized = 0;
-						intro_state = INTRO_MAIN_MENU;
-						menu_initialized = 0;
-						previous_selected_item = -1;
-						press_enable = 0;
-						TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
-					}
-				}
-			}
+        if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 100)) {
+            press_enable = 1;
+        }
+    }
 
-			if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 100)) {
-				press_enable = 1;
-			}
-		}
-
-		key = KBD_get_pressed_key();
-		if (key == BTN_UP || key == BTN_DOWN) {
-			selected_theme = !selected_theme;
-		} else if (key == BTN_OK || key == BTN_ESC) {
-
-			if (key == BTN_OK) {
-				if (selected_theme == 0) {
-                    // Apply dark theme                                 
-				} else {
-                    // Apply light theme
-				}
-			}
-			theme_menu_initialized = 0;
-			intro_state = INTRO_MAIN_MENU;
-			menu_initialized = 0;
-			previous_selected_item = -1;
-		}
-		break;
-	}
+    // Handle button input
+    key = KBD_get_pressed_key();
+    if (key == BTN_UP || key == BTN_DOWN) {
+        selected_difficulty = !selected_difficulty;  // Toggle between 0 and 1
+    } else if (key == BTN_OK || key == BTN_ESC) {
+        if (key == BTN_OK) {
+            current_difficulty = (selected_difficulty == 0) ? DIFFICULTY_EASY : DIFFICULTY_HARD;
+        }
+        difficulty_menu_initialized = 0;
+        intro_state = INTRO_MAIN_MENU;
+        menu_initialized = 0;
+        previous_selected_item = -1;
+    }
+    break;
+}
 
 	case INTRO_HIGH_SCORES: {
 		static uint8_t high_scores_initialized = 0;
@@ -560,6 +564,7 @@ uint8_t Intro() {
 				XPT2046_touch_get_coordinates(&x1, &y1);
 				
 				if (press_enable == 1 && y1 < 240) { 
+					intro_state = INTRO_MAIN_MENU;
 					intro_state = INTRO_MAIN_MENU;
 					high_scores_initialized = 0;
 					menu_initialized = 0;
@@ -765,38 +770,48 @@ uint8_t Intro() {
 }
 
 void GamePlay_UpdateChanges(void) {
-	static stopwatch_handle_t update_stopwatch_misko;
-	static uint8_t timers_initialized = 0;
+    static stopwatch_handle_t update_stopwatch_misko;
+    static uint8_t timers_initialized = 0;
 
-	if (!timers_initialized) {
-		TIMUT_stopwatch_set_time_mark(&update_stopwatch_misko);
-		timers_initialized = 1;
-	}
+    if (!timers_initialized) {
+        TIMUT_stopwatch_set_time_mark(&update_stopwatch_misko);
+        timers_initialized = 1;
+    }
 
-	GFX_display_text_object(&score_text);
-	GFX_display_text_object(&score_box_title);
+    int refresh_rate = (current_difficulty == DIFFICULTY_EASY) ? 11 : 8;
 
-	if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_misko, 10)) {
-		GFX_update_moving_gfx_object_location(&misko);
-		GFX_draw_one_gfx_object_on_background(&misko, &background);
+    if (TIMUT_stopwatch_has_another_X_ms_passed(&update_stopwatch_misko, refresh_rate)) {
+        // 1. Update all positions first
+        GFX_update_moving_gfx_object_location(&misko);
+        
+        if (obstacle_pair1_spawned == 1) {
+            GFX_update_obstacle_pair_location(&obstacle_pair1);
+        }
+        if (obstacle_pair2_spawned == 1) {
+            GFX_update_obstacle_pair_location(&obstacle_pair2);
+        }
+        if (obstacle_pair3_spawned == 1) {
+            GFX_update_obstacle_pair_location(&obstacle_pair3);
+        }
 
-		if (obstacle_pair1_spawned == 1) {
-			GFX_update_obstacle_pair_location(&obstacle_pair1);
-			GFX_draw_obstacle_pair_on_background(&obstacle_pair1, &background);
-		}
+        // 2. Draw background elements first (obstacles)
+        if (obstacle_pair1_spawned == 1) {
+            GFX_draw_obstacle_pair_on_background(&obstacle_pair1, &background);
+        }
+        if (obstacle_pair2_spawned == 1) {
+            GFX_draw_obstacle_pair_on_background(&obstacle_pair2, &background);
+        }
+        if (obstacle_pair3_spawned == 1) {
+            GFX_draw_obstacle_pair_on_background(&obstacle_pair3, &background);
+        }
 
-		if (obstacle_pair2_spawned == 1) {
-			GFX_update_obstacle_pair_location(&obstacle_pair2);
-			GFX_draw_obstacle_pair_on_background(&obstacle_pair2, &background);
-		}
-
-		if (obstacle_pair3_spawned == 1) {
-			GFX_update_obstacle_pair_location(&obstacle_pair3);
-			GFX_draw_obstacle_pair_on_background(&obstacle_pair3, &background);
-		}
-
-	}
-
+        // 3. Draw Misko
+        GFX_draw_one_gfx_object_on_background(&misko, &background);
+        
+        // 4. Draw UI elements last (always on top)
+        GFX_display_text_object(&score_text);
+        GFX_display_text_object(&score_box_title);
+    }
 }
 
 uint8_t GamePlay() {

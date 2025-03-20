@@ -1,42 +1,16 @@
 Za narest:
-- za dodat vibriranje
-- za dodat zvocnik
-- RLE do konca
+
+- za dodat modul
 - clean up kode in formatiranje
 - 3d printed case
-- dodaj izbiro med touch in knofom
-- dodaj izbiro teme 
-- zrihtaj da se prvi obstacle pojavi hitreje
 - popuci warninge
 - stestiraj vse
+- dodaj locene high score
 
 
-IDEJE:
-- uporabimo tudi motorcek za vibriranje
-- ce zmanjka idej za dodatke lahko povprasamo AI hehe
-- spreminjanje hitrosti skoka in padca da nista linearna
 
 PREDSTAVITEV:
 najzanimivejse resitve: optimizacija compilerja, RLE, merjenje casa izvedbe funkcije, DMA?, clock speed na 170mhz
 
-
-Here are some features you could add to your project:
-
-1. **Scoring System**:
-   - Keep track of the player's score based on obstacles passed.
-   - Display the score on the screen during gameplay.
-2. **Power-ups**:
-   - Introduce collectibles that grant temporary abilities, like invincibility or speed boost.
-3. **Multiple Levels**:
-   - Create different backgrounds and obstacle patterns for each level.
-   - Increase difficulty as the player progresses.
-4. **High Score Tracking**:
-   - Save high scores and display them on the game over screen.
-5. **Sound Effects and Music**:
-   - Add background music and sounds for actions like jumping or hitting an obstacle.
-6. **Character Selection**:
-   - Offer different characters or skins that the player can choose from.
-7. **Dynamic Obstacles**:
-   - Implement moving obstacles or ones that change size to increase difficulty.
-8. **Touch Controls**:
-   - Add support for touch input if your hardware allows it.
+problemi z rle: dekodirano se je shranjevalo v ram in je zafilalo ram, ram se je tudi overwrital, risanje direktno na ekran ne gre 
+qspi in flash tudi ni ratalo
