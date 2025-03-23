@@ -1208,6 +1208,7 @@ uint8_t GameOver() {
         GFX_display_text_object(&press_to_go_back_text2);
 
         game_status.score = 0;
+        HAL_Delay(1000);
 
         state = GAMEOVER_WAIT_FOR_ANY_KEY;
         exit_value = 0;
