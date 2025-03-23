@@ -1,7 +1,9 @@
 ../System/timing_utils.c:7:6:TIMUT_stopwatch_set_time_mark	1
 ../System/timing_utils.c:12:6:TIMUT_stopwatch_update	1
-../System/timing_utils.c:17:9:TIMUT_stopwatch_has_X_ms_passed	1
-../System/timing_utils.c:31:9:TIMUT_stopwatch_has_another_X_ms_passed	3
-../System/timing_utils.c:53:6:TIMUT_stopwatch_demo	4
-../System/timing_utils.c:76:10:TIMUT_get_stopwatch_elapsed_time	1
-../System/timing_utils.c:83:6:TIMUT_stopwatch_reset	1
+../System/timing_utils.c:18:9:TIMUT_stopwatch_has_X_ms_passed	1
+../System/timing_utils.c:33:9:TIMUT_stopwatch_has_another_X_ms_passed	3
+../System/timing_utils.c:55:6:TIMUT_stopwatch_demo	4
+../System/timing_utils.c:78:10:TIMUT_get_stopwatch_elapsed_time	1
+../System/timing_utils.c:84:10:TIMUT_stopwatch_get_remaining_time	2
+../System/timing_utils.c:92:6:TIMUT_stopwatch_set_time_mark_with_remaining_time	1
+../System/timing_utils.c:99:6:TIMUT_stopwatch_reset	1

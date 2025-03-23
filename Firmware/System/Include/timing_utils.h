@@ -9,7 +9,7 @@ typedef struct
 {
 	uint32_t	time_mark;
 	uint32_t	elapsed_time;
-
+	uint32_t interval; 
 } stopwatch_handle_t;
 
 // ---------------- Public function prototypes ----------------
@@ -24,4 +24,7 @@ uint32_t TIMUT_get_stopwatch_elapsed_time(stopwatch_handle_t *stopwatch); //vaja
 
 void TIMUT_stopwatch_reset(stopwatch_handle_t *stopwatch);
 
-#endif 
+void TIMUT_stopwatch_set_time_mark_with_remaining_time(stopwatch_handle_t *stopwatch, uint32_t remaining_time);
+uint32_t TIMUT_stopwatch_get_remaining_time(stopwatch_handle_t *stopwatch);
+
+#endif

@@ -101,8 +101,9 @@ text_object_t 	start_game_text;
 text_object_t	choose_theme_text;
 text_object_t	high_scores_text;
 text_object_t	touch_or_button_text;
+text_object_t	pause_text1;
+text_object_t	pause_text2;
 text_object_t	text_selector;
-
 text_object_t	high_scores_menu_text;
 text_object_t	high_score1_text;
 text_object_t	high_score2_text;

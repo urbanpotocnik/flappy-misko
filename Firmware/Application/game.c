@@ -32,7 +32,7 @@ typedef enum INTRO_states {
 } INTRO_states_t;
 
 typedef enum GAMEPLAY_states {
-	GAMEPLAY_INIT, GAMEPLAY_JUMP
+	GAMEPLAY_INIT, GAMEPLAY_JUMP, GAMEPLAY_PAUSE
 } GAMEPLAY_states_t;
 
 typedef enum GAMEOVER_states {
@@ -851,200 +851,294 @@ uint8_t GamePlay() {
     break;
 
 	case GAMEPLAY_JUMP:
-		KBD_flush();
-		GFX_clear_gfx_object_on_background(&press_ok_sprite, &background);
+    KBD_flush();
+    GFX_clear_gfx_object_on_background(&press_ok_sprite, &background);
 
-		if (!touch_initialized) {
-			TIMUT_stopwatch_set_time_mark(&touch_polling_stopwatch);
-			touch_initialized = 1;
-		}
+    if (!touch_initialized) {
+        TIMUT_stopwatch_set_time_mark(&touch_polling_stopwatch);
+        touch_initialized = 1;
+    }
 
-		while (1) {
-			KBD_scan();
-			pressed_button = KBD_get_pressed_key();
+    while (1) {
+        KBD_scan();
+        pressed_button = KBD_get_pressed_key();
 
-			if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 60)) {
-				if (current_input_mode == INPUT_TOUCHSCREEN) {  
-					int x, y;
-					XPT2046_touch_get_coordinates(&x, &y);
-					if (y < 240 && press_enable == 1) {
-						pressed_button = BTN_OK;
-						press_enable = 0;
-						TIMUT_stopwatch_set_time_mark(&stopwatch_touchscreen);
-					}
-				}
-			}
+        // Check for ESC button to pause
+        if (pressed_button == BTN_ESC) {
+            gameplay_state = GAMEPLAY_PAUSE;
+            break;
+        }
 
-			if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_touchscreen, 60)) {
-				press_enable = 1;
-			}
+        if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 60)) {
+            if (current_input_mode == INPUT_TOUCHSCREEN) {  
+                int x, y;
+                XPT2046_touch_get_coordinates(&x, &y);
+                if (y < 240 && press_enable == 1) {
+                    pressed_button = BTN_OK;
+                    press_enable = 0;
+                    TIMUT_stopwatch_set_time_mark(&stopwatch_touchscreen);
+                }
+            }
+        }
 
-			if (pressed_button == BTN_OK) {
-				if (moving_obstacles == 0) {
-					moving_obstacles = 1;
-					TIMUT_stopwatch_set_time_mark(&stopwatch_obstacles);
-					obstacle_number = 1;
-				}
+        if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_touchscreen, 60)) {
+            press_enable = 1;
+        }
 
-				TIMUT_stopwatch_set_time_mark(&stopwatch_jump);
-				GFX_set_gfx_object_velocity(&misko, 0, 2);
-			}
+        if (pressed_button == BTN_OK) {
+            if (moving_obstacles == 0) {
+                moving_obstacles = 1;
+                TIMUT_stopwatch_set_time_mark(&stopwatch_obstacles);
+                obstacle_number = 1;
+            }
 
-			if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_jump, 200)) {
-				GFX_set_gfx_object_velocity(&misko, 0, -2);
-			}
+            TIMUT_stopwatch_set_time_mark(&stopwatch_jump);
+            GFX_set_gfx_object_velocity(&misko, 0, 2);
+        }
 
-			if (TIMUT_stopwatch_has_another_X_ms_passed(&stopwatch_obstacles,
-					1500)) {
+        if (TIMUT_stopwatch_has_X_ms_passed(&stopwatch_jump, 200)) {
+            GFX_set_gfx_object_velocity(&misko, 0, -2);
+        }
 
-				if (obstacle_number == 1) {
-					obstacle_positions =
-							MATH_randomise_distance_between_obstacles();
-					OBJ_init_obstacle_pair(&obstacle_pair1);
-					GFX_init_obstacle_pair_location(&obstacle_pair1, 269,
-							obstacle_positions.obstacle_top_y,
-							obstacle_positions.obstacle_bottom_y);
-					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair1, -1);
-					obstacle_pair1_spawned = 1;
-					obstacle_pair1_cleaned = 0;
-					obstacle_number = 2;
-					//printf("Obstacle 1 spawned\n");
-				} else if (obstacle_number == 2) {
-					obstacle_positions =
-							MATH_randomise_distance_between_obstacles();
-					OBJ_init_obstacle_pair(&obstacle_pair2);
-					GFX_init_obstacle_pair_location(&obstacle_pair2, 269,
-							obstacle_positions.obstacle_top_y,
-							obstacle_positions.obstacle_bottom_y);
-					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair2, -1);
-					obstacle_pair2_spawned = 1;
-					obstacle_pair2_cleaned = 0;
-					obstacle_number = 3;
-					//printf("Obstacle 2 spawned\n");
-				} else if (obstacle_number == 3) {
-					obstacle_positions =
-							MATH_randomise_distance_between_obstacles();
-					OBJ_init_obstacle_pair(&obstacle_pair3);
-					GFX_init_obstacle_pair_location(&obstacle_pair3, 269,
-							obstacle_positions.obstacle_top_y,
-							obstacle_positions.obstacle_bottom_y);
-					GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair3, -1);
-					obstacle_pair3_spawned = 1;
-					obstacle_pair3_cleaned = 0;
-					obstacle_number = 1;
-					//printf("Obstacle 3 spawned\n");
-				}
-			}
+        if (TIMUT_stopwatch_has_another_X_ms_passed(&stopwatch_obstacles,
+                1500)) {
 
-			GamePlay_UpdateChanges();
+            if (obstacle_number == 1) {
+                obstacle_positions =
+                        MATH_randomise_distance_between_obstacles();
+                OBJ_init_obstacle_pair(&obstacle_pair1);
+                GFX_init_obstacle_pair_location(&obstacle_pair1, 269,
+                        obstacle_positions.obstacle_top_y,
+                        obstacle_positions.obstacle_bottom_y);
+                GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair1, -1);
+                obstacle_pair1_spawned = 1;
+                obstacle_pair1_cleaned = 0;
+                obstacle_number = 2;
+                //printf("Obstacle 1 spawned\n");
+            } else if (obstacle_number == 2) {
+                obstacle_positions =
+                        MATH_randomise_distance_between_obstacles();
+                OBJ_init_obstacle_pair(&obstacle_pair2);
+                GFX_init_obstacle_pair_location(&obstacle_pair2, 269,
+                        obstacle_positions.obstacle_top_y,
+                        obstacle_positions.obstacle_bottom_y);
+                GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair2, -1);
+                obstacle_pair2_spawned = 1;
+                obstacle_pair2_cleaned = 0;
+                obstacle_number = 3;
+                //printf("Obstacle 2 spawned\n");
+            } else if (obstacle_number == 3) {
+                obstacle_positions =
+                        MATH_randomise_distance_between_obstacles();
+                OBJ_init_obstacle_pair(&obstacle_pair3);
+                GFX_init_obstacle_pair_location(&obstacle_pair3, 269,
+                        obstacle_positions.obstacle_top_y,
+                        obstacle_positions.obstacle_bottom_y);
+                GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair3, -1);
+                obstacle_pair3_spawned = 1;
+                obstacle_pair3_cleaned = 0;
+                obstacle_number = 1;
+                //printf("Obstacle 3 spawned\n");
+            }
+        }
 
-			GFX_get_object_movement_area(&misko, &movement_area);
-			if (movement_area.y_max == 239) {
-				GFX_set_gfx_object_velocity(&misko, 0, 0);
-				exit_value = 1;
-				break;
-			}
+        GamePlay_UpdateChanges();
 
-			GFX_get_obstacle_pair_movement_area(&obstacle_pair1,
-					&movement_area);
-			GFX_get_obstacle_pair_movement_area(&obstacle_pair2,
-					&movement_area);
-			GFX_get_obstacle_pair_movement_area(&obstacle_pair3,
-					&movement_area);
+        GFX_get_object_movement_area(&misko, &movement_area);
+        if (movement_area.y_max == 239) {
+            GFX_set_gfx_object_velocity(&misko, 0, 0);
+            exit_value = 1;
+            break;
+        }
 
-			if (obstacle_pair1.bottom.location.x_min == 1
-					&& obstacle_pair1_cleaned == 0) {
-				obstacle_pair1_spawned = 0;
-				obstacle_pair1_cleaned = 1;
-				obstacle_pair1_scored = 0;
-				GFX_clear_obstacle_pair_on_background(&obstacle_pair1,
-						&background);
-			}
+        GFX_get_obstacle_pair_movement_area(&obstacle_pair1,
+                &movement_area);
+        GFX_get_obstacle_pair_movement_area(&obstacle_pair2,
+                &movement_area);
+        GFX_get_obstacle_pair_movement_area(&obstacle_pair3,
+                &movement_area);
 
-			if (obstacle_pair2.bottom.location.x_min == 1
-					&& obstacle_pair2_cleaned == 0) {
-				obstacle_pair2_spawned = 0;
-				obstacle_pair2_cleaned = 1;
-				obstacle_pair2_scored = 0;
-				GFX_clear_obstacle_pair_on_background(&obstacle_pair2,
-						&background);
-			}
+        if (obstacle_pair1.bottom.location.x_min == 1
+                && obstacle_pair1_cleaned == 0) {
+            obstacle_pair1_spawned = 0;
+            obstacle_pair1_cleaned = 1;
+            obstacle_pair1_scored = 0;
+            GFX_clear_obstacle_pair_on_background(&obstacle_pair1,
+                    &background);
+        }
 
-			if (obstacle_pair3.bottom.location.x_min == 1
-					&& obstacle_pair3_cleaned == 0) {
-				obstacle_pair3_spawned = 0;
-				obstacle_pair3_cleaned = 1;
-				obstacle_pair3_scored = 0;
-				GFX_clear_obstacle_pair_on_background(&obstacle_pair3,
-						&background);
-			}
+        if (obstacle_pair2.bottom.location.x_min == 1
+                && obstacle_pair2_cleaned == 0) {
+            obstacle_pair2_spawned = 0;
+            obstacle_pair2_cleaned = 1;
+            obstacle_pair2_scored = 0;
+            GFX_clear_obstacle_pair_on_background(&obstacle_pair2,
+                    &background);
+        }
 
-			if ((GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair1.top)
-					&& obstacle_pair1_spawned == 1)
-					|| (GFX_are_gfx_objects_overlapping(&misko,
-							&obstacle_pair1.bottom)
-							&& obstacle_pair1_spawned == 1)
-					|| (GFX_are_gfx_objects_overlapping(&misko,
-							&obstacle_pair2.top) && obstacle_pair2_spawned == 1)
-					|| (GFX_are_gfx_objects_overlapping(&misko,
-							&obstacle_pair2.bottom)
-							&& obstacle_pair2_spawned == 1)
-					|| (GFX_are_gfx_objects_overlapping(&misko,
-							&obstacle_pair3.top) && obstacle_pair3_spawned == 1)
-					|| (GFX_are_gfx_objects_overlapping(&misko,
-							&obstacle_pair3.bottom)
-							&& obstacle_pair3_spawned == 1)) {
+        if (obstacle_pair3.bottom.location.x_min == 1
+                && obstacle_pair3_cleaned == 0) {
+            obstacle_pair3_spawned = 0;
+            obstacle_pair3_cleaned = 1;
+            obstacle_pair3_scored = 0;
+            GFX_clear_obstacle_pair_on_background(&obstacle_pair3,
+                    &background);
+        }
 
-				Update_High_Scores(game_status.score);
-				uint16_t *high_scores = Get_High_Scores();
-				printf("High Scores: 1. %d   2. %d   3. %d\n", high_scores[0],
-						high_scores[1], high_scores[2]);
+        if ((GFX_are_gfx_objects_overlapping(&misko, &obstacle_pair1.top)
+                && obstacle_pair1_spawned == 1)
+                || (GFX_are_gfx_objects_overlapping(&misko,
+                        &obstacle_pair1.bottom)
+                        && obstacle_pair1_spawned == 1)
+                || (GFX_are_gfx_objects_overlapping(&misko,
+                        &obstacle_pair2.top) && obstacle_pair2_spawned == 1)
+                || (GFX_are_gfx_objects_overlapping(&misko,
+                        &obstacle_pair2.bottom)
+                        && obstacle_pair2_spawned == 1)
+                || (GFX_are_gfx_objects_overlapping(&misko,
+                        &obstacle_pair3.top) && obstacle_pair3_spawned == 1)
+                || (GFX_are_gfx_objects_overlapping(&misko,
+                        &obstacle_pair3.bottom)
+                        && obstacle_pair3_spawned == 1)) {
 
-				GFX_set_gfx_object_velocity(&misko, 0, 0);
-				exit_value = 1;
-				break;
-			}
+            Update_High_Scores(game_status.score);
+            uint16_t *high_scores = Get_High_Scores();
+            printf("High Scores: 1. %d   2. %d   3. %d\n", high_scores[0],
+                    high_scores[1], high_scores[2]);
 
-			if (misko.location.x_center > obstacle_pair1.top.location.x_min
-					&& obstacle_pair1_spawned == 1 && !obstacle_pair1_scored) {
-				if (misko.location.x_center
-						> obstacle_pair1.top.location.x_center) {
-					game_status.score += 1;
-					OBJ_set_score_text_value(game_status.score);
-					obstacle_pair1_scored = 1;
-				}
-			}
+            GFX_set_gfx_object_velocity(&misko, 0, 0);
+            exit_value = 1;
+            break;
+        }
 
-			if (misko.location.x_center > obstacle_pair2.top.location.x_min
-					&& obstacle_pair2_spawned == 1 && !obstacle_pair2_scored) {
-				if (misko.location.x_center
-						> obstacle_pair2.top.location.x_center) {
-					game_status.score += 1;
-					OBJ_set_score_text_value(game_status.score);
-					obstacle_pair2_scored = 1;
-				}
-			}
+        if (misko.location.x_center > obstacle_pair1.top.location.x_min
+                && obstacle_pair1_spawned == 1 && !obstacle_pair1_scored) {
+            if (misko.location.x_center
+                    > obstacle_pair1.top.location.x_center) {
+                game_status.score += 1;
+                OBJ_set_score_text_value(game_status.score);
+                obstacle_pair1_scored = 1;
+            }
+        }
 
-			if (misko.location.x_center > obstacle_pair3.top.location.x_min
-					&& obstacle_pair3_spawned == 1 && !obstacle_pair3_scored) {
-				if (misko.location.x_center
-						> obstacle_pair3.top.location.x_center) {
-					game_status.score += 1;
-					OBJ_set_score_text_value(game_status.score);
-					obstacle_pair3_scored = 1;
-				}
-			}
+        if (misko.location.x_center > obstacle_pair2.top.location.x_min
+                && obstacle_pair2_spawned == 1 && !obstacle_pair2_scored) {
+            if (misko.location.x_center
+                    > obstacle_pair2.top.location.x_center) {
+                game_status.score += 1;
+                OBJ_set_score_text_value(game_status.score);
+                obstacle_pair2_scored = 1;
+            }
+        }
 
-			/*
-			 if (pressed_button == BTN_ESC) {
-			 exit_value = 1;
-			 break;
-			 }
-			 */
+        if (misko.location.x_center > obstacle_pair3.top.location.x_min
+                && obstacle_pair3_spawned == 1 && !obstacle_pair3_scored) {
+            if (misko.location.x_center
+                    > obstacle_pair3.top.location.x_center) {
+                game_status.score += 1;
+                OBJ_set_score_text_value(game_status.score);
+                obstacle_pair3_scored = 1;
+            }
+        }
 
-		}
+        /*
+         if (pressed_button == BTN_ESC) {
+         exit_value = 1;
+         break;
+         }
+         */
 
-		break;
+    }
+    break;
+
+case GAMEPLAY_PAUSE:
+    int16_t misko_vel_x = misko.velocity.x;
+    int16_t misko_vel_y = misko.velocity.y;
+    int16_t obs1_vel_x = obstacle_pair1.top.velocity.x;
+    int16_t obs2_vel_x = obstacle_pair2.top.velocity.x;
+    int16_t obs3_vel_x = obstacle_pair3.top.velocity.x;
+    
+    uint32_t remaining_time = TIMUT_stopwatch_get_remaining_time(&stopwatch_obstacles);
+
+    GFX_set_gfx_object_velocity(&misko, 0, 0);
+    if (obstacle_pair1_spawned) {
+        GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair1, 0);
+    }
+    if (obstacle_pair2_spawned) {
+        GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair2, 0);
+    }
+    if (obstacle_pair3_spawned) {
+        GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair3, 0);
+    }
+
+    location_t misko_loc = misko.location;
+    
+    int sprite_x = 20;  
+    int sprite_y;      
+
+    if (misko_loc.y_center < 120) { 
+        sprite_y = 160;  
+    } else {
+        sprite_y = 30;   
+    }
+
+    OBJ_init_big_sprite(sprite_x, sprite_y);
+    GFX_draw_one_gfx_object_on_background(&big_sprite, &background);
+    OBJ_init_text_tiny(sprite_x + 96, sprite_y + 12, "GAME PAUSED", &pause_text1);
+    GFX_display_text_object(&pause_text1);
+    OBJ_init_text_tiny(sprite_x + 10, sprite_y + 28, "PRESS OK OR TOUCH TO CONTINUE", &pause_text2);
+    GFX_display_text_object(&pause_text2);
+
+    GFX_draw_one_gfx_object_on_background(&misko, &background);
+
+    if (!touch_initialized) {
+        TIMUT_stopwatch_set_time_mark(&touch_polling_stopwatch);
+        touch_initialized = 1;
+        press_enable = 1;
+    }
+
+    while (1) {
+        KBD_scan();
+        key = KBD_get_pressed_key();
+
+        if (current_input_mode == INPUT_TOUCHSCREEN) {
+            if (TIMUT_stopwatch_has_another_X_ms_passed(&touch_polling_stopwatch, 100)) {
+                int x, y;
+                XPT2046_touch_get_coordinates(&x, &y);
+                
+                if (y < 240 && press_enable == 1) {
+                    key = BTN_OK;
+                    press_enable = 0;
+                    TIMUT_stopwatch_set_time_mark(&touch_debounce_stopwatch);
+                }
+            }
+
+            if (TIMUT_stopwatch_has_X_ms_passed(&touch_debounce_stopwatch, 100)) {
+                press_enable = 1;
+            }
+        }
+
+        if (key == BTN_OK) {
+            GFX_set_gfx_object_velocity(&misko, misko_vel_x, misko_vel_y);
+            if (obstacle_pair1_spawned) {
+                GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair1, obs1_vel_x);
+            }
+            if (obstacle_pair2_spawned) {
+                GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair2, obs2_vel_x);
+            }
+            if (obstacle_pair3_spawned) {
+                GFX_set_obstacle_pair_x_axis_velocity(&obstacle_pair3, obs3_vel_x);
+            }
+
+            TIMUT_stopwatch_set_time_mark_with_remaining_time(&stopwatch_obstacles, remaining_time);
+
+            GFX_draw_gfx_object(&background);
+            GamePlay_UpdateChanges();
+            gameplay_state = GAMEPLAY_JUMP;
+            break;
+        }
+    }
+    break;
 
 	default:
 		printf("GamePlay(): Error - unknown state (%d)", gameplay_state);

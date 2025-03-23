@@ -143,6 +143,9 @@ extern text_object_t 	flappy_misko_text;
 extern text_object_t 	loading_text;
 extern text_object_t	text_selector;
 extern text_object_t 	start_game_text;
+extern text_object_t	pause_text1;
+extern text_object_t	pause_text2;
+extern text_object_t	text_selector;
 
 extern text_object_t	high_scores_menu_text;
 extern text_object_t	high_score1_text;
@@ -160,7 +163,7 @@ extern text_object_t	biggest_hs_text;
 extern text_object_t	your_hs_value_text;
 extern text_object_t	biggest_hs_value_text;
 extern text_object_t	press_to_go_back_text2;
-
+extern graphic_object_t small_sprite;
 
 // ---------------- Public function prototypes ----------------
 

@@ -9,8 +9,10 @@ Za narest:
 - dodaj readme
 - dodaj pause menu
 - uredi direktorij
+cancle game over screen po 1s
 
 
+tezave soo bile z risanjem z desne na ekran, rle, flash iskanje praznega sektorja
 
 PREDSTAVITEV:
 najzanimivejse resitve: optimizacija compilerja, RLE, merjenje casa izvedbe funkcije, DMA?, clock speed na 170mhz
