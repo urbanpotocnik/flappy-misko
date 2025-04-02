@@ -1000,14 +1000,17 @@ uint8_t GamePlay() {
                 || (GFX_are_gfx_objects_overlapping(&misko,
                         &obstacle_pair3.bottom)
                         && obstacle_pair3_spawned == 1)) {
-
+			LL_GPIO_SetOutputPin( GPIOF, LL_GPIO_PIN_7 );
             Update_High_Scores(game_status.score);
             uint16_t *high_scores = Get_High_Scores();
             printf("High Scores: 1. %d   2. %d   3. %d\n", high_scores[0],
                     high_scores[1], high_scores[2]);
 
-            GFX_set_gfx_object_velocity(&misko, 0, 0);
+			GFX_set_gfx_object_velocity(&misko, 0, 0);
+			HAL_Delay(50);
+			LL_GPIO_ResetOutputPin( GPIOF, LL_GPIO_PIN_7 );
             exit_value = 1;
+			
             break;
         }
 
