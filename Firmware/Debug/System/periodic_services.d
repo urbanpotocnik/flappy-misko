@@ -1,5 +1,5 @@
 System/periodic_services.o: ../System/periodic_services.c \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/LED.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/LED.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h \
@@ -35,14 +35,14 @@ System/periodic_services.o: ../System/periodic_services.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/kbd.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/SCI.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/kbd.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/SCI.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/periodic_services.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/timing_utils.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/buf.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/periodic_services.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/timing_utils.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/buf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/LED.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/LED.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h:
@@ -78,10 +78,10 @@ D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/LED.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/kbd.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/SCI.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/kbd.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/SCI.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/periodic_services.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/timing_utils.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/buf.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/periodic_services.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/timing_utils.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/buf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:

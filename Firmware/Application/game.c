@@ -13,6 +13,14 @@
 #include "math_utils.h" 
 #include "flash.h"         
 
+// Add after other includes
+#define MELODY_NOTE_DURATION 200  // Duration of each note in ms
+#define MELODY_LENGTH 4
+
+static const uint8_t game_over_melody[] = {1, 0, 1, 0, 1, 0, 0};  // 1 = note on, 0 = note off
+static uint8_t melody_index = 0;
+static uint8_t melody_playing = 0;
+
 // ----- Definicija možnih stanj avtomatov --------
 
 typedef enum GAME_states {
@@ -62,6 +70,7 @@ typedef enum DIFFICULTY_MODE {
 
 static DIFFICULTY_MODE_t current_difficulty = DIFFICULTY_EASY;
 
+static uint8_t buzzer_active = 0;
 
 stopwatch_handle_t stopwatch;
 location_t movement_area;
@@ -76,6 +85,7 @@ stopwatch_handle_t stopwatch_jump;
 stopwatch_handle_t update_stopwatch_intro;
 stopwatch_handle_t update_stopwatch_intro_exit;
 stopwatch_handle_t stopwatch_obstacles;
+stopwatch_handle_t stopwatch_buzzer;
 stopwatch_handle_t stopwatch_touchscreen;
 obstacle_positions_t obstacle_positions;
 obstacle_pair_t obstacle_pair1;
@@ -944,6 +954,11 @@ uint8_t GamePlay() {
 
         GamePlay_UpdateChanges();
 
+        if (buzzer_active && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_buzzer, 100)) {
+            LL_GPIO_ResetOutputPin(GPIOF, LL_GPIO_PIN_7);
+            buzzer_active = 0;
+        }
+
         GFX_get_object_movement_area(&misko, &movement_area);
         if (movement_area.y_max == 239) {
             GFX_set_gfx_object_velocity(&misko, 0, 0);
@@ -1001,6 +1016,9 @@ uint8_t GamePlay() {
                         &obstacle_pair3.bottom)
                         && obstacle_pair3_spawned == 1)) {
 			LL_GPIO_SetOutputPin( GPIOF, LL_GPIO_PIN_7 );
+
+			// Tukaj crkne tukaj naredi da trikrat poblenda				
+
             Update_High_Scores(game_status.score);
             uint16_t *high_scores = Get_High_Scores();
             printf("High Scores: 1. %d   2. %d   3. %d\n", high_scores[0],
@@ -1016,9 +1034,13 @@ uint8_t GamePlay() {
 
         if (misko.location.x_center > obstacle_pair1.top.location.x_min
                 && obstacle_pair1_spawned == 1 && !obstacle_pair1_scored) {
-            if (misko.location.x_center
-                    > obstacle_pair1.top.location.x_center) {
+            if (misko.location.x_center > obstacle_pair1.top.location.x_center) {
                 game_status.score += 1;
+                if (!buzzer_active) {
+                    TIMUT_stopwatch_set_time_mark(&stopwatch_buzzer);
+                    LL_GPIO_SetOutputPin(GPIOF, LL_GPIO_PIN_7);
+                    buzzer_active = 1;
+                }
                 OBJ_set_score_text_value(game_status.score);
                 obstacle_pair1_scored = 1;
             }
@@ -1026,9 +1048,13 @@ uint8_t GamePlay() {
 
         if (misko.location.x_center > obstacle_pair2.top.location.x_min
                 && obstacle_pair2_spawned == 1 && !obstacle_pair2_scored) {
-            if (misko.location.x_center
-                    > obstacle_pair2.top.location.x_center) {
+            if (misko.location.x_center > obstacle_pair2.top.location.x_center) {
                 game_status.score += 1;
+                if (!buzzer_active) {
+                    TIMUT_stopwatch_set_time_mark(&stopwatch_buzzer);
+                    LL_GPIO_SetOutputPin(GPIOF, LL_GPIO_PIN_7);
+                    buzzer_active = 1;
+                }
                 OBJ_set_score_text_value(game_status.score);
                 obstacle_pair2_scored = 1;
             }
@@ -1036,9 +1062,13 @@ uint8_t GamePlay() {
 
         if (misko.location.x_center > obstacle_pair3.top.location.x_min
                 && obstacle_pair3_spawned == 1 && !obstacle_pair3_scored) {
-            if (misko.location.x_center
-                    > obstacle_pair3.top.location.x_center) {
+            if (misko.location.x_center > obstacle_pair3.top.location.x_center) {
                 game_status.score += 1;
+                if (!buzzer_active) {
+                    TIMUT_stopwatch_set_time_mark(&stopwatch_buzzer);
+                    LL_GPIO_SetOutputPin(GPIOF, LL_GPIO_PIN_7);
+                    buzzer_active = 1;
+                }
                 OBJ_set_score_text_value(game_status.score);
                 obstacle_pair3_scored = 1;
             }
@@ -1163,6 +1193,18 @@ uint8_t GameOver() {
         KBD_flush();
         HAL_Delay(300);
 
+        // Initialize melody
+        melody_playing = 1;
+        melody_index = 0;
+        TIMUT_stopwatch_set_time_mark(&stopwatch_gameover);
+
+        // Set initial buzzer state
+        if (game_over_melody[melody_index]) {
+            LL_GPIO_SetOutputPin(GPIOF, LL_GPIO_PIN_7);
+        } else {
+            LL_GPIO_ResetOutputPin(GPIOF, LL_GPIO_PIN_7);
+        }
+
         obstacle_pair1_spawned = 0;
         obstacle_pair2_spawned = 0;
         obstacle_pair3_spawned = 0;
@@ -1218,6 +1260,22 @@ uint8_t GameOver() {
         break;
 
     case GAMEOVER_WAIT_FOR_ANY_KEY:
+        // Handle melody playback
+        if (melody_playing && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_gameover, MELODY_NOTE_DURATION)) {
+            melody_index++;
+            if (melody_index < MELODY_LENGTH) {
+                if (game_over_melody[melody_index]) {
+                    LL_GPIO_SetOutputPin(GPIOF, LL_GPIO_PIN_7);
+                } else {
+                    LL_GPIO_ResetOutputPin(GPIOF, LL_GPIO_PIN_7);
+                }
+                TIMUT_stopwatch_set_time_mark(&stopwatch_gameover);
+            } else {
+                melody_playing = 0;
+                LL_GPIO_ResetOutputPin(GPIOF, LL_GPIO_PIN_7);
+            }
+        }
+
         key = KBD_get_pressed_key();
 		static stopwatch_handle_t touch_polling_stopwatch;
 		static stopwatch_handle_t touch_debounce_stopwatch;
@@ -1246,6 +1304,8 @@ uint8_t GameOver() {
 		}
 
 		if (key == BTN_OK || key == BTN_ESC) {
+            melody_playing = 0;
+            LL_GPIO_ResetOutputPin(GPIOF, LL_GPIO_PIN_7);
 			GFX_clear_gfx_object_on_background(&misko, &background);
 			GFX_set_gfx_object_location(&misko, 80, 120);  
 			GFX_set_gfx_object_velocity(&misko, 0, 0);

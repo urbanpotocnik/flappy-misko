@@ -45,27 +45,27 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_pwr.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dmamux.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/LED.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/kbd.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/SCI.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/timing_utils.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/periodic_services.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/lcd_backlight.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/lcd.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/lcd_ili9341.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/lcd_ili9341_registers.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/lcd_backlight.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/ugui.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/ugui_config.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/XPT2046_touch.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/joystick.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/Application/Include/objects.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/Application/Include/images.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/Application/Include/graphics.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/LCD.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/Application/Include/math_utils.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/Application/Include/graphics.h \
- D:/Projekti/misko_final/flappy-misko/Firmware/Application/Include/game.h
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/LED.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/kbd.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/SCI.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/timing_utils.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/periodic_services.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd_backlight.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd_ili9341.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd_ili9341_registers.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd_backlight.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/ugui.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/ugui_config.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/XPT2046_touch.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/joystick.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/objects.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/graphics.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/LCD.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/math_utils.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/graphics.h \
+ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/game.h
 ../Core/Inc/main.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
@@ -113,24 +113,24 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_pwr.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dmamux.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/LED.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/kbd.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/SCI.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/timing_utils.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/periodic_services.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/lcd_backlight.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/lcd.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/lcd_ili9341.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/lcd_ili9341_registers.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/lcd_backlight.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/ugui.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/ugui_config.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/XPT2046_touch.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/joystick.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/Application/Include/objects.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/Application/Include/images.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/Application/Include/graphics.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/LCD.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/Application/Include/math_utils.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/Application/Include/graphics.h:
-D:/Projekti/misko_final/flappy-misko/Firmware/Application/Include/game.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/LED.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/kbd.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/SCI.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/timing_utils.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/periodic_services.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd_backlight.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd_ili9341.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd_ili9341_registers.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd_backlight.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/ugui.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/ugui_config.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/XPT2046_touch.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/joystick.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/objects.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/images.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/graphics.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/LCD.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/math_utils.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/graphics.h:
+C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/Application/Include/game.h:
