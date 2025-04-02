@@ -1,5 +1,5 @@
 System/LED.o: ../System/LED.c \
- C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/LED.h \
+ D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/LED.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h \
@@ -35,7 +35,7 @@ System/LED.o: ../System/LED.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h
-C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/LED.h:
+D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/LED.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h:

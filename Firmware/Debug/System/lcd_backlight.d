@@ -1,5 +1,5 @@
 System/lcd_backlight.o: ../System/lcd_backlight.c \
- C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd_backlight.h \
+ D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/lcd_backlight.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h \
@@ -35,9 +35,9 @@ System/lcd_backlight.o: ../System/lcd_backlight.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
- C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/SCI.h \
+ D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/SCI.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h
-C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd_backlight.h:
+D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/lcd_backlight.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h:
@@ -73,5 +73,5 @@ C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/lcd_backl
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h:
-C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/SCI.h:
+D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/SCI.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h:

@@ -1,5 +1,5 @@
 System/XPT2046_touch.o: ../System/XPT2046_touch.c \
- C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/XPT2046_touch.h \
+ D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/XPT2046_touch.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
  ../Core/Inc/stm32g4xx_hal_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h \
@@ -34,7 +34,7 @@ System/XPT2046_touch.o: ../System/XPT2046_touch.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_fmc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h
-C:/Users/Urban/Documents/Projects/flappy-misko/Firmware/System/Include/XPT2046_touch.h:
+D:/Projekti/misko_final/flappy-misko/Firmware/System/Include/XPT2046_touch.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h:
