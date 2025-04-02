@@ -13,13 +13,6 @@
 #include "math_utils.h" 
 #include "flash.h"         
 
-// Add after other includes
-#define MELODY_NOTE_DURATION 200  // Duration of each note in ms
-#define MELODY_LENGTH 4
-
-static const uint8_t game_over_melody[] = {1, 0, 1, 0, 1, 0, 0};  // 1 = note on, 0 = note off
-static uint8_t melody_index = 0;
-static uint8_t melody_playing = 0;
 
 // ----- Definicija možnih stanj avtomatov --------
 
@@ -120,6 +113,9 @@ static INTRO_states_t intro_state = INTRO_INIT;
 static stopwatch_handle_t touch_polling_stopwatch;
 static stopwatch_handle_t touch_debounce_stopwatch;
 static int touch_initialized = 0;
+static const uint8_t game_over_melody[] = {1, 0, 1, 0, 1, 0, 0};  
+static uint8_t melody_index = 0;
+static uint8_t melody_playing = 0;
 
 // ------------- Public function implementations --------------
 void Game() {
@@ -1015,20 +1011,27 @@ uint8_t GamePlay() {
                 || (GFX_are_gfx_objects_overlapping(&misko,
                         &obstacle_pair3.bottom)
                         && obstacle_pair3_spawned == 1)) {
-			LL_GPIO_SetOutputPin( GPIOF, LL_GPIO_PIN_7 );
+            LL_GPIO_SetOutputPin(GPIOF, LL_GPIO_PIN_7);
+            HAL_Delay(200);
+            LL_GPIO_ResetOutputPin(GPIOF, LL_GPIO_PIN_7);
+            HAL_Delay(100);
 
-			// Tukaj crkne tukaj naredi da trikrat poblenda				
+            LL_GPIO_SetOutputPin(GPIOF, LL_GPIO_PIN_7);
+            HAL_Delay(200);
+            LL_GPIO_ResetOutputPin(GPIOF, LL_GPIO_PIN_7);
+            HAL_Delay(100);
+
+            LL_GPIO_SetOutputPin(GPIOF, LL_GPIO_PIN_7);
+            HAL_Delay(600);
+            LL_GPIO_ResetOutputPin(GPIOF, LL_GPIO_PIN_7);
 
             Update_High_Scores(game_status.score);
             uint16_t *high_scores = Get_High_Scores();
             printf("High Scores: 1. %d   2. %d   3. %d\n", high_scores[0],
                     high_scores[1], high_scores[2]);
 
-			GFX_set_gfx_object_velocity(&misko, 0, 0);
-			HAL_Delay(50);
-			LL_GPIO_ResetOutputPin( GPIOF, LL_GPIO_PIN_7 );
+            GFX_set_gfx_object_velocity(&misko, 0, 0);
             exit_value = 1;
-			
             break;
         }
 
@@ -1193,18 +1196,6 @@ uint8_t GameOver() {
         KBD_flush();
         HAL_Delay(300);
 
-        // Initialize melody
-        melody_playing = 1;
-        melody_index = 0;
-        TIMUT_stopwatch_set_time_mark(&stopwatch_gameover);
-
-        // Set initial buzzer state
-        if (game_over_melody[melody_index]) {
-            LL_GPIO_SetOutputPin(GPIOF, LL_GPIO_PIN_7);
-        } else {
-            LL_GPIO_ResetOutputPin(GPIOF, LL_GPIO_PIN_7);
-        }
-
         obstacle_pair1_spawned = 0;
         obstacle_pair2_spawned = 0;
         obstacle_pair3_spawned = 0;
@@ -1260,22 +1251,6 @@ uint8_t GameOver() {
         break;
 
     case GAMEOVER_WAIT_FOR_ANY_KEY:
-        // Handle melody playback
-        if (melody_playing && TIMUT_stopwatch_has_X_ms_passed(&stopwatch_gameover, MELODY_NOTE_DURATION)) {
-            melody_index++;
-            if (melody_index < MELODY_LENGTH) {
-                if (game_over_melody[melody_index]) {
-                    LL_GPIO_SetOutputPin(GPIOF, LL_GPIO_PIN_7);
-                } else {
-                    LL_GPIO_ResetOutputPin(GPIOF, LL_GPIO_PIN_7);
-                }
-                TIMUT_stopwatch_set_time_mark(&stopwatch_gameover);
-            } else {
-                melody_playing = 0;
-                LL_GPIO_ResetOutputPin(GPIOF, LL_GPIO_PIN_7);
-            }
-        }
-
         key = KBD_get_pressed_key();
 		static stopwatch_handle_t touch_polling_stopwatch;
 		static stopwatch_handle_t touch_debounce_stopwatch;
