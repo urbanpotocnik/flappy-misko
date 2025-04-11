@@ -27,27 +27,27 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  000670b4  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0013d3e6  00000000  00000000  000670e4  2**0
+ 12 .debug_info   0013d39e  00000000  00000000  000670e4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000086cb  00000000  00000000  001a44ca  2**0
+ 13 .debug_abbrev 0000872c  00000000  00000000  001a4482  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_loclists 00026854  00000000  00000000  001acb95  2**0
+ 14 .debug_loclists 00026854  00000000  00000000  001acbae  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00002158  00000000  00000000  001d33f0  2**3
+ 15 .debug_aranges 00002158  00000000  00000000  001d3408  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00005e40  00000000  00000000  001d5548  2**0
+ 16 .debug_rnglists 00005e40  00000000  00000000  001d5560  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00033ae6  00000000  00000000  001db388  2**0
+ 17 .debug_macro  00033ae6  00000000  00000000  001db3a0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00044150  00000000  00000000  0020ee6e  2**0
+ 18 .debug_line   000440bd  00000000  00000000  0020ee86  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    00132d46  00000000  00000000  00252fbe  2**0
+ 19 .debug_str    00132d46  00000000  00000000  00252f43  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  00385d04  2**0
+ 20 .comment      00000043  00000000  00000000  00385c89  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00006cc0  00000000  00000000  00385d48  2**2
+ 21 .debug_frame  00006cc0  00000000  00000000  00385ccc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000066  00000000  00000000  0038ca08  2**0
+ 22 .debug_line_str 00000066  00000000  00000000  0038c98c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -4085,39 +4085,38 @@ void Game() {
  8002170:	2000000c 	.word	0x2000000c
 
 08002174 <GFX_draw_gfx_object>:
+	free(ptr);
+}
 
 
-
-
-void GFX_draw_gfx_object(graphic_object_t *gfx_object)
-{
+// ----------- GRAPHICAL OBJECT RELATED FUNCTIONALITY ---------
+void GFX_draw_gfx_object(graphic_object_t *gfx_object) {
  8002174:	b510      	push	{r4, lr}
  8002176:	4604      	mov	r4, r0
 
-	ILI9341_SetDisplayWindow( gfx_object->location.x_min, gfx_object->location.y_min, gfx_object->image.size_x, gfx_object->image.size_y);
+	ILI9341_SetDisplayWindow(gfx_object->location.x_min, gfx_object->location.y_min, gfx_object->image.size_x, gfx_object->image.size_y);
  8002178:	f9b0 100e 	ldrsh.w	r1, [r0, #14]
  800217c:	88e3      	ldrh	r3, [r4, #6]
  800217e:	f9b0 000c 	ldrsh.w	r0, [r0, #12]
  8002182:	88a2      	ldrh	r2, [r4, #4]
  8002184:	f005 feec 	bl	8007f60 <ILI9341_SetDisplayWindow>
 
-	ILI9341_SendData((LCD_IO_Data_t *) gfx_object->image.image_array, gfx_object->image.size );
+	ILI9341_SendData((LCD_IO_Data_t*) gfx_object->image.image_array, gfx_object->image.size);
  8002188:	68a1      	ldr	r1, [r4, #8]
  800218a:	6820      	ldr	r0, [r4, #0]
 }
  800218c:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
-	ILI9341_SendData((LCD_IO_Data_t *) gfx_object->image.image_array, gfx_object->image.size );
+	ILI9341_SendData((LCD_IO_Data_t*) gfx_object->image.image_array, gfx_object->image.size);
  8002190:	f005 bec6 	b.w	8007f20 <ILI9341_SendData>
 
 08002194 <GFX_init_location_restrictions>:
+	gfx_object->location.x_center = gfx_object->location_old.x_center;
+	gfx_object->location.y_center = gfx_object->location_old.y_center;
 
+}
 
-
-// the limiting values are still allowed
-void GFX_init_location_restrictions(graphic_object_t *gfx_object, location_t *canvas_location)
-{
+void GFX_init_location_restrictions(graphic_object_t *gfx_object, location_t *canvas_location) {
  8002194:	e92d 4ff8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
-	// top left corner restrictions
 	gfx_object->top_left_limits.X_MIN = canvas_location->x_min;
  8002198:	f9b1 9000 	ldrsh.w	r9, [r1]
 	gfx_object->top_left_limits.Y_MIN = canvas_location->y_min;
@@ -4129,7 +4128,7 @@ void GFX_init_location_restrictions(graphic_object_t *gfx_object, location_t *ca
  80021a4:	f9b1 b006 	ldrsh.w	fp, [r1, #6]
 	gfx_object->top_left_limits.X_MIN = canvas_location->x_min;
  80021a8:	fa1f f389 	uxth.w	r3, r9
-{
+void GFX_init_location_restrictions(graphic_object_t *gfx_object, location_t *canvas_location) {
  80021ac:	4604      	mov	r4, r0
 	gfx_object->top_left_limits.X_MIN = canvas_location->x_min;
  80021ae:	8603      	strh	r3, [r0, #48]	@ 0x30
@@ -4160,8 +4159,6 @@ void GFX_init_location_restrictions(graphic_object_t *gfx_object, location_t *ca
 	gfx_object->top_left_limits.Y_MIN = canvas_location->y_min;
  80021cc:	86e2      	strh	r2, [r4, #54]	@ 0x36
 
-
-	// center point restrictions
 	gfx_object->center_limits.X_MIN = canvas_location->x_min + ceil( gfx_object->image.size_x / 2 );
  80021ce:	0840      	lsrs	r0, r0, #1
  80021d0:	f7fe f9c8 	bl	8000564 <__aeabi_i2d>
@@ -4231,42 +4228,36 @@ void GFX_init_location_restrictions(graphic_object_t *gfx_object, location_t *ca
  8002266:	bf00      	nop
 
 08002268 <GFX_init_gfx_object_location>:
+		return 0;	
+}
 
-
-
-uint8_t GFX_is_location_inside_object_restrictions(location_restriction_t *restrictions, int16_t x, int16_t y)
-{
-	if( ( x >= restrictions->X_MIN ) &&
+uint8_t GFX_is_location_inside_object_restrictions(
+		location_restriction_t *restrictions, int16_t x, int16_t y) {
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002268:	8e03      	ldrh	r3, [r0, #48]	@ 0x30
  800226a:	4299      	cmp	r1, r3
+		return 1;	
+	} else
+		return 0; 
+}
 
-
-
-
-uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int16_t y)
-{
+uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int16_t y) {
  800226c:	b5f0      	push	{r4, r5, r6, r7, lr}
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  800226e:	db2a      	blt.n	80022c6 <GFX_init_gfx_object_location+0x5e>
-		( x <= restrictions->X_MAX ) &&
  8002270:	8e43      	ldrh	r3, [r0, #50]	@ 0x32
-	if( ( x >= restrictions->X_MIN ) &&
  8002272:	4299      	cmp	r1, r3
  8002274:	dc27      	bgt.n	80022c6 <GFX_init_gfx_object_location+0x5e>
-		( y >= restrictions->Y_MIN ) &&
  8002276:	8ec3      	ldrh	r3, [r0, #54]	@ 0x36
-		( x <= restrictions->X_MAX ) &&
  8002278:	429a      	cmp	r2, r3
  800227a:	db24      	blt.n	80022c6 <GFX_init_gfx_object_location+0x5e>
-		( y <= restrictions->Y_MAX )    )
  800227c:	8f03      	ldrh	r3, [r0, #56]	@ 0x38
-		( y >= restrictions->Y_MIN ) &&
  800227e:	429a      	cmp	r2, r3
  8002280:	dc2a      	bgt.n	80022d8 <GFX_init_gfx_object_location+0x70>
-        // Within restrictions -> object can be placed
-        // Set the new object location
-        gfx_object->location.x_min = x;
-        gfx_object->location.y_min = y;
+	
+	if (GFX_is_location_inside_object_restrictions(&gfx_object->top_left_limits, x, y)) {
+		gfx_object->location.x_min = x;
+		gfx_object->location.y_min = y;
 
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002282:	8886      	ldrh	r6, [r0, #4]
@@ -4277,18 +4268,18 @@ uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, in
  8002288:	19a3      	adds	r3, r4, r6
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  800228a:	fa1f fc82 	uxth.w	ip, r2
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  800228e:	2500      	movs	r5, #0
 
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  8002290:	eb04 0456 	add.w	r4, r4, r6, lsr #1
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  8002294:	eb0c 0e07 	add.w	lr, ip, r7
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002298:	462e      	mov	r6, r5
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  800229a:	b21b      	sxth	r3, r3
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  800229c:	f363 060f 	bfi	r6, r3, #0, #16
  80022a0:	f361 050f 	bfi	r5, r1, #0, #16
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
@@ -4297,25 +4288,25 @@ uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, in
  80022a8:	fa0f fe8e 	sxth.w	lr, lr
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  80022ac:	b224      	sxth	r4, r4
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  80022ae:	f362 451f 	bfi	r5, r2, #16, #16
  80022b2:	f36e 461f 	bfi	r6, lr, #16, #16
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  80022b6:	fa0f fc8c 	sxth.w	ip, ip
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  80022ba:	8284      	strh	r4, [r0, #20]
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  80022bc:	60c5      	str	r5, [r0, #12]
  80022be:	6106      	str	r6, [r0, #16]
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  80022c0:	f8a0 c016 	strh.w	ip, [r0, #22]
-	if( return_value  )
+	if (return_value) {
  80022c4:	e031      	b.n	800232a <GFX_init_gfx_object_location+0xc2>
-    }
+		return 1; 
+	}
 
-    else
-    {
-		// This part clips the upper part of the obstacle if it is placed outside the screen
+	else {
+
 		if((gfx_object == &obstacle_pair1.top || gfx_object == &obstacle_pair2.top || gfx_object == &obstacle_pair3.top) && y < 0)
  80022c6:	4b21      	ldr	r3, [pc, #132]	@ (800234c <GFX_init_gfx_object_location+0xe4>)
  80022c8:	4298      	cmp	r0, r3
@@ -4332,10 +4323,10 @@ uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, in
 		if((gfx_object == &obstacle_pair1.top || gfx_object == &obstacle_pair2.top || gfx_object == &obstacle_pair3.top) && y < 0)
  80022dc:	2a00      	cmp	r2, #0
  80022de:	dafb      	bge.n	80022d8 <GFX_init_gfx_object_location+0x70>
+
 			gfx_object->location.x_min = x;
 			gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
 
-			// Adjust the image data to clip the top part
 			gfx_object->image.image_array += offset * gfx_object->image.size_x;
 			gfx_object->image.size_y -= offset;
  80022e0:	88c5      	ldrh	r5, [r0, #6]
@@ -4411,46 +4402,40 @@ uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, in
  8002354:	2000018c 	.word	0x2000018c
 
 08002358 <GFX_set_gfx_object_location>:
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002358:	8e03      	ldrh	r3, [r0, #48]	@ 0x30
  800235a:	4299      	cmp	r1, r3
-{
+uint8_t GFX_set_gfx_object_location(graphic_object_t *gfx_object, int16_t x, int16_t y) {
  800235c:	b570      	push	{r4, r5, r6, lr}
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  800235e:	db26      	blt.n	80023ae <GFX_set_gfx_object_location+0x56>
-		( x <= restrictions->X_MAX ) &&
  8002360:	8e43      	ldrh	r3, [r0, #50]	@ 0x32
-	if( ( x >= restrictions->X_MIN ) &&
  8002362:	4299      	cmp	r1, r3
  8002364:	dc23      	bgt.n	80023ae <GFX_set_gfx_object_location+0x56>
-		( y >= restrictions->Y_MIN ) &&
  8002366:	8ec3      	ldrh	r3, [r0, #54]	@ 0x36
-		( x <= restrictions->X_MAX ) &&
  8002368:	429a      	cmp	r2, r3
  800236a:	db20      	blt.n	80023ae <GFX_set_gfx_object_location+0x56>
-		( y <= restrictions->Y_MAX )    )
  800236c:	8f03      	ldrh	r3, [r0, #56]	@ 0x38
-		( y >= restrictions->Y_MIN ) &&
  800236e:	429a      	cmp	r2, r3
  8002370:	dc26      	bgt.n	80023c0 <GFX_set_gfx_object_location+0x68>
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002372:	8886      	ldrh	r6, [r0, #4]
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  8002374:	f8b0 e006 	ldrh.w	lr, [r0, #6]
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002378:	2400      	movs	r4, #0
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  800237a:	fa1f fc81 	uxth.w	ip, r1
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  800237e:	4625      	mov	r5, r4
  8002380:	f361 040f 	bfi	r4, r1, #0, #16
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  8002384:	b293      	uxth	r3, r2
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002386:	f362 441f 	bfi	r4, r2, #16, #16
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  800238a:	eb0c 0206 	add.w	r2, ip, r6
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  800238e:	f362 050f 	bfi	r5, r2, #0, #16
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  8002392:	eb03 025e 	add.w	r2, r3, lr, lsr #1
@@ -4458,22 +4443,22 @@ uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, in
  8002396:	4473      	add	r3, lr
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  8002398:	eb0c 0c56 	add.w	ip, ip, r6, lsr #1
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  800239c:	f363 451f 	bfi	r5, r3, #16, #16
  80023a0:	60c4      	str	r4, [r0, #12]
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  80023a2:	f8a0 c014 	strh.w	ip, [r0, #20]
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  80023a6:	6105      	str	r5, [r0, #16]
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  80023a8:	82c2      	strh	r2, [r0, #22]
-        return 1; // Placement successful
+		return 1; 
  80023aa:	2001      	movs	r0, #1
-			return 1; // placement of obstacle successful
+			return 1; 
 		}
-		
-		return 0;	// Placement not successful
-    }
+
+		return 0;	
+	}
 }
  80023ac:	bd70      	pop	{r4, r5, r6, pc}
 		if((gfx_object == &obstacle_pair1.top || gfx_object == &obstacle_pair2.top || gfx_object == &obstacle_pair3.top) && y < 0)
@@ -4486,7 +4471,7 @@ uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, in
  80023ba:	4b16      	ldr	r3, [pc, #88]	@ (8002414 <GFX_set_gfx_object_location+0xbc>)
  80023bc:	4298      	cmp	r0, r3
  80023be:	d001      	beq.n	80023c4 <GFX_set_gfx_object_location+0x6c>
-		return 0;	// Placement not successful
+		return 0;	
  80023c0:	2000      	movs	r0, #0
 }
  80023c2:	bd70      	pop	{r4, r5, r6, pc}
@@ -4536,7 +4521,7 @@ uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, in
  8002404:	80c2      	strh	r2, [r0, #6]
 			gfx_object->image.size = gfx_object->image.size_x * gfx_object->image.size_y;
  8002406:	6083      	str	r3, [r0, #8]
-        return 1; // Placement successful
+		return 1; 
  8002408:	2001      	movs	r0, #1
 }
  800240a:	bd70      	pop	{r4, r5, r6, pc}
@@ -4546,10 +4531,7 @@ uint8_t GFX_init_gfx_object_location(graphic_object_t *gfx_object, int16_t x, in
 
 08002418 <GFX_set_gfx_object_velocity>:
 
-
-
-void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x, int8_t velocity_y)
-{
+void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x, int8_t velocity_y) {
 	gfx_object->velocity.x = velocity_x;
  8002418:	f880 1048 	strb.w	r1, [r0, #72]	@ 0x48
 	gfx_object->velocity.y = velocity_y;
@@ -4560,112 +4542,101 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
 
 08002424 <GFX_bounce_moving_object_from_edge>:
 
-	// determine the location of the bounced object
+uint8_t GFX_bounce_moving_object_from_edge(graphic_object_t *gfx_object) {
+	int16_t x, y;
+	int16_t dx, dy;
 
-
-		// considering max restrictions
-		dx = gfx_object->location_new.x_min - gfx_object->top_left_limits.X_MAX;
+	dx = gfx_object->location_new.x_min - gfx_object->top_left_limits.X_MAX;
  8002424:	f9b0 1024 	ldrsh.w	r1, [r0, #36]	@ 0x24
-		if( dx >= 0 )
-		{
-			// calculate the coordinate of the bounced object
-			x = gfx_object->location_new.x_min - 2*dx;
-			y = gfx_object->location_new.y_min;
+	if (dx >= 0) {
+		x = gfx_object->location_new.x_min - 2 * dx;
+		y = gfx_object->location_new.y_min;
  8002428:	f9b0 3026 	ldrsh.w	r3, [r0, #38]	@ 0x26
-{
+uint8_t GFX_bounce_moving_object_from_edge(graphic_object_t *gfx_object) {
  800242c:	b5f0      	push	{r4, r5, r6, r7, lr}
-		dx = gfx_object->location_new.x_min - gfx_object->top_left_limits.X_MAX;
+	dx = gfx_object->location_new.x_min - gfx_object->top_left_limits.X_MAX;
  800242e:	8e44      	ldrh	r4, [r0, #50]	@ 0x32
-		}
-		else
-		{
-			// consdering min restrictions
 
-			dx = gfx_object->location_new.x_min - gfx_object->top_left_limits.X_MIN;
+		GFX_set_gfx_object_velocity(gfx_object, -gfx_object->velocity.x, gfx_object->velocity.y);
+
+	} else {
+
+		dx = gfx_object->location_new.x_min - gfx_object->top_left_limits.X_MIN;
  8002430:	8e05      	ldrh	r5, [r0, #48]	@ 0x30
-		dx = gfx_object->location_new.x_min - gfx_object->top_left_limits.X_MAX;
+	dx = gfx_object->location_new.x_min - gfx_object->top_left_limits.X_MAX;
  8002432:	fa1f fc81 	uxth.w	ip, r1
  8002436:	ebac 0e04 	sub.w	lr, ip, r4
-		if( dx >= 0 )
+	if (dx >= 0) {
  800243a:	f41e 4f00 	tst.w	lr, #32768	@ 0x8000
  800243e:	d17b      	bne.n	8002538 <GFX_bounce_moving_object_from_edge+0x114>
-			x = gfx_object->location_new.x_min - 2*dx;
+		x = gfx_object->location_new.x_min - 2 * dx;
  8002440:	fa1f f78e 	uxth.w	r7, lr
  8002444:	ebac 0c47 	sub.w	ip, ip, r7, lsl #1
-				// calculate the coordinate of the bounced object
-				x = gfx_object->location_new.x_min - 2*dx;
-				y = gfx_object->location_new.y_min;
+		if (dx <= 0) {
+			x = gfx_object->location_new.x_min - 2 * dx;
+			y = gfx_object->location_new.y_min;
 
-				// change the direction of the velocity component
-				GFX_set_gfx_object_velocity( gfx_object, -gfx_object->velocity.x, gfx_object->velocity.y);
+			GFX_set_gfx_object_velocity(gfx_object, -gfx_object->velocity.x, gfx_object->velocity.y);
  8002448:	f890 2048 	ldrb.w	r2, [r0, #72]	@ 0x48
  800244c:	4252      	negs	r2, r2
 	gfx_object->velocity.x = velocity_x;
  800244e:	f880 2048 	strb.w	r2, [r0, #72]	@ 0x48
-				x = gfx_object->location_new.x_min - 2*dx;
+			x = gfx_object->location_new.x_min - 2 * dx;
  8002452:	fa0f f68c 	sxth.w	r6, ip
-				y = gfx_object->location_new.y_min;
+			y = gfx_object->location_new.y_min;
  8002456:	461a      	mov	r2, r3
 		}
+	}
 
-
-
-		// considering max restrictions
-		dy = gfx_object->location_new.y_min - gfx_object->top_left_limits.Y_MAX;
+	dy = gfx_object->location_new.y_min - gfx_object->top_left_limits.Y_MAX;
  8002458:	f8b0 e038 	ldrh.w	lr, [r0, #56]	@ 0x38
  800245c:	b29b      	uxth	r3, r3
  800245e:	eba3 0c0e 	sub.w	ip, r3, lr
-		if( dy >= 0 )
+	if (dy >= 0) {
  8002462:	f41c 4f00 	tst.w	ip, #32768	@ 0x8000
-		dy = gfx_object->location_new.y_min - gfx_object->top_left_limits.Y_MAX;
+	dy = gfx_object->location_new.y_min - gfx_object->top_left_limits.Y_MAX;
  8002466:	fa1f f78c 	uxth.w	r7, ip
-		if( dy >= 0 )
+	if (dy >= 0) {
  800246a:	d159      	bne.n	8002520 <GFX_bounce_moving_object_from_edge+0xfc>
-		{
-			// calculate the coordinate of the bounced object
-			x = gfx_object->location_new.x_min;
-			y = gfx_object->location_new.y_min - 2*dy;
+		x = gfx_object->location_new.x_min;
+		y = gfx_object->location_new.y_min - 2 * dy;
  800246c:	eba3 0347 	sub.w	r3, r3, r7, lsl #1
  8002470:	b21a      	sxth	r2, r3
 
 
-			// change the direction of the velocity component
 			GFX_set_gfx_object_velocity( gfx_object, gfx_object->velocity.x, -gfx_object->velocity.y);
  8002472:	f890 3049 	ldrb.w	r3, [r0, #73]	@ 0x49
  8002476:	425b      	negs	r3, r3
 	gfx_object->velocity.y = velocity_y;
  8002478:	f880 3049 	strb.w	r3, [r0, #73]	@ 0x49
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  800247c:	42a9      	cmp	r1, r5
  800247e:	db22      	blt.n	80024c6 <GFX_bounce_moving_object_from_edge+0xa2>
  8002480:	42a1      	cmp	r1, r4
  8002482:	dc20      	bgt.n	80024c6 <GFX_bounce_moving_object_from_edge+0xa2>
-		( y >= restrictions->Y_MIN ) &&
  8002484:	8ec3      	ldrh	r3, [r0, #54]	@ 0x36
-		( x <= restrictions->X_MAX ) &&
  8002486:	429a      	cmp	r2, r3
  8002488:	db1d      	blt.n	80024c6 <GFX_bounce_moving_object_from_edge+0xa2>
-		( y >= restrictions->Y_MIN ) &&
  800248a:	4572      	cmp	r2, lr
  800248c:	dc24      	bgt.n	80024d8 <GFX_bounce_moving_object_from_edge+0xb4>
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  800248e:	f8b0 c004 	ldrh.w	ip, [r0, #4]
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  8002492:	88c7      	ldrh	r7, [r0, #6]
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002494:	2500      	movs	r5, #0
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002496:	b28c      	uxth	r4, r1
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002498:	462e      	mov	r6, r5
  800249a:	f361 050f 	bfi	r5, r1, #0, #16
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  800249e:	b293      	uxth	r3, r2
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  80024a0:	f362 451f 	bfi	r5, r2, #16, #16
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  80024a4:	eb04 020c 	add.w	r2, r4, ip
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  80024a8:	f362 060f 	bfi	r6, r2, #0, #16
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  80024ac:	eb03 0257 	add.w	r2, r3, r7, lsr #1
@@ -4673,20 +4644,20 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
  80024b0:	443b      	add	r3, r7
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  80024b2:	eb04 045c 	add.w	r4, r4, ip, lsr #1
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  80024b6:	f363 461f 	bfi	r6, r3, #16, #16
  80024ba:	60c5      	str	r5, [r0, #12]
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  80024bc:	8284      	strh	r4, [r0, #20]
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  80024be:	6106      	str	r6, [r0, #16]
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  80024c0:	82c2      	strh	r2, [r0, #22]
-        return 1; // Placement successful
+		return 1; 
  80024c2:	2001      	movs	r0, #1
 
+	}
 
-	// place the bounced object in this new location
 	return GFX_set_gfx_object_location(gfx_object, x, y);
 
 }
@@ -4701,7 +4672,7 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
  80024d2:	4b26      	ldr	r3, [pc, #152]	@ (800256c <GFX_bounce_moving_object_from_edge+0x148>)
  80024d4:	4298      	cmp	r0, r3
  80024d6:	d001      	beq.n	80024dc <GFX_bounce_moving_object_from_edge+0xb8>
-		return 0;	// Placement not successful
+		return 0;	
  80024d8:	2000      	movs	r0, #0
 }
  80024da:	bdf0      	pop	{r4, r5, r6, r7, pc}
@@ -4751,7 +4722,7 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
  8002518:	80c2      	strh	r2, [r0, #6]
 			gfx_object->image.size = gfx_object->image.size_x * gfx_object->image.size_y;
  800251a:	6083      	str	r3, [r0, #8]
-        return 1; // Placement successful
+		return 1; 
  800251c:	2001      	movs	r0, #1
 }
  800251e:	bdf0      	pop	{r4, r5, r6, r7, pc}
@@ -4767,24 +4738,24 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
  8002532:	dd0e      	ble.n	8002552 <GFX_bounce_moving_object_from_edge+0x12e>
  8002534:	4631      	mov	r1, r6
  8002536:	e7a1      	b.n	800247c <GFX_bounce_moving_object_from_edge+0x58>
-			dx = gfx_object->location_new.x_min - gfx_object->top_left_limits.X_MIN;
+		dx = gfx_object->location_new.x_min - gfx_object->top_left_limits.X_MIN;
  8002538:	ebac 0e05 	sub.w	lr, ip, r5
-			if( dx <= 0 )
+		if (dx <= 0) {
  800253c:	fa0f f78e 	sxth.w	r7, lr
  8002540:	2600      	movs	r6, #0
  8002542:	2f00      	cmp	r7, #0
  8002544:	4632      	mov	r2, r6
-			dx = gfx_object->location_new.x_min - gfx_object->top_left_limits.X_MIN;
+		dx = gfx_object->location_new.x_min - gfx_object->top_left_limits.X_MIN;
  8002546:	fa1f fe8e 	uxth.w	lr, lr
-			if( dx <= 0 )
+		if (dx <= 0) {
  800254a:	dc85      	bgt.n	8002458 <GFX_bounce_moving_object_from_edge+0x34>
-				x = gfx_object->location_new.x_min - 2*dx;
+			x = gfx_object->location_new.x_min - 2 * dx;
  800254c:	ebac 0c4e 	sub.w	ip, ip, lr, lsl #1
  8002550:	e77a      	b.n	8002448 <GFX_bounce_moving_object_from_edge+0x24>
 				y = gfx_object->location_new.y_min - 2*dy;
  8002552:	eba3 034c 	sub.w	r3, r3, ip, lsl #1
  8002556:	b21a      	sxth	r2, r3
-				GFX_set_gfx_object_velocity( gfx_object, gfx_object->velocity.x, -gfx_object->velocity.y);
+			GFX_set_gfx_object_velocity(gfx_object, gfx_object->velocity.x, -gfx_object->velocity.y);
  8002558:	f890 3049 	ldrb.w	r3, [r0, #73]	@ 0x49
  800255c:	425b      	negs	r3, r3
 	gfx_object->velocity.y = velocity_y;
@@ -4796,12 +4767,12 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
  800256c:	2000018c 	.word	0x2000018c
 
 08002570 <GFX_update_moving_gfx_object_location>:
-{
+uint8_t GFX_update_moving_gfx_object_location(graphic_object_t *gfx_object) {
  8002570:	b530      	push	{r4, r5, lr}
 	gfx_object->location_old.x_min = gfx_object->location.x_min;
  8002572:	6902      	ldr	r2, [r0, #16]
  8002574:	61c2      	str	r2, [r0, #28]
-	GFX_move_location(  &gfx_object->location, &gfx_object->location_new, gfx_object->velocity.x, -gfx_object->velocity.y );
+	GFX_move_location(&gfx_object->location, &gfx_object->location_new, gfx_object->velocity.x, -gfx_object->velocity.y);
  8002576:	f990 2049 	ldrsb.w	r2, [r0, #73]	@ 0x49
 	gfx_object->location_old.y_max = gfx_object->location.y_max;
  800257a:	f9b0 3012 	ldrsh.w	r3, [r0, #18]
@@ -4813,75 +4784,69 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
  8002586:	f9b0 100e 	ldrsh.w	r1, [r0, #14]
 	gfx_object->location_old.x_min = gfx_object->location.x_min;
  800258a:	f9b0 e00c 	ldrsh.w	lr, [r0, #12]
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  800258e:	8e05      	ldrh	r5, [r0, #48]	@ 0x30
-	GFX_move_location(  &gfx_object->location, &gfx_object->location_new, gfx_object->velocity.x, -gfx_object->velocity.y );
+	GFX_move_location(&gfx_object->location, &gfx_object->location_new, gfx_object->velocity.x, -gfx_object->velocity.y);
  8002590:	b292      	uxth	r2, r2
-	location_new->y_max 	= location->y_max + dy;
+	location_new->y_max = location->y_max + dy;
  8002592:	1a9b      	subs	r3, r3, r2
  8002594:	8543      	strh	r3, [r0, #42]	@ 0x2a
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  8002596:	f990 3048 	ldrsb.w	r3, [r0, #72]	@ 0x48
  800259a:	b29b      	uxth	r3, r3
-	location_new->x_max 	= location->x_max + dx;
+	location_new->x_max = location->x_max + dx;
  800259c:	449c      	add	ip, r3
  800259e:	f8a0 c028 	strh.w	ip, [r0, #40]	@ 0x28
 	gfx_object->location_old.y_center = gfx_object->location.y_center;
  80025a2:	f9b0 c016 	ldrsh.w	ip, [r0, #22]
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  80025a6:	449e      	add	lr, r3
-	location_new->y_center 	= location->y_center + dy;
+	location_new->y_center = location->y_center + dy;
  80025a8:	ebac 0c02 	sub.w	ip, ip, r2
-	location_new->x_center 	= location->x_center + dx;
+	location_new->x_center = location->x_center + dx;
  80025ac:	4423      	add	r3, r4
-	location_new->y_min 	= location->y_min + dy;
+	location_new->y_min = location->y_min + dy;
  80025ae:	b289      	uxth	r1, r1
 	gfx_object->location_old.x_min = gfx_object->location.x_min;
  80025b0:	6944      	ldr	r4, [r0, #20]
-	location_new->x_center 	= location->x_center + dx;
+	location_new->x_center = location->x_center + dx;
  80025b2:	8583      	strh	r3, [r0, #44]	@ 0x2c
-	location_new->y_center 	= location->y_center + dy;
+	location_new->y_center = location->y_center + dy;
  80025b4:	f8a0 c02e 	strh.w	ip, [r0, #46]	@ 0x2e
  80025b8:	1a8b      	subs	r3, r1, r2
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  80025ba:	fa0f fc8e 	sxth.w	ip, lr
 	gfx_object->location_old.x_min = gfx_object->location.x_min;
  80025be:	6204      	str	r4, [r0, #32]
  80025c0:	68c4      	ldr	r4, [r0, #12]
  80025c2:	6184      	str	r4, [r0, #24]
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  80025c4:	45ac      	cmp	ip, r5
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  80025c6:	fa1f f48e 	uxth.w	r4, lr
-	location_new->y_min 	= location->y_min + dy;
+	location_new->y_min = location->y_min + dy;
  80025ca:	fa0f fe83 	sxth.w	lr, r3
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  80025ce:	f8a0 c024 	strh.w	ip, [r0, #36]	@ 0x24
-	location_new->y_min 	= location->y_min + dy;
+	location_new->y_min = location->y_min + dy;
  80025d2:	f8a0 e026 	strh.w	lr, [r0, #38]	@ 0x26
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  80025d6:	b29b      	uxth	r3, r3
  80025d8:	db1a      	blt.n	8002610 <GFX_update_moving_gfx_object_location+0xa0>
-		( x <= restrictions->X_MAX ) &&
  80025da:	8e45      	ldrh	r5, [r0, #50]	@ 0x32
-	if( ( x >= restrictions->X_MIN ) &&
  80025dc:	45ac      	cmp	ip, r5
  80025de:	dc17      	bgt.n	8002610 <GFX_update_moving_gfx_object_location+0xa0>
-		( y >= restrictions->Y_MIN ) &&
  80025e0:	8ec5      	ldrh	r5, [r0, #54]	@ 0x36
-		( x <= restrictions->X_MAX ) &&
  80025e2:	45ae      	cmp	lr, r5
  80025e4:	db14      	blt.n	8002610 <GFX_update_moving_gfx_object_location+0xa0>
-		( y <= restrictions->Y_MAX )    )
  80025e6:	8f02      	ldrh	r2, [r0, #56]	@ 0x38
-		( y >= restrictions->Y_MIN ) &&
  80025e8:	4596      	cmp	lr, r2
  80025ea:	dc1a      	bgt.n	8002622 <GFX_update_moving_gfx_object_location+0xb2>
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  80025ec:	8881      	ldrh	r1, [r0, #4]
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  80025ee:	88c2      	ldrh	r2, [r0, #6]
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  80025f0:	f8a0 c00c 	strh.w	ip, [r0, #12]
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  80025f4:	1865      	adds	r5, r4, r1
@@ -4891,7 +4856,7 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
  80025fa:	189c      	adds	r4, r3, r2
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  80025fc:	eb03 0252 	add.w	r2, r3, r2, lsr #1
-        gfx_object->location.y_min = y;
+		gfx_object->location.y_min = y;
  8002600:	f8a0 e00e 	strh.w	lr, [r0, #14]
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002604:	8205      	strh	r5, [r0, #16]
@@ -4901,7 +4866,7 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
  8002608:	8281      	strh	r1, [r0, #20]
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  800260a:	82c2      	strh	r2, [r0, #22]
-        return 1; // Placement successful
+		return 1; 
  800260c:	2001      	movs	r0, #1
 }
  800260e:	bd30      	pop	{r4, r5, pc}
@@ -4915,10 +4880,10 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
  800261c:	4d19      	ldr	r5, [pc, #100]	@ (8002684 <GFX_update_moving_gfx_object_location+0x114>)
  800261e:	42a8      	cmp	r0, r5
  8002620:	d004      	beq.n	800262c <GFX_update_moving_gfx_object_location+0xbc>
-		switch(gfx_object->edge_behavior)
+		switch (gfx_object->edge_behavior) {
  8002622:	f890 304a 	ldrb.w	r3, [r0, #74]	@ 0x4a
  8002626:	b32b      	cbz	r3, 8002674 <GFX_update_moving_gfx_object_location+0x104>
-				return object_placement_successful;
+			return object_placement_successful;
  8002628:	2000      	movs	r0, #0
 }
  800262a:	bd30      	pop	{r4, r5, pc}
@@ -4967,20 +4932,18 @@ void GFX_set_gfx_object_velocity(graphic_object_t *gfx_object, int8_t velocity_x
  800266c:	6085      	str	r5, [r0, #8]
 			gfx_object->location.y_min = 0;
  800266e:	81c3      	strh	r3, [r0, #14]
-        return 1; // Placement successful
+		return 1; 
  8002670:	2001      	movs	r0, #1
 }
  8002672:	bd30      	pop	{r4, r5, pc}
  8002674:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
-				object_placement_successful = GFX_bounce_moving_object_from_edge(gfx_object);
+			object_placement_successful = GFX_bounce_moving_object_from_edge(
  8002678:	f7ff bed4 	b.w	8002424 <GFX_bounce_moving_object_from_edge>
  800267c:	200002bc 	.word	0x200002bc
  8002680:	20000224 	.word	0x20000224
  8002684:	2000018c 	.word	0x2000018c
 
 08002688 <GFX_get_object_movement_area>:
-
-
 
 void GFX_get_object_movement_area(graphic_object_t *gfx_object, location_t *object_movement_area)
 {
@@ -5053,12 +5016,12 @@ void GFX_get_object_movement_area(graphic_object_t *gfx_object, location_t *obje
  80026f6:	bf00      	nop
 
 080026f8 <GFX_are_gfx_objects_overlapping>:
+}
 
+uint8_t GFX_are_locations_overlapping(location_t *location_A,
+		location_t *location_B) {
 
-uint8_t GFX_are_locations_overlapping(location_t *location_A, location_t *location_B)
-{
-
-	if ( 	(location_A->x_min > location_B->x_max) ||	// Cond1. If A's left edge is to the right of the B's right edge, - then A is Totally to right Of B
+	if ((location_A->x_min > location_B->x_max) ||	
  80026f8:	f9b0 200c 	ldrsh.w	r2, [r0, #12]
  80026fc:	f9b1 3010 	ldrsh.w	r3, [r1, #16]
  8002700:	429a      	cmp	r2, r3
@@ -5067,12 +5030,12 @@ uint8_t GFX_are_locations_overlapping(location_t *location_A, location_t *locati
  8002708:	f9b1 300c 	ldrsh.w	r3, [r1, #12]
  800270c:	429a      	cmp	r2, r3
  800270e:	db0e      	blt.n	800272e <GFX_are_gfx_objects_overlapping+0x36>
-			(location_A->x_max < location_B->x_min) ||	// Cond2. If A's right edge is to the left of the B's left edge, - then A is Totally to left Of B
+			(location_A->x_max < location_B->x_min) ||	
  8002710:	f9b0 2012 	ldrsh.w	r2, [r0, #18]
  8002714:	f9b1 300e 	ldrsh.w	r3, [r1, #14]
  8002718:	429a      	cmp	r2, r3
  800271a:	db08      	blt.n	800272e <GFX_are_gfx_objects_overlapping+0x36>
-			(location_A->y_max < location_B->y_min) ||	// Cond3. If A's top edge is below B's bottom edge, - then A is Totally below B
+			(location_A->y_max < location_B->y_min) ||	
  800271c:	f9b0 000e 	ldrsh.w	r0, [r0, #14]
  8002720:	f9b1 3012 	ldrsh.w	r3, [r1, #18]
  8002724:	4298      	cmp	r0, r3
@@ -5080,14 +5043,14 @@ uint8_t GFX_are_locations_overlapping(location_t *location_A, location_t *locati
  8002728:	2000      	movgt	r0, #0
  800272a:	2001      	movle	r0, #1
  800272c:	4770      	bx	lr
-			(location_A->y_min > location_B->y_max) )		// Cond4. If A's bottom edge is above B's top edge, - then A is Totally above B
-	{
-		return 0;	// not overlapping
+			(location_A->y_min > location_B->y_max))
+			{
+		return 0;	
  800272e:	2000      	movs	r0, #0
-uint8_t GFX_are_gfx_objects_overlapping(graphic_object_t *object_A, graphic_object_t *object_B)
-{
 
-	return GFX_are_locations_overlapping( &object_A->location, &object_B->location );
+uint8_t GFX_are_gfx_objects_overlapping(graphic_object_t *object_A, graphic_object_t *object_B) {
+
+	return GFX_are_locations_overlapping(&object_A->location, &object_B->location);
 
 }
  8002730:	4770      	bx	lr
@@ -5101,39 +5064,39 @@ void GFX_copy_image_part_to_partial_frame_buffer( image_object_t *image )
 {
 	GFX_get_image_part( image, partial_frame_buffer.location.x_min, partial_frame_buffer.location.y_min, partial_frame_buffer.image.size_x, partial_frame_buffer.image.size_y, partial_frame_buffer.image.image_array);
  8002734:	4b2c      	ldr	r3, [pc, #176]	@ (80027e8 <GFX_copy_image_part_to_partial_frame_buffer+0xb4>)
-	if(y + size_y > img->size_y)
+	if (y + size_y > img->size_y)
  8002736:	88c2      	ldrh	r2, [r0, #6]
 	GFX_get_image_part( image, partial_frame_buffer.location.x_min, partial_frame_buffer.location.y_min, partial_frame_buffer.image.size_x, partial_frame_buffer.image.size_y, partial_frame_buffer.image.image_array);
  8002738:	f9b3 c00e 	ldrsh.w	ip, [r3, #14]
 {
  800273c:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
-	if(y + size_y > img->size_y)
+	if (y + size_y > img->size_y)
  8002740:	88df      	ldrh	r7, [r3, #6]
  8002742:	4467      	add	r7, ip
  8002744:	4297      	cmp	r7, r2
  8002746:	dc4c      	bgt.n	80027e2 <GFX_copy_image_part_to_partial_frame_buffer+0xae>
 	GFX_get_image_part( image, partial_frame_buffer.location.x_min, partial_frame_buffer.location.y_min, partial_frame_buffer.image.size_x, partial_frame_buffer.image.size_y, partial_frame_buffer.image.image_array);
  8002748:	f9b3 600c 	ldrsh.w	r6, [r3, #12]
-	if(x + size_x > img->size_x)
+	if (x + size_x > img->size_x)
  800274c:	889c      	ldrh	r4, [r3, #4]
  800274e:	8882      	ldrh	r2, [r0, #4]
  8002750:	4434      	add	r4, r6
  8002752:	4294      	cmp	r4, r2
  8002754:	dc45      	bgt.n	80027e2 <GFX_copy_image_part_to_partial_frame_buffer+0xae>
-	for( uint16_t row = y; row < (y + size_y); row++ )
+	for (uint16_t row = y; row < (y + size_y); row++) {
  8002756:	fa1f fc8c 	uxth.w	ip, ip
  800275a:	4567      	cmp	r7, ip
  800275c:	dd41      	ble.n	80027e2 <GFX_copy_image_part_to_partial_frame_buffer+0xae>
 	GFX_get_image_part( image, partial_frame_buffer.location.x_min, partial_frame_buffer.location.y_min, partial_frame_buffer.image.size_x, partial_frame_buffer.image.size_y, partial_frame_buffer.image.image_array);
  800275e:	f8d3 a000 	ldr.w	sl, [r3]
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  8002762:	b2b6      	uxth	r6, r6
 	uint32_t i = 0;
  8002764:	2100      	movs	r1, #0
  8002766:	f06f 4900 	mvn.w	r9, #2147483648	@ 0x80000000
 		return IMG_TRANSPARENT_COLOR_CODE;
  800276a:	f44f 68fc 	mov.w	r8, #2016	@ 0x7e0
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  800276e:	42b4      	cmp	r4, r6
  8002770:	dd31      	ble.n	80027d6 <GFX_copy_image_part_to_partial_frame_buffer+0xa2>
  8002772:	f41c 4f00 	tst.w	ip, #32768	@ 0x8000
@@ -5148,31 +5111,32 @@ void GFX_copy_image_part_to_partial_frame_buffer( image_object_t *image )
  8002788:	f832 2015 	ldrh.w	r2, [r2, r5, lsl #1]
 			sub_image_array[i] = GFX_get_image_pixel(img, column, row);
  800278c:	f82e 2f02 	strh.w	r2, [lr, #2]!
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  8002790:	3301      	adds	r3, #1
  8002792:	b29b      	uxth	r3, r3
  8002794:	429c      	cmp	r4, r3
 			i++;
  8002796:	f101 0101 	add.w	r1, r1, #1
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  800279a:	461a      	mov	r2, r3
  800279c:	dd1b      	ble.n	80027d6 <GFX_copy_image_part_to_partial_frame_buffer+0xa2>
-	if ( ( (x_img>=0) && (x_img < img->size_x) ) && ( (y_img>=0) && (y_img < img->size_y) ) )
+	if (((x_img >= 0) && (x_img < img->size_x))
  800279e:	041d      	lsls	r5, r3, #16
  80027a0:	d408      	bmi.n	80027b4 <GFX_copy_image_part_to_partial_frame_buffer+0x80>
  80027a2:	f8b0 b004 	ldrh.w	fp, [r0, #4]
  80027a6:	4593      	cmp	fp, r2
 		return img->image_array[i];
  80027a8:	fb0c 250b 	mla	r5, ip, fp, r2
-	if ( ( (x_img>=0) && (x_img < img->size_x) ) && ( (y_img>=0) && (y_img < img->size_y) ) )
+	if (((x_img >= 0) && (x_img < img->size_x))
  80027ac:	dd02      	ble.n	80027b4 <GFX_copy_image_part_to_partial_frame_buffer+0x80>
+			&& ((y_img >= 0) && (y_img < img->size_y))) {
  80027ae:	88c2      	ldrh	r2, [r0, #6]
  80027b0:	4562      	cmp	r2, ip
  80027b2:	d8e8      	bhi.n	8002786 <GFX_copy_image_part_to_partial_frame_buffer+0x52>
 		return IMG_TRANSPARENT_COLOR_CODE;
  80027b4:	f44f 62fc 	mov.w	r2, #2016	@ 0x7e0
  80027b8:	e7e8      	b.n	800278c <GFX_copy_image_part_to_partial_frame_buffer+0x58>
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  80027ba:	460a      	mov	r2, r1
  80027bc:	1ab5      	subs	r5, r6, r2
  80027be:	4449      	add	r1, r9
@@ -5180,17 +5144,17 @@ void GFX_copy_image_part_to_partial_frame_buffer( image_object_t *image )
  80027c4:	b2ad      	uxth	r5, r5
 			i++;
  80027c6:	3201      	adds	r2, #1
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  80027c8:	18ab      	adds	r3, r5, r2
  80027ca:	b29b      	uxth	r3, r3
  80027cc:	429c      	cmp	r4, r3
 			sub_image_array[i] = GFX_get_image_pixel(img, column, row);
  80027ce:	f821 8f02 	strh.w	r8, [r1, #2]!
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  80027d2:	dcf8      	bgt.n	80027c6 <GFX_copy_image_part_to_partial_frame_buffer+0x92>
 			i++;
  80027d4:	4611      	mov	r1, r2
-	for( uint16_t row = y; row < (y + size_y); row++ )
+	for (uint16_t row = y; row < (y + size_y); row++) {
  80027d6:	f10c 0c01 	add.w	ip, ip, #1
  80027da:	fa1f fc8c 	uxth.w	ip, ip
  80027de:	4567      	cmp	r7, ip
@@ -5202,17 +5166,13 @@ void GFX_copy_image_part_to_partial_frame_buffer( image_object_t *image )
 
 080027ec <GFX_partial_frame_buffer_overlay_object>:
 
-
-
-
-void GFX_partial_frame_buffer_overlay_object(graphic_object_t *object)
-{
+void GFX_partial_frame_buffer_overlay_object(graphic_object_t *object) {
  80027ec:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+	uint16_t pixel;
 
 
-	// overlay the graphical object image over the part of the existing image in the partial frame buffer
 
-	// go over all the required rows of the partial frame buffer image
+
 	for( uint16_t y_abs = partial_frame_buffer.location.y_min; y_abs < partial_frame_buffer.location.y_max; y_abs++ )
  80027f0:	4e27      	ldr	r6, [pc, #156]	@ (8002890 <GFX_partial_frame_buffer_overlay_object+0xa4>)
  80027f2:	89f3      	ldrh	r3, [r6, #14]
@@ -5220,14 +5180,13 @@ void GFX_partial_frame_buffer_overlay_object(graphic_object_t *object)
  80027f8:	429a      	cmp	r2, r3
  80027fa:	dd47      	ble.n	800288c <GFX_partial_frame_buffer_overlay_object+0xa0>
 	{
-		// for each row, go over all required columns
 		for( uint16_t x_abs = partial_frame_buffer.location.x_min; x_abs < partial_frame_buffer.location.x_max; x_abs++ )
  80027fc:	f9b6 c010 	ldrsh.w	ip, [r6, #16]
  8002800:	f8b6 e00c 	ldrh.w	lr, [r6, #12]
+		{
 			GFX_absolute_coordinates_to_object_coordinates(object, x_abs, y_abs, &x_obj, &y_obj);
 			pixel = GFX_get_image_pixel( &object->image, x_obj, y_obj);
 
-			// overlay the pixel only if it is not transparent
 			if ( pixel != IMG_TRANSPARENT_COLOR_CODE)
 				partial_frame_buffer.image.image_array[i] = pixel;
  8002804:	f8d6 8000 	ldr.w	r8, [r6]
@@ -5252,7 +5211,7 @@ void GFX_partial_frame_buffer_overlay_object(graphic_object_t *object)
  800282a:	1b1b      	subs	r3, r3, r4
  800282c:	4413      	add	r3, r2
  800282e:	fa1f fa83 	uxth.w	sl, r3
-	if ( ( (x_img>=0) && (x_img < img->size_x) ) && ( (y_img>=0) && (y_img < img->size_y) ) )
+	if (((x_img >= 0) && (x_img < img->size_x))
  8002832:	041b      	lsls	r3, r3, #16
  8002834:	d41a      	bmi.n	800286c <GFX_partial_frame_buffer_overlay_object+0x80>
  8002836:	8883      	ldrh	r3, [r0, #4]
@@ -5262,11 +5221,11 @@ void GFX_partial_frame_buffer_overlay_object(graphic_object_t *object)
  800283c:	f8b0 900e 	ldrh.w	r9, [r0, #14]
  8002840:	eba5 0909 	sub.w	r9, r5, r9
  8002844:	fa1f fb89 	uxth.w	fp, r9
-	if ( ( (x_img>=0) && (x_img < img->size_x) ) && ( (y_img>=0) && (y_img < img->size_y) ) )
+			&& ((y_img >= 0) && (y_img < img->size_y))) {
  8002848:	f419 4f00 	tst.w	r9, #32768	@ 0x8000
 		return img->image_array[i];
  800284c:	fb0b aa03 	mla	sl, fp, r3, sl
-	if ( ( (x_img>=0) && (x_img < img->size_x) ) && ( (y_img>=0) && (y_img < img->size_y) ) )
+			&& ((y_img >= 0) && (y_img < img->size_y))) {
  8002850:	d10c      	bne.n	800286c <GFX_partial_frame_buffer_overlay_object+0x80>
  8002852:	88c3      	ldrh	r3, [r0, #6]
  8002854:	459b      	cmp	fp, r3
@@ -5282,7 +5241,6 @@ void GFX_partial_frame_buffer_overlay_object(graphic_object_t *object)
 		for( uint16_t x_abs = partial_frame_buffer.location.x_min; x_abs < partial_frame_buffer.location.x_max; x_abs++ )
  8002868:	f9b6 c010 	ldrshne.w	ip, [r6, #16]
 
-			// update the buffer linear index
 			i++;
  800286c:	3201      	adds	r2, #1
 		for( uint16_t x_abs = partial_frame_buffer.location.x_min; x_abs < partial_frame_buffer.location.x_max; x_abs++ )
@@ -5311,18 +5269,18 @@ void GFX_partial_frame_buffer_overlay_object(graphic_object_t *object)
  8002890:	200003c8 	.word	0x200003c8
 
 08002894 <GFX_clear_area_on_background>:
-
-
-
+		GFX_deallocate_partial_frame_buffer();
+	}
+}
 
 void GFX_clear_area_on_background(int16_t x_min, int16_t y_min, int16_t x_max, int16_t y_max, graphic_object_t *bckgnd)
 {
  8002894:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+	partial_frame_buffer.location.y_min = y_min;
+
 	partial_frame_buffer.location.x_max = x_max;
 	partial_frame_buffer.location.y_max = y_max;
 
-
-	// prepare the partial frame image buffer for the area of the current object
 	partial_frame_buffer.image.size_x = partial_frame_buffer.location.x_max - partial_frame_buffer.location.x_min;
  8002898:	b286      	uxth	r6, r0
 {
@@ -5363,32 +5321,28 @@ void GFX_clear_area_on_background(int16_t x_min, int16_t y_min, int16_t x_max, i
 	partial_frame_buffer.image.size = partial_frame_buffer.image.size_x * partial_frame_buffer.image.size_y;
  80028d4:	fb0b f000 	mul.w	r0, fp, r0
  80028d8:	60a8      	str	r0, [r5, #8]
-	return ( (uint16_t *) malloc(size_px * sizeof(uint16_t) ) );
+	return ((uint16_t*) malloc(size_px * sizeof(uint16_t)));
  80028da:	0040      	lsls	r0, r0, #1
  80028dc:	f005 ff1e 	bl	800871c <malloc>
-	if(y + size_y > img->size_y)
+	if (y + size_y > img->size_y)
  80028e0:	88f9      	ldrh	r1, [r7, #6]
-	return ( (uint16_t *) malloc(size_px * sizeof(uint16_t) ) );
+	return ((uint16_t*) malloc(size_px * sizeof(uint16_t)));
  80028e2:	9002      	str	r0, [sp, #8]
-	if(y + size_y > img->size_y)
+	if (y + size_y > img->size_y)
  80028e4:	eb08 0e0b 	add.w	lr, r8, fp
  80028e8:	458e      	cmp	lr, r1
-
-
-
-	// allocate memory for the part of the frame, i.e. prepare the image buffer
 	partial_frame_buffer.image.image_array = GFX_allocate_image_buffer(partial_frame_buffer.image.size);
  80028ea:	6028      	str	r0, [r5, #0]
-	if(y + size_y > img->size_y)
+	if (y + size_y > img->size_y)
  80028ec:	dc40      	bgt.n	8002970 <GFX_clear_area_on_background+0xdc>
-	if(x + size_x > img->size_x)
+	if (x + size_x > img->size_x)
  80028ee:	9b05      	ldr	r3, [sp, #20]
  80028f0:	9801      	ldr	r0, [sp, #4]
  80028f2:	f8b7 9004 	ldrh.w	r9, [r7, #4]
  80028f6:	eb03 0c00 	add.w	ip, r3, r0
  80028fa:	45cc      	cmp	ip, r9
  80028fc:	dc38      	bgt.n	8002970 <GFX_clear_area_on_background+0xdc>
-	for( uint16_t row = y; row < (y + size_y); row++ )
+	for (uint16_t row = y; row < (y + size_y); row++) {
  80028fe:	4574      	cmp	r4, lr
  8002900:	da36      	bge.n	8002970 <GFX_clear_area_on_background+0xdc>
 	uint32_t i = 0;
@@ -5398,7 +5352,7 @@ void GFX_clear_area_on_background(int16_t x_min, int16_t y_min, int16_t x_max, i
  8002908:	f8cd b018 	str.w	fp, [sp, #24]
  800290c:	9104      	str	r1, [sp, #16]
  800290e:	f8cd 801c 	str.w	r8, [sp, #28]
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  8002912:	45b4      	cmp	ip, r6
  8002914:	dd26      	ble.n	8002964 <GFX_clear_area_on_background+0xd0>
  8002916:	9b04      	ldr	r3, [sp, #16]
@@ -5411,7 +5365,7 @@ void GFX_clear_area_on_background(int16_t x_min, int16_t y_min, int16_t x_max, i
  8002926:	eb03 0040 	add.w	r0, r3, r0, lsl #1
 		i = y_img * img->size_x + x_img;
  800292a:	fb04 f809 	mul.w	r8, r4, r9
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  800292e:	46b3      	mov	fp, r6
  8002930:	4633      	mov	r3, r6
  8002932:	e00b      	b.n	800294c <GFX_clear_area_on_background+0xb8>
@@ -5420,21 +5374,21 @@ void GFX_clear_area_on_background(int16_t x_min, int16_t y_min, int16_t x_max, i
  8002936:	f831 1016 	ldrh.w	r1, [r1, r6, lsl #1]
 			sub_image_array[i] = GFX_get_image_pixel(img, column, row);
  800293a:	f820 1f02 	strh.w	r1, [r0, #2]!
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  800293e:	3301      	adds	r3, #1
  8002940:	b29b      	uxth	r3, r3
  8002942:	459c      	cmp	ip, r3
 			i++;
  8002944:	f102 0201 	add.w	r2, r2, #1
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  8002948:	469b      	mov	fp, r3
  800294a:	dd0a      	ble.n	8002962 <GFX_clear_area_on_background+0xce>
-	if ( ( (x_img>=0) && (x_img < img->size_x) ) && ( (y_img>=0) && (y_img < img->size_y) ) )
+	if (((x_img >= 0) && (x_img < img->size_x))
  800294c:	ea44 0103 	orr.w	r1, r4, r3
  8002950:	0409      	lsls	r1, r1, #16
 		return img->image_array[i];
  8002952:	eb0b 0608 	add.w	r6, fp, r8
-	if ( ( (x_img>=0) && (x_img < img->size_x) ) && ( (y_img>=0) && (y_img < img->size_y) ) )
+	if (((x_img >= 0) && (x_img < img->size_x))
  8002956:	d401      	bmi.n	800295c <GFX_clear_area_on_background+0xc8>
  8002958:	45cb      	cmp	fp, r9
  800295a:	dbeb      	blt.n	8002934 <GFX_clear_area_on_background+0xa0>
@@ -5442,27 +5396,26 @@ void GFX_clear_area_on_background(int16_t x_min, int16_t y_min, int16_t x_max, i
  800295c:	f44f 61fc 	mov.w	r1, #2016	@ 0x7e0
  8002960:	e7eb      	b.n	800293a <GFX_clear_area_on_background+0xa6>
  8002962:	9e03      	ldr	r6, [sp, #12]
-	for( uint16_t row = y; row < (y + size_y); row++ )
+	for (uint16_t row = y; row < (y + size_y); row++) {
  8002964:	3401      	adds	r4, #1
  8002966:	b2a4      	uxth	r4, r4
  8002968:	45a6      	cmp	lr, r4
  800296a:	dcd2      	bgt.n	8002912 <GFX_clear_area_on_background+0x7e>
  800296c:	e9dd b806 	ldrd	fp, r8, [sp, #24]
-	ILI9341_SetDisplayWindow( gfx_object->location.x_min, gfx_object->location.y_min, gfx_object->image.size_x, gfx_object->image.size_y);
+	ILI9341_SetDisplayWindow(gfx_object->location.x_min, gfx_object->location.y_min, gfx_object->image.size_x, gfx_object->image.size_y);
  8002970:	9a01      	ldr	r2, [sp, #4]
  8002972:	9805      	ldr	r0, [sp, #20]
  8002974:	465b      	mov	r3, fp
  8002976:	4641      	mov	r1, r8
  8002978:	f005 faf2 	bl	8007f60 <ILI9341_SetDisplayWindow>
-	ILI9341_SendData((LCD_IO_Data_t *) gfx_object->image.image_array, gfx_object->image.size );
+	ILI9341_SendData((LCD_IO_Data_t*) gfx_object->image.image_array, gfx_object->image.size);
  800297c:	6828      	ldr	r0, [r5, #0]
  800297e:	68a9      	ldr	r1, [r5, #8]
  8002980:	f005 face 	bl	8007f20 <ILI9341_SendData>
 	free(ptr);
  8002984:	6828      	ldr	r0, [r5, #0]
-
-
-	// de-allocate memory for the partial frame buffer
+	GFX_get_image_part( &bckgnd->image, partial_frame_buffer.location.x_min, partial_frame_buffer.location.y_min, partial_frame_buffer.image.size_x, partial_frame_buffer.image.size_y, partial_frame_buffer.image.image_array);
+	GFX_draw_gfx_object(&partial_frame_buffer);
 	GFX_deallocate_image_buffer(partial_frame_buffer.image.image_array);
 
 }
@@ -5477,15 +5430,15 @@ void GFX_clear_area_on_background(int16_t x_min, int16_t y_min, int16_t x_max, i
  800299c:	1ab0      	subs	r0, r6, r2
 			i++;
  800299e:	3201      	adds	r2, #1
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  80029a0:	1883      	adds	r3, r0, r2
  80029a2:	b29b      	uxth	r3, r3
  80029a4:	459c      	cmp	ip, r3
 			sub_image_array[i] = GFX_get_image_pixel(img, column, row);
  80029a6:	f821 af02 	strh.w	sl, [r1, #2]!
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  80029aa:	dcf8      	bgt.n	800299e <GFX_clear_area_on_background+0x10a>
-	for( uint16_t row = y; row < (y + size_y); row++ )
+	for (uint16_t row = y; row < (y + size_y); row++) {
  80029ac:	3401      	adds	r4, #1
  80029ae:	b2a4      	uxth	r4, r4
  80029b0:	45a6      	cmp	lr, r4
@@ -5495,41 +5448,40 @@ void GFX_clear_area_on_background(int16_t x_min, int16_t y_min, int16_t x_max, i
  80029b8:	200003c8 	.word	0x200003c8
 
 080029bc <GFX_draw_one_gfx_object_on_background>:
-{
+void GFX_draw_one_gfx_object_on_background(graphic_object_t *object, graphic_object_t *bckgnd) {
  80029bc:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
  80029c0:	4604      	mov	r4, r0
-	if ( 	(location_A->x_min > location_B->x_max) ||	// Cond1. If A's left edge is to the right of the B's right edge, - then A is Totally to right Of B
+	if ((location_A->x_min > location_B->x_max) ||	
  80029c2:	f9b0 0018 	ldrsh.w	r0, [r0, #24]
  80029c6:	f9b4 5010 	ldrsh.w	r5, [r4, #16]
-			(location_A->x_max < location_B->x_min) ||	// Cond2. If A's right edge is to the left of the B's left edge, - then A is Totally to left Of B
+			(location_A->x_max < location_B->x_min) ||	
  80029ca:	f9b4 201c 	ldrsh.w	r2, [r4, #28]
-			(location_A->y_max < location_B->y_min) ||	// Cond3. If A's top edge is below B's bottom edge, - then A is Totally below B
+			(location_A->y_max < location_B->y_min) ||	
  80029ce:	f9b4 301e 	ldrsh.w	r3, [r4, #30]
-	if ( 	(location_A->x_min > location_B->x_max) ||	// Cond1. If A's left edge is to the right of the B's right edge, - then A is Totally to right Of B
+	if ((location_A->x_min > location_B->x_max) ||	
  80029d2:	42a8      	cmp	r0, r5
-{
+void GFX_draw_one_gfx_object_on_background(graphic_object_t *object, graphic_object_t *bckgnd) {
  80029d4:	460e      	mov	r6, r1
  80029d6:	b082      	sub	sp, #8
-			(location_A->y_min > location_B->y_max) )		// Cond4. If A's bottom edge is above B's top edge, - then A is Totally above B
+			(location_A->y_min > location_B->y_max))
  80029d8:	f9b4 101a 	ldrsh.w	r1, [r4, #26]
-	if ( 	(location_A->x_min > location_B->x_max) ||	// Cond1. If A's left edge is to the right of the B's right edge, - then A is Totally to right Of B
+	if ((location_A->x_min > location_B->x_max) ||	
  80029dc:	dc0b      	bgt.n	80029f6 <GFX_draw_one_gfx_object_on_background+0x3a>
-			(location_A->x_max < location_B->x_min) ||	// Cond2. If A's right edge is to the left of the B's left edge, - then A is Totally to left Of B
+			(location_A->x_max < location_B->x_min) ||	
  80029de:	f9b4 700c 	ldrsh.w	r7, [r4, #12]
-	if ( 	(location_A->x_min > location_B->x_max) ||	// Cond1. If A's left edge is to the right of the B's right edge, - then A is Totally to right Of B
+	if ((location_A->x_min > location_B->x_max) ||	
  80029e2:	4297      	cmp	r7, r2
  80029e4:	dc07      	bgt.n	80029f6 <GFX_draw_one_gfx_object_on_background+0x3a>
-			(location_A->y_max < location_B->y_min) ||	// Cond3. If A's top edge is below B's bottom edge, - then A is Totally below B
+			(location_A->y_max < location_B->y_min) ||	
  80029e6:	f9b4 c00e 	ldrsh.w	ip, [r4, #14]
-			(location_A->x_max < location_B->x_min) ||	// Cond2. If A's right edge is to the left of the B's left edge, - then A is Totally to left Of B
+			(location_A->x_max < location_B->x_min) ||	
  80029ea:	459c      	cmp	ip, r3
  80029ec:	dc03      	bgt.n	80029f6 <GFX_draw_one_gfx_object_on_background+0x3a>
-			(location_A->y_min > location_B->y_max) )		// Cond4. If A's bottom edge is above B's top edge, - then A is Totally above B
+			(location_A->y_min > location_B->y_max))
  80029ee:	f9b4 e012 	ldrsh.w	lr, [r4, #18]
-			(location_A->y_max < location_B->y_min) ||	// Cond3. If A's top edge is below B's bottom edge, - then A is Totally below B
+			(location_A->y_max < location_B->y_min) ||	
  80029f2:	458e      	cmp	lr, r1
  80029f4:	da37      	bge.n	8002a66 <GFX_draw_one_gfx_object_on_background+0xaa>
-
 
 
 void GFX_clear_location_on_background( location_t *location, graphic_object_t *bckgnd )
@@ -5568,29 +5520,29 @@ void GFX_clear_location_on_background( location_t *location, graphic_object_t *b
  8002a24:	fb02 f303 	mul.w	r3, r2, r3
 	partial_frame_buffer.image.size_y = partial_frame_buffer.location.y_max - partial_frame_buffer.location.y_min;
  8002a28:	80ea      	strh	r2, [r5, #6]
-	return ( (uint16_t *) malloc(size_px * sizeof(uint16_t) ) );
+	return ((uint16_t*) malloc(size_px * sizeof(uint16_t)));
  8002a2a:	0058      	lsls	r0, r3, #1
 	partial_frame_buffer.image.size = partial_frame_buffer.image.size_x * partial_frame_buffer.image.size_y;
  8002a2c:	60ab      	str	r3, [r5, #8]
-	return ( (uint16_t *) malloc(size_px * sizeof(uint16_t) ) );
+	return ((uint16_t*) malloc(size_px * sizeof(uint16_t)));
  8002a2e:	f005 fe75 	bl	800871c <malloc>
  8002a32:	4603      	mov	r3, r0
-				GFX_copy_image_part_to_partial_frame_buffer(&bckgnd->image);
+		GFX_copy_image_part_to_partial_frame_buffer(&bckgnd->image);
  8002a34:	4630      	mov	r0, r6
 	partial_frame_buffer.image.image_array = GFX_allocate_image_buffer(partial_frame_buffer.image.size);
  8002a36:	602b      	str	r3, [r5, #0]
-				GFX_copy_image_part_to_partial_frame_buffer(&bckgnd->image);
+		GFX_copy_image_part_to_partial_frame_buffer(&bckgnd->image);
  8002a38:	f7ff fe7c 	bl	8002734 <GFX_copy_image_part_to_partial_frame_buffer>
-				GFX_partial_frame_buffer_overlay_object(object);
+		GFX_partial_frame_buffer_overlay_object(object);
  8002a3c:	4620      	mov	r0, r4
  8002a3e:	f7ff fed5 	bl	80027ec <GFX_partial_frame_buffer_overlay_object>
-	ILI9341_SetDisplayWindow( gfx_object->location.x_min, gfx_object->location.y_min, gfx_object->image.size_x, gfx_object->image.size_y);
+	ILI9341_SetDisplayWindow(gfx_object->location.x_min, gfx_object->location.y_min, gfx_object->image.size_x, gfx_object->image.size_y);
  8002a42:	88eb      	ldrh	r3, [r5, #6]
  8002a44:	88aa      	ldrh	r2, [r5, #4]
  8002a46:	f9b5 100e 	ldrsh.w	r1, [r5, #14]
  8002a4a:	f9b5 000c 	ldrsh.w	r0, [r5, #12]
  8002a4e:	f005 fa87 	bl	8007f60 <ILI9341_SetDisplayWindow>
-	ILI9341_SendData((LCD_IO_Data_t *) gfx_object->image.image_array, gfx_object->image.size );
+	ILI9341_SendData((LCD_IO_Data_t*) gfx_object->image.image_array, gfx_object->image.size);
  8002a52:	6828      	ldr	r0, [r5, #0]
  8002a54:	68a9      	ldr	r1, [r5, #8]
  8002a56:	f005 fa63 	bl	8007f20 <ILI9341_SendData>
@@ -5659,16 +5611,11 @@ void GFX_clear_location_on_background( location_t *location, graphic_object_t *b
  8002ab8:	200003c8 	.word	0x200003c8
 
 08002abc <GFX_clear_gfx_object_on_background>:
-
-
-
+}
 
 void GFX_clear_gfx_object_on_background(graphic_object_t *object, graphic_object_t *bckgnd)
 {
  8002abc:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
-
-	// specify the frame buffer graphic object parameters
-	// the buffer image dimensions is the same as current object dimensions
 	partial_frame_buffer.location.x_min = object->location.x_min;
  8002ac0:	68c3      	ldr	r3, [r0, #12]
  8002ac2:	f9b0 600c 	ldrsh.w	r6, [r0, #12]
@@ -5685,17 +5632,15 @@ void GFX_clear_gfx_object_on_background(graphic_object_t *object, graphic_object
  8002ad2:	f9b0 2010 	ldrsh.w	r2, [r0, #16]
 	partial_frame_buffer.location.y_max = object->location.y_max;
 
-
-	// prepare the partial frame image buffer for the area of the current object
-		partial_frame_buffer.image.size_x = partial_frame_buffer.location.x_max - partial_frame_buffer.location.x_min;
+	partial_frame_buffer.image.size_x = partial_frame_buffer.location.x_max - partial_frame_buffer.location.x_min;
  8002ad6:	b2b6      	uxth	r6, r6
  8002ad8:	1b92      	subs	r2, r2, r6
  8002ada:	fa1f fb82 	uxth.w	fp, r2
 	partial_frame_buffer.location.y_max = object->location.y_max;
  8002ade:	f9b0 2012 	ldrsh.w	r2, [r0, #18]
-		partial_frame_buffer.image.size_x = partial_frame_buffer.location.x_max - partial_frame_buffer.location.x_min;
+	partial_frame_buffer.image.size_x = partial_frame_buffer.location.x_max - partial_frame_buffer.location.x_min;
  8002ae2:	f8a5 b004 	strh.w	fp, [r5, #4]
-		partial_frame_buffer.image.size_y = partial_frame_buffer.location.y_max - partial_frame_buffer.location.y_min;
+	partial_frame_buffer.image.size_y = partial_frame_buffer.location.y_max - partial_frame_buffer.location.y_min;
  8002ae6:	b2a4      	uxth	r4, r4
  8002ae8:	1b12      	subs	r2, r2, r4
  8002aea:	fa1f f882 	uxth.w	r8, r2
@@ -5705,37 +5650,37 @@ void GFX_clear_gfx_object_on_background(graphic_object_t *object, graphic_object
  8002af2:	9105      	str	r1, [sp, #20]
 	partial_frame_buffer.location.x_min = object->location.x_min;
  8002af4:	6901      	ldr	r1, [r0, #16]
-		partial_frame_buffer.image.size_y = partial_frame_buffer.location.y_max - partial_frame_buffer.location.y_min;
+	partial_frame_buffer.image.size_y = partial_frame_buffer.location.y_max - partial_frame_buffer.location.y_min;
  8002af6:	f8a5 8006 	strh.w	r8, [r5, #6]
-		partial_frame_buffer.image.size = partial_frame_buffer.image.size_x * partial_frame_buffer.image.size_y;
+	partial_frame_buffer.image.size = partial_frame_buffer.image.size_x * partial_frame_buffer.image.size_y;
  8002afa:	fb08 f00b 	mul.w	r0, r8, fp
  8002afe:	60a8      	str	r0, [r5, #8]
-	return ( (uint16_t *) malloc(size_px * sizeof(uint16_t) ) );
+	return ((uint16_t*) malloc(size_px * sizeof(uint16_t)));
  8002b00:	0040      	lsls	r0, r0, #1
 	partial_frame_buffer.location.x_min = object->location.x_min;
  8002b02:	e9c5 3103 	strd	r3, r1, [r5, #12]
-	return ( (uint16_t *) malloc(size_px * sizeof(uint16_t) ) );
+	return ((uint16_t*) malloc(size_px * sizeof(uint16_t)));
  8002b06:	f005 fe09 	bl	800871c <malloc>
-	if(y + size_y > img->size_y)
+	if (y + size_y > img->size_y)
  8002b0a:	9a04      	ldr	r2, [sp, #16]
-	return ( (uint16_t *) malloc(size_px * sizeof(uint16_t) ) );
+	return ((uint16_t*) malloc(size_px * sizeof(uint16_t)));
  8002b0c:	9001      	str	r0, [sp, #4]
 
-		// allocate memory for the part of the frame, i.e. prepare the image buffer
-		partial_frame_buffer.image.image_array = GFX_allocate_image_buffer(partial_frame_buffer.image.size);
+
+	partial_frame_buffer.image.image_array = GFX_allocate_image_buffer(partial_frame_buffer.image.size);
  8002b0e:	6028      	str	r0, [r5, #0]
-	if(y + size_y > img->size_y)
+	if (y + size_y > img->size_y)
  8002b10:	88f8      	ldrh	r0, [r7, #6]
  8002b12:	eb02 0108 	add.w	r1, r2, r8
  8002b16:	4281      	cmp	r1, r0
  8002b18:	dc3e      	bgt.n	8002b98 <GFX_clear_gfx_object_on_background+0xdc>
-	if(x + size_x > img->size_x)
+	if (x + size_x > img->size_x)
  8002b1a:	9b05      	ldr	r3, [sp, #20]
  8002b1c:	f8b7 9004 	ldrh.w	r9, [r7, #4]
  8002b20:	eb03 0e0b 	add.w	lr, r3, fp
  8002b24:	45ce      	cmp	lr, r9
  8002b26:	dc37      	bgt.n	8002b98 <GFX_clear_gfx_object_on_background+0xdc>
-	for( uint16_t row = y; row < (y + size_y); row++ )
+	for (uint16_t row = y; row < (y + size_y); row++) {
  8002b28:	428c      	cmp	r4, r1
  8002b2a:	da35      	bge.n	8002b98 <GFX_clear_gfx_object_on_background+0xdc>
  8002b2c:	e9cd b806 	strd	fp, r8, [sp, #24]
@@ -5745,7 +5690,7 @@ void GFX_clear_gfx_object_on_background(graphic_object_t *object, graphic_object
  8002b32:	f44f 6afc 	mov.w	sl, #2016	@ 0x7e0
  8002b36:	468c      	mov	ip, r1
  8002b38:	9003      	str	r0, [sp, #12]
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  8002b3a:	4576      	cmp	r6, lr
  8002b3c:	da26      	bge.n	8002b8c <GFX_clear_gfx_object_on_background+0xd0>
  8002b3e:	9b03      	ldr	r3, [sp, #12]
@@ -5758,7 +5703,7 @@ void GFX_clear_gfx_object_on_background(graphic_object_t *object, graphic_object
  8002b4e:	eb03 0040 	add.w	r0, r3, r0, lsl #1
 		i = y_img * img->size_x + x_img;
  8002b52:	fb04 f809 	mul.w	r8, r4, r9
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  8002b56:	46b3      	mov	fp, r6
  8002b58:	4633      	mov	r3, r6
  8002b5a:	e00b      	b.n	8002b74 <GFX_clear_gfx_object_on_background+0xb8>
@@ -5767,21 +5712,21 @@ void GFX_clear_gfx_object_on_background(graphic_object_t *object, graphic_object
  8002b5e:	f831 1016 	ldrh.w	r1, [r1, r6, lsl #1]
 			sub_image_array[i] = GFX_get_image_pixel(img, column, row);
  8002b62:	f820 1f02 	strh.w	r1, [r0, #2]!
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  8002b66:	3301      	adds	r3, #1
  8002b68:	b29b      	uxth	r3, r3
  8002b6a:	459e      	cmp	lr, r3
 			i++;
  8002b6c:	f102 0201 	add.w	r2, r2, #1
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  8002b70:	469b      	mov	fp, r3
  8002b72:	dd0a      	ble.n	8002b8a <GFX_clear_gfx_object_on_background+0xce>
-	if ( ( (x_img>=0) && (x_img < img->size_x) ) && ( (y_img>=0) && (y_img < img->size_y) ) )
+	if (((x_img >= 0) && (x_img < img->size_x))
  8002b74:	ea44 0103 	orr.w	r1, r4, r3
  8002b78:	0409      	lsls	r1, r1, #16
 		return img->image_array[i];
  8002b7a:	eb0b 0608 	add.w	r6, fp, r8
-	if ( ( (x_img>=0) && (x_img < img->size_x) ) && ( (y_img>=0) && (y_img < img->size_y) ) )
+	if (((x_img >= 0) && (x_img < img->size_x))
  8002b7e:	d401      	bmi.n	8002b84 <GFX_clear_gfx_object_on_background+0xc8>
  8002b80:	45d9      	cmp	r9, fp
  8002b82:	dceb      	bgt.n	8002b5c <GFX_clear_gfx_object_on_background+0xa0>
@@ -5789,28 +5734,26 @@ void GFX_clear_gfx_object_on_background(graphic_object_t *object, graphic_object
  8002b84:	f44f 61fc 	mov.w	r1, #2016	@ 0x7e0
  8002b88:	e7eb      	b.n	8002b62 <GFX_clear_gfx_object_on_background+0xa6>
  8002b8a:	9e02      	ldr	r6, [sp, #8]
-	for( uint16_t row = y; row < (y + size_y); row++ )
+	for (uint16_t row = y; row < (y + size_y); row++) {
  8002b8c:	3401      	adds	r4, #1
  8002b8e:	b2a4      	uxth	r4, r4
  8002b90:	45a4      	cmp	ip, r4
  8002b92:	dcd2      	bgt.n	8002b3a <GFX_clear_gfx_object_on_background+0x7e>
  8002b94:	e9dd b806 	ldrd	fp, r8, [sp, #24]
-	ILI9341_SetDisplayWindow( gfx_object->location.x_min, gfx_object->location.y_min, gfx_object->image.size_x, gfx_object->image.size_y);
+	ILI9341_SetDisplayWindow(gfx_object->location.x_min, gfx_object->location.y_min, gfx_object->image.size_x, gfx_object->image.size_y);
  8002b98:	e9dd 1004 	ldrd	r1, r0, [sp, #16]
  8002b9c:	4643      	mov	r3, r8
  8002b9e:	465a      	mov	r2, fp
  8002ba0:	f005 f9de 	bl	8007f60 <ILI9341_SetDisplayWindow>
-	ILI9341_SendData((LCD_IO_Data_t *) gfx_object->image.image_array, gfx_object->image.size );
+	ILI9341_SendData((LCD_IO_Data_t*) gfx_object->image.image_array, gfx_object->image.size);
  8002ba4:	6828      	ldr	r0, [r5, #0]
  8002ba6:	68a9      	ldr	r1, [r5, #8]
  8002ba8:	f005 f9ba 	bl	8007f20 <ILI9341_SendData>
 	free(ptr);
  8002bac:	6828      	ldr	r0, [r5, #0]
-
-	// de-allocate memory for the partial frame buffer
+	GFX_get_image_part( &bckgnd->image, partial_frame_buffer.location.x_min, partial_frame_buffer.location.y_min, partial_frame_buffer.image.size_x, partial_frame_buffer.image.size_y, partial_frame_buffer.image.image_array);
+	GFX_draw_gfx_object(&partial_frame_buffer);
 	GFX_deallocate_image_buffer(partial_frame_buffer.image.image_array);
-
-
 }
  8002bae:	b009      	add	sp, #36	@ 0x24
  8002bb0:	e8bd 4ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
@@ -5823,15 +5766,15 @@ void GFX_clear_gfx_object_on_background(graphic_object_t *object, graphic_object
  8002bc4:	1ab0      	subs	r0, r6, r2
 			i++;
  8002bc6:	3201      	adds	r2, #1
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  8002bc8:	1883      	adds	r3, r0, r2
  8002bca:	b29b      	uxth	r3, r3
  8002bcc:	459e      	cmp	lr, r3
 			sub_image_array[i] = GFX_get_image_pixel(img, column, row);
  8002bce:	f821 af02 	strh.w	sl, [r1, #2]!
-		for(uint16_t column = x; column < (x + size_x); column++ )
+		for (uint16_t column = x; column < (x + size_x); column++) {
  8002bd2:	dcf8      	bgt.n	8002bc6 <GFX_clear_gfx_object_on_background+0x10a>
-	for( uint16_t row = y; row < (y + size_y); row++ )
+	for (uint16_t row = y; row < (y + size_y); row++) {
  8002bd4:	3401      	adds	r4, #1
  8002bd6:	b2a4      	uxth	r4, r4
  8002bd8:	45a4      	cmp	ip, r4
@@ -5841,15 +5784,14 @@ void GFX_clear_gfx_object_on_background(graphic_object_t *object, graphic_object
  8002be0:	200003c8 	.word	0x200003c8
 
 08002be4 <GFX_display_text_object>:
-
-
-
+	GFX_update_moving_gfx_object_location(middle_object);
+	GFX_draw_two_gfx_objects_on_background(front_object, middle_object, bckgnd);
+}
 
 void GFX_display_text_object(text_object_t *txt_object)
 {
  8002be4:	b510      	push	{r4, lr}
  8002be6:	4604      	mov	r4, r0
-
 	UG_FontSelect(txt_object->font);
  8002be8:	6880      	ldr	r0, [r0, #8]
  8002bea:	f005 fb4b 	bl	8008284 <UG_FontSelect>
@@ -5859,64 +5801,49 @@ void GFX_display_text_object(text_object_t *txt_object)
 	UG_SetBackcolor(txt_object->back_color);
  8002bf4:	6920      	ldr	r0, [r4, #16]
  8002bf6:	f005 fb5d 	bl	80082b4 <UG_SetBackcolor>
-
 	UG_PutString(txt_object->x_min, txt_object->y_min, txt_object->text );
  8002bfa:	6822      	ldr	r2, [r4, #0]
  8002bfc:	f9b4 1006 	ldrsh.w	r1, [r4, #6]
  8002c00:	f9b4 0004 	ldrsh.w	r0, [r4, #4]
-
 }
  8002c04:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
 	UG_PutString(txt_object->x_min, txt_object->y_min, txt_object->text );
  8002c08:	f005 bd46 	b.w	8008698 <UG_PutString>
 
 08002c0c <GFX_init_obstacle_pair_location>:
-
-
-
+	UG_FillFrame( progress_bar->bar.x_min, progress_bar->bar.y_min, progress_bar->bar.x_max, progress_bar->bar.y_max, progress_bar->bar.color );
+	UG_FillFrame( progress_bar->bar.x_max, progress_bar->bar.y_min, progress_bar->bar.x_min + progress_bar->full_length_px, progress_bar->bar.y_max, progress_bar->background_color );
+}
 
 void GFX_init_obstacle_pair_location(obstacle_pair_t *pair, int16_t x, int16_t top_y, int16_t bottom_y) 
 {
  8002c0c:	b5f0      	push	{r4, r5, r6, r7, lr}
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002c0e:	8e04      	ldrh	r4, [r0, #48]	@ 0x30
  8002c10:	42a1      	cmp	r1, r4
  8002c12:	db3e      	blt.n	8002c92 <GFX_init_obstacle_pair_location+0x86>
-		( x <= restrictions->X_MAX ) &&
  8002c14:	8e44      	ldrh	r4, [r0, #50]	@ 0x32
-	if( ( x >= restrictions->X_MIN ) &&
  8002c16:	42a1      	cmp	r1, r4
  8002c18:	dc3b      	bgt.n	8002c92 <GFX_init_obstacle_pair_location+0x86>
-		( y >= restrictions->Y_MIN ) &&
  8002c1a:	8ec4      	ldrh	r4, [r0, #54]	@ 0x36
-		( x <= restrictions->X_MAX ) &&
  8002c1c:	42a2      	cmp	r2, r4
  8002c1e:	db38      	blt.n	8002c92 <GFX_init_obstacle_pair_location+0x86>
-		( y <= restrictions->Y_MAX )    )
  8002c20:	8f04      	ldrh	r4, [r0, #56]	@ 0x38
-		( y >= restrictions->Y_MIN ) &&
  8002c22:	42a2      	cmp	r2, r4
  8002c24:	f340 80cc 	ble.w	8002dc0 <GFX_init_obstacle_pair_location+0x1b4>
-	if( ( x >= restrictions->X_MIN ) &&
  8002c28:	f8b0 407c 	ldrh.w	r4, [r0, #124]	@ 0x7c
  8002c2c:	42a1      	cmp	r1, r4
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  8002c2e:	b29a      	uxth	r2, r3
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002c30:	db77      	blt.n	8002d22 <GFX_init_obstacle_pair_location+0x116>
-		( x <= restrictions->X_MAX ) &&
  8002c32:	f8b0 407e 	ldrh.w	r4, [r0, #126]	@ 0x7e
-	if( ( x >= restrictions->X_MIN ) &&
  8002c36:	42a1      	cmp	r1, r4
  8002c38:	dc73      	bgt.n	8002d22 <GFX_init_obstacle_pair_location+0x116>
-		( y >= restrictions->Y_MIN ) &&
  8002c3a:	f8b0 4082 	ldrh.w	r4, [r0, #130]	@ 0x82
-		( x <= restrictions->X_MAX ) &&
  8002c3e:	42a3      	cmp	r3, r4
  8002c40:	db6f      	blt.n	8002d22 <GFX_init_obstacle_pair_location+0x116>
-		( y <= restrictions->Y_MAX )    )
  8002c42:	f8b0 4084 	ldrh.w	r4, [r0, #132]	@ 0x84
-		( y >= restrictions->Y_MIN ) &&
  8002c46:	42a3      	cmp	r3, r4
  8002c48:	dc76      	bgt.n	8002d38 <GFX_init_obstacle_pair_location+0x12c>
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
@@ -5926,17 +5853,17 @@ void GFX_init_obstacle_pair_location(obstacle_pair_t *pair, int16_t x, int16_t t
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002c52:	b28d      	uxth	r5, r1
  8002c54:	eb05 0c07 	add.w	ip, r5, r7
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002c58:	2600      	movs	r6, #0
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  8002c5a:	eb05 0557 	add.w	r5, r5, r7, lsr #1
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  8002c5e:	eb04 0e02 	add.w	lr, r4, r2
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002c62:	4637      	mov	r7, r6
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002c64:	fa0f fc8c 	sxth.w	ip, ip
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002c68:	f36c 070f 	bfi	r7, ip, #0, #16
  8002c6c:	f361 060f 	bfi	r6, r1, #0, #16
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
@@ -5945,19 +5872,19 @@ void GFX_init_obstacle_pair_location(obstacle_pair_t *pair, int16_t x, int16_t t
  8002c74:	eb02 0454 	add.w	r4, r2, r4, lsr #1
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  8002c78:	b22d      	sxth	r5, r5
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002c7a:	f363 461f 	bfi	r6, r3, #16, #16
  8002c7e:	f36e 471f 	bfi	r7, lr, #16, #16
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  8002c82:	b224      	sxth	r4, r4
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  8002c84:	f8a0 5060 	strh.w	r5, [r0, #96]	@ 0x60
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002c88:	6586      	str	r6, [r0, #88]	@ 0x58
  8002c8a:	65c7      	str	r7, [r0, #92]	@ 0x5c
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  8002c8c:	f8a0 4062 	strh.w	r4, [r0, #98]	@ 0x62
-	if( return_value  )
+	if (return_value) {
  8002c90:	e081      	b.n	8002d96 <GFX_init_obstacle_pair_location+0x18a>
 		if((gfx_object == &obstacle_pair1.top || gfx_object == &obstacle_pair2.top || gfx_object == &obstacle_pair3.top) && y < 0)
  8002c92:	4c5d      	ldr	r4, [pc, #372]	@ (8002e08 <GFX_init_obstacle_pair_location+0x1fc>)
@@ -6028,21 +5955,21 @@ void GFX_init_obstacle_pair_location(obstacle_pair_t *pair, int16_t x, int16_t t
  8002cfe:	462e      	mov	r6, r5
  8002d00:	f36c 060f 	bfi	r6, ip, #0, #16
  8002d04:	f364 461f 	bfi	r6, r4, #16, #16
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002d08:	f8b0 407c 	ldrh.w	r4, [r0, #124]	@ 0x7c
 	gfx_object->location_old.y_center = gfx_object->location.y_center;
  8002d0c:	f8a0 e022 	strh.w	lr, [r0, #34]	@ 0x22
 	gfx_object->location_old.x_min = gfx_object->location.x_min;
  8002d10:	f361 050f 	bfi	r5, r1, #0, #16
  8002d14:	f362 451f 	bfi	r5, r2, #16, #16
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002d18:	42a1      	cmp	r1, r4
 	gfx_object->location_old.x_min = gfx_object->location.x_min;
  8002d1a:	61c6      	str	r6, [r0, #28]
  8002d1c:	6185      	str	r5, [r0, #24]
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  8002d1e:	b29a      	uxth	r2, r3
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002d20:	da87      	bge.n	8002c32 <GFX_init_obstacle_pair_location+0x26>
 		if((gfx_object == &obstacle_pair1.top || gfx_object == &obstacle_pair2.top || gfx_object == &obstacle_pair3.top) && y < 0)
  8002d22:	4d39      	ldr	r5, [pc, #228]	@ (8002e08 <GFX_init_obstacle_pair_location+0x1fc>)
@@ -6058,7 +5985,6 @@ void GFX_init_obstacle_pair_location(obstacle_pair_t *pair, int16_t x, int16_t t
  8002d32:	4d37      	ldr	r5, [pc, #220]	@ (8002e10 <GFX_init_obstacle_pair_location+0x204>)
  8002d34:	42ac      	cmp	r4, r5
  8002d36:	d004      	beq.n	8002d42 <GFX_init_obstacle_pair_location+0x136>
-
 	pair->bottom.image.size_y = DISPLAY_SIZE_Y-bottom_y;
  8002d38:	f1c2 02f0 	rsb	r2, r2, #240	@ 0xf0
  8002d3c:	f8a0 2052 	strh.w	r2, [r0, #82]	@ 0x52
@@ -6140,26 +6066,26 @@ void GFX_init_obstacle_pair_location(obstacle_pair_t *pair, int16_t x, int16_t t
  8002dc2:	88c7      	ldrh	r7, [r0, #6]
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002dc4:	b28d      	uxth	r5, r1
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002dc6:	2400      	movs	r4, #0
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002dc8:	eb05 0c06 	add.w	ip, r5, r6
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  8002dcc:	eb05 0556 	add.w	r5, r5, r6, lsr #1
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002dd0:	4626      	mov	r6, r4
  8002dd2:	f361 040f 	bfi	r4, r1, #0, #16
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  8002dd6:	fa1f fe82 	uxth.w	lr, r2
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002dda:	f362 441f 	bfi	r4, r2, #16, #16
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002dde:	fa0f fc8c 	sxth.w	ip, ip
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002de2:	60c4      	str	r4, [r0, #12]
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  8002de4:	eb0e 0407 	add.w	r4, lr, r7
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002de8:	f36c 060f 	bfi	r6, ip, #0, #16
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  8002dec:	eb0e 0e57 	add.w	lr, lr, r7, lsr #1
@@ -6167,17 +6093,17 @@ void GFX_init_obstacle_pair_location(obstacle_pair_t *pair, int16_t x, int16_t t
  8002df0:	b224      	sxth	r4, r4
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  8002df2:	b22d      	sxth	r5, r5
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002df4:	f364 461f 	bfi	r6, r4, #16, #16
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  8002df8:	fa0f fe8e 	sxth.w	lr, lr
         gfx_object->location.x_center = gfx_object->location.x_min + gfx_object->image.size_x / 2;
  8002dfc:	8285      	strh	r5, [r0, #20]
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002dfe:	6106      	str	r6, [r0, #16]
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  8002e00:	f8a0 e016 	strh.w	lr, [r0, #22]
-	if( return_value  )
+	if (return_value) {
  8002e04:	e779      	b.n	8002cfa <GFX_init_obstacle_pair_location+0xee>
  8002e06:	bf00      	nop
  8002e08:	200002bc 	.word	0x200002bc
@@ -6205,7 +6131,6 @@ void GFX_set_obstacle_pair_x_axis_velocity(obstacle_pair_t *pair, int8_t x_veloc
 
 08002e28 <GFX_update_obstacle_pair_location>:
 
-
 void GFX_update_obstacle_pair_location(obstacle_pair_t *pair) 
 {
  8002e28:	b570      	push	{r4, r5, r6, lr}
@@ -6216,83 +6141,77 @@ void GFX_update_obstacle_pair_location(obstacle_pair_t *pair)
  8002e30:	6922      	ldr	r2, [r4, #16]
  8002e32:	f9b0 000c 	ldrsh.w	r0, [r0, #12]
  8002e36:	61e2      	str	r2, [r4, #28]
-	GFX_move_location(  &gfx_object->location, &gfx_object->location_new, gfx_object->velocity.x, -gfx_object->velocity.y );
+	GFX_move_location(&gfx_object->location, &gfx_object->location_new, gfx_object->velocity.x, -gfx_object->velocity.y);
  8002e38:	f994 2049 	ldrsb.w	r2, [r4, #73]	@ 0x49
 	gfx_object->location_old.y_max = gfx_object->location.y_max;
  8002e3c:	f9b4 3012 	ldrsh.w	r3, [r4, #18]
 	gfx_object->location_old.x_max = gfx_object->location.x_max;
  8002e40:	f9b4 1010 	ldrsh.w	r1, [r4, #16]
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002e44:	8e26      	ldrh	r6, [r4, #48]	@ 0x30
-	GFX_move_location(  &gfx_object->location, &gfx_object->location_new, gfx_object->velocity.x, -gfx_object->velocity.y );
+	GFX_move_location(&gfx_object->location, &gfx_object->location_new, gfx_object->velocity.x, -gfx_object->velocity.y);
  8002e46:	b292      	uxth	r2, r2
-	location_new->y_max 	= location->y_max + dy;
+	location_new->y_max = location->y_max + dy;
  8002e48:	1a9b      	subs	r3, r3, r2
  8002e4a:	8563      	strh	r3, [r4, #42]	@ 0x2a
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  8002e4c:	f994 3048 	ldrsb.w	r3, [r4, #72]	@ 0x48
  8002e50:	b29b      	uxth	r3, r3
-	location_new->x_max 	= location->x_max + dx;
+	location_new->x_max = location->x_max + dx;
  8002e52:	4419      	add	r1, r3
  8002e54:	8521      	strh	r1, [r4, #40]	@ 0x28
 	gfx_object->location_old.x_center = gfx_object->location.x_center;
  8002e56:	f9b4 1014 	ldrsh.w	r1, [r4, #20]
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  8002e5a:	4418      	add	r0, r3
-	location_new->x_center 	= location->x_center + dx;
+	location_new->x_center = location->x_center + dx;
  8002e5c:	440b      	add	r3, r1
 	gfx_object->location_old.y_center = gfx_object->location.y_center;
  8002e5e:	f9b4 1016 	ldrsh.w	r1, [r4, #22]
-	location_new->x_center 	= location->x_center + dx;
+	location_new->x_center = location->x_center + dx;
  8002e62:	85a3      	strh	r3, [r4, #44]	@ 0x2c
-	location_new->y_center 	= location->y_center + dy;
+	location_new->y_center = location->y_center + dy;
  8002e64:	1a89      	subs	r1, r1, r2
  8002e66:	85e1      	strh	r1, [r4, #46]	@ 0x2e
 	gfx_object->location_old.x_min = gfx_object->location.x_min;
  8002e68:	6961      	ldr	r1, [r4, #20]
  8002e6a:	6221      	str	r1, [r4, #32]
-	location_new->y_min 	= location->y_min + dy;
+	location_new->y_min = location->y_min + dy;
  8002e6c:	fa1f fc8c 	uxth.w	ip, ip
 	gfx_object->location_old.x_min = gfx_object->location.x_min;
  8002e70:	68e1      	ldr	r1, [r4, #12]
  8002e72:	61a1      	str	r1, [r4, #24]
  8002e74:	ebac 0302 	sub.w	r3, ip, r2
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  8002e78:	b201      	sxth	r1, r0
  8002e7a:	b285      	uxth	r5, r0
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002e7c:	42b1      	cmp	r1, r6
-	location_new->y_min 	= location->y_min + dy;
+	location_new->y_min = location->y_min + dy;
  8002e7e:	b218      	sxth	r0, r3
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  8002e80:	84a1      	strh	r1, [r4, #36]	@ 0x24
-	location_new->y_min 	= location->y_min + dy;
+	location_new->y_min = location->y_min + dy;
  8002e82:	84e0      	strh	r0, [r4, #38]	@ 0x26
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002e84:	b29b      	uxth	r3, r3
  8002e86:	db71      	blt.n	8002f6c <GFX_update_obstacle_pair_location+0x144>
-		( x <= restrictions->X_MAX ) &&
  8002e88:	8e66      	ldrh	r6, [r4, #50]	@ 0x32
-	if( ( x >= restrictions->X_MIN ) &&
  8002e8a:	42b1      	cmp	r1, r6
  8002e8c:	dc6e      	bgt.n	8002f6c <GFX_update_obstacle_pair_location+0x144>
-		( y >= restrictions->Y_MIN ) &&
  8002e8e:	8ee6      	ldrh	r6, [r4, #54]	@ 0x36
-		( x <= restrictions->X_MAX ) &&
  8002e90:	42b0      	cmp	r0, r6
  8002e92:	db6b      	blt.n	8002f6c <GFX_update_obstacle_pair_location+0x144>
-		( y <= restrictions->Y_MAX )    )
  8002e94:	8f22      	ldrh	r2, [r4, #56]	@ 0x38
-		( y >= restrictions->Y_MIN ) &&
  8002e96:	4290      	cmp	r0, r2
  8002e98:	dc71      	bgt.n	8002f7e <GFX_update_obstacle_pair_location+0x156>
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002e9a:	81a1      	strh	r1, [r4, #12]
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002e9c:	88a1      	ldrh	r1, [r4, #4]
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  8002e9e:	88e2      	ldrh	r2, [r4, #6]
-        gfx_object->location.y_min = y;
+		gfx_object->location.y_min = y;
  8002ea0:	81e0      	strh	r0, [r4, #14]
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002ea2:	1868      	adds	r0, r5, r1
@@ -6312,7 +6231,7 @@ void GFX_update_obstacle_pair_location(obstacle_pair_t *pair)
 	gfx_object->location_old.x_min = gfx_object->location.x_min;
  8002eb6:	6de2      	ldr	r2, [r4, #92]	@ 0x5c
  8002eb8:	66a2      	str	r2, [r4, #104]	@ 0x68
-	GFX_move_location(  &gfx_object->location, &gfx_object->location_new, gfx_object->velocity.x, -gfx_object->velocity.y );
+	GFX_move_location(&gfx_object->location, &gfx_object->location_new, gfx_object->velocity.x, -gfx_object->velocity.y);
  8002eba:	f994 2095 	ldrsb.w	r2, [r4, #149]	@ 0x95
 	gfx_object->location_old.y_max = gfx_object->location.y_max;
  8002ebe:	f9b4 305e 	ldrsh.w	r3, [r4, #94]	@ 0x5e
@@ -6324,77 +6243,71 @@ void GFX_update_obstacle_pair_location(obstacle_pair_t *pair)
  8002eca:	f9b4 c05c 	ldrsh.w	ip, [r4, #92]	@ 0x5c
 	gfx_object->location_old.y_min = gfx_object->location.y_min;
  8002ece:	f9b4 105a 	ldrsh.w	r1, [r4, #90]	@ 0x5a
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002ed2:	f8b4 607c 	ldrh.w	r6, [r4, #124]	@ 0x7c
-	GFX_move_location(  &gfx_object->location, &gfx_object->location_new, gfx_object->velocity.x, -gfx_object->velocity.y );
+	GFX_move_location(&gfx_object->location, &gfx_object->location_new, gfx_object->velocity.x, -gfx_object->velocity.y);
  8002ed6:	b292      	uxth	r2, r2
-	location_new->y_max 	= location->y_max + dy;
+	location_new->y_max = location->y_max + dy;
  8002ed8:	1a9b      	subs	r3, r3, r2
  8002eda:	f8a4 3076 	strh.w	r3, [r4, #118]	@ 0x76
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  8002ede:	f994 3094 	ldrsb.w	r3, [r4, #148]	@ 0x94
  8002ee2:	b29b      	uxth	r3, r3
  8002ee4:	449e      	add	lr, r3
-	location_new->x_max 	= location->x_max + dx;
+	location_new->x_max = location->x_max + dx;
  8002ee6:	449c      	add	ip, r3
-	location_new->x_center 	= location->x_center + dx;
+	location_new->x_center = location->x_center + dx;
  8002ee8:	442b      	add	r3, r5
  8002eea:	f8a4 3078 	strh.w	r3, [r4, #120]	@ 0x78
 	gfx_object->location_old.y_center = gfx_object->location.y_center;
  8002eee:	f9b4 3062 	ldrsh.w	r3, [r4, #98]	@ 0x62
 	gfx_object->location_old.x_min = gfx_object->location.x_min;
  8002ef2:	6e25      	ldr	r5, [r4, #96]	@ 0x60
-	location_new->x_max 	= location->x_max + dx;
+	location_new->x_max = location->x_max + dx;
  8002ef4:	f8a4 c074 	strh.w	ip, [r4, #116]	@ 0x74
-	location_new->y_center 	= location->y_center + dy;
+	location_new->y_center = location->y_center + dy;
  8002ef8:	1a9b      	subs	r3, r3, r2
-	location_new->y_min 	= location->y_min + dy;
+	location_new->y_min = location->y_min + dy;
  8002efa:	b289      	uxth	r1, r1
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  8002efc:	fa0f fc8e 	sxth.w	ip, lr
-	location_new->y_center 	= location->y_center + dy;
+	location_new->y_center = location->y_center + dy;
  8002f00:	f8a4 307a 	strh.w	r3, [r4, #122]	@ 0x7a
 	gfx_object->location_old.x_min = gfx_object->location.x_min;
  8002f04:	66e5      	str	r5, [r4, #108]	@ 0x6c
  8002f06:	1a8b      	subs	r3, r1, r2
  8002f08:	6da5      	ldr	r5, [r4, #88]	@ 0x58
  8002f0a:	6665      	str	r5, [r4, #100]	@ 0x64
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002f0c:	45b4      	cmp	ip, r6
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  8002f0e:	fa1f f58e 	uxth.w	r5, lr
-	location_new->y_min 	= location->y_min + dy;
+	location_new->y_min = location->y_min + dy;
  8002f12:	fa0f fe83 	sxth.w	lr, r3
     GFX_update_moving_gfx_object_location(&pair->top);
     GFX_update_moving_gfx_object_location(&pair->bottom);
  8002f16:	f104 004c 	add.w	r0, r4, #76	@ 0x4c
-	location_new->x_min 	= location->x_min + dx;
+	location_new->x_min = location->x_min + dx;
  8002f1a:	f8a4 c070 	strh.w	ip, [r4, #112]	@ 0x70
-	location_new->y_min 	= location->y_min + dy;
+	location_new->y_min = location->y_min + dy;
  8002f1e:	f8a4 e072 	strh.w	lr, [r4, #114]	@ 0x72
-	if( ( x >= restrictions->X_MIN ) &&
+	if ((x >= restrictions->X_MIN) && (x <= restrictions->X_MAX) && (y >= restrictions->Y_MIN) && (y <= restrictions->Y_MAX)) {
  8002f22:	b29b      	uxth	r3, r3
  8002f24:	db53      	blt.n	8002fce <GFX_update_obstacle_pair_location+0x1a6>
-		( x <= restrictions->X_MAX ) &&
  8002f26:	f8b4 607e 	ldrh.w	r6, [r4, #126]	@ 0x7e
-	if( ( x >= restrictions->X_MIN ) &&
  8002f2a:	45b4      	cmp	ip, r6
  8002f2c:	dc4f      	bgt.n	8002fce <GFX_update_obstacle_pair_location+0x1a6>
-		( y >= restrictions->Y_MIN ) &&
  8002f2e:	f8b4 6082 	ldrh.w	r6, [r4, #130]	@ 0x82
-		( x <= restrictions->X_MAX ) &&
  8002f32:	45b6      	cmp	lr, r6
  8002f34:	db4b      	blt.n	8002fce <GFX_update_obstacle_pair_location+0x1a6>
-		( y <= restrictions->Y_MAX )    )
  8002f36:	f8b4 2084 	ldrh.w	r2, [r4, #132]	@ 0x84
-		( y >= restrictions->Y_MIN ) &&
  8002f3a:	4596      	cmp	lr, r2
  8002f3c:	dc50      	bgt.n	8002fe0 <GFX_update_obstacle_pair_location+0x1b8>
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002f3e:	f8b4 1050 	ldrh.w	r1, [r4, #80]	@ 0x50
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  8002f42:	f8b4 2052 	ldrh.w	r2, [r4, #82]	@ 0x52
-        gfx_object->location.x_min = x;
+		gfx_object->location.x_min = x;
  8002f46:	f8a4 c058 	strh.w	ip, [r4, #88]	@ 0x58
         gfx_object->location.x_max = gfx_object->location.x_min + gfx_object->image.size_x;
  8002f4a:	1868      	adds	r0, r5, r1
@@ -6405,7 +6318,7 @@ void GFX_update_obstacle_pair_location(obstacle_pair_t *pair)
  8002f54:	1898      	adds	r0, r3, r2
         gfx_object->location.y_center = gfx_object->location.y_min + gfx_object->image.size_y / 2;
  8002f56:	eb03 0252 	add.w	r2, r3, r2, lsr #1
-        gfx_object->location.y_min = y;
+		gfx_object->location.y_min = y;
  8002f5a:	f8a4 e05a 	strh.w	lr, [r4, #90]	@ 0x5a
         gfx_object->location.y_max = gfx_object->location.y_min + gfx_object->image.size_y;
  8002f5e:	f8a4 005e 	strh.w	r0, [r4, #94]	@ 0x5e
@@ -6425,14 +6338,14 @@ void GFX_update_obstacle_pair_location(obstacle_pair_t *pair)
  8002f78:	4e34      	ldr	r6, [pc, #208]	@ (800304c <GFX_update_obstacle_pair_location+0x224>)
  8002f7a:	42b4      	cmp	r4, r6
  8002f7c:	d007      	beq.n	8002f8e <GFX_update_obstacle_pair_location+0x166>
-		switch(gfx_object->edge_behavior)
+		switch (gfx_object->edge_behavior) {
  8002f7e:	f894 304a 	ldrb.w	r3, [r4, #74]	@ 0x4a
  8002f82:	2b00      	cmp	r3, #0
  8002f84:	d197      	bne.n	8002eb6 <GFX_update_obstacle_pair_location+0x8e>
-				object_placement_successful = GFX_bounce_moving_object_from_edge(gfx_object);
+			object_placement_successful = GFX_bounce_moving_object_from_edge(
  8002f86:	4620      	mov	r0, r4
  8002f88:	f7ff fa4c 	bl	8002424 <GFX_bounce_moving_object_from_edge>
-				return object_placement_successful;
+			return object_placement_successful;
  8002f8c:	e793      	b.n	8002eb6 <GFX_update_obstacle_pair_location+0x8e>
 		if((gfx_object == &obstacle_pair1.top || gfx_object == &obstacle_pair2.top || gfx_object == &obstacle_pair3.top) && y < 0)
  8002f8e:	2800      	cmp	r0, #0
@@ -6481,7 +6394,7 @@ void GFX_update_obstacle_pair_location(obstacle_pair_t *pair)
  8002fc8:	60a6      	str	r6, [r4, #8]
 			gfx_object->location.y_min = 0;
  8002fca:	81e3      	strh	r3, [r4, #14]
-	if ( ! object_placement_successful )
+	if (!object_placement_successful) {
  8002fcc:	e773      	b.n	8002eb6 <GFX_update_obstacle_pair_location+0x8e>
 		if((gfx_object == &obstacle_pair1.top || gfx_object == &obstacle_pair2.top || gfx_object == &obstacle_pair3.top) && y < 0)
  8002fce:	4e1d      	ldr	r6, [pc, #116]	@ (8003044 <GFX_update_obstacle_pair_location+0x21c>)
@@ -6493,13 +6406,13 @@ void GFX_update_obstacle_pair_location(obstacle_pair_t *pair)
  8002fda:	4e1c      	ldr	r6, [pc, #112]	@ (800304c <GFX_update_obstacle_pair_location+0x224>)
  8002fdc:	42b0      	cmp	r0, r6
  8002fde:	d007      	beq.n	8002ff0 <GFX_update_obstacle_pair_location+0x1c8>
-		switch(gfx_object->edge_behavior)
+		switch (gfx_object->edge_behavior) {
  8002fe0:	f894 3096 	ldrb.w	r3, [r4, #150]	@ 0x96
  8002fe4:	2b00      	cmp	r3, #0
  8002fe6:	d1c0      	bne.n	8002f6a <GFX_update_obstacle_pair_location+0x142>
 }
  8002fe8:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
-				object_placement_successful = GFX_bounce_moving_object_from_edge(gfx_object);
+			object_placement_successful = GFX_bounce_moving_object_from_edge(
  8002fec:	f7ff ba1a 	b.w	8002424 <GFX_bounce_moving_object_from_edge>
 		if((gfx_object == &obstacle_pair1.top || gfx_object == &obstacle_pair2.top || gfx_object == &obstacle_pair3.top) && y < 0)
  8002ff0:	f1be 0f00 	cmp.w	lr, #0
@@ -6557,7 +6470,6 @@ void GFX_update_obstacle_pair_location(obstacle_pair_t *pair)
 
 08003050 <GFX_draw_obstacle_pair_on_background>:
 
-
 void GFX_draw_obstacle_pair_on_background(obstacle_pair_t *pair, graphic_object_t *background)
 {
  8003050:	b538      	push	{r3, r4, r5, lr}
@@ -6576,7 +6488,6 @@ void GFX_draw_obstacle_pair_on_background(obstacle_pair_t *pair, graphic_object_
 08003068 <GFX_get_obstacle_pair_movement_area>:
 	object_movement_area->x_min = (gfx_object->location.x_min < gfx_object->location_old.x_min) ? gfx_object->location.x_min : gfx_object->location_old.x_min;
  8003068:	f9b0 c00c 	ldrsh.w	ip, [r0, #12]
-
 
 void GFX_get_obstacle_pair_movement_area(obstacle_pair_t *pair, location_t *object_movement_area)
 {
@@ -6685,7 +6596,6 @@ void GFX_get_obstacle_pair_movement_area(obstacle_pair_t *pair, location_t *obje
 
 08003128 <GFX_clear_obstacle_pair_on_background>:
 
-
 void GFX_clear_obstacle_pair_on_background(obstacle_pair_t *pair, location_t *object_movement_area)
 {
  8003128:	b538      	push	{r3, r4, r5, lr}
@@ -6699,7 +6609,6 @@ void GFX_clear_obstacle_pair_on_background(obstacle_pair_t *pair, location_t *ob
 	GFX_clear_gfx_object_on_background(&pair->bottom, &background);
  8003134:	4629      	mov	r1, r5
  8003136:	f104 004c 	add.w	r0, r4, #76	@ 0x4c
-}
  800313a:	e8bd 4038 	ldmia.w	sp!, {r3, r4, r5, lr}
 	GFX_clear_gfx_object_on_background(&pair->bottom, &background);
  800313e:	f7ff bcbd 	b.w	8002abc <GFX_clear_gfx_object_on_background>
