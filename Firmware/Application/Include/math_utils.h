@@ -1,26 +1,8 @@
-/*
- * math_utils.h
- *
- *  Created on: 18 May 2022
- *      Author: Gasper
- */
-
 #ifndef INCLUDE_MATH_UTILS_H_
 #define INCLUDE_MATH_UTILS_H_
 
-
-
-// ----------- Include other modules (for public) -------------
-
-// ------ Standard C libraries -----
-
-#include <stdio.h>		// data types definitions
+#include <stdio.h>		
 #include <stdint.h>
-
-
-
-// -------------------- Public definitions --------------------
-
 
 // ---------------- Public function prototypes ----------------
 
@@ -38,6 +20,5 @@ int8_t MATH_random_sign(void);
 uint32_t MATH_calculate_distance_between_points(int16_t x1, int16_t y1, int16_t x2, int16_t y2);
 void MATH_demo_random_integer_number_from_interval(void);
 obstacle_positions_t MATH_randomise_distance_between_obstacles(void);
-
 
 #endif /* INCLUDE_MATH_UTILS_H_ */
