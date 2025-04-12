@@ -1,9 +1,0 @@
-../System/lcd.c:124:6:UserPixelSetFunction	1
-../System/lcd.c:40:6:LCD_FillRect	1
-../System/lcd.c:65:6:LCD_Init	1
-../System/lcd.c:87:6:LCD_ClearScreen	1
-../System/lcd.c:99:6:LCD_demo_simple	2
-../System/lcd.c:131:11:_HW_FillFrame_	1
-../System/lcd.c:141:6:LCD_uGUI_init	1
-../System/lcd.c:160:6:LCD_uGUI_demo_Misko3	1
-../System/lcd.c:199:6:LCD_TCH_demo	2

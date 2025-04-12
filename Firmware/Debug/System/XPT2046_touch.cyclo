@@ -1,3 +1,0 @@
-../System/XPT2046_touch.c:44:6:XPT2046_touch_pressed	1
-../System/XPT2046_touch.c:52:6:XPT2046_touch_get_coordinates	4
-../System/XPT2046_touch.c:122:6:XPT2046_touch_get_coordinates_if_pressed	2

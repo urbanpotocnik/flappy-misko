@@ -1,3 +1,0 @@
-../Application/flash.c:7:10:Flash_Read_UInt16	0	static
-../Application/flash.c:13:6:Update_High_Scores	48	static
-../Application/flash.c:55:11:Get_High_Scores	0	static

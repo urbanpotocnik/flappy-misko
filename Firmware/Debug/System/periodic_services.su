@@ -1,4 +1,0 @@
-../System/periodic_services.c:19:6:PSERV_init	0	static
-../System/periodic_services.c:25:6:PSERV_enable	0	static
-../System/periodic_services.c:30:6:PSERV_disable	0	static
-../System/periodic_services.c:35:6:PSERV_run_services_Callback	0	static

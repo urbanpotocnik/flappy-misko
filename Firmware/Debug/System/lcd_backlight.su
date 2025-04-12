@@ -1,8 +1,0 @@
-../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:3217:22:LL_TIM_OC_SetCompareCH1	0	static
-../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h:3318:26:LL_TIM_OC_GetCompareCH1	0	static
-../System/lcd_backlight.c:21:6:LCD_BKLT_init	8	static
-../System/lcd_backlight.c:38:9:LCD_BKLT_get_brightness	8	static
-../System/lcd_backlight.c:43:6:LCD_BKLT_set_brightness	0	static
-../System/lcd_backlight.c:48:6:LCD_BKLT_on	0	static
-../System/lcd_backlight.c:53:6:LCD_BKLT_off	0	static
-../System/lcd_backlight.c:59:6:LCD_BKLT_demo	16	static
