@@ -1,43 +1,12 @@
-/*
- * images.h
- *
- *  Created on: 10 May 2022
- *      Author:
- */
-
 #ifndef IMAGES_H_
 #define IMAGES_H_
-
-
 
 // Images were converted using the online tool here:
 //
 // https://www.mischianti.org/images-to-byte-array-online-converter-cpp-arduino/
 
-// https://javl.github.io/image2cpp/ is way better
-//
-// Useful color code calculator: http://www.rinkydinkelectronics.com/calc_rgb565.php
-
-
-
-// ----------- Include other modules (for public) -------------
-
-#include "stdint.h"		// support for data type definitions
-
-
-
-
-// -------------------- Public definitions --------------------
-
-
-#define IMG_TRANSPARENT_COLOR_CODE		0x07e0		// green color used for transparent background
-
-
-
-
-// NOTE: by using the "const" specifier, you "force" the compiler to place the variable in the flash memory!
-
-
+#include "stdint.h"		
+#define IMG_TRANSPARENT_COLOR_CODE	0x07e0		
 
 // 'background', 320x240px
 const static uint16_t background_img[] = {
@@ -10687,14 +10656,5 @@ const static uint16_t high_score_sprite_large_img[] = {
 	0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 	0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x4a49
 };
-
-
-/*
-
-const static uint16_t _img[] = {
-
-};
-
- */
 
 #endif /* IMAGES_H_ */
